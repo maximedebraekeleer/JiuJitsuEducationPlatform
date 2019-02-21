@@ -6,12 +6,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #region Fields
         private string _naam;
         private string _voornaam;
+        private DateTime _geboorteDatum;
         private string _straat;
         private int _huisNummer;
-        private DateTime _geboorteDatum;
+        private string _gemeente;
         private int _postcode;
         private int _telefoonNummer;
-        private string _gemeente;
+        private string _email;
         #endregion
 
 
@@ -52,12 +53,22 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             }
         }
 
-        public int Huisnummer {
+        public int HuisNummer {
             get => _huisNummer;
             set {
                 if (value.Equals(null) || value == 0)
                     throw new ArgumentException("Huisnummer mag niet leeg zijn");
                 _huisNummer = value;
+            }
+        }
+
+        public string Gemeente {
+            get => _gemeente;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
+                    throw new ArgumentException("Gemeente kan niet leeg zijn of meer dan 45 caracters bevatten");
+                _gemeente = value;
             }
         }
 
@@ -79,35 +90,37 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             }
         }
 
-        public string Gemeente {
-            get => _gemeente;
-            set {
-                if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
-                    throw new ArgumentException("Gemeente kan niet leeg zijn of meer dan 45 caracters bevatten");
-                _gemeente = value;
+        public string Email {
+            get => _email;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Length > 45 || new System.Net.Mail.MailAddress(value).Address != value)
+                    throw new ArgumentException("Email kan niet leeg zijn of meer dan 45 caracters bevatten of Email is ongeldig");
+                _email = value;
             }
         }
 
-        public string Email { get; set; }
-
+        public bool IsBeheerder { get; set; }
+        public bool IsLesgever { get; set; }
         #endregion
 
         #region Constructor
-
-        public Lid(string naam, string voornaam, string straat, int huisNummer, DateTime geboorteDatum, int postcode, int telefoonNummer) {
-            _naam = naam;
-            _voornaam = voornaam;
-            _straat = straat;
-            _huisNummer = huisNummer;
-            _geboorteDatum = geboorteDatum;
-            _postcode = postcode;
-            _telefoonNummer = telefoonNummer;
+        public Lid(string naam, string voornaam, DateTime geboorteDatum, string straat, int huisNummer, string gemeente, int postcode, int telefoonNummer, string email, bool isBeheerder, bool isLesgever) {
+            Naam = naam;
+            Voornaam = voornaam;
+            GeboorteDatum = geboorteDatum;
+            Straat = straat;
+            HuisNummer = huisNummer;
+            Gemeente = gemeente;
+            Postcode = postcode;
+            TelefoonNummer = telefoonNummer;
+            Email = email;
+            IsBeheerder = isBeheerder;
+            IsLesgever = isLesgever;
         }
-
         #endregion
 
         #region Methods
-
 
         #endregion
     }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Lid {
@@ -14,6 +11,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         private DateTime _geboorteDatum;
         private int _postcode;
         private int _telefoonNummer;
+        private string _gemeente;
         #endregion
 
 
@@ -79,6 +77,31 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
                     throw new ArgumentException("Telefoonnummer mag niet leeg zijn");
                 _telefoonNummer = value;
             }
+        }
+
+        public string Gemeente {
+            get => _gemeente;
+            set {
+                if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
+                    throw new ArgumentException("Gemeente kan niet leeg zijn of meer dan 45 caracters bevatten");
+                _gemeente = value;
+            }
+        }
+
+        public string Email { get; set; }
+
+        #endregion
+
+        #region Constructor
+
+        public Lid(string naam, string voornaam, string straat, int huisNummer, DateTime geboorteDatum, int postcode, int telefoonNummer) {
+            _naam = naam;
+            _voornaam = voornaam;
+            _straat = straat;
+            _huisNummer = huisNummer;
+            _geboorteDatum = geboorteDatum;
+            _postcode = postcode;
+            _telefoonNummer = telefoonNummer;
         }
 
         #endregion

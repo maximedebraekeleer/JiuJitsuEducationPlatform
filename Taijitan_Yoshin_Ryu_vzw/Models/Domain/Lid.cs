@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Lid {
@@ -104,8 +106,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public bool IsLesgever { get; set; }
         #endregion
 
-        #region Constructor
-        public Lid(string naam, string voornaam, DateTime geboorteDatum, string straat, int huisNummer, string gemeente, int postcode, int telefoonNummer, string email, bool isBeheerder, bool isLesgever) {
+        #region Collections
+        public ICollection<LidLesgroep> LidLesgroepen { get; private set; }
+        public IEnumerable<Lesgroep> Lesgroepen => LidLesgroepen.Select(l => l.Lesgroep);
+        #endregion
+
+        #region Constructors
+        protected Lid() {
+            LidLesgroepen = new HashSet<LidLesgroep>();
+        }
+
+        public Lid(string naam, string voornaam, DateTime geboorteDatum, string straat, int huisNummer, string gemeente, int postcode, int telefoonNummer, string email, bool isBeheerder, bool isLesgever) : this() {
             Naam = naam;
             Voornaam = voornaam;
             GeboorteDatum = geboorteDatum;
@@ -121,7 +132,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Methods
-
+        public void AddLesgroep(Lesgroep l) {
+            LidLesgroepen.Add(new LidLesgroep(this, l));
+        }
         #endregion
     }
 }

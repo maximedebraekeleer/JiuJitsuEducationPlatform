@@ -39,7 +39,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
 
         public DateTime GeboorteDatum {
             get => _geboorteDatum;
-            private set {
+            set {
                 if (value.Equals(null) && value >= DateTime.Today)
                     throw new ArgumentException("Datum kan niet voor vandaag zijn");
                 _geboorteDatum = value;

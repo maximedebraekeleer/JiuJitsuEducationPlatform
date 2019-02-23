@@ -17,7 +17,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             : base(options) {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder) {
+           protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new LidConfiguration());
             builder.ApplyConfiguration(new LesgroepConfiguration());

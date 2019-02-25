@@ -1,0 +1,81 @@
+﻿body, .body-content {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#header {
+    display: flex;
+    padding: 10px 0 10px 10px;
+}
+
+    #header > img {
+        margin-right: 20px;
+        vertical-align: middle;
+    }
+
+    #header h1 strong {
+        color: #336566;
+    }
+
+    #header > h1 {
+        font-weight: bold;
+        font-size: 2.5vw;
+    }
+
+#banner {
+    position: relative;
+    background-image: url("../images/jj_banner.jpg");
+    background-size: cover;
+    min-height: 350px;
+    min-width: 100%;
+}
+
+#login {
+    position: absolute;
+    top: 50%;
+    left: 18%;
+    transform: translateY(-50%);
+    padding: 4vw 5vw;
+    background: white;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+    #login > form {
+        display: flex;
+        flex-direction: column;
+    }
+
+        #login > form > input {
+            margin-bottom: 7.5px;
+            padding: 3px 0 3px 5px;
+            border-width: 1.1px;
+            font-size: 1vw;
+        }
+
+        #login > form > button {
+            max-width: 6vw;
+            margin: 10px auto 10px auto;
+            font-size: 15px;
+            padding: 5px 20px;
+            background: none;
+            border: solid 1.5px #336566;
+            outline: none;
+            color: #336566;
+        }
+
+        #login > form > button:active {
+            background: #336566;
+            color: white;
+        }
+
+        #login > form > span {
+            text-align: center;
+            font-size: .8vw;
+        }
+
+            #login > form > span:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }

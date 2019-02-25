@@ -1,0 +1,75 @@
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.LidViewModels.EditViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Wijzigen gegevens van @TempData["Lid"]</h1>
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Voornaam"></label>
+        <input asp-for="Voornaam" class="form-control" />
+        <span asp-validation-for="Voornaam" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Naam"></label>
+        <input asp-for="Naam" class="form-control" />
+        <span asp-validation-for="Naam" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GeboorteDatum"></label>
+        <input asp-for="GeboorteDatum" class="datepicker"/>
+        <span asp-validation-for="GeboorteDatum" class="text-danger"></span>
+    </div><div class="form-group">
+        <label asp-for="Straat"></label>
+        <input asp-for="Straat" />
+        <span asp-validation-for="Straat" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HuisNummer"></label>
+        <input asp-for="HuisNummer" class="form-control" />
+        <span asp-validation-for="HuisNummer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gemeente"></label>
+        <input asp-for="Gemeente" class="form-control" />
+        <span asp-validation-for="Gemeente" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PostCode"></label>
+        <input asp-for="PostCode" class="form-control" />
+        <span asp-validation-for="PostCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TelefoonNummer"></label>
+        <input asp-for="TelefoonNummer" class="form-control" />
+        <span asp-validation-for="TelefoonNummer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
+    </div>
+</form>
+
+@section scripts {
+    <script asp-src-include="lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script asp-src-include="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                showOn: "both",
+                bottonText: "<i class='fa fa-calendar'></i>"
+            });
+        });
+    </script>
+}

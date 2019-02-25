@@ -1,23 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Data
-{
-    public class DataInitializer
-    {
+namespace Taijitan_Yoshin_Ryu_vzw.Data {
+    public class DataInitializer {
         private readonly ApplicationDbContext _dbContext;
 
-        public DataInitializer(ApplicationDbContext dbContext)
-        {
+        public DataInitializer(ApplicationDbContext dbContext) {
             _dbContext = dbContext;
         }
 
-        public void InitializeData()
-        {
+        public void InitializeData() {
             //Tabellen leeg maken
             try {
                 _dbContext.Database.ExecuteSqlCommand(

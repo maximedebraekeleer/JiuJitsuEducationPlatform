@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Taijitan_Yoshin_Ryu_vzw.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Taijitan_Yoshin_Ryu_vzw.Filters;
+using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Taijitan_Yoshin_Ryu_vzw.Data.Repositories;
 
 namespace Taijitan_Yoshin_Ryu_vzw
 {
@@ -33,13 +36,15 @@ namespace Taijitan_Yoshin_Ryu_vzw
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<DataInitializer>();
+            services.AddScoped<ILidRepository, LidRepository>();
+            services.AddScoped<LidFilter>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

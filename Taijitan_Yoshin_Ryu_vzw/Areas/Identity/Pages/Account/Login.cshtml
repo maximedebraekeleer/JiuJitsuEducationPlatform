@@ -1,0 +1,18 @@
+﻿@page
+@model LoginModel
+
+@{
+    
+}
+<div id="login">
+    <form action="/" method="post">
+        <input type="text" name="gebruikersnaam" value="" placeholder="e-mailadres" />
+        <input type="password" name="wachtwoord" value="" placeholder="wachtwoord" />
+        <button>Log in</button>
+        <span>wachtwoord vergeten?</span>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

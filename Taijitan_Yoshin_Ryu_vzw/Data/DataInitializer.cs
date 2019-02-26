@@ -17,6 +17,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 _dbContext.Database.ExecuteSqlCommand(
                 "DELETE FROM [Lid_Lesgroep]" +
                 "DBCC CHECKIDENT ([Lid_Lesgroep], RESEED, 0);" +
+                "DELETE FROM [Sessie_Lesgroep]" +
+                "DBCC CHECKIDENT ([Sessie_Lesgroep], RESEED, 0);" +
                 "DELETE FROM [Lid]" +
                 "DBCC CHECKIDENT ([Lid], RESEED, 0);" +
                 "DELETE FROM [Lesgroep]" +

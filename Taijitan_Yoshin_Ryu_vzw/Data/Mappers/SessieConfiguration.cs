@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Taijitan_Yoshin_Ryu_vzw.Models;
+using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
     public class SessieConfiguration : IEntityTypeConfiguration<Sessie> {
@@ -20,11 +20,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #region Properties
             builder.Property(t => t.Tijdstip)
                 .IsRequired();
-            #endregion
-
-            #region Relaties
-            builder.HasMany(t => t.Lesgroepen)
-                .WithOne();
             #endregion
         }
     }

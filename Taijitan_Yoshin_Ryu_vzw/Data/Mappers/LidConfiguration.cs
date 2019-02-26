@@ -44,7 +44,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
                 .IsRequired();
 
             builder.Property(t => t.TelefoonNummer)
-                .HasColumnName("telefoon")
+                .HasColumnName("Telefoon")
                 .IsRequired();
 
             builder.Property(t => t.Email)

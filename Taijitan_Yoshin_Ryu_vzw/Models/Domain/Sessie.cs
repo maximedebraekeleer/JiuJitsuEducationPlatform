@@ -2,23 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Models
-{
+namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Sessie
     {
+        #region Regions
+        private DateTime _tijdstip;
+        #endregion
+
         #region Properties
-        public DateTime Tijdstip { get; private set; }
+        public DateTime Tijdstip {
+            get => _tijdstip;
+            set {
+                if (value.Equals(null))
+                    throw new ArgumentException("Datum kan niet leeg zijn");
+                _tijdstip = value;
+            }
+        }
         #endregion
 
         #region Collections
-        public ICollection<Lesgroep> Lesgroepen { get; private set; }
+        public ICollection<SessieLesgroep> SessieLesgroepen { get; private set; }
+        public IEnumerable<Lesgroep> Lesgroepen => SessieLesgroepen.Select(l => l.Lesgroep);
         #endregion
 
         #region Constructors
-        private Sessie() {
-            Lesgroepen = new List<Lesgroep>();
+        protected Sessie() {
+            SessieLesgroepen = new HashSet<SessieLesgroep>();
         }
 
         public Sessie(DateTime tijdstip) : this() {
@@ -27,8 +37,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models
         #endregion
 
         #region Methods
-        public void AddLesgroep(Lesgroep lesgroep) {
-            Lesgroepen.Add(lesgroep);
+        public void AddLesgroep(Lesgroep l) {
+            SessieLesgroepen.Add(new SessieLesgroep(this, l));
         }
         #endregion
     }

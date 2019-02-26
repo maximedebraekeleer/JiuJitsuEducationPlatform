@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
-    public class LidLesgroepConfiguration : IEntityTypeConfiguration<LidLesgroep> {
-        public void Configure(EntityTypeBuilder<LidLesgroep> builder) {
+    public class SessieLesgroepConfiguration : IEntityTypeConfiguration<SessieLesgroep> {
+        public void Configure(EntityTypeBuilder<SessieLesgroep> builder) {
             #region Table
-            builder.ToTable("Lid_Lesgroep");
+            builder.ToTable("Sessie_Lesgroep");
             #endregion
 
             #region Key
-            builder.HasKey(t => new { t.Lid_Email, t.Lesgroep_Groepsnaam });
+            builder.HasKey(t => new { t.Sessie_Tijdstip, t.Lesgroep_Groepsnaam });
             #endregion
 
             #region Relations
-            builder.HasOne(t => t.Lid)
-                    .WithMany(t => t.LidLesgroepen)
-                    .HasForeignKey(t => t.Lid_Email)
+            builder.HasOne(t => t.Sessie)
+                    .WithMany(t => t.SessieLesgroepen)
+                    .HasForeignKey(t => t.Sessie_Tijdstip)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.Lesgroep)
-                    .WithMany(t => t.LidLesgroepen)
+                    .WithMany(t => t.SessieLesgroepen)
                     .HasForeignKey(t => t.Lesgroep_Groepsnaam)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);

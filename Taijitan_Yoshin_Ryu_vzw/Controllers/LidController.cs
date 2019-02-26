@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Taijitan_Yoshin_Ryu_vzw.Filters;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Models.LidViewModels;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
+    [ServiceFilter(typeof(LidFilter))]
     public class LidController : Controller {
         private readonly ILidRepository _lidRepository;
 
@@ -15,13 +17,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
         }
 
         public IActionResult Index(Lid lid) {
-            lid = _lidRepository.GetByEmail(HttpContext.Session.Id);
+            TempData["Lid"] = lid.Voornaam + " " + lid.Naam;
             return View(lid);
         }
 
         [HttpGet]
         public IActionResult Edit(string email) {
             Lid lid = _lidRepository.GetByEmail(email);
+            TempData["Lid"] = lid.Voornaam + " " + lid.Naam;
             if (lid == null)
                 return NotFound();
             return View(new EditViewModel(lid));

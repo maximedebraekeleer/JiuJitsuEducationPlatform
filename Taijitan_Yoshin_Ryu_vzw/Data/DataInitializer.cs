@@ -30,6 +30,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             }
 
             //Databank opvullen
+            //Leden
             Lid daan = new Lid("Daan", "Van vooren", Convert.ToDateTime("10/01/1997 12:10:15 PM"), "Molenstraat", 14, "Aalst", 9300, 0497707832, "daan.vv@Hogent.be", true, true);
             Lid annelies = new Lid("Annelies", "Van Achter", Convert.ToDateTime("4/6/1971 12:10:15 PM"), "Stationstraat", 12, "Lede", 9340, 0487708832, "anneva@gmail.be", true, false);
             Lid michael = new Lid("Michaël", "Vermassen", Convert.ToDateTime("3/12/1997 12:10:15 PM"), "lange zoutstraat", 34, "Aalst", 9300, 0497808832, "michver@gmail.be", false, true);
@@ -40,7 +41,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
 
             _dbContext.AddRange(annelies, daan, michael, maxime, hans, christophe, aaron);
 
-
+            //Lesgroepen
             Lesgroep groep1 = new Lesgroep("groep 1");
             Lesgroep groep2 = new Lesgroep("groep 2");
             Lesgroep groep3 = new Lesgroep("groep 3");
@@ -54,7 +55,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                     new Lesgroep("groep 6"),
                     new Lesgroep("groep 7"),
                     new Lesgroep("Dan-graden")
-                };
+            };
             _dbContext.Lesgroepen.AddRange(lesgroepen);
 
             //vullen lidlesgroep, methode addlesgroep maakt een nieuwe lidlesgroep
@@ -65,6 +66,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             hans.AddLesgroep(groep1);
             christophe.AddLesgroep(groep1);
             aaron.AddLesgroep(groep2);
+
+            //Sessies
+            Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20));
+            Sessie sessie2 = new Sessie(new DateTime(2019, 03, 22));
+
+            _dbContext.Sessies.Add(sessie1);
+            _dbContext.Sessies.Add(sessie2);
+
+            sessie1.AddLesgroep(groep1);
+            sessie1.AddLesgroep(groep2);
+            sessie2.AddLesgroep(groep3);
 
             //opslaan in databank
             _dbContext.SaveChanges();

@@ -124,7 +124,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Constructors
-        protected Lid() {
+        public Lid() {
             LidLesgroepen = new HashSet<LidLesgroep>();
         }
 

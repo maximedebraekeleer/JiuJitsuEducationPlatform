@@ -24,11 +24,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #region Collections
         public ICollection<LidLesgroep> LidLesgroepen { get; private set; }
         public IEnumerable<Lid> Leden => LidLesgroepen.Select(l => l.Lid);
+
+        public ICollection<SessieLesgroep> SessieLesgroepen { get; private set; }
+        public IEnumerable<Sessie> Sessies => SessieLesgroepen.Select(s => s.Sessie);
         #endregion
 
         #region Constructors
         protected Lesgroep() {
             LidLesgroepen = new HashSet<LidLesgroep>();
+            SessieLesgroepen = new HashSet<SessieLesgroep>();
         }
 
         public Lesgroep(string groepsnaam) : this() {

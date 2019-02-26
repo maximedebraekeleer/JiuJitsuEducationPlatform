@@ -15,6 +15,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         private int _postcode;
         private int _telefoonNummer;
         private string _email;
+        private string _wachtwoord;
         #endregion
 
 
@@ -102,6 +103,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             }
         }
 
+        public string Wachtwoord {
+            get => _wachtwoord;
+            set 
+            {
+                //Validatie nog implementeren
+                if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
+                    throw new ArgumentException("Wachtwoord kan niet leeg zijn of meer dan 45 caracters bevatten");
+                _wachtwoord = value;
+            }
+        }
+
         public bool IsBeheerder { get; set; }
         public bool IsLesgever { get; set; }
         #endregion
@@ -128,6 +140,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             Email = email;
             IsBeheerder = isBeheerder;
             IsLesgever = isLesgever;
+            Wachtwoord = "123";
         }
         #endregion
 

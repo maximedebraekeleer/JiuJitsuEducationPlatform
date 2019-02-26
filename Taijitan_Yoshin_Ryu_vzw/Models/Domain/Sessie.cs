@@ -10,7 +10,26 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models
     {
         #region Properties
         public DateTime Tijdstip { get; private set; }
-        public Lesgroep Lesgroep { get; private set; }
+        #endregion
+
+        #region Collections
+        public ICollection<Lesgroep> Lesgroepen { get; private set; }
+        #endregion
+
+        #region Constructors
+        private Sessie() {
+            Lesgroepen = new List<Lesgroep>();
+        }
+
+        public Sessie(DateTime tijdstip) : this() {
+            Tijdstip = tijdstip;
+        }
+        #endregion
+
+        #region Methods
+        public void AddLesgroep(Lesgroep lesgroep) {
+            Lesgroepen.Add(lesgroep);
+        }
         #endregion
     }
 }

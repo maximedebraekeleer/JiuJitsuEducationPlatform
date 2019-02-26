@@ -20,7 +20,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 "DELETE FROM [Lid]" +
                 "DBCC CHECKIDENT ([Lid], RESEED, 0);" +
                 "DELETE FROM [Lesgroep]" +
-                "DBCC CHECKIDENT ([Lesgroep], RESEED, 0);"
+                "DBCC CHECKIDENT ([Lesgroep], RESEED, 0);" +
+                "DELETE FROM [Sessie]" +
+                "DBCC CHECKIDENT ([Sessie], RESEED, 0);"
                 );
             }
             catch (Exception e) {

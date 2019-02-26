@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Taijitan_Yoshin_Ryu_vzw.Data.Mappers;
+using Taijitan_Yoshin_Ryu_vzw.Models;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Data {
@@ -11,6 +12,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         #region DbSets
         public DbSet<Lid> Leden { get; set; }
         public DbSet<Lesgroep> Lesgroepen { get; set; }
+        public DbSet<Sessie> Sessies { get; set; }
+
         #endregion
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -22,6 +25,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             builder.ApplyConfiguration(new LidConfiguration());
             builder.ApplyConfiguration(new LesgroepConfiguration());
             builder.ApplyConfiguration(new LidLesgroepConfiguration());
+            builder.Ignore<Sessie>();
+
         }
     }
 }

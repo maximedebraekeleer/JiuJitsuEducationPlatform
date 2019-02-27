@@ -14,9 +14,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
     public class HomeController : Controller
     {
 
-        SignInManager<Lid> signin;
+        SignInManager<ApplicationUser> signin;
 
-        public HomeController(Microsoft.AspNetCore.Identity.SignInManager<Lid> signin)
+        public HomeController(Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signin)
         {
             this.signin = signin;
         }

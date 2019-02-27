@@ -73,7 +73,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 TelefoonNummer = 0470012312
             };
             await _userManager.CreateAsync(user1, "P@ssword1");
-            await _userManager.AddClaimAsync(user1, new Claim(ClaimTypes.Role, "lid"));
+            await _userManager.AddClaimAsync(user1, new Claim(ClaimTypes.Role, "admin"));
 
             //User2
             eMailAddress = "hans@gmail.com";
@@ -90,7 +90,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 TelefoonNummer = 0497708826
             };
             await _userManager.CreateAsync(user2, "P@ssword1");
-            await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "lid"));
+            await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "admin"));
 
             //User3
             eMailAddress = "maxime@gmail.com";

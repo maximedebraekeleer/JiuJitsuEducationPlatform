@@ -113,9 +113,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
                 _wachtwoord = value;
             }
         }
-
-        public bool IsBeheerder { get; set; }
-        public bool IsLesgever { get; set; }
         #endregion
 
         #region Collections

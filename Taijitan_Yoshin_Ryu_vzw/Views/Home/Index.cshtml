@@ -1,12 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Jiu Jitsu Gent - Platform";
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+    ViewData["Title"] = "Home Page";
 }
 
-<div id="header">
-    <img src="~/images/jj_logo.png" alt="Jiu Jitsu Gent Logo" />
-    <h1><strong>Taijitan</strong> Jiu Jitsu - Platform</h1>
-    <i class="fas fa-envelope"></i>
-</div>
-<div id="banner">
-    <partial name="~/Areas/Identity/Pages/Account/Login.cshtml" />
-</div>
+@if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded) {
+    <h3>Modules voor de admins</h3>
+}
+else if ((await AuthorizationService.AuthorizeAsync(User, "Lesgever")).Succeeded) {
+    <h3>Modules voor de leerkrachten</h3>
+}
+else {
+   <h3>Gebruiker niet ingelogd</h3>
+}

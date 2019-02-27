@@ -1,98 +1,66 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Data {
     public class DataInitializer {
         private readonly ApplicationDbContext _dbContext;
-        private readonly UserManager<Lid> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DataInitializer(ApplicationDbContext dbContext, UserManager<Lid> userManager) {
+        //Users
+        ApplicationUser user1;
+        ApplicationUser user2;
+        ApplicationUser user3;
+        ApplicationUser user4;
+
+        public DataInitializer(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager) {
             _dbContext = dbContext;
             _userManager = userManager;
         }
 
         public async Task InitializeData() {
-            _dbContext.Database.EnsureDeleted();
-            if (_dbContext.Database.EnsureCreated()) {
-                await InitializeUsers();
+            //Users maken
+            await InitializeUsers();
 
-                //Tabellen leeg maken
-                try {
-                    _dbContext.Database.ExecuteSqlCommand(
-                    "DELETE FROM [Lid_Lesgroep]" +
-                    "DBCC CHECKIDENT ([Lid_Lesgroep], RESEED, 0);" +
-                    "DELETE FROM [Sessie_Lesgroep]" +
-                    "DBCC CHECKIDENT ([Sessie_Lesgroep], RESEED, 0);" +
-                    "DELETE FROM [Lesgroep]" +
-                    "DBCC CHECKIDENT ([Lesgroep], RESEED, 0);" +
-                    "DELETE FROM [Sessie]" +
-                    "DBCC CHECKIDENT ([Sessie], RESEED, 0);" +
+            //Lesgroepen maken
+            Lesgroep groep1 = new Lesgroep("groep 1");
+            Lesgroep groep2 = new Lesgroep("groep 2");
+            Lesgroep groep3 = new Lesgroep("groep 3");
 
-                    "DELETE FROM [AspNetUsers]" +
-                    "DBCC CHECKIDENT ([AspNetUsers], RESEED, 0);" +
-                    "DELETE FROM [AspNetUserClaims]" +
-                    "DBCC CHECKIDENT ([AspNetUserClaims], RESEED, 0);" +
-                    "DELETE FROM [AspNetRoleClaims]" +
-                    "DBCC CHECKIDENT ([AspNetRoleClaims], RESEED, 0);" +
-                    "DELETE FROM [AspNetRoles]" +
-                    "DBCC CHECKIDENT ([AspNetRoles], RESEED, 0);"
-                    );
-                }
-                catch (Exception e) {
+            _dbContext.Lesgroepen.Add(groep1);
+            _dbContext.Lesgroepen.Add(groep2);
+            _dbContext.Lesgroepen.Add(groep3);
 
-                }
+            //Leden in lesgroep steken
+            user1.AddLesgroep(groep1);
+            user2.AddLesgroep(groep1);
+            user3.AddLesgroep(groep3);
+            user4.AddLesgroep(groep2);
 
-                //Lesgroepen
-                Lesgroep groep1 = new Lesgroep("groep 1");
-                Lesgroep groep2 = new Lesgroep("groep 2");
-                Lesgroep groep3 = new Lesgroep("groep 3");
-                var lesgroepen = new List<Lesgroep>
-                {
-                    groep1,
-                    groep2,
-                    groep3,
-                    new Lesgroep("groep 4"),
-                    new Lesgroep("groep 5"),
-                    new Lesgroep("groep 6"),
-                    new Lesgroep("groep 7"),
-                    new Lesgroep("Dan-graden")
-            };
-                _dbContext.Lesgroepen.AddRange(lesgroepen);
+            //Sessies aanmaken
+            Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20));
+            Sessie sessie2 = new Sessie(new DateTime(2019, 03, 22));
 
-                //vullen lidlesgroep, methode addlesgroep maakt een nieuwe lidlesgroep
-                Lid litter = _dbContext.Leden.FirstOrDefault(l => l.Voornaam == "Daan");
-                litter.AddLesgroep(groep1);
-                Lid lit = _dbContext.Leden.FirstOrDefault(l => l.Voornaam == "Hans");
-                litter.AddLesgroep(groep1);
-                Lid lit2 = _dbContext.Leden.FirstOrDefault(l => l.Voornaam == "Maxime");
-                litter.AddLesgroep(groep2);
-                Lid litter2 = _dbContext.Leden.FirstOrDefault(l => l.Voornaam == "Dirk");
-                litter.AddLesgroep(groep3);
-                
+            _dbContext.Sessies.Add(sessie1);
+            _dbContext.Sessies.Add(sessie2);
 
-                //Sessies
-                Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20));
-                Sessie sessie2 = new Sessie(new DateTime(2019, 03, 22));
+            //Groepen in sessie steken
+            sessie1.AddLesgroep(groep1);
+            sessie1.AddLesgroep(groep2);
+            sessie2.AddLesgroep(groep3);
 
-                _dbContext.Sessies.Add(sessie1);
-                _dbContext.Sessies.Add(sessie2);
-
-                sessie1.AddLesgroep(groep1);
-                sessie1.AddLesgroep(groep2);
-                sessie2.AddLesgroep(groep3);
-            }
+            //Wijzigingen opslaan
+            _dbContext.SaveChanges();
         }
 
         private async Task InitializeUsers() {
             //User1
             string eMailAddress = "daan@gmail.com";
-            Lid user = new Lid {
+            user1 = new ApplicationUser {
                 UserName = eMailAddress,
                 Email = eMailAddress,
                 Naam = "Van Vooren",
@@ -104,12 +72,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Postcode = 9940,
                 TelefoonNummer = 0470012312
             };
-            await _userManager.CreateAsync(user, "P@ssword1");
-            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "beheerder"));
+            await _userManager.CreateAsync(user1, "P@ssword1");
+            await _userManager.AddClaimAsync(user1, new Claim(ClaimTypes.Role, "admin"));
 
             //User2
             eMailAddress = "hans@gmail.com";
-            user = new Lid {
+            user2 = new ApplicationUser {
                 UserName = eMailAddress,
                 Email = eMailAddress,
                 Naam = "van der Staak",
@@ -121,12 +89,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Postcode = 9420,
                 TelefoonNummer = 0497708826
             };
-            await _userManager.CreateAsync(user, "P@ssword1");
-            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "beheerder"));
+            await _userManager.CreateAsync(user2, "P@ssword1");
+            await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "admin"));
 
             //User3
             eMailAddress = "maxime@gmail.com";
-            user = new Lid {
+            user3 = new ApplicationUser {
                 UserName = eMailAddress,
                 Email = eMailAddress,
                 Naam = "De Braekeleer",
@@ -138,12 +106,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Postcode = 9870,
                 TelefoonNummer = 046969669
             };
-            await _userManager.CreateAsync(user, "P@ssword1");
-            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "lesgever"));
+            await _userManager.CreateAsync(user3, "P@ssword1");
+            await _userManager.AddClaimAsync(user3, new Claim(ClaimTypes.Role, "lesgever"));
 
             //User4
             eMailAddress = "dirk@gmail.com";
-            user = new Lid {
+            user4 = new ApplicationUser {
                 UserName = eMailAddress,
                 Email = eMailAddress,
                 Naam = "Dirk",
@@ -155,10 +123,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Postcode = 9420,
                 TelefoonNummer = 0497708826
             };
-            await _userManager.CreateAsync(user, "P@ssword1");
+            await _userManager.CreateAsync(user4, "P@ssword1");
 
             _dbContext.SaveChanges();
         }
     }
 }
-

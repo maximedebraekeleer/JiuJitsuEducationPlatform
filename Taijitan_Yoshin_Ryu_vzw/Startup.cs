@@ -85,7 +85,7 @@ namespace Taijitan_Yoshin_Ryu_vzw
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            dataInitializer.InitializeData().Wait(-1);
+            //dataInitializer.InitializeData().Wait(-1);
         }
     }
 }

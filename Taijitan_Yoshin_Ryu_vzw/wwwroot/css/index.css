@@ -1,6 +1,38 @@
-﻿body, .body-content {
+﻿body {
     height: 100%;
     width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.body-content{
+    position: relative;
+    height: 95vh;
+}
+
+.content-wrapper {
+    position: absolute;
+    min-width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.navbar {
+    background: white;
+    border: none;
+    box-shadow: 0px 3px 10px 0px rgba(207,207,207,1);
+}
+
+.navbar-brand h1 strong {
+    color: #336566;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-brand > h1 {
+    font-weight: bold;
+    font-size: 1.2vw;
     padding: 0;
     margin: 0;
 }
@@ -27,23 +59,11 @@
         font-size: 2.5rem;
     }
 
-    #header > i:hover {
-        cursor: pointer;
-    }
+        #header > i:hover {
+            cursor: pointer;
+        }
 
-    #header > img {
-        margin-right: 20px;
-        vertical-align: middle;
-    }
 
-    #header h1 strong {
-        color: #336566;
-    }
-
-    #header > h1 {
-        font-weight: bold;
-        font-size: 2.5vw;
-    }
 
 #banner {
     position: relative;
@@ -56,48 +76,40 @@
 #login {
     position: absolute;
     top: 50%;
-    left: 18%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
     padding: 3vw 4vw;
     background: white;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
-    #login > form {
-        display: flex;
-        flex-direction: column;
+    #login button {
+        margin: 0 auto;
+        display: block;
+        background: none;
+        border: solid 1px #336566;
+        color: #336566;
+        padding: 5px 20px;
     }
 
-        #login > form > input {
-            margin-bottom: 7.5px;
-            padding: 3px 0 3px 5px;
-            border-width: 1.1px;
-            font-size: 1vw;
-            outline: none;
-        }
+    #login button:active{
+        border-width: 2px;
+        padding: 4.5px 19.5px;
+    }
 
-        #login > form > button {
-            max-width: 6vw;
-            margin: 10px auto 10px auto;
-            font-size: 15px;
-            padding: 5px 20px;
-            background: none;
-            border: solid 1.5px #336566;
-            outline: none;
-            color: #336566;
-        }
+#login span{
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
 
-        #login > form > button:active {
-            background: #336566;
-            color: white;
-        }
+#login span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 
-        #login > form > span {
-            text-align: center;
-            font-size: .8vw;
-        }
+footer{
+    text-align: center;
+}
 
-            #login > form > span:hover {
-                text-decoration: underline;
-                cursor: pointer;
-            }
+

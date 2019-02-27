@@ -18,6 +18,24 @@
     </environment>
 </head>
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><h1><strong>Tajitan</strong> Jiu Jitsu - Platform</h1></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
 
     <partial name="_CookieConsentPartial" />
 
@@ -25,10 +43,10 @@
         @RenderBody()
 
     </div>
-    <hr />
     <footer>
-        <p>&copy; Taijitan Yoshin Ryu</p>
+        &copy; Tajitan Yoshin Ryu
     </footer>
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -50,7 +68,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

@@ -110,6 +110,11 @@
 
 footer {
     text-align: center;
+    padding-top: 50px;
+}
+
+h3{
+    text-align: center;
 }
 
 .userModule {
@@ -129,8 +134,10 @@ footer {
 
     .userModule:hover {
         background-color: #E0E0E0;
+        cursor: pointer;
     }
 
 .userModuleWrapper {
     display: flex;
+    justify-content: center;
 }

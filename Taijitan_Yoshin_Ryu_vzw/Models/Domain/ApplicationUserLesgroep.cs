@@ -4,25 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
-    public class LidLesgroep {
+    public class ApplicationUserLesgroep {
         #region Properties
-        public string Lid_Id { get; set; }
+        public string ApplicationUser_Id { get; set; }
         public string Lesgroep_Groepsnaam { get; set; }
         #endregion
 
         #region Navigational Properties
-        public Lid Lid { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         public Lesgroep Lesgroep { get; set; }
         #endregion
 
         #region Constructors
-        protected LidLesgroep() {
+        protected ApplicationUserLesgroep() {
 
         }
 
-        public LidLesgroep(Lid lid, Lesgroep lesgroep) : this() {
-            Lid = lid;
-            Lid_Id = Lid.Id;
+        public ApplicationUserLesgroep(ApplicationUser applicationUser, Lesgroep lesgroep) : this() {
+            ApplicationUser = applicationUser;
+            ApplicationUser_Id = ApplicationUser.Id;
 
             Lesgroep = lesgroep;
             Lesgroep_Groepsnaam = Lesgroep.Groepsnaam;

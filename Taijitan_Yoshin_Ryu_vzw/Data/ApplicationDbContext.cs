@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Taijitan_Yoshin_Ryu_vzw.Data.Mappers;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Data {
-    public class ApplicationDbContext : IdentityDbContext<Lid> {
+    public class ApplicationDbContext : IdentityDbContext {
         #region DbSets
-        public DbSet<Lid> Leden { get; set; }
+        //Identity
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         public DbSet<Lesgroep> Lesgroepen { get; set; }
         public DbSet<Sessie> Sessies { get; set; }
         #endregion
@@ -18,15 +20,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             : base(options) {
         }
 
-           protected override void OnModelCreating(ModelBuilder builder) {
+        protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new LesgroepConfiguration());
-            builder.ApplyConfiguration(new LidLesgroepConfiguration());
+            builder.ApplyConfiguration(new ApplicationUserLesgroepConfiguration());
             builder.ApplyConfiguration(new SessieConfiguration());
             builder.ApplyConfiguration(new SessieLesgroepConfiguration());
-
-
-
         }
     }
 }

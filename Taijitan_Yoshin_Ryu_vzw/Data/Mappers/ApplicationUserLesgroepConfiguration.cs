@@ -7,25 +7,25 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
-    public class SessieLesgroepConfiguration : IEntityTypeConfiguration<SessieLesgroep> {
-        public void Configure(EntityTypeBuilder<SessieLesgroep> builder) {
+    public class ApplicationUserLesgroepConfiguration : IEntityTypeConfiguration<ApplicationUserLesgroep> {
+        public void Configure(EntityTypeBuilder<ApplicationUserLesgroep> builder) {
             #region Table
-            builder.ToTable("Sessie_Lesgroep");
+            builder.ToTable("ApplicationUser_Lesgroep");
             #endregion
 
             #region Key
-            builder.HasKey(t => new { t.Sessie_Tijdstip, t.Lesgroep_Groepsnaam });
+            builder.HasKey(t => new { t.ApplicationUser_Id, t.Lesgroep_Groepsnaam });
             #endregion
 
             #region Relations
-            builder.HasOne(t => t.Sessie)
-                    .WithMany(t => t.SessieLesgroepen)
-                    .HasForeignKey(t => t.Sessie_Tijdstip)
+            builder.HasOne(t => t.ApplicationUser)
+                    .WithMany(t => t.ApplicationUserLesgroepen)
+                    .HasForeignKey(t => t.ApplicationUser_Id)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.Lesgroep)
-                    .WithMany(t => t.SessieLesgroepen)
+                    .WithMany(t => t.ApplicationUserLesgroepen)
                     .HasForeignKey(t => t.Lesgroep_Groepsnaam)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);

@@ -1,4 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Jiu Jitsu Gent - Platform";
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+    ViewData["Title"] = "Home Page";
 }
 
+@if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded) {
+    <h3>Modules voor de admins</h3>
+}
+else if ((await AuthorizationService.AuthorizeAsync(User, "Lesgever")).Succeeded) {
+    <h3>Modules voor de leerkrachten</h3>
+}
+else {
+   <h3>Gebruiker niet ingelogd</h3>
+}

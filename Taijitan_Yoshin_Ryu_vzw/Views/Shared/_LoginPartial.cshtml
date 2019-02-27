@@ -1,11 +1,10 @@
 @using Microsoft.AspNetCore.Identity
 @using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
-@inject SignInManager<Lid> SignInManager
-@inject UserManager<Lid> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
-{
+@if (SignInManager.IsSignedIn(User)) {
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -17,7 +16,8 @@
         </ul>
     </form>
 }
-else
-{
-
+else {
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
 }

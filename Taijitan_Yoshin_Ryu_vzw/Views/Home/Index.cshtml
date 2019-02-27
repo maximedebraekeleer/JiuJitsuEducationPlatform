@@ -6,11 +6,35 @@
 }
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "Lid")).Succeeded) {
-    <h3>Modules voor de admins</h3>
+    <h3>Modules voor de leden</h3>
+    <br />
+    <div class="userModuleWrapper">
+        <div class="userModule">
+            <h5>Aanwezigheid registreren</h5>
+        </div>
+        <div class="userModule">
+            <h5>Lesmateriaal raadplegen</h5>
+        </div>
+        <div class="userModule">
+            <h5>Lesmateriaal becommentariëren</h5>
+        </div>
+    </div>
 }
 else if ((await AuthorizationService.AuthorizeAsync(User, "Lesgever")).Succeeded) {
-    <h3>Modules voor de leerkrachten</h3>
+    <h3>Modules voor de lesgevers</h3>
+    <br />
+    <div class="userModuleWrapper">
+        <div class="userModule">
+            <h5>Overzicht aanwezigheden raadplegen</h5>
+        </div>
+        <div class="userModule">
+            <h5>Sessie starten</h5>
+        </div>
+        <div class="userModule">
+            <h5>Melding bij nieuwe commentaar</h5>
+        </div>
+    </div>
 }
 else {
-   <h3>Gebruiker niet ingelogd</h3>
+    <h3>Geen gebruiker aangemeld</h3>
 }

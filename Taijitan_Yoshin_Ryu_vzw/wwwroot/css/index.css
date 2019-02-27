@@ -111,3 +111,26 @@
 footer {
     text-align: center;
 }
+
+.userModule {
+    height: 200px;
+    width: 400px;
+    background-color: #EEEEEE;
+    text-align: center;
+    margin: 7px;
+    padding: 10px;
+    display: table;
+}
+
+    .userModule h5 {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .userModule:hover {
+        background-color: #E0E0E0;
+    }
+
+.userModuleWrapper {
+    display: flex;
+}

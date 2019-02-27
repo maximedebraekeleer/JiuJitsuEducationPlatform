@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Taijitan_Yoshin_Ryu_vzw.Filters;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Data.Repositories;
+using System.Security.Claims;
 
 namespace Taijitan_Yoshin_Ryu_vzw
 {
@@ -40,11 +41,20 @@ namespace Taijitan_Yoshin_Ryu_vzw
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+
+            services.AddDefaultIdentity<Lid>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("Lesgever", policy => policy.RequireClaim(ClaimTypes.Role, "lesgever"));
+                options.AddPolicy("Beheerder", policy => policy.RequireClaim(ClaimTypes.Role, "beheerder"));
+            });
+
             services.AddScoped<DataInitializer>();
+
             services.AddScoped<ILidRepository, LidRepository>();
             services.AddScoped<LidFilter>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -74,7 +84,8 @@ namespace Taijitan_Yoshin_Ryu_vzw
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            dataInitializer.InitializeData();
+
+            dataInitializer.InitializeData().Wait();
         }
     }
 }

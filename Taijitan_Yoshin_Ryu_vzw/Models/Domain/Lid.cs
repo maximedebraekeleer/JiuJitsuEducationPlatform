@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
-    public class Lid {
-
+namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
+{
+    public class Lid : IdentityUser
+    {
         #region Fields
         private string _naam;
         private string _voornaam;
@@ -14,58 +16,66 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         private string _gemeente;
         private int _postcode;
         private int _telefoonNummer;
-        private string _email;
-        private string _wachtwoord;
         #endregion
 
-
         #region Properties
-        public string Naam {
+        public string Naam
+        {
             get => _naam;
-            set {
+            set
+            {
                 if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
                     throw new ArgumentException("Naam kan niet leeg zijn of meer dan 45 caracters bevatten");
                 _naam = value;
             }
         }
 
-        public string Voornaam {
+        public string Voornaam
+        {
             get => _voornaam;
-            set {
+            set
+            {
                 if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
                     throw new ArgumentException("Voornaam kan niet leeg zijn of meer dan 45 caracters bevatten");
                 _voornaam = value;
             }
         }
 
-        public DateTime GeboorteDatum {
+        public DateTime GeboorteDatum
+        {
             get => _geboorteDatum;
-            set {
+            set
+            {
                 if (value.Equals(null) && value >= DateTime.Today)
                     throw new ArgumentException("Datum kan niet voor vandaag zijn");
                 _geboorteDatum = value;
             }
         }
 
-        public string Straat {
+        public string Straat
+        {
             get => _straat;
-            set {
+            set
+            {
                 if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
                     throw new ArgumentException("Street cannot be empty and should not exceed 45 characters");
                 _straat = value;
             }
         }
 
-        public int HuisNummer {
+        public int HuisNummer
+        {
             get => _huisNummer;
-            set {
+            set
+            {
                 if (value.Equals(null) || value == 0)
                     throw new ArgumentException("Huisnummer mag niet leeg zijn");
                 _huisNummer = value;
             }
         }
 
-        public string Gemeente {
+        public string Gemeente
+        {
             get => _gemeente;
             set
             {
@@ -75,44 +85,28 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             }
         }
 
-        public int Postcode {
+        public int Postcode
+        {
             get => _postcode;
-            set {
+            set
+            {
                 if (value.Equals(null) || value == 0)
                     throw new ArgumentException("Postcode mag niet leeg zijn");
                 _postcode = value;
             }
         }
 
-        public int TelefoonNummer {
+        public int TelefoonNummer
+        {
             get => _telefoonNummer;
-            set {
+            set
+            {
                 if (value.Equals(null) || value == 0)
                     throw new ArgumentException("Telefoonnummer mag niet leeg zijn");
                 _telefoonNummer = value;
             }
         }
 
-        public string Email {
-            get => _email;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value) || value.Length > 45 || new System.Net.Mail.MailAddress(value).Address != value)
-                    throw new ArgumentException("Email kan niet leeg zijn of meer dan 45 caracters bevatten of Email is ongeldig");
-                _email = value;
-            }
-        }
-
-        public string Wachtwoord {
-            get => _wachtwoord;
-            set 
-            {
-                //Validatie nog implementeren
-                if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
-                    throw new ArgumentException("Wachtwoord kan niet leeg zijn of meer dan 45 caracters bevatten");
-                _wachtwoord = value;
-            }
-        }
         #endregion
 
         #region Collections
@@ -121,28 +115,27 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Constructors
-        public Lid() {
+        public Lid()
+        {
             LidLesgroepen = new HashSet<LidLesgroep>();
         }
 
-        public Lid(string naam, string voornaam, DateTime geboorteDatum, string straat, int huisNummer, string gemeente, int postcode, int telefoonNummer, string email, bool isBeheerder, bool isLesgever) : this() {
-            Naam = naam;
-            Voornaam = voornaam;
-            GeboorteDatum = geboorteDatum;
-            Straat = straat;
-            HuisNummer = huisNummer;
-            Gemeente = gemeente;
-            Postcode = postcode;
-            TelefoonNummer = telefoonNummer;
-            Email = email;
-            IsBeheerder = isBeheerder;
-            IsLesgever = isLesgever;
-            Wachtwoord = "123";
-        }
+        //public Lid(string naam, string voornaam, DateTime geboorteDatum, string straat, int huisNummer, string gemeente, int postcode, int telefoonNummer) : this()
+        //{
+        //    Naam = naam;
+        //    Voornaam = voornaam;
+        //    GeboorteDatum = geboorteDatum;
+        //    Straat = straat;
+        //    HuisNummer = huisNummer;
+        //    Gemeente = gemeente;
+        //    Postcode = postcode;
+        //    TelefoonNummer = telefoonNummer;
+        //}
         #endregion
 
         #region Methods
-        public void AddLesgroep(Lesgroep l) {
+        public void AddLesgroep(Lesgroep l)
+        {
             LidLesgroepen.Add(new LidLesgroep(this, l));
         }
         #endregion

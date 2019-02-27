@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+@inject SignInManager<Lid> SignInManager
+@inject UserManager<Lid> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

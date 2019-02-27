@@ -38,7 +38,7 @@ namespace Taijitan_Yoshin_Ryu_vzw {
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthorization(options => {
-                options.AddPolicy("Lid", policy => policy.RequireClaim(ClaimTypes.Role, "lid"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
                 options.AddPolicy("Lesgever", policy => policy.RequireClaim(ClaimTypes.Role, "lesgever"));
             });
 

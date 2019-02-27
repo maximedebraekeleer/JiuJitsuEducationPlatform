@@ -1,0 +1,115 @@
+﻿body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.body-content{
+    position: relative;
+    height: 95vh;
+}
+
+.content-wrapper {
+    position: absolute;
+    min-width: 100%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.navbar {
+    background: white;
+    border: none;
+    box-shadow: 0px 3px 10px 0px rgba(207,207,207,1);
+}
+
+.navbar-brand h1 strong {
+    color: #336566;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-brand > h1 {
+    font-weight: bold;
+    font-size: 1.2vw;
+    padding: 0;
+    margin: 0;
+}
+
+#header {
+    position: relative;
+    display: flex;
+    padding: 10px 0 10px 10px;
+}
+
+    #header > i {
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #336566;
+        border-radius: 50%;
+        min-height: 3vw;
+        min-width: 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+    }
+
+        #header > i:hover {
+            cursor: pointer;
+        }
+
+
+
+#banner {
+    position: relative;
+    background-image: url("../images/jj_banner.jpg");
+    background-size: cover;
+    min-height: 300px;
+    min-width: 100%;
+}
+
+#login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 3vw 4vw;
+    background: white;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+    #login button {
+        margin: 0 auto;
+        display: block;
+        background: none;
+        border: solid 1px #336566;
+        color: #336566;
+        padding: 5px 20px;
+    }
+
+    #login button:active{
+        border-width: 2px;
+        padding: 4.5px 19.5px;
+    }
+
+#login span{
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+#login span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+footer{
+    text-align: center;
+}
+
+

@@ -4,25 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
-    public class ApplicationUserLesgroep {
+    public class GebruikerLesgroep {
         #region Properties
-        public string ApplicationUser_Id { get; set; }
+        public string Gebruiker_email { get; set; }
         public string Lesgroep_Groepsnaam { get; set; }
         #endregion
 
         #region Navigational Properties
-        public ApplicationUser ApplicationUser { get; set; }
+        public Gebruiker Gebruiker { get; set; }
         public Lesgroep Lesgroep { get; set; }
         #endregion
 
         #region Constructors
-        protected ApplicationUserLesgroep() {
+        protected GebruikerLesgroep() {
 
         }
 
-        public ApplicationUserLesgroep(ApplicationUser applicationUser, Lesgroep lesgroep) : this() {
-            ApplicationUser = applicationUser;
-            ApplicationUser_Id = ApplicationUser.Id;
+        public GebruikerLesgroep(Gebruiker gebruiker, Lesgroep lesgroep) : this() {
+            Gebruiker = gebruiker;
+            Gebruiker_email = gebruiker.Email;
 
             Lesgroep = lesgroep;
             Lesgroep_Groepsnaam = Lesgroep.Groepsnaam;

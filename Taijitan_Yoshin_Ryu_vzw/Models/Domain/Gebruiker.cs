@@ -5,8 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
-    public class ApplicationUser : IdentityUser {
+    public class Gebruiker {
         #region Properties
+        public string Email { get; set; }
         public string Naam { get; set; }
         public string Voornaam { get; set; }
         public DateTime GeboorteDatum { get; set; }
@@ -18,19 +19,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Collections
-        public ICollection<ApplicationUserLesgroep> ApplicationUserLesgroepen { get; private set; }
-        public IEnumerable<Lesgroep> Lesgroepen => ApplicationUserLesgroepen.Select(l => l.Lesgroep);
+        public ICollection<GebruikerLesgroep> GebruikerLesgroepen { get; private set; }
+        public IEnumerable<Lesgroep> Lesgroepen => GebruikerLesgroepen.Select(l => l.Lesgroep);
         #endregion
 
         #region Constructors
-        public ApplicationUser() {
-            ApplicationUserLesgroepen = new HashSet<ApplicationUserLesgroep>();
+        public Gebruiker() {
+            GebruikerLesgroepen = new HashSet<GebruikerLesgroep>();
         }
         #endregion
 
         #region Methods
         public void AddLesgroep(Lesgroep l) {
-            ApplicationUserLesgroepen.Add(new ApplicationUserLesgroep(this, l));
+            GebruikerLesgroepen.Add(new GebruikerLesgroep(this, l));
         }
         #endregion
     }

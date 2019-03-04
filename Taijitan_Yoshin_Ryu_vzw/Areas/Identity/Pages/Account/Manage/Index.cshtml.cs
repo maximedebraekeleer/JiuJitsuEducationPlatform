@@ -8,24 +8,30 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Taijitan_Yoshin_Ryu_vzw.Data;
+using Taijitan_Yoshin_Ryu_vzw.Data.Repositories;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly GebruikerRepository _gebruikers;
 
         public IndexModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            IEmailSender emailSender,
+            ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _gebruikers = new GebruikerRepository(dbContext);
         }
         [Display(Name = "Gebruikersnaam")]
         public string Username { get; set; }
@@ -84,17 +90,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            //gebruiker uit de repository halen
+            Gebruiker gebruiker = _gebruikers.GetByEmail(user.Email);
 
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            var naam = user.Naam;
-            var voorNaam = user.Voornaam;
-            var geboorteDatum = user.GeboorteDatum;
-            var straat = user.Straat;
-            var huisNummer = user.HuisNummer;
-            var gemeente = user.Gemeente;
-            var postcode = user.Postcode;
+            var naam = gebruiker.Naam;
+            var voorNaam = gebruiker.Voornaam;
+            var geboorteDatum = gebruiker.GeboorteDatum;
+            var straat = gebruiker.Straat;
+            var huisNummer = gebruiker.HuisNummer;
+            var gemeente = gebruiker.Gemeente;
+            var postcode = gebruiker.Postcode;
 
 
             Username = userName;
@@ -125,6 +133,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             }
 
             var user = await _userManager.GetUserAsync(User);
+            Gebruiker gebruiker = _gebruikers.GetByEmail(user.Email);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -139,6 +149,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
                     var userId = await _userManager.GetUserIdAsync(user);
                     throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
                 }
+                gebruiker.Email = Input.Email;
+                
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -151,35 +163,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
-            if(Input.Naam != user.Naam)
-            {
-                user.Naam = Input.Naam;
-            }
-            if(Input.Voornaam != user.Voornaam)
-            {
-                user.Voornaam = Input.Voornaam;
-            }
-            if(Input.GeboorteDatum != user.GeboorteDatum)
-            {
-                user.GeboorteDatum = Input.GeboorteDatum;
-            }
-            if (Input.Straat != user.Straat)
-            {
-                user.Straat = Input.Straat;
-            }
-            if (Input.HuisNummer != user.HuisNummer)
-            {
-                user.HuisNummer = Input.HuisNummer;
-            }
-            if (Input.Gemeente != user.Gemeente)
-            {
-                user.Gemeente = Input.Gemeente;
-            }
-            if (Input.PostCode != user.Postcode)
-            {
-                user.Postcode = Input.PostCode;
-            }
-            await _userManager.UpdateAsync(user);
+            gebruiker.Naam = Input.Naam;
+            gebruiker.Voornaam = Input.Voornaam;
+            gebruiker.GeboorteDatum = Input.GeboorteDatum;
+            gebruiker.Straat = Input.Straat;
+            gebruiker.HuisNummer = Input.HuisNummer;
+            gebruiker.Gemeente = Input.Gemeente;
+            gebruiker.Postcode = gebruiker.Postcode;
+
+            _gebruikers.SaveChanges();
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

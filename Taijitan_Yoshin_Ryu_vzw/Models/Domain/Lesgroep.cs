@@ -22,8 +22,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Collections
-        public ICollection<ApplicationUserLesgroep> ApplicationUserLesgroepen { get; private set; }
-        public IEnumerable<ApplicationUser> ApplicationUsers => ApplicationUserLesgroepen.Select(l => l.ApplicationUser);
+        public ICollection<GebruikerLesgroep> GebruikerLesgroepen { get; private set; }
+        public IEnumerable<Gebruiker> Gebruikers => GebruikerLesgroepen.Select(l => l.Gebruiker);
 
         public ICollection<SessieLesgroep> SessieLesgroepen { get; private set; }
         public IEnumerable<Sessie> Sessies => SessieLesgroepen.Select(s => s.Sessie);
@@ -31,7 +31,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
 
         #region Constructors
         protected Lesgroep() {
-            ApplicationUserLesgroepen = new HashSet<ApplicationUserLesgroep>();
+            GebruikerLesgroepen = new HashSet<GebruikerLesgroep>();
             SessieLesgroepen = new HashSet<SessieLesgroep>();
         }
 
@@ -41,8 +41,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Methods
-        public void AddApplicationUser(ApplicationUser l) {
-            ApplicationUserLesgroepen.Add(new ApplicationUserLesgroep(l, this));
+        public void AddGebruiker(Gebruiker l) {
+            GebruikerLesgroepen.Add(new GebruikerLesgroep(l, this));
         }
         #endregion
     }

@@ -34,7 +34,7 @@ namespace Taijitan_Yoshin_Ryu_vzw {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ApplicationUser>()
+            services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthorization(options => {
@@ -71,7 +71,6 @@ namespace Taijitan_Yoshin_Ryu_vzw {
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
             //dataInitializer.InitializeData().Wait(-1);
             //VOORLOPIG NIET UIT COMMENTAAR ZETTEN
         }

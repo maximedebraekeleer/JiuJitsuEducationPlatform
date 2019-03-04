@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 namespace Taijitan_Yoshin_Ryu_vzw.Data {
     public class DataInitializer {
         private readonly ApplicationDbContext _dbContext;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         //Users
-        ApplicationUser user1;
-        ApplicationUser user2;
-        ApplicationUser user3;
-        ApplicationUser user4;
+        IdentityUser user1;
+        IdentityUser user2;
+        IdentityUser user3;
+        IdentityUser user4;
 
-        public DataInitializer(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager) {
+        Gebruiker gebruiker1;
+        Gebruiker gebruiker2;
+        Gebruiker gebruiker3;
+        Gebruiker gebruiker4;
+
+        public DataInitializer(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager) {
             _dbContext = dbContext;
             _userManager = userManager;
         }
@@ -36,10 +41,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             _dbContext.Lesgroepen.Add(groep3);
 
             //Leden in lesgroep steken
-            user1.AddLesgroep(groep1);
-            user2.AddLesgroep(groep1);
-            user3.AddLesgroep(groep3);
-            user4.AddLesgroep(groep2);
+            gebruiker1.AddLesgroep(groep1);
+            gebruiker2.AddLesgroep(groep1);
+            gebruiker3.AddLesgroep(groep3);
+            gebruiker4.AddLesgroep(groep2);
 
             //Sessies aanmaken
             Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20));
@@ -58,10 +63,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         }
 
         private async Task InitializeUsers() {
+            _dbContext.Database.EnsureDeleted();
+            _dbContext.Database.EnsureCreated();
+
             //User1
             string eMailAddress = "daan@gmail.com";
-            user1 = new ApplicationUser {
-                UserName = eMailAddress,
+            user1 = new IdentityUser { Email = eMailAddress };
+            await _userManager.CreateAsync(user1, "P@ssword1");
+            await _userManager.AddClaimAsync(user1, new Claim(ClaimTypes.Role, "Gebruiker"));
+            gebruiker1 = new Gebruiker
+            {
                 Email = eMailAddress,
                 Naam = "Van Vooren",
                 Voornaam = "Daan",
@@ -70,15 +81,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 HuisNummer = 23,
                 Gemeente = "Ertvelde",
                 Postcode = 9940,
-                TelefoonNummer = 0470012312
+                TelefoonNummer = 047001231
             };
-            await _userManager.CreateAsync(user1, "P@ssword1");
-            await _userManager.AddClaimAsync(user1, new Claim(ClaimTypes.Role, "lid"));
 
             //User2
             eMailAddress = "hans@gmail.com";
-            user2 = new ApplicationUser {
-                UserName = eMailAddress,
+            user2 = new IdentityUser { UserName = eMailAddress };
+            gebruiker2 = new Gebruiker {               
                 Email = eMailAddress,
                 Naam = "van der Staak",
                 Voornaam = "Hans",
@@ -90,12 +99,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 TelefoonNummer = 0497708826
             };
             await _userManager.CreateAsync(user2, "P@ssword1");
-            await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "lid"));
+            await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "Gebruiker"));
 
             //User3
             eMailAddress = "maxime@gmail.com";
-            user3 = new ApplicationUser {
-                UserName = eMailAddress,
+            user3 = new IdentityUser { UserName = eMailAddress };
+            gebruiker3 = new Gebruiker {
                 Email = eMailAddress,
                 Naam = "De Braekeleer",
                 Voornaam = "Maxime",
@@ -111,8 +120,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
 
             //User4
             eMailAddress = "dirk@gmail.com";
-            user4 = new ApplicationUser {
-                UserName = eMailAddress,
+            user4 = new IdentityUser { UserName = eMailAddress };
+            gebruiker4 = new Gebruiker {
                 Email = eMailAddress,
                 Naam = "Dirk",
                 Voornaam = "Dirkie",

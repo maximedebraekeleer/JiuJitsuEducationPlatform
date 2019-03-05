@@ -16,6 +16,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public string Gemeente { get; set; }
         public int Postcode { get; set; }
         public int TelefoonNummer { get; set; }
+        public bool IsLid { get; set; }
+        public bool IsLesgever { get; set; }
         #endregion
 
         #region Collections
@@ -26,6 +28,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #region Constructors
         public Gebruiker() {
             GebruikerLesgroepen = new HashSet<GebruikerLesgroep>();
+        }
+
+        public Gebruiker(string email, string naam, string voornaam, DateTime geboorteDatum, string straat,
+            int huisNummer, string gemeente, int postcode, int telefoonNummer, bool isLid, bool isLesgever) : this() {
+            Email = email;
+            Naam = naam;
+            Voornaam = voornaam;
+            GeboorteDatum = geboorteDatum;
+            Straat = straat;
+            HuisNummer = huisNummer;
+            Gemeente = gemeente;
+            Postcode = postcode;
+            TelefoonNummer = telefoonNummer;
+            IsLid = isLid;
+            IsLesgever = isLesgever;
         }
         #endregion
 

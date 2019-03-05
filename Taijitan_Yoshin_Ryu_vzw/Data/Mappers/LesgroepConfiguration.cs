@@ -19,7 +19,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
 
             #region Properties
             builder.Property(t => t.Groepsnaam)
-                    .HasMaxLength(45)
                     .IsRequired();
             #endregion
         }

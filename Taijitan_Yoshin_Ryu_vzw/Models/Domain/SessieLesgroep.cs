@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class SessieLesgroep {
         #region Properties
-        public DateTime Sessie_Tijdstip { get; set; }
+        public int Sessie_Id { get; set; }
         public string Lesgroep_Groepsnaam { get; set; }
         #endregion
 
@@ -22,7 +22,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
 
         public SessieLesgroep(Sessie sessie, Lesgroep lesgroep) : this() {
             Sessie = sessie;
-            Sessie_Tijdstip = Sessie.Tijdstip;
+            Sessie_Id = Sessie.Id;
 
             Lesgroep = lesgroep;
             Lesgroep_Groepsnaam = Lesgroep.Groepsnaam;

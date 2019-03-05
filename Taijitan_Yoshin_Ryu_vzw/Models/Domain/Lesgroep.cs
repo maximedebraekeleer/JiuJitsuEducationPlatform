@@ -6,19 +6,8 @@ using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Lesgroep {
-        #region Fields
-        private string _groepsnaam;
-        #endregion
-
         #region Properties
-        public string Groepsnaam {
-            get => _groepsnaam;
-            set {
-                if (string.IsNullOrWhiteSpace(value) || value.Length > 45)
-                    throw new ArgumentException("Groepsnaam kan niet leeg zijn of meer dan 45 caracters bevatten");
-                _groepsnaam = value;
-            }
-        }
+        public string Groepsnaam { get; set; }
         #endregion
 
         #region Collections

@@ -14,13 +14,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #endregion
 
             #region Key
-            builder.HasKey(t => new { t.Sessie_Tijdstip, t.Lesgroep_Groepsnaam });
+            builder.HasKey(t => new { t.Sessie_Id, t.Lesgroep_Groepsnaam });
             #endregion
 
             #region Relations
             builder.HasOne(t => t.Sessie)
                     .WithMany(t => t.SessieLesgroepen)
-                    .HasForeignKey(t => t.Sessie_Tijdstip)
+                    .HasForeignKey(t => t.Sessie_Id)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
 

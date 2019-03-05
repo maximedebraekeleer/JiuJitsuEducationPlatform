@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class GebruikerLesgroep {
         #region Properties
-        public string Gebruiker_email { get; set; }
+        public string Gebruiker_Email { get; set; }
         public string Lesgroep_Groepsnaam { get; set; }
         #endregion
 
@@ -22,7 +22,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
 
         public GebruikerLesgroep(Gebruiker gebruiker, Lesgroep lesgroep) : this() {
             Gebruiker = gebruiker;
-            Gebruiker_email = gebruiker.Email;
+            Gebruiker_Email = gebruiker.Email;
 
             Lesgroep = lesgroep;
             Lesgroep_Groepsnaam = Lesgroep.Groepsnaam;

@@ -9,9 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Taijitan_Yoshin_Ryu_vzw.Data {
     public class ApplicationDbContext : IdentityDbContext {
         #region DbSets
-        //Identity
         public DbSet<Gebruiker> Gebruikers { get; set; }
-
         public DbSet<Lesgroep> Lesgroepen { get; set; }
         public DbSet<Sessie> Sessies { get; set; }
         #endregion
@@ -22,11 +20,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new GebruikerConfiguration());
             builder.ApplyConfiguration(new LesgroepConfiguration());
             builder.ApplyConfiguration(new GebruikerLesgroepConfiguration());
             builder.ApplyConfiguration(new SessieConfiguration());
             builder.ApplyConfiguration(new SessieLesgroepConfiguration());
-            builder.ApplyConfiguration(new GebruikerConfiguration());
         }
     }
 }

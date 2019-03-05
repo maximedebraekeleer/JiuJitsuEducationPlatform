@@ -1,8 +1,6 @@
 ﻿using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -47,8 +45,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             gebruiker4.AddLesgroep(groep2);
 
             //Sessies aanmaken
-            Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20));
-            Sessie sessie2 = new Sessie(new DateTime(2019, 03, 22));
+            Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20), "12:00", "14:00");
+            Sessie sessie2 = new Sessie(new DateTime(2019, 03, 21), "15:00", "17:00");
 
             _dbContext.Sessies.Add(sessie1);
             _dbContext.Sessies.Add(sessie2);
@@ -63,16 +61,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         }
 
         private async Task InitializeUsers() {
-            _dbContext.Database.EnsureDeleted();
-            _dbContext.Database.EnsureCreated();
-
             //User1
             string eMailAddress = "daan@gmail.com";
-            user1 = new IdentityUser { Email = eMailAddress };
+            user1 = new IdentityUser { UserName = eMailAddress, Email = eMailAddress };
             await _userManager.CreateAsync(user1, "P@ssword1");
-            await _userManager.AddClaimAsync(user1, new Claim(ClaimTypes.Role, "Gebruiker"));
-            gebruiker1 = new Gebruiker
-            {
+            await _userManager.AddClaimAsync(user1, new Claim(ClaimTypes.Role, "lid"));
+            gebruiker1 = new Gebruiker {
                 Email = eMailAddress,
                 Naam = "Van Vooren",
                 Voornaam = "Daan",
@@ -81,13 +75,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 HuisNummer = 23,
                 Gemeente = "Ertvelde",
                 Postcode = 9940,
-                TelefoonNummer = 047001231
+                TelefoonNummer = 0470011701,
+                IsLid = true,
+                IsLesgever = false
             };
 
             //User2
             eMailAddress = "hans@gmail.com";
-            user2 = new IdentityUser { UserName = eMailAddress };
-            gebruiker2 = new Gebruiker {               
+            user2 = new IdentityUser { UserName = eMailAddress, Email = eMailAddress };
+            await _userManager.CreateAsync(user2, "P@ssword1");
+            await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "lid"));
+            gebruiker2 = new Gebruiker {
                 Email = eMailAddress,
                 Naam = "van der Staak",
                 Voornaam = "Hans",
@@ -96,43 +94,53 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 HuisNummer = 28,
                 Gemeente = "Mere",
                 Postcode = 9420,
-                TelefoonNummer = 0497708826
+                TelefoonNummer = 0497708826,
+                IsLid = true,
+                IsLesgever = false
             };
-            await _userManager.CreateAsync(user2, "P@ssword1");
-            await _userManager.AddClaimAsync(user2, new Claim(ClaimTypes.Role, "Gebruiker"));
 
             //User3
             eMailAddress = "maxime@gmail.com";
-            user3 = new IdentityUser { UserName = eMailAddress };
+            user3 = new IdentityUser { UserName = eMailAddress, Email = eMailAddress };
+            await _userManager.CreateAsync(user3, "P@ssword1");
+            await _userManager.AddClaimAsync(user3, new Claim(ClaimTypes.Role, "lesgever"));
             gebruiker3 = new Gebruiker {
                 Email = eMailAddress,
                 Naam = "De Braekeleer",
                 Voornaam = "Maxime",
-                GeboorteDatum = new DateTime(502, 1, 10),
-                Straat = "Glazenstraat",
-                HuisNummer = 69,
+                GeboorteDatum = new DateTime(1999, 5, 2),
+                Straat = "Houtstraat",
+                HuisNummer = 12,
                 Gemeente = "Zulte Waregem",
                 Postcode = 9870,
-                TelefoonNummer = 046969669
+                TelefoonNummer = 046969669,
+                IsLid = false,
+                IsLesgever = true
             };
-            await _userManager.CreateAsync(user3, "P@ssword1");
-            await _userManager.AddClaimAsync(user3, new Claim(ClaimTypes.Role, "lesgever"));
 
             //User4
-            eMailAddress = "dirk@gmail.com";
-            user4 = new IdentityUser { UserName = eMailAddress };
+            eMailAddress = "michael@gmail.com";
+            user4 = new IdentityUser { UserName = eMailAddress, Email = eMailAddress };
+            await _userManager.CreateAsync(user4, "P@ssword1");
+            await _userManager.AddClaimAsync(user4, new Claim(ClaimTypes.Role, "lesgever"));
             gebruiker4 = new Gebruiker {
                 Email = eMailAddress,
-                Naam = "Dirk",
-                Voornaam = "Dirkie",
-                GeboorteDatum = new DateTime(200, 1, 11),
-                Straat = "Yikesstraat",
-                HuisNummer = 28,
-                Gemeente = "Merel",
-                Postcode = 9420,
-                TelefoonNummer = 0497708826
+                Naam = "Vermassen",
+                Voornaam = "Michael",
+                GeboorteDatum = new DateTime(1998, 4, 12),
+                Straat = "Vlasstraat",
+                HuisNummer = 12,
+                Gemeente = "Opwijk",
+                Postcode = 1234,
+                TelefoonNummer = 0415789124,
+                IsLid = false,
+                IsLesgever = true
             };
-            await _userManager.CreateAsync(user4, "P@ssword1");
+
+            _dbContext.Gebruikers.Add(gebruiker1);
+            _dbContext.Gebruikers.Add(gebruiker2);
+            _dbContext.Gebruikers.Add(gebruiker3);
+            _dbContext.Gebruikers.Add(gebruiker4);
 
             _dbContext.SaveChanges();
         }

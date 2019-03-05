@@ -14,11 +14,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #endregion
 
             #region Primary Key
-            builder.HasKey(t => t.Tijdstip);
+            builder.HasKey(t => t.Id);
             #endregion
 
             #region Properties
-            builder.Property(t => t.Tijdstip)
+            builder.Property(t => t.Datum)
+                .IsRequired();
+
+            builder.Property(t => t.BeginUur)
+                .IsRequired();
+
+            builder.Property(t => t.EindUur)
                 .IsRequired();
             #endregion
         }

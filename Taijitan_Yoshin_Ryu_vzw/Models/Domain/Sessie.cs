@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Sessie
     {
-        #region Regions
-        private DateTime _tijdstip;
-        #endregion
-
         #region Properties
-        public DateTime Tijdstip {
-            get => _tijdstip;
-            set {
-                if (value.Equals(null))
-                    throw new ArgumentException("Datum kan niet leeg zijn");
-                _tijdstip = value;
-            }
-        }
+        public int Id { get; set; } //Id is auto-increment
+        public DateTime Datum { get; set; }
+        public string BeginUur { get; set; }
+        public string EindUur { get; set; }
+
         #endregion
 
         #region Collections
@@ -31,8 +24,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             SessieLesgroepen = new HashSet<SessieLesgroep>();
         }
 
-        public Sessie(DateTime tijdstip) : this() {
-            Tijdstip = tijdstip;
+        public Sessie(DateTime datum, string beginUur, string eindUur) : this() {
+            Datum = datum.Date;
+            BeginUur = beginUur;
+            EindUur = eindUur;
         }
         #endregion
 

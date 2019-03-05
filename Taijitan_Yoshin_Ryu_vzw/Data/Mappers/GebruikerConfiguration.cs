@@ -20,6 +20,38 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
             builder.HasKey(g => g.Email);
             #endregion
 
+            #region Properties
+            builder.Property(t => t.Naam)
+                   .IsRequired();
+
+            builder.Property(t => t.Voornaam)
+                   .IsRequired();
+
+            builder.Property(t => t.GeboorteDatum)
+                   .IsRequired();
+
+            builder.Property(t => t.Straat)
+                   .IsRequired();
+
+            builder.Property(t => t.HuisNummer)
+                   .IsRequired();
+
+            builder.Property(t => t.Gemeente)
+                   .IsRequired();
+
+            builder.Property(t => t.Postcode)
+                   .IsRequired();
+
+            builder.Property(t => t.TelefoonNummer)
+                   .IsRequired();
+
+            builder.Property(t => t.IsLid)
+                   .IsRequired();
+
+            builder.Property(t => t.IsLesgever)
+                   .IsRequired();
+            #endregion
+
         }
     }
 }

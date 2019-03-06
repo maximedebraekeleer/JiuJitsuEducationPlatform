@@ -85,7 +85,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             #endregion
                        
             [Display(Name = "Telefoonnummer")]
-            [Phone]
+            //[Phone]
             public int TelefoonNummer { get; set; } //Niet verplicht
 
             [Display(Name = "E-mailadres van ouders")]
@@ -198,7 +198,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
                
             _gebruikers.SaveChanges();
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Uw profiel is aangepast";
             return RedirectToPage();
         }
        

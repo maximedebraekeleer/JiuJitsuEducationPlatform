@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Taijitan_Yoshin_Ryu_vzw.Data.Repositories;
 
 namespace Taijitan_Yoshin_Ryu_vzw {
     public class Startup {
@@ -42,10 +43,14 @@ namespace Taijitan_Yoshin_Ryu_vzw {
                 options.AddPolicy("Lesgever", policy => policy.RequireClaim(ClaimTypes.Role, "lesgever"));
             });
 
+            services.AddScoped<IGebruikerRepository, GebruikerRepository>();
             services.AddSession();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddMvc()
+                .AddRazorPagesOptions(options => { options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "/Login"); })
+                .AddRazorPagesOptions(options => { options.Conventions.AddAreaPageRoute("Identity", "/Account/Manage/Index", "Gebruiker/Edit"); })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            ///Identity/Account/Manage
             services.AddScoped<DataInitializer>();
         }
 

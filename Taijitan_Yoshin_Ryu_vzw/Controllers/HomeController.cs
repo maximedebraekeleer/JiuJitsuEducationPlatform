@@ -1,34 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taijitan_Yoshin_Ryu_vzw.Models;
-using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SignInManager<IdentityUser> signin;
 
-        SignInManager<IdentityUser> signin;
-
-        public HomeController(Microsoft.AspNetCore.Identity.SignInManager<IdentityUser> signin)
+        public HomeController(SignInManager<IdentityUser> signin)
         {
             this.signin = signin;
         }
         public IActionResult Index()
         {
-            
             if(signin.IsSignedIn(User))
             {
-                return View();
+                return RedirectToAction(nameof(Index), "Gebruiker");
             }
-            return RedirectToAction("Login", "Identity/Account");
-
+            //return RedirectToAction("Login", "Identity/Account");
+            return LocalRedirect("/Login");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

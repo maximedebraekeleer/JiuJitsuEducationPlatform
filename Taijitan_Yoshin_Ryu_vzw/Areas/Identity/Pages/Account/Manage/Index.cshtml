@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Persoonlijke gegevens";
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -9,30 +9,10 @@
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
-            </div>
-            <div class="form-group">
+            <div class="form-group">                
                 <label asp-for="Input.Email"></label>
-                @if (Model.IsEmailConfirmed)
-                {
-                    <div class="input-group">
-                        <input asp-for="Input.Email" class="form-control" />
-                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
-                    </div>
-                }
-                else
-                {
-                    <input asp-for="Input.Email" class="form-control" />
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Stuur bevestigings mail</button>
-                }
+                <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Voornaam"></label>
@@ -46,11 +26,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.GeboorteDatum"></label>
-                <input asp-for="Input.GeboorteDatum" class="form-control" />
-                <span asp-validation-for="Input.GeboorteDatum" class="text-danger"></span>
-            </div><div class="form-group">
+                <input asp-for="Input.GeboorteDatum" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.GeboorteLand"></label>
+                <input asp-for="Input.GeboorteLand" class="form-control" disabled/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.GeboorteStad"></label>
+                <input asp-for="Input.GeboorteStad " class="form-control" disabled/>
+            </div>
+            <div class="form-group">
                 <label asp-for="Input.Straat"></label>
-                <input asp-for="Input.Straat" class="form-control"/>
+                <input asp-for="Input.Straat" class="form-control" />
                 <span asp-validation-for="Input.Straat" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -67,6 +55,35 @@
                 <label asp-for="Input.PostCode"></label>
                 <input asp-for="Input.PostCode" class="form-control" />
                 <span asp-validation-for="Input.PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.TelefoonNummer"></label>
+                <input asp-for="Input.TelefoonNummer" class="form-control" />
+                <span asp-validation-for="Input.TelefoonNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.GsmNummer"></label>
+                <input asp-for="Input.GsmNummer" class="form-control" />
+                <span asp-validation-for="Input.GsmNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.RijksregisterNummer"></label>
+                <input asp-for="Input.RijksregisterNummer" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.EmailOuders"></label>
+                <input asp-for="Input.EmailOuders" class="form-control" />
+                <span asp-validation-for="Input.EmailOuders" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.InfoClubAangelegenheden"></label>
+                <input asp-for="Input.InfoClubAangelegenheden" class="form-control" />
+                <span asp-validation-for="Input.InfoClubAangelegenheden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.InfoFederaleAangelegenheden"></label>
+                <input asp-for="Input.InfoFederaleAangelegenheden" class="form-control" />
+                <span asp-validation-for="Input.InfoFederaleAangelegenheden" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-default">Opslaan</button>
         </form>

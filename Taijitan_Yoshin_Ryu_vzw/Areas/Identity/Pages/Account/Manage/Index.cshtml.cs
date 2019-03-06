@@ -33,11 +33,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             _emailSender = emailSender;
             _gebruikers = new GebruikerRepository(dbContext);
         }
-        [Display(Name = "Gebruikersnaam")]
-        public string Username { get; set; }
-
-        public bool IsEmailConfirmed { get; set; }
-
+ 
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -45,23 +41,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
         public InputModel Input { get; set; }
 
         public class InputModel
-        {
+        {                       
+            #region required inputs
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "E-mailadres")]
             [EmailAddress]
             public string Email { get; set; }
-
-            [Phone]
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
-            [Display(Name = "Telefoonnummer")]
-            public string PhoneNumber { get; set; }
-
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
-            public string Naam { get; set; }
-
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
-            public string Voornaam { get; set; }
-
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "Geboortedatum")]
             [DataType(DataType.Date)]
@@ -81,6 +66,36 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Postcode")]
             [DataType(DataType.PostalCode)]
             public int PostCode { get; set; }
+
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
+            public string Naam { get; set; }
+
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
+            public string Voornaam { get; set; }
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
+            public int GsmNummer { get; set; }
+            #endregion
+
+            #region disabled input fields            
+            public char Geslacht { get; set; }
+            public string GeboorteStad { get; set; }
+            public string GeboorteLand { get; set; }
+            public int RijksregisterNummer { get; set; }
+            public DateTime InschrijvingsDatum { get; set; }
+            #endregion
+                       
+            [Display(Name = "Telefoonnummer")]
+            [Phone]
+            public int TelefoonNummer { get; set; } //Niet verplicht
+
+            [Display(Name = "E-mailadres van ouders")]
+            public string EmailOuders { get; set; } //Niet verplicht
+
+            [Display(Name = "Ik wens info te ontvangen over club aangelegenheden.")]
+            public bool InfoClubAangelegenheden { get; set; }
+
+            [Display(Name = "Ik wens info te ontvangen over federale aangelegenheden.")]
+            public bool InfoFederaleAangelegenheden { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -88,39 +103,50 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Kon gebruiker niet laden met ID '{_userManager.GetUserId(User)}'.");
             }
             //gebruiker uit de repository halen
             Gebruiker gebruiker = _gebruikers.GetByEmail(user.Email);
 
-            var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var naam = gebruiker.Naam;
             var voorNaam = gebruiker.Voornaam;
+            var geslacht = gebruiker.Geslacht;
             var geboorteDatum = gebruiker.GeboorteDatum;
+            var geboorteLand = gebruiker.GeboorteLand;
+            var geboorteStad = gebruiker.GeboorteStad;
             var straat = gebruiker.Straat;
             var huisNummer = gebruiker.HuisNummer;
             var gemeente = gebruiker.Gemeente;
             var postcode = gebruiker.Postcode;
+            var telefoonNummer = gebruiker.TelefoonNummer;
+            var gsmNummer = gebruiker.GsmNummer;
+            var rijksregister = gebruiker.RijksregisterNummer;
+            var emailOuders = gebruiker.EmailOuders;
+            var infoClubAangelegenheden = gebruiker.InfoClubAangelegenheden;
+            var infoFederale = gebruiker.InfoFederaleAangelegenheden;
 
-
-            Username = userName;
-
+            
             Input = new InputModel
             {
                 Email = email,
-                PhoneNumber = phoneNumber,
                 Naam = naam,
                 Voornaam = voorNaam,
                 GeboorteDatum = geboorteDatum,
+                GeboorteLand = geboorteLand,
+                GeboorteStad = geboorteStad,
                 Straat = straat,
                 HuisNummer = huisNummer,
                 Gemeente = gemeente,
-                PostCode = postcode
+                PostCode = postcode,
+                TelefoonNummer = telefoonNummer,
+                GsmNummer = gsmNummer,
+                RijksregisterNummer = rijksregister,
+                EmailOuders = emailOuders,
+                InfoClubAangelegenheden = infoClubAangelegenheden,
+                InfoFederaleAangelegenheden = infoFederale
             };
 
-            IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
 
             return Page();
         }
@@ -137,40 +163,39 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Kon gebruiker niet laden met ID '{_userManager.GetUserId(User)}'.");
             }
 
             var email = await _userManager.GetEmailAsync(user);
             if (Input.Email != email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
-                if (!setEmailResult.Succeeded)
+                var setUserNameResult = await _userManager.SetUserNameAsync(user, Input.Email);
+                if (!setEmailResult.Succeeded || !setUserNameResult.Succeeded)
                 {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
+                    var userId = await _userManager.GetUserIdAsync(user); 
+                    throw new InvalidOperationException($"Er vond een onbekende error plaats bij het aanpassen van het mailadres van de gerbuiker met het ID '{userId}'.");
                 }
                 gebruiker.Email = Input.Email;
                 
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
-                }
-            }
             gebruiker.Naam = Input.Naam;
             gebruiker.Voornaam = Input.Voornaam;
             gebruiker.GeboorteDatum = Input.GeboorteDatum;
+            gebruiker.GeboorteLand = Input.GeboorteLand;
+            gebruiker.GeboorteStad = Input.GeboorteStad;
             gebruiker.Straat = Input.Straat;
             gebruiker.HuisNummer = Input.HuisNummer;
             gebruiker.Gemeente = Input.Gemeente;
             gebruiker.Postcode = gebruiker.Postcode;
-
+            gebruiker.TelefoonNummer = Input.TelefoonNummer;
+            gebruiker.GsmNummer = Input.GsmNummer;
+            gebruiker.RijksregisterNummer = Input.RijksregisterNummer;
+            gebruiker.EmailOuders = Input.EmailOuders;
+            gebruiker.InfoClubAangelegenheden = Input.InfoClubAangelegenheden;
+            gebruiker.InfoFederaleAangelegenheden = Input.InfoFederaleAangelegenheden;
+               
             _gebruikers.SaveChanges();
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

@@ -49,8 +49,8 @@ namespace Taijitan_Yoshin_Ryu_vzw {
             services.AddMvc()
                 .AddRazorPagesOptions(options => { options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "/Login"); })
                 .AddRazorPagesOptions(options => { options.Conventions.AddAreaPageRoute("Identity", "/Account/Manage/Index", "Gebruiker/Edit"); })
+                .AddRazorPagesOptions(options => { options.Conventions.AddAreaPageRoute("Identity", "/Account/Manage/ChangePassword", "Gebruiker/EditPassword"); })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            ///Identity/Account/Manage
             services.AddScoped<DataInitializer>();
         }
 

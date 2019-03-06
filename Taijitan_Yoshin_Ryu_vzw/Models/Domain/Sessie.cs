@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Sessie
@@ -9,8 +8,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #region Properties
         public int Id { get; set; } //Id is auto-increment
         public DateTime Datum { get; set; }
-        public string BeginUur { get; set; }
-        public string EindUur { get; set; }
+        public DateTime BeginUur { get; set; }
+        public DateTime EindUur { get; set; }
 
         #endregion
 
@@ -24,8 +23,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             SessieLesgroepen = new HashSet<SessieLesgroep>();
         }
 
-        public Sessie(DateTime datum, string beginUur, string eindUur) : this() {
-            Datum = datum.Date;
+        public Sessie(DateTime datum, DateTime beginUur, DateTime eindUur) : this() {
+            Datum = datum;
             BeginUur = beginUur;
             EindUur = eindUur;
         }

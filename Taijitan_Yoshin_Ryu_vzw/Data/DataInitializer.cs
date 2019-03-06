@@ -45,8 +45,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             gebruiker4.AddLesgroep(groep2);
 
             //Sessies aanmaken
-            Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20), "12:00", "14:00");
-            Sessie sessie2 = new Sessie(new DateTime(2019, 03, 21), "15:00", "17:00");
+            Sessie sessie1 = new Sessie(new DateTime(2019, 03, 20), new DateTime(2000, 01, 01, 12, 00, 00), new DateTime(2000, 01, 01, 15, 00, 00));
+            Sessie sessie2 = new Sessie(new DateTime(2019, 03, 25), new DateTime(2000, 01, 01, 19, 00, 00), new DateTime(2000, 01, 01, 21, 00, 00));
 
             _dbContext.Sessies.Add(sessie1);
             _dbContext.Sessies.Add(sessie2);
@@ -70,12 +70,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Email = eMailAddress,
                 Naam = "Van Vooren",
                 Voornaam = "Daan",
-                GeboorteDatum = new DateTime(2000, 1, 10),
+                Geslacht = 'm',
+                GeboorteDatum = new DateTime(1997, 1, 10),
+                GeboorteLand = "België",
+                GeboorteStad = "Gent",
                 Straat = "Rijschootstraat",
                 HuisNummer = 23,
                 Gemeente = "Ertvelde",
-                Postcode = 9940,
-                TelefoonNummer = 0470011701,
+                Postcode = 9000,
+                TelefoonNummer = 0900011000,
+                GsmNummer = 0477744888,
+                RijksregisterNummer = 123456789,
+                InschrijvingsDatum = new DateTime(2019, 2, 2),
+                EmailOuders = "oudersDaan@gmail.com",
+                InfoClubAangelegenheden = false,
+                InfoFederaleAangelegenheden = false,
                 IsLid = true,
                 IsLesgever = false
             };
@@ -89,12 +98,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Email = eMailAddress,
                 Naam = "van der Staak",
                 Voornaam = "Hans",
-                GeboorteDatum = new DateTime(1999, 1, 11),
+                Geslacht = 'm',
+                GeboorteDatum = new DateTime(1999, 4, 5),
+                GeboorteLand = "België",
+                GeboorteStad = "Gent",
                 Straat = "Ottergemstraat",
                 HuisNummer = 28,
                 Gemeente = "Mere",
                 Postcode = 9420,
-                TelefoonNummer = 0497708826,
+                TelefoonNummer = 0997708826,
+                GsmNummer = 0477744888,
+                RijksregisterNummer = 876543210,
+                InschrijvingsDatum = new DateTime(2019, 1, 12),
+                EmailOuders = "oudersHans@gmail.com",
+                InfoClubAangelegenheden = true,
+                InfoFederaleAangelegenheden = false,
                 IsLid = true,
                 IsLesgever = false
             };
@@ -108,12 +126,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Email = eMailAddress,
                 Naam = "De Braekeleer",
                 Voornaam = "Maxime",
-                GeboorteDatum = new DateTime(1999, 5, 2),
+                Geslacht = 'm',
+                GeboorteDatum = new DateTime(1998, 5, 2),
+                GeboorteLand = "België",
+                GeboorteStad = "Gent",
                 Straat = "Houtstraat",
                 HuisNummer = 12,
                 Gemeente = "Zulte Waregem",
                 Postcode = 9870,
-                TelefoonNummer = 046969669,
+                TelefoonNummer = 097812348,
+                GsmNummer = 0412332123,
+                RijksregisterNummer = 123456321,
+                InschrijvingsDatum = new DateTime(2019, 2, 12),
+                EmailOuders = "oudersMaxime@gmail.com",
+                InfoClubAangelegenheden = true,
+                InfoFederaleAangelegenheden = true,
                 IsLid = false,
                 IsLesgever = true
             };
@@ -127,12 +154,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Email = eMailAddress,
                 Naam = "Vermassen",
                 Voornaam = "Michael",
+                Geslacht = 'm',
                 GeboorteDatum = new DateTime(1998, 4, 12),
+                GeboorteLand = "België",
+                GeboorteStad = "Gent",
                 Straat = "Vlasstraat",
-                HuisNummer = 12,
+                HuisNummer = 14,
                 Gemeente = "Opwijk",
-                Postcode = 1234,
-                TelefoonNummer = 0415789124,
+                Postcode = 123,
+                TelefoonNummer = 0977788999,
+                GsmNummer = 0415789124,
+                RijksregisterNummer = 147258369,
+                InschrijvingsDatum = new DateTime(2019, 2, 28),
+                EmailOuders = "oudersMichael@gmail.com",
+                InfoClubAangelegenheden = false,
+                InfoFederaleAangelegenheden = true,
                 IsLid = false,
                 IsLesgever = true
             };

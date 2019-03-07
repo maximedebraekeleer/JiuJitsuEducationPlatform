@@ -30,16 +30,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public bool IsLesgever { get; set; }
         #endregion
 
-        #region Collections
-        public ICollection<GebruikerLesgroep> GebruikerLesgroepen { get; private set; }
-        public IEnumerable<Lesgroep> Lesgroepen => GebruikerLesgroepen.Select(l => l.Lesgroep);
-        #endregion
-
         #region Constructors
-        public Gebruiker() {
-            GebruikerLesgroepen = new HashSet<GebruikerLesgroep>();
-        }
-
         public Gebruiker(string email, string naam, string voornaam, char geslacht, DateTime geboorteDatum, 
             string geboorteLand, string geboorteStad, string straat, int huisNummer, string gemeente, 
             int postcode, int telefoonNummer, int gsmNummer, int rijksregisterNummer, DateTime inschrijvingsDatum, 
@@ -65,12 +56,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
                 InfoFederaleAangelegenheden = infoFederaleAangelegenheden;
                 IsLid = isLid;
                 IsLesgever = isLesgever;
-        }
-        #endregion
-
-        #region Methods
-        public void AddLesgroep(Lesgroep l) {
-            GebruikerLesgroepen.Add(new GebruikerLesgroep(this, l));
         }
         #endregion
     }

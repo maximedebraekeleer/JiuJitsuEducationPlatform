@@ -18,13 +18,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #endregion
 
             #region Properties
-            builder.Property(t => t.Datum)
+            builder.Property(t => t.BeginDatumEnTijd)
                 .IsRequired();
 
-            builder.Property(t => t.BeginUur)
-                .IsRequired();
-
-            builder.Property(t => t.EindUur)
+            builder.Property(t => t.EindDatumEnTijd)
                 .IsRequired();
             #endregion
         }

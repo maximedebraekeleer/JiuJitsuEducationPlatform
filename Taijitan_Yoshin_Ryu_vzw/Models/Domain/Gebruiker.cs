@@ -24,10 +24,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public string EmailOuders { get; set; } //Niet verplicht
         public bool InfoClubAangelegenheden { get; set; }
         public bool InfoFederaleAangelegenheden { get; set; }
-
-        //Type Gebruiker
-        public bool IsLid { get; set; }
-        public bool IsLesgever { get; set; }
         #endregion
 
         #region Collections

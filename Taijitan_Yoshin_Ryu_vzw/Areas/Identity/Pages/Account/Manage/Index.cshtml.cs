@@ -182,16 +182,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             gebruiker.Naam = Input.Naam;
             gebruiker.Voornaam = Input.Voornaam;
-            gebruiker.GeboorteDatum = Input.GeboorteDatum;
-            gebruiker.GeboorteLand = Input.GeboorteLand;
-            gebruiker.GeboorteStad = Input.GeboorteStad;
+            //gebruiker.GeboorteDatum = Input.GeboorteDatum;
+            //gebruiker.GeboorteLand = Input.GeboorteLand;
+            //gebruiker.GeboorteStad = Input.GeboorteStad;
             gebruiker.Straat = Input.Straat;
             gebruiker.HuisNummer = Input.HuisNummer;
             gebruiker.Gemeente = Input.Gemeente;
             gebruiker.Postcode = gebruiker.Postcode;
             gebruiker.TelefoonNummer = Input.TelefoonNummer;
             gebruiker.GsmNummer = Input.GsmNummer;
-            gebruiker.RijksregisterNummer = Input.RijksregisterNummer;
+            //gebruiker.RijksregisterNummer = Input.RijksregisterNummer;
             gebruiker.EmailOuders = Input.EmailOuders;
             gebruiker.InfoClubAangelegenheden = Input.InfoClubAangelegenheden;
             gebruiker.InfoFederaleAangelegenheden = Input.InfoFederaleAangelegenheden;

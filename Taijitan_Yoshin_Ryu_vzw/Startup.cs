@@ -78,7 +78,7 @@ namespace Taijitan_Yoshin_Ryu_vzw {
             });
 
             //DATABANK IS GESEED DUS VOORLOPIG IN COMMENTAAR LATEN STAAN
-            //dataInitializer.InitializeData().Wait(-1);
+            dataInitializer.InitializeData().Wait(-1);
         }
     }
 }

@@ -68,12 +68,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
 
             builder.Property(t => t.InfoFederaleAangelegenheden)
                    .IsRequired();
-
-            builder.Property(t => t.IsLid)
-                   .IsRequired();
-
-            builder.Property(t => t.IsLesgever)
-                   .IsRequired();
             #endregion
 
         }

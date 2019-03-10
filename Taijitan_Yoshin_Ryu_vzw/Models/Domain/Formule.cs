@@ -10,7 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Properties
-
+        public int Id { get; set; } //Id is auto-increment
         #endregion
 
         #region Constructors

@@ -44,6 +44,7 @@ namespace Taijitan_Yoshin_Ryu_vzw {
             });
 
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+            services.AddScoped<IFormuleRepository, FormuleRepository>();
             services.AddSession();
 
             services.AddMvc()

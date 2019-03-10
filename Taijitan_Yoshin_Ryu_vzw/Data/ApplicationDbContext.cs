@@ -11,6 +11,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         #region DbSets
         public DbSet<Gebruiker> Gebruikers { get; set; }
         public DbSet<Sessie> Sessies { get; set; }
+        public DbSet<Formule> formules { get; set; }
         #endregion
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

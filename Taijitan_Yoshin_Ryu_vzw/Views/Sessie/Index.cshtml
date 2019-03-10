@@ -1,0 +1,40 @@
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModel.StartSessieViewModel
+
+@{
+    ViewData["Title"] = "Sessie";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sessie starten</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Datum"></label>
+                    <input asp-for="Datum" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="BeginUur" class="control-label"></label>
+                    <input asp-for="BeginUur" class="form-control" />
+                    <span asp-validation-for="BeginUur" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EindUur" class="control-label"></label>
+                    <input asp-for="EindUur" class="form-control" />
+                    <span asp-validation-for="EindUur" class="text-danger"></span>
+                </div>                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Start</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

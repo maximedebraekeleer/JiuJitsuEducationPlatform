@@ -20,8 +20,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
             builder.HasKey(t => t.Id);
             #endregion
 
-            #region Properties
+            #region Relaties
+            builder.HasMany(t => t.Leden)
+                .WithOne(t => t.Formule)
+                .OnDelete(DeleteBehavior.Cascade);
+            #endregion
 
+            #region Properties
             #endregion
         }
     }

@@ -16,23 +16,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             _context = context;
             _gebruikers = context.Gebruikers;
         }
-        public void Add(Gebruiker Gebruiker)
-        {
+        public void Add(Gebruiker Gebruiker) {
             _gebruikers.Add(Gebruiker);
         }
 
-        public void Delete(Gebruiker Gebruiker)
-        {
+        public void Delete(Gebruiker Gebruiker) {
             _gebruikers.Remove(Gebruiker);
         }
 
-        public Gebruiker GetByEmail(string email)
-        {
+        public Gebruiker GetByEmail(string email) {
             return _gebruikers.SingleOrDefault(l => l.Email.Equals(email));
         }
 
-        public void SaveChanges()
-        {
+        public void SaveChanges() {
             _context.SaveChanges();
         }
     }

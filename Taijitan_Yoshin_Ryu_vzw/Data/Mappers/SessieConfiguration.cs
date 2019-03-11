@@ -17,12 +17,25 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             builder.HasKey(t => t.Id);
             #endregion
 
+            #region Relaties
+            builder.HasMany(t => t.Aanwezigheden)
+                .WithOne(t => t.Sessie)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(t => t.Lesgever)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+            #endregion
+
             #region Properties
             builder.Property(t => t.BeginDatumEnTijd)
                 .IsRequired();
 
             builder.Property(t => t.EindDatumEnTijd)
                 .IsRequired();
+
+            //builder.Property(t => t.Lesgever)
+            //    .IsRequired();
             #endregion
         }
     }

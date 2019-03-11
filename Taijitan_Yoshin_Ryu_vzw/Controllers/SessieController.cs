@@ -31,13 +31,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         {
             switch ((int)DateTime.Now.DayOfWeek)
             {
-                case 0 : return new Formule(); //zondag
-                case 1 : return new Formule(); //maandag
-                case 2 : return new Formule(); //dinsdag formule3+4+6
-                case 3 : return new Formule(); //woensdag formule1+5
-                case 4 : return new Formule(); //donderdag formule6
-                case 5 : return new Formule(); //vrijdag
-                case 6 : return new Formule(); //zaterdag formule2+4+5
+                //case 0 : return new Formule(); //zondag
+                //case 1 : return new Formule(); //maandag
+                //case 2 : return new Formule(); //dinsdag formule3+4+6
+                //case 3 : return new Formule(); //woensdag formule1+5
+                //case 4 : return new Formule(); //donderdag formule6
+                //case 5 : return new Formule(); //vrijdag
+                //case 6 : return new Formule(); //zaterdag formule2+4+5
 
             }
 

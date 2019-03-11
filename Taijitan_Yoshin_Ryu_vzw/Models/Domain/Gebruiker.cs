@@ -6,7 +6,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public abstract class Gebruiker
     {
         #region Properties
-        //Info over Gebruiker
+        public string Username { get; set; } //Unieke waarde
         public string Email { get; set; }
         public string Naam { get; set; }
         public string Voornaam { get; set; }
@@ -25,6 +25,37 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public string EmailOuders { get; set; } //Niet verplicht
         public bool InfoClubAangelegenheden { get; set; }
         public bool InfoFederaleAangelegenheden { get; set; }
+        #endregion
+
+        #region Constructors
+        protected Gebruiker() {
+        }
+
+        public Gebruiker(string username, string email, string naam, string voornaam, char geslacht, DateTime geboorteDatum,
+            string geboorteLand, string geboorteStad, string straat, int huisNummer, string gemeente,
+            int postcode, int telefoonNummer, int gsmNummer, int rijksregisterNummer, DateTime inschrijvingsDatum,
+            string emailOuders, bool infoClubAangelegenheden, bool infoFederaleAangelegenheden)
+        {
+            Username = username;
+            Email = email;
+            Naam = naam;
+            Voornaam = voornaam;
+            Geslacht = geslacht;
+            GeboorteDatum = geboorteDatum;
+            GeboorteLand = geboorteLand;
+            GeboorteStad = geboorteStad;
+            Straat = straat;
+            HuisNummer = huisNummer;
+            Gemeente = gemeente;
+            Postcode = postcode;
+            TelefoonNummer = telefoonNummer; //Niet verplicht
+            GsmNummer = gsmNummer;
+            RijksregisterNummer = rijksregisterNummer;
+            InschrijvingsDatum = inschrijvingsDatum;
+            EmailOuders = emailOuders; //Niet verplicht
+            InfoClubAangelegenheden = infoClubAangelegenheden;
+            InfoFederaleAangelegenheden = infoFederaleAangelegenheden;
+        }
         #endregion
     }
 }

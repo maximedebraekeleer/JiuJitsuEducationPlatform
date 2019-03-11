@@ -78,7 +78,6 @@ namespace Taijitan_Yoshin_Ryu_vzw {
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //DATABANK IS GESEED DUS VOORLOPIG IN COMMENTAAR LATEN STAAN
             dataInitializer.InitializeData().Wait(-1);
         }
     }

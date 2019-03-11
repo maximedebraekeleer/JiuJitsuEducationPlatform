@@ -12,7 +12,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
         private readonly DbSet<Formule> _formules;
         public FormuleRepository(ApplicationDbContext dbContext)
         {
-            _formules = dbContext.formules;
+            _formules = dbContext.Formules;
         }
         public IEnumerable<Formule> getAll()
         {

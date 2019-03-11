@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Trainingsdag {
         #region Properties
-        public int DagId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int DagId { get; set; } 
         public string BeginUur { get; set; }
         public string EindUur { get; set; }
         public string DagNaam { get; set; }

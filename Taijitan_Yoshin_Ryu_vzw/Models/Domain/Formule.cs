@@ -7,6 +7,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Formule {
         #region Properties
         public int Id { get; set; } //Id is auto-increment
+        public string FormuleNaam { get; set; }
         #endregion
 
         #region Collections
@@ -14,7 +15,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public IEnumerable<Trainingsdag> Trainingsdagen => FormuleTrainingsdagen.Select(f => f.Trainingsdag);
 
         public ICollection<Lid> Leden { get; set; }
-
         #endregion
 
         #region Constructors
@@ -23,8 +23,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             Leden = new List<Lid>();
         }
 
-        public Formule(int id) : this() {
-            Id = id;
+        public Formule(string formuleNaam) : this() {
+            //Id = id;
+            FormuleNaam = formuleNaam;
         }
         #endregion
 

@@ -24,11 +24,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #endregion
 
             #region Properties
-            builder.Property(a => a.Lid)
-                .IsRequired();
-
-            builder.Property(a => a.Sessie)
-                .IsRequired();
             #endregion
         }
     }

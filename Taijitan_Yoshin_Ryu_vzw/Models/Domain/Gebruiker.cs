@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
-    public abstract class Gebruiker
+    public class Gebruiker
     {
         #region Properties
         public string Username { get; set; } //Unieke waarde
@@ -15,12 +15,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public string GeboorteLand { get; set; }
         public string GeboorteStad { get; set; }
         public string Straat { get; set; }
-        public int HuisNummer { get; set; }
+        public string HuisNummer { get; set; }
         public string Gemeente { get; set; }
-        public int Postcode { get; set; }
-        public int TelefoonNummer { get; set; } //Niet verplicht
-        public int GsmNummer { get; set; }
-        public int RijksregisterNummer { get; set; }
+        public string Postcode { get; set; }
+        public string TelefoonNummer { get; set; } //Niet verplicht
+        public string GsmNummer { get; set; }
+        public string RijksregisterNummer { get; set; }
         public DateTime InschrijvingsDatum { get; set; }
         public string EmailOuders { get; set; } //Niet verplicht
         public bool InfoClubAangelegenheden { get; set; }
@@ -28,12 +28,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Constructors
-        protected Gebruiker() {
+        public Gebruiker() {
         }
 
         public Gebruiker(string username, string email, string naam, string voornaam, char geslacht, DateTime geboorteDatum,
-            string geboorteLand, string geboorteStad, string straat, int huisNummer, string gemeente,
-            int postcode, int telefoonNummer, int gsmNummer, int rijksregisterNummer, DateTime inschrijvingsDatum,
+            string geboorteLand, string geboorteStad, string straat, string huisNummer, string gemeente,
+            string postcode, string telefoonNummer, string gsmNummer, string rijksregisterNummer, DateTime inschrijvingsDatum,
             string emailOuders, bool infoClubAangelegenheden, bool infoFederaleAangelegenheden)
         {
             Username = username;

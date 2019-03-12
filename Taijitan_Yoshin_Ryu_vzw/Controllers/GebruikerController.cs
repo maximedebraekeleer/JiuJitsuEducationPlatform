@@ -9,37 +9,25 @@ using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 {
-    //[ServiceFilter(typeof(GebruikerFilter))]
     public class GebruikerController : Controller
     {
-            //private readonly IAuthorizationService authorizationService;
-        //private readonly IGebruikerRepository _gebruikerRepository;
+        private readonly IGebruikerRepository _gebruikerRepository;
 
-            //public GebruikerController(IAuthorizationService authorizationService) {
-            //    this.authorizationService = authorizationService;
-            //}
+        public GebruikerController(IGebruikerRepository gebruikerRepository) {
+            _gebruikerRepository = gebruikerRepository;
+        }
 
-        //de variable en de contstructor moeten vervangen worden door deze
-
-        //public GebruikerController(IGebruikerRepository gebruikerRepository) {
-        //    _gebruikerRepository = gebruikerRepository;
-        //}
-
-        public async Task<IActionResult> Index()
+        [ServiceFilter(typeof(GebruikerFilter))]
+        public IActionResult Index(Gebruiker gebruiker)
         {
-            //var authorizationResult_lid = await authorizationService.AuthorizeAsync(User, "Lid");
-            //var authorizationResult_lesgever = await authorizationService.AuthorizeAsync(User, "Lesgever");
+            if(gebruiker is Lid)
+                return View("Lid");
 
-            //if (authorizationResult_lid.Succeeded) {
-            //    return View("Lid");
-            //}
-            //else if (authorizationResult_lesgever.Succeeded) {
-            //    return View("Lesgever");
-            //}
-            //else {
-            //    return View("Error");
-            //}
-            return View("Lesgever");
+            else if (gebruiker is Lesgever)
+                return View("Lesgever");
+
+            else
+                return View("Error");
         }
 
         [Authorize(Policy = "Lid")]

@@ -24,8 +24,23 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             _gebruikers.Remove(Gebruiker);
         }
 
+        public IEnumerable<Gebruiker> GetAll()
+        {
+            return _gebruikers.Where(g => g is Lid).ToList();
+        }
+
         public Gebruiker GetByEmail(string email) {
             return _gebruikers.SingleOrDefault(l => l.Email.Equals(email));
+        }
+
+        public Gebruiker GetByUserName(string username)
+        {
+            return _gebruikers.SingleOrDefault(l => l.Username.Equals(username));
+        }
+
+        public IEnumerable<Lid> getLedenByFormule(Formule formule)
+        {   
+            return _gebruikers.Where(g => g is Lid).Select(g => (Lid)g).Where(l => l.Formule == formule).ToList();
         }
 
         public void SaveChanges() {

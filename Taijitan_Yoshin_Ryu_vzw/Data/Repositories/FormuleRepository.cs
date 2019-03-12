@@ -19,5 +19,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             return _formules.ToList();
 
         }
+
+        public IEnumerable<Formule> getByTrainingsdag(Trainingsdag trainingsdag)
+        {
+            IEnumerable<Formule> formules = _formules.Include(f => f.Trainingsdagen).Where( f=> f.Trainingsdagen.Contains(trainingsdag));
+            return formules;
+            
+        }
     }
 }

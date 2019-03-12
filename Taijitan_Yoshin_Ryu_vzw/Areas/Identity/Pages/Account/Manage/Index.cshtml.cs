@@ -41,8 +41,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
         public InputModel Input { get; set; }
 
         public class InputModel
-        {                       
+        {
             #region required inputs
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
+            [Display(Name = "Gebruikersnaam")]
+            public string Username { get; set; }
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "E-mailadres")]
             [EmailAddress]
@@ -60,12 +63,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "Huisnummer")]
-            public int HuisNummer { get; set; }
+            public string HuisNummer { get; set; }
 
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "Postcode")]
             [DataType(DataType.PostalCode)]
-            public int PostCode { get; set; }
+            public string PostCode { get; set; }
 
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string Naam { get; set; }
@@ -73,20 +76,20 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string Voornaam { get; set; }
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
-            public int GsmNummer { get; set; }
+            public string GsmNummer { get; set; }
             #endregion
 
             #region disabled input fields            
             public char Geslacht { get; set; }
             public string GeboorteStad { get; set; }
             public string GeboorteLand { get; set; }
-            public int RijksregisterNummer { get; set; }
+            public string RijksregisterNummer { get; set; }
             public DateTime InschrijvingsDatum { get; set; }
             #endregion
                        
             [Display(Name = "Telefoonnummer")]
             //[Phone]
-            public int TelefoonNummer { get; set; } //Niet verplicht
+            public string TelefoonNummer { get; set; } //Niet verplicht
 
             [Display(Name = "E-mailadres van ouders")]
             public string EmailOuders { get; set; } //Niet verplicht
@@ -108,6 +111,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             //gebruiker uit de repository halen
             Gebruiker gebruiker = _gebruikers.GetByEmail(user.Email);
 
+            var username = gebruiker.Username;
             var email = await _userManager.GetEmailAsync(user);
             var naam = gebruiker.Naam;
             var voorNaam = gebruiker.Voornaam;
@@ -126,9 +130,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             var infoClubAangelegenheden = gebruiker.InfoClubAangelegenheden;
             var infoFederale = gebruiker.InfoFederaleAangelegenheden;
 
-            
+
             Input = new InputModel
             {
+                Username = username,
                 Email = email,
                 Naam = naam,
                 Voornaam = voorNaam,
@@ -180,6 +185,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
                 
             }
 
+            gebruiker.Username = Input.Username;
             gebruiker.Naam = Input.Naam;
             gebruiker.Voornaam = Input.Voornaam;
             //gebruiker.GeboorteDatum = Input.GeboorteDatum;

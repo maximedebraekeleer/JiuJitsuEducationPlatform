@@ -10,38 +10,40 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 {
     public class SessieController : Controller
     {
-        IEnumerable<Formule> _formules;
 
-        public SessieController()
+        private readonly IFormuleRepository _formules;
+        private readonly ITrainingsdagRepository _trainingsdagen;
+        private readonly IGebruikerRepository _gebruikers;
+
+        public SessieController(IFormuleRepository formules, ITrainingsdagRepository trainingsdagen, IGebruikerRepository gebruikers)
         {
-
+            _formules = formules;
+            _trainingsdagen = trainingsdagen;
+            _gebruikers = gebruikers;
         }
         public IActionResult Index()
         {
-            bepaalFormule();
-            return View(new StartSessieViewModel());
+            return View(GeefLeden(GeefFormules(GeefTrainingsdagen())));            
         }
 
-        public IActionResult Sessie()
+        private List<Lid> GeefLeden(List<Formule> formules)
         {
-            return View();
+            List<Lid> leden = new List<Lid>();
+            formules.ForEach(f => leden.AddRange(_gebruikers.getLedenByFormule(f)));
+            return leden;
         }
 
-        private Formule bepaalFormule()
+        private List<Formule> GeefFormules(IEnumerable<Trainingsdag> trainingsdagen)
         {
-            switch ((int)DateTime.Now.DayOfWeek)
-            {
-                //case 0 : return new Formule(); //zondag
-                //case 1 : return new Formule(); //maandag
-                //case 2 : return new Formule(); //dinsdag formule3+4+6
-                //case 3 : return new Formule(); //woensdag formule1+5
-                //case 4 : return new Formule(); //donderdag formule6
-                //case 5 : return new Formule(); //vrijdag
-                //case 6 : return new Formule(); //zaterdag formule2+4+5
+            //List<Formule> formulesOpVandaag = _formules.getByTrainingsdag(trainingsdagen.FirstOrDefault()).ToList();
+            List<Formule> formules = _formules.getAll().ToList();
+            return formules;
+        }
 
-            }
-
-            return null;
+        private IEnumerable<Trainingsdag> GeefTrainingsdagen()
+        {
+            IEnumerable<Trainingsdag> trainingsdagen = _trainingsdagen.getByDagNummer((int)DateTime.Now.DayOfWeek);
+            return trainingsdagen;
         }
     }
 }

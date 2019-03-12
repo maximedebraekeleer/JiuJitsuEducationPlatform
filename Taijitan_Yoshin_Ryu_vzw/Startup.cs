@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Data.Repositories;
+using Taijitan_Yoshin_Ryu_vzw.Filters;
 
 namespace Taijitan_Yoshin_Ryu_vzw {
     public class Startup {
@@ -45,6 +46,8 @@ namespace Taijitan_Yoshin_Ryu_vzw {
 
             services.AddScoped<IGebruikerRepository, GebruikerRepository>();
             services.AddScoped<IFormuleRepository, FormuleRepository>();
+            services.AddScoped<ITrainingsdagRepository, TrainingsdagRepository>();
+            services.AddScoped<GebruikerFilter>();
             services.AddSession();
 
             services.AddMvc()

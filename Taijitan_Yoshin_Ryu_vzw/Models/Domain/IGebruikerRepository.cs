@@ -11,5 +11,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         void Add(Gebruiker Gebruiker);
         void Delete(Gebruiker Gebruiker);
         void SaveChanges();
+        IEnumerable<Lid> getLedenByFormule(Formule formule);
+        IEnumerable<Gebruiker> GetAll();
+        Gebruiker GetByUserName(string username);
     }
 }

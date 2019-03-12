@@ -12,12 +12,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
     //[ServiceFilter(typeof(GebruikerFilter))]
     public class GebruikerController : Controller
     {
-        private readonly IAuthorizationService authorizationService;
+            //private readonly IAuthorizationService authorizationService;
         //private readonly IGebruikerRepository _gebruikerRepository;
 
-        public GebruikerController(IAuthorizationService authorizationService) {
-            this.authorizationService = authorizationService;
-        }
+            //public GebruikerController(IAuthorizationService authorizationService) {
+            //    this.authorizationService = authorizationService;
+            //}
 
         //de variable en de contstructor moeten vervangen worden door deze
 
@@ -27,18 +27,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var authorizationResult_lid = await authorizationService.AuthorizeAsync(User, "Lid");
-            var authorizationResult_lesgever = await authorizationService.AuthorizeAsync(User, "Lesgever");
+            //var authorizationResult_lid = await authorizationService.AuthorizeAsync(User, "Lid");
+            //var authorizationResult_lesgever = await authorizationService.AuthorizeAsync(User, "Lesgever");
 
-            if (authorizationResult_lid.Succeeded) {
-                return View("Lid");
-            }
-            else if (authorizationResult_lesgever.Succeeded) {
-                return View("Lesgever");
-            }
-            else {
-                return View("Error");
-            }
+            //if (authorizationResult_lid.Succeeded) {
+            //    return View("Lid");
+            //}
+            //else if (authorizationResult_lesgever.Succeeded) {
+            //    return View("Lesgever");
+            //}
+            //else {
+            //    return View("Error");
+            //}
+            return View("Lesgever");
         }
 
         [Authorize(Policy = "Lid")]

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Taijitan_Yoshin_Ryu_vzw.Data {
     public class ApplicationDbContext : IdentityDbContext {
         #region DbSets
-        //public DbSet<Aanwezigheid> aanwezigheden { get; set; }
+        public DbSet<Aanwezigheid> aanwezigheden { get; set; }
         public DbSet<Formule> Formules { get; set; }
         public DbSet<Gebruiker> Gebruikers { get; set; }
         public DbSet<Sessie> Sessies { get; set; }
@@ -27,7 +27,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             builder.Entity<Lesgever>();
 
             //Configurations
-            //builder.ApplyConfiguration(new AanwezigheidConfiguration());
+            builder.ApplyConfiguration(new AanwezigheidConfiguration());
             builder.ApplyConfiguration(new FormuleConfiguration());
             builder.ApplyConfiguration(new FormuleTrainingsdagConfiguration());
             builder.ApplyConfiguration(new GebruikerConfiguration());
@@ -35,6 +35,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             builder.ApplyConfiguration(new LidConfiguration());
             builder.ApplyConfiguration(new SessieConfiguration());
             builder.ApplyConfiguration(new TrainingsdagConfiguration());
+
+            //Ignores
+            builder.Ignore<Beheerder>();
+            builder.Ignore<Graad>();
+            builder.Ignore<Lesmateriaal>();
+            builder.Ignore<LesmateriaalThema>();
         }
     }
 }

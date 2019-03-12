@@ -14,7 +14,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #endregion
 
             #region Key
-            builder.HasKey(t => new { t.Formule_Id, t.Trainingsdag_DagId });
+            builder.HasKey(t => new { t.Formule_Id, t.Trainingsdag_Id });
             #endregion
 
             #region Relaties
@@ -26,7 +26,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
 
             builder.HasOne(t => t.Trainingsdag)
                     .WithMany(t => t.FormuleTrainingsdagen)
-                    .HasForeignKey(t => t.Trainingsdag_DagId)
+                    .HasForeignKey(t => t.Trainingsdag_Id)
                     .IsRequired()
                     .OnDelete(DeleteBehavior.Restrict);
             #endregion

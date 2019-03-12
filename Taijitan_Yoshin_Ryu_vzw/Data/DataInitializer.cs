@@ -19,10 +19,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated()) {
                 //Trainingsdagen (van site gehaald)
-                Trainingsdag Dinsdag = new Trainingsdag(2, "18:00", "20:00", "Dinsdag");
-                Trainingsdag Woensdag = new Trainingsdag(3, "14:00", "15:30", "Woensdag");
-                Trainingsdag Donderdag = new Trainingsdag(4, "18:00", "20:00", "Donderdag");
-                Trainingsdag Zaterdag = new Trainingsdag(6, "10:00", "11:30", "Zaterdag");
+                Trainingsdag Dinsdag = new Trainingsdag(2, "Dinsdag", "18:00", "20:00");
+                Trainingsdag Woensdag = new Trainingsdag(3, "Woensdag", "14:00", "15:30");
+                Trainingsdag Donderdag = new Trainingsdag(4, "Donderdag", "18:00", "20:00");
+                Trainingsdag Zaterdag = new Trainingsdag(6, "Zaterdag", "10:00", "11:30");
 
                 var trainingsdagen = new List<Trainingsdag> {
                     Dinsdag, Woensdag, Donderdag, Zaterdag

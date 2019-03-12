@@ -7,7 +7,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class FormuleTrainingsdag {
         #region Properties
         public int Formule_Id { get; set; }
-        public int Trainingsdag_DagId { get; set; }
+        public int Trainingsdag_Id { get; set; }
         #endregion
 
         #region Navigational Properties
@@ -25,7 +25,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             Formule_Id = Formule.Id;
 
             Trainingsdag = trainingsdag;
-            Trainingsdag_DagId = Trainingsdag.DagId;
+            Trainingsdag_Id = Trainingsdag.Id;
         }
         #endregion
     }

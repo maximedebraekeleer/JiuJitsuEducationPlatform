@@ -22,7 +22,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public IEnumerable<Formule> getByTrainingsdag(Trainingsdag trainingsdag)
         {
-            IEnumerable<Formule> formules = _formules.Include(f => f.Trainingsdagen).Where( f=> f.Trainingsdagen.Contains(trainingsdag));
+            IEnumerable<Formule> formules = _formules.Where(f => f.Trainingsdagen.SelectMany(o => o.FormuleTrainingsdagen).Select(o => o.Trainingsdag).Contains(trainingsdag));
             return formules;
             
         }

@@ -17,13 +17,12 @@
     <div class="btn-group-vertical">
         @foreach (var item in Model)
         {
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam</button>
+            <a type="button" class="btn btn-primary" asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-id="@item.Username">@item.Voornaam @item.Naam</a>
+            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
+            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
+            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
+            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
+            @foreach (var td in item.Formule.FormuleTrainingsdagen) { <a>@td.Trainingsdag.DagNaam</a> }
         }
     </div>
 </body>

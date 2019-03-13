@@ -29,8 +29,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories {
             return _gebruikers.Where(g => g is Lid)
                 .Select(g => (Lid)g)
                 .Include(l => l.Formule)
-                .ThenInclude(f => f.FormuleTrainingsdagen)
-                .ThenInclude(op => op.Trainingsdag)
+                .ThenInclude(f => f.FormuleTrainingsmomenten)
+                .ThenInclude(op => op.Trainingsmoment)
                 .ToList();
         }
 

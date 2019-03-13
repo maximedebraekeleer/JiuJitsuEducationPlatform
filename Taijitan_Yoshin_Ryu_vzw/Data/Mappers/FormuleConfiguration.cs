@@ -6,12 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
-{
-    public class FormuleConfiguration : IEntityTypeConfiguration<Formule>
-    {
-        public void Configure(EntityTypeBuilder<Formule> builder)
-        {
+namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
+    public class FormuleConfiguration : IEntityTypeConfiguration<Formule> {
+        public void Configure(EntityTypeBuilder<Formule> builder) {
             #region Table
             builder.ToTable("Formule");
             #endregion
@@ -23,9 +20,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
             #region Relaties
             builder.HasMany(t => t.Leden)
                 .WithOne(t => t.Formule);
-            #endregion
-
-            #region Properties
             #endregion
         }
     }

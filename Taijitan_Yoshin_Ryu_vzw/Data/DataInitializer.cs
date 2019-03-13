@@ -18,16 +18,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         public async Task InitializeData() {
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated()) {
-                //Trainingsdagen (van site gehaald)
-                Trainingsdag Dinsdag = new Trainingsdag(2, "Dinsdag", "18:00", "20:00");
-                Trainingsdag Woensdag = new Trainingsdag(3, "Woensdag", "14:00", "15:30");
-                Trainingsdag Donderdag = new Trainingsdag(4, "Donderdag", "18:00", "20:00");
-                Trainingsdag Zaterdag = new Trainingsdag(6, "Zaterdag", "10:00", "11:30");
+                //Trainingsmomenten (van site gehaald)
+                Trainingsmoment Dinsdag = new Trainingsmoment(2, "Dinsdag", "18:00", "20:00");
+                Trainingsmoment Woensdag = new Trainingsmoment(3, "Woensdag", "14:00", "15:30");
+                Trainingsmoment Donderdag = new Trainingsmoment(4, "Donderdag", "18:00", "20:00");
+                Trainingsmoment Zaterdag = new Trainingsmoment(6, "Zaterdag", "10:00", "11:30");
 
-                var trainingsdagen = new List<Trainingsdag> {
+                var trainingsmomenten = new List<Trainingsmoment> {
                     Dinsdag, Woensdag, Donderdag, Zaterdag
                 };
-                _dbContext.Trainingsdagen.AddRange(trainingsdagen);
+                _dbContext.Trainingsmomenten.AddRange(trainingsmomenten);
 
                 //Formules (van powerpoint gehaald)
                 Formule DI_DO = new Formule("DI_DO");
@@ -41,19 +41,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 };
                 _dbContext.Formules.AddRange(formules);
 
-                //Trainingsdagen in formule steken
-                DI_DO.AddTrainingsdag(Dinsdag);
-                DI_DO.AddTrainingsdag(Donderdag);
+                //Trainingsmoment in formule steken
+                DI_DO.AddTrainingsmoment(Dinsdag);
+                DI_DO.AddTrainingsmoment(Donderdag);
 
-                DI_ZA.AddTrainingsdag(Dinsdag);
-                DI_ZA.AddTrainingsdag(Zaterdag);
+                DI_ZA.AddTrainingsmoment(Dinsdag);
+                DI_ZA.AddTrainingsmoment(Zaterdag);
 
-                WO_ZA.AddTrainingsdag(Woensdag);
-                WO_ZA.AddTrainingsdag(Zaterdag);
+                WO_ZA.AddTrainingsmoment(Woensdag);
+                WO_ZA.AddTrainingsmoment(Zaterdag);
 
-                WO.AddTrainingsdag(Woensdag);
+                WO.AddTrainingsmoment(Woensdag);
 
-                ZA.AddTrainingsdag(Zaterdag);
+                ZA.AddTrainingsmoment(Zaterdag);
 
                 //Gebruikers en corresponderende ASPUsers
                 //--Leden met login

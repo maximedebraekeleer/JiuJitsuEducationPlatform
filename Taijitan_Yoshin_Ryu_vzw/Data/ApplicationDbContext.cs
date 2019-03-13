@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Taijitan_Yoshin_Ryu_vzw.Data.Mappers;
+﻿using Taijitan_Yoshin_Ryu_vzw.Data.Mappers;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         public DbSet<Formule> Formules { get; set; }
         public DbSet<Gebruiker> Gebruikers { get; set; }
         public DbSet<Sessie> Sessies { get; set; }
-        public DbSet<Trainingsdag> Trainingsdagen { get; set; }
+        public DbSet<Trainingsmoment> Trainingsmomenten { get; set; }
         #endregion
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -29,12 +26,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             //Configurations
             builder.ApplyConfiguration(new AanwezigheidConfiguration());
             builder.ApplyConfiguration(new FormuleConfiguration());
-            builder.ApplyConfiguration(new FormuleTrainingsdagConfiguration());
+            builder.ApplyConfiguration(new FormuleTrainingsmomentConfiguration());
             builder.ApplyConfiguration(new GebruikerConfiguration());
             builder.ApplyConfiguration(new LesgeverConfiguration());
             builder.ApplyConfiguration(new LidConfiguration());
             builder.ApplyConfiguration(new SessieConfiguration());
-            builder.ApplyConfiguration(new TrainingsdagConfiguration());
+            builder.ApplyConfiguration(new TrainingsmomentConfiguration());
 
             //Ignores
             builder.Ignore<Beheerder>();

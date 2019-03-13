@@ -16,11 +16,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories {
         }
 
         public IEnumerable<Formule> getAll() {
-            return _formules.Include(f => f.Leden).Include(f => f.FormuleTrainingsdagen).ThenInclude(op => op.Trainingsdag).ToList();
+            return _formules.Include(f => f.Leden).Include(f => f.FormuleTrainingsmomenten).ThenInclude(op => op.Trainingsmoment).ToList();
         }
 
-        public IEnumerable<Formule> getByTrainingsdag(Trainingsdag trainingsdag) {
-            return _formules.Where(f => f.Trainingsdagen.SelectMany(o => o.FormuleTrainingsdagen).Select(o => o.Trainingsdag).Contains(trainingsdag));
+        public IEnumerable<Formule> getByTrainingsmoment(Trainingsmoment trainingsmoment) {
+            return _formules.Where(f => f.Trainingsmomenten.SelectMany(o => o.FormuleTrainingsmomenten).Select(o => o.Trainingsmoment).Contains(trainingsmoment));
         }
     }
 }

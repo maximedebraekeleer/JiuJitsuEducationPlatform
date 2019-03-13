@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Formule {
@@ -11,15 +10,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Collections
-        public virtual ICollection<FormuleTrainingsdag> FormuleTrainingsdagen { get; set; }
-        public IEnumerable<Trainingsdag> Trainingsdagen => FormuleTrainingsdagen.Select(f => f.Trainingsdag);
+        public virtual ICollection<FormuleTrainingsmoment> FormuleTrainingsmomenten { get; set; }
+        public IEnumerable<Trainingsmoment> Trainingsmomenten => FormuleTrainingsmomenten.Select(f => f.Trainingsmoment);
 
         public virtual ICollection<Lid> Leden { get; set; }
         #endregion
 
         #region Constructors
-        public Formule(){
-            FormuleTrainingsdagen = new HashSet<FormuleTrainingsdag>();
+        public Formule() {
+            FormuleTrainingsmomenten = new HashSet<FormuleTrainingsmoment>();
             Leden = new List<Lid>();
         }
 
@@ -29,18 +28,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Methods
-        public void AddTrainingsdag(Trainingsdag trainingsdag) {
-            FormuleTrainingsdagen.Add(new FormuleTrainingsdag(this, trainingsdag));
+        public void AddTrainingsmoment(Trainingsmoment trainingsmoment) {
+            FormuleTrainingsmomenten.Add(new FormuleTrainingsmoment(this, trainingsmoment));
         }
 
-        public bool bevatTrainingsdag(Trainingsdag dag) {
-            //bool res = false;
-            //foreach(Trainingsdag dag in Trainingsdagen) {
-            //    if (dag.DagNummer == dagNummer)
-            //        res = true;
-            //}
-            //return res;
-            return Trainingsdagen.Contains(dag);
+        public bool bevatTrainingsmoment(Trainingsmoment trainingsmoment) {
+            return Trainingsmomenten.Contains(trainingsmoment);
         }
 
         public override string ToString() {

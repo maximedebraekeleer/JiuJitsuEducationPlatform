@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
-{
-    public interface IFormuleRepository
-    {
+namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
+    public interface IFormuleRepository {
         IEnumerable<Formule> getAll();
-        IEnumerable<Formule> getByTrainingsdag(Trainingsdag trainingsdag);
-
+        IEnumerable<Formule> getByTrainingsmoment(Trainingsmoment trainingsmoment);
     }
 }

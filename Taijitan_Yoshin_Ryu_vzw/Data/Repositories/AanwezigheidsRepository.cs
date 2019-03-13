@@ -24,7 +24,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public IEnumerable<Aanwezigheid> GetAll()
         {
-            return _aanwezigheden.ToList();
+            return _aanwezigheden.Include(a => a.Lid).Include(a => a.Sessie).ToList();
         }
 
         public IEnumerable<Aanwezigheid> GetbyFormule(Formule formule)

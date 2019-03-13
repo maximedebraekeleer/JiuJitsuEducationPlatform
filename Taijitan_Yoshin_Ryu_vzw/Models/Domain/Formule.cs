@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Formule {
@@ -11,27 +10,34 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Collections
-        public ICollection<FormuleTrainingsdag> FormuleTrainingsdagen { get; private set; }
-        public IEnumerable<Trainingsdag> Trainingsdagen => FormuleTrainingsdagen.Select(f => f.Trainingsdag);
+        public virtual ICollection<FormuleTrainingsmoment> FormuleTrainingsmomenten { get; set; }
+        public IEnumerable<Trainingsmoment> Trainingsmomenten => FormuleTrainingsmomenten.Select(f => f.Trainingsmoment);
 
-        public ICollection<Lid> Leden { get; set; }
+        public virtual ICollection<Lid> Leden { get; set; }
         #endregion
 
         #region Constructors
-        protected Formule(){
-            FormuleTrainingsdagen = new HashSet<FormuleTrainingsdag>();
+        public Formule() {
+            FormuleTrainingsmomenten = new HashSet<FormuleTrainingsmoment>();
             Leden = new List<Lid>();
         }
 
         public Formule(string formuleNaam) : this() {
-            //Id = id;
             FormuleNaam = formuleNaam;
         }
         #endregion
 
         #region Methods
-        public void addTrainingsdag(Trainingsdag trainingsdag) {
-            FormuleTrainingsdagen.Add(new FormuleTrainingsdag(this, trainingsdag));
+        public void AddTrainingsmoment(Trainingsmoment trainingsmoment) {
+            FormuleTrainingsmomenten.Add(new FormuleTrainingsmoment(this, trainingsmoment));
+        }
+
+        public bool bevatTrainingsmoment(Trainingsmoment trainingsmoment) {
+            return Trainingsmomenten.Contains(trainingsmoment);
+        }
+
+        public override string ToString() {
+            return FormuleNaam;
         }
         #endregion
     }

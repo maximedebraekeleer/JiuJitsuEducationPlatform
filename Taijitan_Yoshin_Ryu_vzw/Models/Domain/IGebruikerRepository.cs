@@ -14,5 +14,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         IEnumerable<Lid> getLedenByFormule(Formule formule);
         IEnumerable<Gebruiker> GetAll();
         Gebruiker GetByUserName(string username);
+        IEnumerable<Lid> GetLeden();
     }
 }

@@ -16,6 +16,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             _context = context;
             _aanwezigheden = _context.aanwezigheden;
         }
+
+        public void Add(Aanwezigheid aanwezigheid)
+        {
+            _aanwezigheden.Add(aanwezigheid);
+        }
+
         public IEnumerable<Aanwezigheid> GetAll()
         {
             return _aanwezigheden.ToList();

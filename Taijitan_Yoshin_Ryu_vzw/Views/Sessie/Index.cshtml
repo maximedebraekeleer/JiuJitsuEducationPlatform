@@ -13,17 +13,26 @@
 </head>
 
 <body>
-   
-    <div class="btn-group-vertical">
-        @foreach (var item in Model)
-        {
-            <a type="button" class="btn btn-primary" asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-id="@item.Username">@item.Voornaam @item.Naam</a>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
-            <button type="button" class="btn btn-primary">@item.Voornaam @item.Naam @item.Formule.FormuleNaam @item.Formule.Id</button>
-            @foreach (var td in item.Formule.FormuleTrainingsdagen) { <a>@td.Trainingsdag.DagNaam</a> }
-        }
-    </div>
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success">@TempData["message"]</div>
+    }
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-warning">@TempData["error"]</div>
+    }    
+        <div class="btn-group-vertical">
+            @foreach (var item in Model)
+            {
+                <a class="btn btn-primary" asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>               
+            }
+        </div>
 </body>
 </html>
+<script>
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+</script>

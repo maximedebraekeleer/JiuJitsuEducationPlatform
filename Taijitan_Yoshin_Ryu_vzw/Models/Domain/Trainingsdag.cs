@@ -15,12 +15,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Collections
-        public ICollection<FormuleTrainingsdag> FormuleTrainingsdagen{ get; private set; }
+        public virtual ICollection<FormuleTrainingsdag> FormuleTrainingsdagen{ get; private set; }
         public IEnumerable<Formule> Formules => FormuleTrainingsdagen.Select(f => f.Formule);
         #endregion
 
         #region Constructors
-        protected Trainingsdag() {
+        public Trainingsdag() {
             FormuleTrainingsdagen = new HashSet<FormuleTrainingsdag>();
         }
 
@@ -33,15 +33,22 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Methods
-        public void AddFormume(Formule f) {
-            FormuleTrainingsdagen.Add(new FormuleTrainingsdag(f, this));
-        }
-
-        //LATER
-        //public DateTime geefDatumMetbeginUur(){
-        //    var dateStr = "14:00";
-        //    var dateTime = DateTime.ParseExact(dateStr, "H:mm", null, System.Globalization.DateTimeStyles.None);
+        //public void AddFormule(Formule f) {
+        //    FormuleTrainingsdagen.Add(new FormuleTrainingsdag(f, this));
         //}
+
+        
+        public DateTime geefDatumBeginUur(){
+            return geefDatumUur(BeginUur);
+        }
+        public DateTime geefDatumEindUur()
+        {
+            return geefDatumUur(EindUur);
+        }
+        private DateTime geefDatumUur(string uur)
+        {
+            return DateTime.ParseExact(uur, "H:mm", null, System.Globalization.DateTimeStyles.None);
+        }
         #endregion
     }
 }

@@ -4,35 +4,53 @@
     ViewData["Title"] = "Sessie";
 }
 
-<!DOCTYPE html>
+<div class="content-wrapper">
+    <div class="sessie-wrapper">
+        
+        <div class="sessie-content">
+            <h3>Aanwezigheden - sessie vandaag</h3>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Sessie</title>
-</head>
-
-<body>
-    @if (TempData["message"] != null)
-    {
-        <div class="alert alert-success">@TempData["message"]</div>
-    }
-    @if (TempData["error"] != null)
-    {
-        <div class="alert alert-warning">@TempData["error"]</div>
-    }    
-        <div class="btn-group-vertical">
-            @foreach (var item in Model)
-            {
-                <a class="btn btn-primary" asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>               
-            }
+            <ul class="ledenlijst">
+                @foreach (var item in Model)
+                {
+                    <li class="ledenlijstLid" asp-controller="Sessie" asp-route-username="@item.Username">@item.Voornaam @item.Naam</li>
+                }
+            </ul>
+            <div class="buttonPanel">
+                <button>Cancel</button>
+                <button>Lid toevoegen</button>
+                <button>Bevestigen</button>
+            </div>
         </div>
-</body>
-</html>
+
+
+    </div>
+</div>
 <script>
-    window.setTimeout(function () {
-        $(".alert").fadeTo(500, 0).slideUp(500, function () {
-            $(this).remove();
+    var leden = document.getElementsByClassName("ledenlijstLid");
+
+    for (var i = 0; i < leden.length; i++) {
+        leden[i].addEventListener('click', (e) => {
+            if(e.target.classList.contains('aanwezig')) {
+            e.target.classList.remove('aanwezig');
+            } else
+                e.target.classList.add('aanwezig');
         });
-    }, 4000);
+    }
 </script>
+@*
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-warning">@TempData["error"]</div>
+}
+<div class="btn-group-vertical">
+    @foreach (var item in Model)
+    {
+        <a class="btn btn-primary" asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+    }
+</div>*@

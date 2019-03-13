@@ -5,28 +5,21 @@ using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class FormuleTrainingsdag {
-        #region Properties
-        public int Formule_Id { get; set; }
-        public int Trainingsdag_Id { get; set; }
-        #endregion
-
-        #region Navigational Properties
+        public int FormuleId { get; set; }
         public Formule Formule { get; set; }
+        public int TrainingsdagId { get; set; }
         public Trainingsdag Trainingsdag { get; set; }
-        #endregion
 
-        #region Constructors
-        protected FormuleTrainingsdag() {
+        public FormuleTrainingsdag() {
 
         }
 
-        public FormuleTrainingsdag(Formule formume, Trainingsdag trainingsdag) : this() {
-            Formule = formume;
-            Formule_Id = Formule.Id;
+        public FormuleTrainingsdag(Formule formule, Trainingsdag trainingsdag) : this() {
+            Formule = formule;
+            FormuleId = Formule.Id;
 
             Trainingsdag = trainingsdag;
-            Trainingsdag_Id = Trainingsdag.Id;
+            TrainingsdagId = Trainingsdag.Id;
         }
-        #endregion
     }
 }

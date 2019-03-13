@@ -26,7 +26,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public IEnumerable<Gebruiker> GetAll()
         {
-            return _gebruikers.Where(g => g is Lid).ToList();
+            return _gebruikers.ToList();
+        }
+
+        //Daan
+        public IEnumerable<Lid> GetLeden() {
+            return _gebruikers.Where(g => g is Lid)
+                .Select(g => (Lid)g)
+                .Include(l => l.Formule)
+                .ThenInclude(f => f.FormuleTrainingsdagen)
+                .ThenInclude(op => op.Trainingsdag)
+                .ToList();
         }
 
         public Gebruiker GetByEmail(string email) {

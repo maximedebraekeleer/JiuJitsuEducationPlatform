@@ -11,8 +11,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
         public void Configure(EntityTypeBuilder<Lid> builder) {
             #region Relaties
             builder.HasOne(t => t.Formule)
-                .WithMany(t => t.Leden)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany(t => t.Leden);
             #endregion
 
             #region Properties

@@ -18,17 +18,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #endregion
 
             #region Properties
-            builder.Property(t => t.DagNummer)
-                .IsRequired();
+            //builder.Property(t => t.DagNummer)
+            //    .IsRequired();
 
-            builder.Property(t => t.DagNaam)
-                .IsRequired();
+            //builder.Property(t => t.DagNaam)
+            //    .IsRequired();
 
-            builder.Property(t => t.BeginUur)
-                .IsRequired();
+            //builder.Property(t => t.BeginUur)
+            //    .IsRequired();
 
-            builder.Property(t => t.EindUur)
-                .IsRequired();
+            //builder.Property(t => t.EindUur)
+            //    .IsRequired();
             #endregion
         }
     }

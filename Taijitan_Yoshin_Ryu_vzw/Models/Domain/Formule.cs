@@ -11,27 +11,39 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Collections
-        public ICollection<FormuleTrainingsdag> FormuleTrainingsdagen { get; private set; }
+        public virtual ICollection<FormuleTrainingsdag> FormuleTrainingsdagen { get; set; }
         public IEnumerable<Trainingsdag> Trainingsdagen => FormuleTrainingsdagen.Select(f => f.Trainingsdag);
 
-        public ICollection<Lid> Leden { get; set; }
+        public virtual ICollection<Lid> Leden { get; set; }
         #endregion
 
         #region Constructors
-        protected Formule(){
+        public Formule(){
             FormuleTrainingsdagen = new HashSet<FormuleTrainingsdag>();
             Leden = new List<Lid>();
         }
 
         public Formule(string formuleNaam) : this() {
-            //Id = id;
             FormuleNaam = formuleNaam;
         }
         #endregion
 
         #region Methods
-        public void addTrainingsdag(Trainingsdag trainingsdag) {
+        public void AddTrainingsdag(Trainingsdag trainingsdag) {
             FormuleTrainingsdagen.Add(new FormuleTrainingsdag(this, trainingsdag));
+        }
+
+        public bool bevatTrainingsdag(int dagNummer) {
+            bool res = false;
+            foreach(Trainingsdag dag in Trainingsdagen) {
+                if (dag.DagNummer == dagNummer)
+                    res = true;
+            }
+            return res;
+        }
+
+        public override string ToString() {
+            return FormuleNaam;
         }
         #endregion
     }

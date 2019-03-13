@@ -13,23 +13,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             builder.ToTable("Formule_Trainingsdag");
             #endregion
 
-            #region Key
-            builder.HasKey(t => new { t.Formule_Id, t.Trainingsdag_Id });
-            #endregion
+                builder.HasKey(bc => new { bc.FormuleId, bc.TrainingsdagId });
 
-            #region Relaties
-            builder.HasOne(t => t.Formule)
-                    .WithMany(t => t.FormuleTrainingsdagen)
-                    .HasForeignKey(t => t.Formule_Id)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
+                builder.HasOne(bc => bc.Formule)
+                .WithMany(b => b.FormuleTrainingsdagen)
+                .HasForeignKey(bc => bc.FormuleId);
 
-            builder.HasOne(t => t.Trainingsdag)
-                    .WithMany(t => t.FormuleTrainingsdagen)
-                    .HasForeignKey(t => t.Trainingsdag_Id)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
-            #endregion
+                builder.HasOne(bc => bc.Trainingsdag)
+                .WithMany(c => c.FormuleTrainingsdagen)
+                .HasForeignKey(bc => bc.TrainingsdagId);
         }
     }
 }

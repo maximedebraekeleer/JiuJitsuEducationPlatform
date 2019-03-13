@@ -22,8 +22,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
 
             #region Relaties
             builder.HasMany(t => t.Leden)
-                .WithOne(t => t.Formule)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithOne(t => t.Formule);
             #endregion
 
             #region Properties

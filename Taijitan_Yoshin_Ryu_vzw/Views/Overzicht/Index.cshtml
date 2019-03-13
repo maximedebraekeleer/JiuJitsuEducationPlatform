@@ -1,0 +1,19 @@
+﻿@model List<Taijitan_Yoshin_Ryu_vzw.Models.Domain.Aanwezigheid>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<table class="table table-striped table-condensed table-bordered">
+    <tr>
+        <th>Lid</th>
+        <th>Sessie</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Lid.Voornaam @item.Lid.Naam</td>
+            <td>@item.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</td>
+        </tr>
+    }
+</table>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
     public class SessieController : Controller {
@@ -42,21 +43,18 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             ledenOpdag.ToList();
 
             //Gefilterde leden teruggeven
-            return View(ledenOpdag);
+            return View(new SessieViewModel(ledenOpdag, HuidigeSessie));
         }
 
-        public IActionResult RegistreerAanwezigheid(string username) {
+        public IActionResult RegistreerAanwezigheid(List<Lid> leden) {
             GeefHuidigeSessie();
 
-            Lid lid = (Lid)_gebruikers.GetByUserName(username);
-            if (_aanwezigheden.GetbyLid(lid).Any(a => a.Sessie == HuidigeSessie)) {
-                TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";
-                return RedirectToAction(nameof(Index));
+            foreach(Lid l in leden){
+               _aanwezigheden.Add(new Aanwezigheid(l, HuidigeSessie));               
             }
-            _aanwezigheden.Add(new Aanwezigheid(lid, HuidigeSessie));
             _aanwezigheden.SaveChanges();
-            TempData["message"] = $"{lid.Voornaam}{lid.Naam} is succesvol geregistreerd als aanwezig.";
-            return RedirectToAction(nameof(Index));
+            
+            return RedirectToAction(nameof(Index), nameof(Gebruiker));
         }
 
         private void MaakHuidigeSessie(Trainingsmoment trainingsmoment) {

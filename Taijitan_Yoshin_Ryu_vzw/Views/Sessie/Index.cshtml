@@ -1,4 +1,4 @@
-﻿@model List<Taijitan_Yoshin_Ryu_vzw.Models.Domain.Lid>
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.SessieViewModel
 
 @{
     ViewData["Title"] = "Sessie";
@@ -8,36 +8,26 @@
     <div class="sessie-wrapper">
         
         <div class="sessie-content">
-            <h3>Aanwezigheden - sessie vandaag</h3>
+            <h3>Aanwezigheden - @Model.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</h3>
 
             <ul class="ledenlijst">
-                @foreach (var item in Model)
+                @foreach (var item in Model.Leden)
                 {
-                    <li class="ledenlijstLid" asp-controller="Sessie" asp-route-username="@item.Username">@item.Voornaam @item.Naam</li>
+                    <li class="ledenlijstLid"@*onclick="@{Model.AanwezigeLeden.Add(item);}"*@>@item.Voornaam @item.Naam</li>                    
                 }
             </ul>
-            <div class="buttonPanel">
-                <button>Cancel</button>
-                <button>Lid toevoegen</button>
-                <button>Bevestigen</button>
+            <div class="buttonPanel">                
+                <form><button asp-controller="Gebruiker" asp-action="Index">Cancel</button></form>
+                <form><button>Lid toevoegen</button></form>
+                <form><button id="bevestigAanwezigheden" asp-action="RegistreerAanwezigheid" asp-route-leden="@Model.AanwezigeLeden">Bevestigen</button></form>
+                
             </div>
         </div>
 
 
     </div>
 </div>
-<script>
-    var leden = document.getElementsByClassName("ledenlijstLid");
-
-    for (var i = 0; i < leden.length; i++) {
-        leden[i].addEventListener('click', (e) => {
-            if(e.target.classList.contains('aanwezig')) {
-            e.target.classList.remove('aanwezig');
-            } else
-                e.target.classList.add('aanwezig');
-        });
-    }
-</script>
+<script src="~/js/sessieStarten.js"/>
 @*
 
 @if (TempData["message"] != null)

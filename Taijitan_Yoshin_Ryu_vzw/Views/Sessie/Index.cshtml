@@ -8,18 +8,18 @@
     <div class="sessie-wrapper">
         
         <div class="sessie-content">
-            <h3>Aanwezigheden - @Model.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</h3>
+            <h3 id="bevestigAanwezigheden">Aanwezigheden - @Model.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</h3>
 
             <ul class="ledenlijst">
                 @foreach (var item in Model.Leden)
                 {
-                    <li class="ledenlijstLid"@*onclick="@{Model.AanwezigeLeden.Add(item);}"*@>@item.Voornaam @item.Naam</li>                    
+                    <form method="post" asp-action="RegistreerAanwezigheid" asp-route-lid="@item.Username"><li class="ledenlijstLid">@item.Voornaam @item.Naam - @item.Username</li></form>                    
                 }
             </ul>
             <div class="buttonPanel">                
                 <form><button asp-controller="Gebruiker" asp-action="Index">Cancel</button></form>
                 <form><button>Lid toevoegen</button></form>
-                <form><button id="bevestigAanwezigheden" asp-action="RegistreerAanwezigheid" asp-route-leden="@Model.AanwezigeLeden">Bevestigen</button></form>
+                <form><button  asp-action="RegistreerAanwezigheid" asp-route-leden="@Model.AanwezigeLeden">Bevestigen</button></form>
                 
             </div>
         </div>

@@ -46,15 +46,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             return View(new SessieViewModel(ledenOpdag, HuidigeSessie));
         }
 
-        public IActionResult RegistreerAanwezigheid(List<Lid> leden) {
+        public void RegistreerAanwezigheid(string username) {
             GeefHuidigeSessie();
+            Lid lid = (Lid)_gebruikers.GetByUserName(username);
 
-            foreach(Lid l in leden){
-               _aanwezigheden.Add(new Aanwezigheid(l, HuidigeSessie));               
-            }
+            if (HuidigeSessie.isLidAanwezig(lid))
+            {
+                HuidigeSessie.verwijderAanwezigheid(lid);
+            }else
+                HuidigeSessie.voegAanwezigheidToe(lid);
+                
+
             _aanwezigheden.SaveChanges();
             
-            return RedirectToAction(nameof(Index), nameof(Gebruiker));
         }
 
         private void MaakHuidigeSessie(Trainingsmoment trainingsmoment) {
@@ -95,6 +99,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
         private IEnumerable<Trainingsmoment> GeefTrainingsmomenten() {
             IEnumerable<Trainingsmoment> trainingsmomenten = _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek);
             return trainingsmomenten;
-        }
+        
     }
 }

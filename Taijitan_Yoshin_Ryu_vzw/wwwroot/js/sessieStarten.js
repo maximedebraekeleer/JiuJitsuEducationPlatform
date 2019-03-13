@@ -1,4 +1,4 @@
-﻿document.onload = () => {
+﻿$(document).ready(() => {
     let leden = document.getElementsByClassName("ledenlijstLid");
 
     for (let i = 0; i < leden.length; i++) {
@@ -10,9 +10,4 @@
         });
     }
 
-    $('#bevestigAanwezigheden').click(() => {
-        let aanwezigeLeden = $('.aanwezig');
-        console.log(aanwezigeLeden);
-    });
-
-}
+});

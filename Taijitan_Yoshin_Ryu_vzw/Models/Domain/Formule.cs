@@ -33,13 +33,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             FormuleTrainingsdagen.Add(new FormuleTrainingsdag(this, trainingsdag));
         }
 
-        public bool bevatTrainingsdag(int dagNummer) {
-            bool res = false;
-            foreach(Trainingsdag dag in Trainingsdagen) {
-                if (dag.DagNummer == dagNummer)
-                    res = true;
-            }
-            return res;
+        public bool bevatTrainingsdag(Trainingsdag dag) {
+            //bool res = false;
+            //foreach(Trainingsdag dag in Trainingsdagen) {
+            //    if (dag.DagNummer == dagNummer)
+            //        res = true;
+            //}
+            //return res;
+            return Trainingsdagen.Contains(dag);
         }
 
         public override string ToString() {

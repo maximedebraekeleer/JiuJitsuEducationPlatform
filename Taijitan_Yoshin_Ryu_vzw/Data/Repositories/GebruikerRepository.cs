@@ -5,14 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
-{
-    public class GebruikerRepository : IGebruikerRepository
-    {
+namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories {
+    public class GebruikerRepository : IGebruikerRepository {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Gebruiker> _gebruikers;
-        public GebruikerRepository(ApplicationDbContext context)
-        {
+        public GebruikerRepository(ApplicationDbContext context) {
             _context = context;
             _gebruikers = context.Gebruikers;
         }
@@ -24,12 +21,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             _gebruikers.Remove(Gebruiker);
         }
 
-        public IEnumerable<Gebruiker> GetAll()
-        {
+        public IEnumerable<Gebruiker> GetAll() {
             return _gebruikers.ToList();
         }
 
-        //Daan
         public IEnumerable<Lid> GetLeden() {
             return _gebruikers.Where(g => g is Lid)
                 .Select(g => (Lid)g)
@@ -43,13 +38,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             return _gebruikers.SingleOrDefault(l => l.Email.Equals(email));
         }
 
-        public Gebruiker GetByUserName(string username)
-        {
+        public Gebruiker GetByUserName(string username) {
             return _gebruikers.SingleOrDefault(l => l.Username.Equals(username));
         }
 
-        public IEnumerable<Lid> getLedenByFormule(Formule formule)
-        {   
+        public IEnumerable<Lid> getLedenByFormule(Formule formule) {
             return _gebruikers.Where(g => g is Lid).Select(g => (Lid)g).Where(l => l.Formule == formule).ToList();
         }
 

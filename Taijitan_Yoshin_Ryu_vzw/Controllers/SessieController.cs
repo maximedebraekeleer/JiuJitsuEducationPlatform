@@ -30,11 +30,27 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         public IActionResult Index()
         {
             IEnumerable<Trainingsdag> trainingsdagen = GeefTrainingsdagen();
-            MaakHuidigeSessie(trainingsdagen);
-            return View(GeefLeden(GeefFormules(trainingsdagen)));
-        }
+            //return View(GeefLeden(GeefFormules(trainingsdagen)));
 
-        
+            //WERENDE VERSIE
+            //Welke dag
+            Trainingsdag dag = _trainingsdagen.getByDagNummer((int)DateTime.Today.DayOfWeek).FirstOrDefault();
+            MaakHuidigeSessie(dag);
+
+            //Formules ophalen die deze dag bevatten
+            IList<Formule> formulesFiltered = _formules.getAll().Where(f => f.bevatTrainingsdag(dag)).ToList();
+
+            //Leden uit deze modules halen
+            List<Lid> ledenOpdag = new List<Lid>();
+
+            foreach (Formule f in formulesFiltered) {
+                ledenOpdag.AddRange(f.Leden);
+            }
+            ledenOpdag.ToList();
+
+            //Gefilterde leden teruggeven
+            return View(ledenOpdag);
+        }
 
         public IActionResult RegistreerAanwezigheid(string username)
         {
@@ -52,10 +68,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private void MaakHuidigeSessie(IEnumerable<Trainingsdag> trainingsdagen)
+        private void MaakHuidigeSessie(Trainingsdag trainingsDag)
         {            
-            DateTime datumBeginUur = trainingsdagen.FirstOrDefault().geefDatumBeginUur();
-            DateTime datumEindUur = trainingsdagen.FirstOrDefault().geefDatumEindUur();
+            DateTime datumBeginUur = trainingsDag.geefDatumBeginUur();
+            DateTime datumEindUur = trainingsDag.geefDatumEindUur();
             Lesgever sensei = (Lesgever)_gebruikers.GetByUserName(User.Identity.Name);
 
             if (!_sessies.GetAll().Any(x => x.BeginDatumEnTijd == datumBeginUur))
@@ -67,7 +83,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             else
             {
                 HuidigeSessie = _sessies.GetByDatumBeginUur(datumBeginUur);
-
             }
         }
 
@@ -78,22 +93,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             HuidigeSessie = _sessies.GetByDatumBeginUur(datumBeginUur);
         }
 
-        private List<Lid> GeefLeden(List<Formule> formules)
-        {
-            List<Lid> leden = new List<Lid>();
-            formules.ForEach(f => leden.AddRange(_gebruikers.getLedenByFormule(f)));
-            return leden;
-        }
+        //private List<Lid> GeefLeden(List<Formule> formules)
+        //{
+        //    List<Lid> leden = new List<Lid>();
+        //    formules.ForEach(f => leden.AddRange(_gebruikers.getLedenByFormule(f)));
+        //    return leden;
+        //}
 
-        private List<Formule> GeefFormules(IEnumerable<Trainingsdag> trainingsdagen)
-        {
-            List<Formule> formules2 = _formules.getByTrainingsdag(trainingsdagen.FirstOrDefault()).ToList();
-            List<Formule> formules = _formules.getAll().ToList();
-            return formules;
-        }
+        //private List<Formule> GeefFormules(IEnumerable<Trainingsdag> trainingsdagen)
+        //{
+        //    List<Formule> formules2 = _formules.getByTrainingsdag(trainingsdagen.FirstOrDefault()).ToList();
+        //    List<Formule> formules = _formules.getAll().ToList();
+        //    return formules;
+        //}
 
-        private IEnumerable<Trainingsdag> GeefTrainingsdagen()
-        {
+        private IEnumerable<Trainingsdag> GeefTrainingsdagen() {
             IEnumerable<Trainingsdag> trainingsdagen = _trainingsdagen.getByDagNummer((int)DateTime.Now.DayOfWeek);
             return trainingsdagen;
         }

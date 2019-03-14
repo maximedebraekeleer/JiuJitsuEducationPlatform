@@ -21,5 +21,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
             Sessie = sessie;
         }
         #endregion
+
+        #region methodes
+
+
+        #endregion
     }
 }

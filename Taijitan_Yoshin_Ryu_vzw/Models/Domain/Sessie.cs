@@ -31,6 +31,27 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public void voegAanwezigheidToe(Lid lid) {
             Aanwezigheden.Add(new Aanwezigheid(lid, this));
         }
+
+        public void verwijderAanwezigheid(Lid lid)
+        {
+            foreach (var aanwezigheid in Aanwezigheden)
+            {
+                if (aanwezigheid.Lid.Username == lid.Username)
+                {
+                    Aanwezigheden.Remove(aanwezigheid);
+                }
+            }
+        }
+
+        public bool isLidAanwezig(Lid lid)
+        {
+            foreach(var aanwezigheid in Aanwezigheden)
+            {
+                if (aanwezigheid.Lid == lid)
+                    return true;
+            }
+            return false;
+        }
         #endregion
     }
 }

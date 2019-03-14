@@ -37,14 +37,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Geef een username op.")]
             public string UserName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Geef een wachtwoord op.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Mij onthouden?")]
             public bool RememberMe { get; set; }
         }
 

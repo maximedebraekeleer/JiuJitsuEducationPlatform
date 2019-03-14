@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
     public class SessieController : Controller {
@@ -41,8 +42,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             }
             ledenOpdag.ToList();
 
+            List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(HuidigeSessie).Select(l => l.Lid).ToList();
+
             //Gefilterde leden teruggeven
-            return View(ledenOpdag);
+            return View(new SessieViewModel(ledenOpdag, HuidigeSessie, aanwezigeLeden));
         }
 
         public IActionResult RegistreerAanwezigheid(string username) {

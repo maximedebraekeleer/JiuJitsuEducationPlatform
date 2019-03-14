@@ -42,11 +42,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [StringLength(100, ErrorMessage = "Het {0} moet minstens {2} en maximaal {1} karakters bevatten.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
+            [DataType(DataType.Password, ErrorMessage = "Ongeldig E-pas.")]
             [Display(Name = "Nieuw wachtwoord")]
             public string NewPassword { get; set; }
 
-            [DataType(DataType.Password)]
+            [DataType(DataType.Password, ErrorMessage = "Ongeldig E-pas.")]
             [Display(Name = "Bevestig nieuw wachtwoord")]
             [Compare("NewPassword", ErrorMessage = "De wachtwoorden komen niet overeen.")]
             public string ConfirmPassword { get; set; }

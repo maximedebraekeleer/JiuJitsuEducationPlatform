@@ -1,4 +1,4 @@
-﻿@model List<Taijitan_Yoshin_Ryu_vzw.Models.Domain.Lid>
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.SessieViewModel
 
 @{
     ViewData["Title"] = "Sessie";
@@ -6,20 +6,33 @@
 
 <div class="content-wrapper">
     <div class="sessie-wrapper">
-        
+
         <div class="sessie-content">
-            <h3>Aanwezigheden - sessie vandaag</h3>
+            <h3>Aanwezigheden - @Model.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</h3>
 
             <ul class="ledenlijst">
-                @foreach (var item in Model)
-                {
-                    <li class="ledenlijstLid" asp-controller="Sessie" asp-route-username="@item.Username">@item.Voornaam @item.Naam</li>
+                @foreach (var item in Model.Leden) {
+
+                    if (Model.AanwezigeLeden.Contains(item)) {
+                        <li class="ledenlijstLid aanwezig">
+                            <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+                        </li>
+                    }
+                    else {
+                        <li class="ledenlijstLid">
+                            <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+                        </li>
+                    }
                 }
             </ul>
             <div class="buttonPanel">
-                <button>Cancel</button>
+                <form asp-controller="Gebruiker">
+                    <button>Cancel</button>
+                </form>
                 <button>Lid toevoegen</button>
-                <button>Bevestigen</button>
+                <form asp-controller="Gebruiker">
+                    <button>Bevestigen</button>
+                </form>
             </div>
         </div>
 
@@ -31,8 +44,8 @@
 
     for (var i = 0; i < leden.length; i++) {
         leden[i].addEventListener('click', (e) => {
-            if(e.target.classList.contains('aanwezig')) {
-            e.target.classList.remove('aanwezig');
+            if (e.target.classList.contains('aanwezig')) {
+                e.target.classList.remove('aanwezig');
             } else
                 e.target.classList.add('aanwezig');
         });
@@ -40,17 +53,17 @@
 </script>
 @*
 
-@if (TempData["message"] != null)
-{
-    <div class="alert alert-success">@TempData["message"]</div>
-}
-@if (TempData["error"] != null)
-{
-    <div class="alert alert-warning">@TempData["error"]</div>
-}
-<div class="btn-group-vertical">
-    @foreach (var item in Model)
+    @if (TempData["message"] != null)
     {
-        <a class="btn btn-primary" asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+        <div class="alert alert-success">@TempData["message"]</div>
     }
-</div>*@
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-warning">@TempData["error"]</div>
+    }
+    <div class="btn-group-vertical">
+        @foreach (var item in Model)
+        {
+            <a class="btn btn-primary" asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+        }
+    </div>*@

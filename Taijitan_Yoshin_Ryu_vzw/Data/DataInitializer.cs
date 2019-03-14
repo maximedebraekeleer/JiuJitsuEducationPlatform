@@ -59,12 +59,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 //--Leden met login
                 Gebruiker lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',
                     new DateTime(1998, 02, 03), "België", "Gent", "Vossenlaan", "2", "Beerle", "9000",
-                    "091234583", "Lid", "123456789", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false, WO_ZA);
+                    "091234583", "Lid", "123456789", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false, DI_DO);
                 await CreateUser(lid1.Username, lid1.Email, "P@ssword1", "lid");
 
                 Gebruiker lid2 = new Lid("LidMichael", "michael@gmail.com", "Vermassen", "Michael", 'm',
                     new DateTime(1997, 05, 14), "België", "Gent", "Laanstraat", "72", "Hasselt", "6547",
-                    "094782662", "0470477701", "324754747", new DateTime(2019, 03, 09), "michael@ouders.com", true, true, WO_ZA);
+                    "094782662", "0470477701", "324754747", new DateTime(2019, 03, 09), "michael@ouders.com", true, true, DI_DO);
                 await CreateUser(lid2.Username, lid2.Email, "P@ssword1", "lid");
 
                 //--Leden zonder login
@@ -74,11 +74,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
 
                 Gebruiker lid4 = new Lid("Lid4", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "mark@ouders.com", true, false, WO_ZA);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "mark@ouders.com", true, false, DI_DO);
 
                 Gebruiker lid5 = new Lid("Lid5", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "louis@ouders.com", true, false, ZA);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "louis@ouders.com", true, false, DI_DO);
 
                 Gebruiker lid6 = new Lid("Lid6", "Lid6@gmail.com", "Van Onderen", "Justine", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
@@ -86,11 +86,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
 
                 Gebruiker lid7 = new Lid("Lid7", "Lid6@gmail.com", "Van Onderen", "Sien", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, WO);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, DI_DO);
 
                 Gebruiker lid8 = new Lid("Lid8", "Lid8@gmail.com", "Van Schuinen", "Neeri", 'm',
                     new DateTime(1960, 08, 05), "Duitsland", "Passichi", "Jiaefestraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, WO);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, DI_DO);
 
                 //--Lesgevers
                 Gebruiker lesgever1 = new Lesgever("LesgeverHans", "hans@gmail.com", "Van Der Staak", "Hans", 'm',

@@ -37,37 +37,42 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage {
             //[Display(Name = "Gebruikersnaam")]
             //public string Username { get; set; }
 
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "E-mailadres")]
-            [EmailAddress]
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
+            [EmailAddress(ErrorMessage = "Ongeldig E-mailadres.")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "Geboortedatum")]
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [DataType(DataType.Date)]
             public DateTime GeboorteDatum { get; set; }
 
+            [Display(Name = "Straat")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string Straat { get; set; }
 
+            [Display(Name = "Gemeente")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string Gemeente { get; set; }
 
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "Huisnummer")]
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string HuisNummer { get; set; }
 
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [Display(Name = "Postcode")]
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             [DataType(DataType.PostalCode)]
             public string PostCode { get; set; }
 
+            [Display(Name = "Naam")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string Naam { get; set; }
 
+            [Display(Name = "Voornaam")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string Voornaam { get; set; }
 
+            [Display(Name = "GSM-nummer")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
             public string GsmNummer { get; set; }
             #endregion
@@ -77,6 +82,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage {
             public string TelefoonNummer { get; set; } //Niet verplicht
 
             [Display(Name = "E-mailadres van ouders")]
+            [RegularExpression(@"^$|^.*@.*\..*$", ErrorMessage = "Ongeldig E-mailadres.")]
             public string EmailOuders { get; set; } //Niet verplicht
 
             [Display(Name = "Ik wens info te ontvangen over club aangelegenheden.")]
@@ -87,10 +93,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage {
             #endregion
 
             #region onAanpasbaardeVelden            
+            [Display(Name = "Geslacht")]
             public char Geslacht { get; set; }
+            [Display(Name = "Geboortestad")]
             public string GeboorteStad { get; set; }
+            [Display(Name = "Geboorteland")]
             public string GeboorteLand { get; set; }
+            [Display(Name = "Rijksregisternummer")]
             public string RijksregisterNummer { get; set; }
+            [Display(Name = "Inschrijvingsdatum")]
             public DateTime InschrijvingsDatum { get; set; }
             #endregion
         }

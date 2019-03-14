@@ -328,3 +328,9 @@ h4{
         margin-top: 4vh;
         justify-content: space-around;
     }
+
+#lesmateriaalModuleVoorbeeld {
+    width: 100%;
+    height: auto;
+    padding-top: 14px;
+}

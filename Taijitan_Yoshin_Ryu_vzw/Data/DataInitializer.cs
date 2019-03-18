@@ -55,6 +55,54 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
 
                 ZA.AddTrainingsmoment(Zaterdag);
 
+                //Lesmateriaal
+                //1-Thema's toevoegen
+                LesmateriaalThema thema1 = new LesmateriaalThema("Standen");
+                LesmateriaalThema thema2 = new LesmateriaalThema("Aanvallen");
+                LesmateriaalThema thema3 = new LesmateriaalThema("Worpen");
+
+                var themas = new List<LesmateriaalThema> {
+                    thema1, thema2, thema3
+                };
+                _dbContext.LesmateriaalThemas.AddRange(themas);
+
+                //2-Graden toevoegen
+                Graad kyu1 = new Graad("1e kyu");
+                Graad kyu2 = new Graad("2e kyu");
+                Graad kyu3 = new Graad("3e kyu");
+                Graad kyu4 = new Graad("4e kyu");
+                Graad kyu5 = new Graad("5e kyu");
+                Graad kyu6 = new Graad("6e kyu");
+
+                var graden = new List<Graad> {
+                    kyu1, kyu2, kyu3, kyu4, kyu5, kyu6
+                };
+                _dbContext.Graden.AddRange(graden);
+
+                kyu1.AddLesmateriaalThema(thema1, thema2, thema3);
+                kyu2.AddLesmateriaalThema(thema1, thema2, thema3);
+                kyu3.AddLesmateriaalThema(thema1, thema2, thema3);
+                kyu4.AddLesmateriaalThema(thema1, thema2, thema3);
+                kyu5.AddLesmateriaalThema(thema1, thema2);
+                kyu6.AddLesmateriaalThema(thema1);
+
+                //1-Lesmateriaal toevoegen
+                Lesmateriaal lm1 = new Lesmateriaal(kyu1, thema1, "Lesmateriaal 1", "FOTO", "VIDEO");
+                Lesmateriaal lm2 = new Lesmateriaal(kyu1, thema2, "Lesmateriaal 2", "FOTO", "VIDEO");
+                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "FOTO", "VIDEO");
+                Lesmateriaal lm4 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 4", "FOTO", "VIDEO");
+                Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "FOTO", "VIDEO");
+                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 1", "FOTO", "VIDEO");
+                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 2", "FOTO", "VIDEO");
+                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 3", "FOTO", "VIDEO");
+                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 4", "FOTO", "VIDEO");
+                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 5", "FOTO", "VIDEO");
+
+                var lesmaterialen = new List<Lesmateriaal> {
+                    lm1, lm2, lm3, lm4, lm5, lm6, lm7, lm8, lm9, lm10
+                };
+                _dbContext.Lesmaterialen.AddRange(lesmaterialen);
+
                 //Gebruikers en corresponderende ASPUsers
                 //--Leden met login
                 Gebruiker lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',

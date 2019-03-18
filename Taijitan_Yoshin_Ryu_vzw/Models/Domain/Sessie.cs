@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
-    public class Sessie {
+namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
+{
+    public class Sessie
+    {
         #region Properties
         public int Id { get; set; } //Id is auto-increment
         public DateTime BeginDatumEnTijd { get; set; }
@@ -16,11 +17,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Constructors
-        protected Sessie() {
+        protected Sessie()
+        {
             Aanwezigheden = new List<Aanwezigheid>();
         }
 
-        public Sessie(DateTime beginDatumEnTijd, DateTime eindDatumEnTijd, Lesgever lesgever) : this() {
+        public Sessie(DateTime beginDatumEnTijd, DateTime eindDatumEnTijd, Lesgever lesgever) : this()
+        {
             BeginDatumEnTijd = beginDatumEnTijd;
             EindDatumEnTijd = eindDatumEnTijd;
             Lesgever = lesgever;
@@ -28,29 +31,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Methods
-        public void voegAanwezigheidToe(Lid lid) {
+        public void voegAanwezigheidToe(Lid lid)
+        {
             Aanwezigheden.Add(new Aanwezigheid(lid, this));
-        }
-
-        public void verwijderAanwezigheid(Lid lid)
-        {
-            foreach (var aanwezigheid in Aanwezigheden)
-            {
-                if (aanwezigheid.Lid.Username == lid.Username)
-                {
-                    Aanwezigheden.Remove(aanwezigheid);
-                }
-            }
-        }
-
-        public bool isLidAanwezig(Lid lid)
-        {
-            foreach(var aanwezigheid in Aanwezigheden)
-            {
-                if (aanwezigheid.Lid == lid)
-                    return true;
-            }
-            return false;
         }
         #endregion
     }

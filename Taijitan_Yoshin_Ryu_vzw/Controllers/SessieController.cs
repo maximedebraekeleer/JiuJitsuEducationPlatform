@@ -27,17 +27,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             //return View(GeefLeden(GeefFormules(trainingsmomenten)));
 
             //WERENDE VERSIE
-            Trainingsmoment trainingsMoment;            
-
-            //Donderdag wordt gekozen op localhost
-            if (HttpContext.Request.Host.Host.ToLower().Equals("localhost")) {
-                 trainingsMoment = _trainingsmomenten.getByDagNummer(4/*Donderdag*/).FirstOrDefault();
-            }
-            //Welk trainingsmomenten
-            else
-            {
-                trainingsMoment = _trainingsmomenten.getByDagNummer((int)DateTime.Today.DayOfWeek).FirstOrDefault();
-            }            
+            Trainingsmoment trainingsMoment = GeefTrainingsmomenten().FirstOrDefault();
+                      
             if (trainingsMoment == null)
             {
                 TempData["error"] = $"Er zijn vandaag geen sessies";
@@ -84,6 +75,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
         {
             return View();
         }
+        public IActionResult Cancel()
+        {
+            GeefHuidigeSessie();
+            _sessies.Remove(HuidigeSessie);
+            _sessies.SaveChanges();
+            TempData["error"] = $"De sessie is geannuleerd.";
+            return RedirectToAction(nameof(Lesgever), "Gebruiker");
+        }
 
 
         private void MaakHuidigeSessie(Trainingsmoment trainingsmoment) {
@@ -123,7 +122,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
 
         private IEnumerable<Trainingsmoment> GeefTrainingsmomenten()
         {
-            IEnumerable<Trainingsmoment> trainingsmomenten = _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek);
+            IEnumerable<Trainingsmoment> trainingsmomenten;
+            //Donderdag wordt gekozen op localhost, anders de huidige dag
+            if (HttpContext.Request.Host.Host.ToLower().Equals("localhost"))
+            {
+                trainingsmomenten = _trainingsmomenten.getByDagNummer(4/*Donderdag*/);
+            }
+            else {
+                trainingsmomenten = _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek);
+            }
+            
             return trainingsmomenten;
         }
     }

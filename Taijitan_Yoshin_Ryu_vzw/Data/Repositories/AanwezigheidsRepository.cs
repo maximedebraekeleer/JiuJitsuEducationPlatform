@@ -42,6 +42,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             return _aanwezigheden.Where(a => a.Sessie == sessie).ToList();
         }
 
+        public void Remove(Aanwezigheid aanwezigheid)
+        {
+            _aanwezigheden.Remove(aanwezigheid);
+        }
+
         public void SaveChanges()
         {
             _context.SaveChanges();

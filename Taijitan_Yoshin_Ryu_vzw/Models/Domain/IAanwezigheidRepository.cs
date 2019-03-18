@@ -12,6 +12,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         IEnumerable<Aanwezigheid> GetbyLid(Lid lid);
         IEnumerable<Aanwezigheid> GetbyFormule(Formule formule);
         void Add(Aanwezigheid aanwezigheid);
+        void Remove(Aanwezigheid aanwezigheid);
         void SaveChanges();
     }
 }

@@ -1,4 +1,6 @@
-﻿
+﻿li a {
+    display: block;
+}
 .sessie-wrapper {
     display: flex;
     justify-content: center;

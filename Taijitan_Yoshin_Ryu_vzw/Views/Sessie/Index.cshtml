@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Sessie";
 }
-
+@section AddCss {
+    <link rel="stylesheet" href="~/css/sessieStart.css" asp-append-version="true" />
+}
 <div class="content-wrapper">
     <div class="sessie-wrapper">
 
@@ -11,14 +13,17 @@
             <h3>Aanwezigheden - @Model.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</h3>
 
             <ul class="ledenlijst">
-                @foreach (var item in Model.Leden) {
+                @foreach (var item in Model.Leden)
+                {
 
-                    if (Model.AanwezigeLeden.Contains(item)) {
+                    if (Model.AanwezigeLeden.Contains(item))
+                    {
                         <li class="ledenlijstLid aanwezig">
                             <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
                         </li>
                     }
-                    else {
+                    else
+                    {
                         <li class="ledenlijstLid">
                             <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
                         </li>

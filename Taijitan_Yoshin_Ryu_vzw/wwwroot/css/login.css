@@ -1,3 +1,47 @@
-﻿body{
-    background: red;
+﻿#banner {
+    position: relative;
+    background-image: url("../images/jj_banner.jpg");
+    background-size: cover;
+    min-height: 300px;
+    min-width: 100%;
 }
+
+#login {
+    position: absolute;
+    min-height: 375px;
+    min-width: 385px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 3vw 4vw;
+    background: white;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+    #login button {
+        margin: 0 auto;
+        display: block;
+        background: none;
+        border: solid 1px #336566;
+        color: #336566;
+        padding: 5px 20px;
+    }
+
+        #login button:active {
+            border-width: 2px;
+            padding: 4.5px 19.5px;
+        }
+
+    #login span {
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+    }
+
+        #login span:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }

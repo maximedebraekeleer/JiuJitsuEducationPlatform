@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Persoonlijke gegevens";
 }
-
 <h4>@ViewData["Title"]</h4>
 @Html.Partial("_StatusMessage", Model.StatusMessage)
 <div class="row">
@@ -12,10 +11,10 @@
             <div class="form-content">
                 <div class="form-divider">
                     @*<div class="form-group">
-                        <label asp-for="Input.Username"></label>
-                        <input asp-for="Input.Username" class="form-control" />
-                        <span asp-validation-for="Input.Username" class="text-danger"></span>
-                    </div>*@
+                            <label asp-for="Input.Username"></label>
+                            <input asp-for="Input.Username" class="form-control" />
+                            <span asp-validation-for="Input.Username" class="text-danger"></span>
+                        </div>*@
                     <div class="form-group">
                         <label asp-for="Input.Email"></label>
                         <input asp-for="Input.Email" class="form-control" />
@@ -33,15 +32,15 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Input.GeboorteDatum"></label>
-                        <input asp-for="Input.GeboorteDatum" class="form-control" disabled/>
+                        <input asp-for="Input.GeboorteDatum" class="form-control" disabled />
                     </div>
                     <div class="form-group">
                         <label asp-for="Input.GeboorteLand"></label>
-                        <input asp-for="Input.GeboorteLand" class="form-control" disabled/>
+                        <input asp-for="Input.GeboorteLand" class="form-control" disabled />
                     </div>
                     <div class="form-group">
                         <label asp-for="Input.GeboorteStad"></label>
-                        <input asp-for="Input.GeboorteStad " class="form-control" disabled/>
+                        <input asp-for="Input.GeboorteStad " class="form-control" disabled />
                     </div>
 
 
@@ -79,7 +78,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Input.RijksregisterNummer"></label>
-                        <input asp-for="Input.RijksregisterNummer" class="form-control" disabled/>
+                        <input asp-for="Input.RijksregisterNummer" class="form-control" disabled />
                     </div>
                     <div class="form-group">
                         <label asp-for="Input.EmailOuders"></label>
@@ -88,17 +87,17 @@
                     </div>
                 </div>
             </div>
-                <div class="form-group">
-                    <label asp-for="Input.InfoClubAangelegenheden"></label>
-                    <input asp-for="Input.InfoClubAangelegenheden" class="form-control" />
-                    <span asp-validation-for="Input.InfoClubAangelegenheden" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.InfoFederaleAangelegenheden"></label>
-                    <input asp-for="Input.InfoFederaleAangelegenheden" class="form-control" />
-                    <span asp-validation-for="Input.InfoFederaleAangelegenheden" class="text-danger"></span>
-                </div>
-            
+            <div class="form-group">
+                <label asp-for="Input.InfoClubAangelegenheden"></label>
+                <input asp-for="Input.InfoClubAangelegenheden" class="form-control" />
+                <span asp-validation-for="Input.InfoClubAangelegenheden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.InfoFederaleAangelegenheden"></label>
+                <input asp-for="Input.InfoFederaleAangelegenheden" class="form-control" />
+                <span asp-validation-for="Input.InfoFederaleAangelegenheden" class="text-danger"></span>
+            </div>
+
             <button type="submit">Opslaan</button>
         </form>
     </div>

@@ -21,7 +21,7 @@ button {
 
 .body-content {
     position: relative;
-    height: 100vh;
+    height: 95vh;
 }
 
 .content-wrapper {
@@ -73,54 +73,6 @@ button {
     line-height: 50px;
 }
 
-#banner {
-    position: relative;
-    background-image: url("../images/jj_banner.jpg");
-    background-size: cover;
-    min-height: 300px;
-    min-width: 100%;
-}
-
-#login {
-    position: absolute;
-    min-height: 375px;
-    min-width: 385px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    padding: 3vw 4vw;
-    background: white;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-}
-
-    #login button {
-        margin: 0 auto;
-        display: block;
-        background: none;
-        border: solid 1px #336566;
-        color: #336566;
-        padding: 5px 20px;
-    }
-
-        #login button:active {
-            border-width: 2px;
-            padding: 4.5px 19.5px;
-        }
-
-    #login span {
-        text-align: center;
-        display: inline-block;
-        width: 100%;
-    }
-
-        #login span:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
 .index-wrapper{
     margin-top: 20vh;
 }
@@ -130,204 +82,11 @@ footer {
     margin-top: -5vh;
 }
 
-h3{
-    text-align: center;
-}
-
-#module_aanwezigheidRegistreren {
-    background-image: url('/images/module_1.jpg');
-}
-
-#module_lesmateriaalRaadplegen {
-    background-image: url('/images/module_2.jpg');
-}
-
-#module_overzichtAanwezigheden {
-    background-image: url('/images/module_3.jpg');
-}
-
-#module_sessieStarten {
-    background-image: url('/images/module_4.jpg');
-}
-
-#module_meldingenBijCommentaar {
-    background-image: url('/images/module_5.jpg');
-}
-
-.userModule {
-    height: 200px;
-    width: 400px;
-    background-color: #EEEEEE;
-    text-align: center;
-    margin: 25px;
-    padding: 30px;
-    display: table;
-    background-size: cover;
-}
-
 h3 {
     color: #336566;
     font-weight: bolder;
+    text-align: center;
 }
-    .userModule:hover {
-        cursor: pointer;
-        margin: 12.5px;
-        height: 225px;
-        width: 425px;
-        padding: 12.5px;
-    }
-
-    .userModule:hover h5 {
-        font-size: 1.8vw;
-    }
-
-
-    .userModule h5 {
-        display: table-cell;
-        vertical-align: middle;
-        color: white;
-        font-weight: bold;
-        font-size: 1.5vw;
-    }
-
-.userModuleWrapper {
-    display: flex;
-    padding: 0 5vw 0 5vw;
-    max-width: 100vw;
-    flex-grow: 1;
-    flex-wrap: wrap;
-}
-
-.userModuleWrapper > a {
-    text-decoration: none;
-}
-
-.manage-wrapper{
-    margin-top: 15vh;
-}
-
-.form-content{
-    display: flex;
-    width: 100%;
-}
-
-.form-group > label {
-    color: #336566;
-}
-
-.form-divider{
-    width: 100%;
-    padding: 0 20px 0 20px;
-}
-
-.button-margin {
-    margin-top: 49px;
-}
-
-
-#profile-form > button {
-    display: block;
-    background: none;
-    border: solid 1px #336566;
-    color: #336566;
-    padding: 5px 20px;
-    margin-left: 20px;
-}
-
-#profile-form button:active {
-    border-width: 2px;
-    padding: 4.5px 19.5px;
-}
-
-.manage-wrapper > .row > div:nth-child(2){
-    padding-left: 2vw;
-}
-
-.nav-pills > li > a{
-    color: black;
-}
-
-.nav-pills > li.active > a {
-    background-color: white;
-    color: #336566;
-    font-weight: bold;
-    border-left: solid #336566 5px;
-    border-radius: 0%;
-    background: #fcfcfc;
-    -webkit-box-shadow: inset 0px 0px 5px #efefef;
-    -moz-box-shadow: inset 0px 0px 5px #efefef;
-    box-shadow: inset 0px 0px 5px #efefef;
-    outline: none;
-}
-
-    .nav-pills > li.active > a:hover {
-        background-color: #336566;
-        color: white;
-    }
-
-h4{
-    margin-left: 20px;
-}
-
-#profile-form > .form-group{
-    margin-left: 20px;
-}
-
-.form-group > input[type='checkbox']{
-    display: inline;
-    max-width: 15px;
-    max-height: 15px;
-    transform: translateY(2px);
-    margin-left: 10px;
-    border: none;
-}
-
-.sessie-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-.sessie-content {
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    display: inline-block;
-    margin: 0 auto;
-    padding: 3vh 4vw;
-}
-
-.ledenlijst{
-    border: solid 1px lightgrey;
-    list-style: none;
-    padding: 0;
-    margin-top: 3vh;
-    max-height: 50vh;
-    overflow-y: auto;
-}
-
-.ledenlijst > li{
-    padding: 1vh 0 1vh 1vw;
-}
-
-    .ledenlijst > li:hover {
-        text-decoration: none;
-    }
-
-    .ledenlijst > li:nth-child(even) {
-        background: #e0e0e0;
-    }
-
-    .ledenlijst > li.aanwezig {
-        background: #61d961;
-    }
-
-    .ledenlijst > li:nth-child(even).aanwezig {
-        background: #38cf38;
-    }
-
-    .buttonPanel{
-        display: flex;
-        margin-top: 4vh;
-        justify-content: space-around;
-    }
 
 #lesmateriaalModuleVoorbeeld {
     width: 100%;

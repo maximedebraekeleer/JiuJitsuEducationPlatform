@@ -27,8 +27,22 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             //return View(GeefLeden(GeefFormules(trainingsmomenten)));
 
             //WERENDE VERSIE
+            Trainingsmoment trainingsMoment;            
+
+            //Donderdag wordt gekozen op localhost
+            if (HttpContext.Request.Host.Host.ToLower().Equals("localhost")) {
+                 trainingsMoment = _trainingsmomenten.getByDagNummer(4/*Donderdag*/).FirstOrDefault();
+            }
             //Welk trainingsmomenten
-            Trainingsmoment trainingsMoment = _trainingsmomenten.getByDagNummer((int)DateTime.Today.DayOfWeek).FirstOrDefault();
+            else
+            {
+                trainingsMoment = _trainingsmomenten.getByDagNummer((int)DateTime.Today.DayOfWeek).FirstOrDefault();
+            }            
+            if (trainingsMoment == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             MaakHuidigeSessie(trainingsMoment);
 
             //Formules ophalen die deze trainingsmomenten bevatten
@@ -53,14 +67,24 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
 
             Lid lid = (Lid)_gebruikers.GetByUserName(username);
             if (_aanwezigheden.GetbyLid(lid).Any(a => a.Sessie == HuidigeSessie)) {
-                TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";
+                //TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";
                 return RedirectToAction(nameof(Index));
             }
             _aanwezigheden.Add(new Aanwezigheid(lid, HuidigeSessie));
             _aanwezigheden.SaveChanges();
-            TempData["message"] = $"{lid.Voornaam}{lid.Naam} is succesvol geregistreerd als aanwezig.";
+            //TempData["message"] = $"{lid.Voornaam}{lid.Naam} is succesvol geregistreerd als aanwezig.";
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult AanwezigLidNietInLijst()
+        {
+            return View();
+        }
+        public IActionResult AanwezigGast()
+        {
+            return View();
+        }
+
 
         private void MaakHuidigeSessie(Trainingsmoment trainingsmoment) {
             DateTime datumBeginUur = trainingsmoment.geefDatumBeginUur();
@@ -97,7 +121,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
         //    return formules;
         //}
 
-        private IEnumerable<Trainingsmoment> GeefTrainingsmomenten() {
+        private IEnumerable<Trainingsmoment> GeefTrainingsmomenten()
+        {
             IEnumerable<Trainingsmoment> trainingsmomenten = _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek);
             return trainingsmomenten;
         }

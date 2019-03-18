@@ -6,6 +6,10 @@
 <div class="content-wrapper">
     <h3>Modules voor de lesgevers</h3>
     <br />
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["error"]</div>
+    }
     <div class="userModuleWrapper">
         <a asp-controller="Overzicht" asp-action="Index">
             <div class="userModule" id="module_overzichtAanwezigheden">

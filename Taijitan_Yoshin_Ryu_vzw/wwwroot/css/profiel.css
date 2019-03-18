@@ -1,0 +1,83 @@
+﻿.form-content {
+    display: flex;
+    width: 100%;
+}
+
+.form-group > label {
+    color: #336566;
+}
+
+.form-divider {
+    width: 100%;
+    padding: 0 20px 0 20px;
+}
+
+.button-margin {
+    margin-top: 49px;
+}
+
+
+#profile-form > button {
+    display: block;
+    background: none;
+    border: solid 1px #336566;
+    color: #336566;
+    padding: 5px 20px;
+    margin-left: 20px;
+}
+
+#profile-form button:active {
+    border-width: 2px;
+    padding: 4.5px 19.5px;
+}
+
+.manage-wrapper > .row > div:nth-child(2) {
+    padding-left: 2vw;
+}
+
+.manage-wrapper {
+    margin-top: 10vh;
+}
+
+.nav-pills > li > a {
+    color: black;
+}
+
+.nav-pills > li.active > a {
+    background-color: white;
+    color: #336566;
+    font-weight: bold;
+    border-left: solid #336566 5px;
+    border-radius: 0%;
+    background: #fcfcfc;
+    -webkit-box-shadow: inset 0px 0px 5px #efefef;
+    -moz-box-shadow: inset 0px 0px 5px #efefef;
+    box-shadow: inset 0px 0px 5px #efefef;
+    outline: none;
+}
+
+    .nav-pills > li.active > a:hover {
+        background-color: #336566;
+        color: white;
+    }
+
+h4 {
+    margin-left: 20px;
+}
+
+#profile-form > .form-group {
+    margin-left: 20px;
+}
+
+.form-group > input[type='checkbox'] {
+    display: inline;
+    max-width: 15px;
+    max-height: 15px;
+    transform: translateY(2px);
+    margin-left: 10px;
+    border: none;
+}
+
+footer{
+    margin-top: 0;
+}

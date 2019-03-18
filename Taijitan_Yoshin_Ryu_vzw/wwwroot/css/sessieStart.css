@@ -1,0 +1,47 @@
+﻿
+.sessie-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.sessie-content {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    display: inline-block;
+    margin: 0 auto;
+    padding: 3vh 4vw;
+}
+
+.ledenlijst {
+    border: solid 1px lightgrey;
+    list-style: none;
+    padding: 0;
+    margin-top: 3vh;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+    .ledenlijst > li {
+        padding: 1vh 0 1vh 1vw;
+    }
+
+        .ledenlijst > li:hover {
+            text-decoration: none;
+        }
+
+        .ledenlijst > li:nth-child(even) {
+            background: #e0e0e0;
+        }
+
+        .ledenlijst > li.aanwezig {
+            background: #61d961;
+        }
+
+        .ledenlijst > li:nth-child(even).aanwezig {
+            background: #38cf38;
+        }
+
+.buttonPanel {
+    display: flex;
+    margin-top: 4vh;
+    justify-content: space-around;
+}

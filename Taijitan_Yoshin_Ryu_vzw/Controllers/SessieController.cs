@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
@@ -57,8 +58,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             GeefHuidigeSessie();
 
             Lid lid = (Lid)_gebruikers.GetByUserName(username);
-            if (_aanwezigheden.GetbyLid(lid).Any(a => a.Sessie == HuidigeSessie)) {
-                //TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";
+            Aanwezigheid aanwezigheid = _aanwezigheden.GetbyLid(lid).Where(a => a.Sessie == HuidigeSessie).FirstOrDefault();
+            if (aanwezigheid != null) {
+                //TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";                
+                _aanwezigheden.Remove(aanwezigheid);
+                _aanwezigheden.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             _aanwezigheden.Add(new Aanwezigheid(lid, HuidigeSessie));
@@ -67,16 +71,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult AanwezigLidNietInLijst()
+        public IActionResult RegistreerAanwezigheidNietInLijst()
         {
             return View();
         }
-        public IActionResult AanwezigGast()
+        
+        public IActionResult Cancel(string password)
         {
-            return View();
-        }
-        public IActionResult Cancel()
-        {
+            //var result = await _signing.PasswordSignInAsync(User.Identity.Name, password);
             GeefHuidigeSessie();
             _sessies.Remove(HuidigeSessie);
             _sessies.SaveChanges();
@@ -105,20 +107,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             DateTime datumBeginUur = trainingsmomenten.FirstOrDefault().geefDatumBeginUur();
             HuidigeSessie = _sessies.GetByDatumBeginUur(datumBeginUur);
         }
-
-        //private List<Lid> GeefLeden(List<Formule> formules)
-        //{
-        //    List<Lid> leden = new List<Lid>();
-        //    formules.ForEach(f => leden.AddRange(_gebruikers.getLedenByFormule(f)));
-        //    return leden;
-        //}
-
-        //private List<Formule> GeefFormules(IEnumerable<Trainingsmoment> trainingsmomenten)
-        //{
-        //    List<Formule> formules2 = _formules.getByTrainingsmoment(trainingsmomenten.FirstOrDefault()).ToList();
-        //    List<Formule> formules = _formules.getAll().ToList();
-        //    return formules;
-        //}
 
         private IEnumerable<Trainingsmoment> GeefTrainingsmomenten()
         {

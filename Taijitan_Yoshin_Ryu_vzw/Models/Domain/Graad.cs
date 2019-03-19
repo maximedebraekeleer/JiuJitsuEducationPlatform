@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +10,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
     public class Graad
     {
         #region Properties
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int GraadId { get; set; }
         public string GraadNaam { get; set; }
         #endregion
 
@@ -23,24 +26,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             GraadLesmateriaalThemas = new HashSet<GraadLesmateriaalThema>();
         }
 
-        public Graad(string graadNaam) : this()
+        public Graad(int graadId, string graadNaam) : this()
         {
+            GraadId = graadId;
             GraadNaam = graadNaam;
         }
         #endregion
 
         #region Methods
-        //public void AddLesmateriaalThema(LesmateriaalThema lesmateriaalThema)
-        //{
-        //    GraadLesmateriaalThemas.Add(new GraadLesmateriaalThema(this, lesmateriaalThema));
-        //}
-
         public void AddLesmateriaalThema(params LesmateriaalThema[] list)
         {
             foreach(LesmateriaalThema l in list)
             {
                 GraadLesmateriaalThemas.Add(new GraadLesmateriaalThema(this, l));
-
             }
         }
 

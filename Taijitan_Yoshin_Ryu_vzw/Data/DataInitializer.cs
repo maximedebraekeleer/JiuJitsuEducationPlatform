@@ -67,39 +67,54 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 _dbContext.LesmateriaalThemas.AddRange(themas);
 
                 //2-Graden toevoegen
-                Graad kyu1 = new Graad("1e kyu");
-                Graad kyu2 = new Graad("2e kyu");
-                Graad kyu3 = new Graad("3e kyu");
-                Graad kyu4 = new Graad("4e kyu");
-                Graad kyu5 = new Graad("5e kyu");
-                Graad kyu6 = new Graad("6e kyu");
+                Graad kyu6 = new Graad(1, "6e kyu");
+                Graad kyu5 = new Graad(2, "5e kyu");
+                Graad kyu4 = new Graad(3, "4e kyu");
+                Graad kyu3 = new Graad(4, "3e kyu");
+                Graad kyu2 = new Graad(5, "2e kyu");
+                Graad kyu1 = new Graad(6, "1e kyu");
+                Graad dan1 = new Graad(7, "1e dan");
+                Graad dan2 = new Graad(8, "2e dan");
+                Graad dan3 = new Graad(9, "3e dan");
+                Graad dan4 = new Graad(10, "4e dan");
+                Graad dan5 = new Graad(11, "5e dan");
 
                 var graden = new List<Graad> {
-                    kyu1, kyu2, kyu3, kyu4, kyu5, kyu6
+                    kyu6, kyu5, kyu4, kyu3, kyu2, kyu1, dan1, dan2, dan3, dan4, dan5
                 };
                 _dbContext.Graden.AddRange(graden);
 
-                kyu1.AddLesmateriaalThema(thema1, thema2, thema3);
-                kyu2.AddLesmateriaalThema(thema1, thema2, thema3);
-                kyu3.AddLesmateriaalThema(thema1, thema2, thema3);
+                kyu6.AddLesmateriaalThema(thema1, thema2, thema3);
+                kyu5.AddLesmateriaalThema(thema1, thema2, thema3);
                 kyu4.AddLesmateriaalThema(thema1, thema2, thema3);
-                kyu5.AddLesmateriaalThema(thema1, thema2);
-                kyu6.AddLesmateriaalThema(thema1);
+                kyu3.AddLesmateriaalThema(thema1, thema2);
+                kyu2.AddLesmateriaalThema(thema1, thema3);
+                kyu1.AddLesmateriaalThema(thema1, thema2, thema3);
+                dan1.AddLesmateriaalThema(thema1, thema2, thema3);
+                dan2.AddLesmateriaalThema(thema1);
+                dan3.AddLesmateriaalThema(thema1, thema2, thema3);
+                dan4.AddLesmateriaalThema(thema3);
+                dan5.AddLesmateriaalThema(thema2, thema3);
 
-                //1-Lesmateriaal toevoegen
+                //3-Lesmateriaal toevoegen
                 Lesmateriaal lm1 = new Lesmateriaal(kyu1, thema1, "Lesmateriaal 1", "FOTO", "VIDEO");
                 Lesmateriaal lm2 = new Lesmateriaal(kyu1, thema2, "Lesmateriaal 2", "FOTO", "VIDEO");
                 Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "FOTO", "VIDEO");
-                Lesmateriaal lm4 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 4", "FOTO", "VIDEO");
+                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "FOTO", "VIDEO");
                 Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "FOTO", "VIDEO");
-                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 1", "FOTO", "VIDEO");
-                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 2", "FOTO", "VIDEO");
-                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 3", "FOTO", "VIDEO");
-                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 4", "FOTO", "VIDEO");
-                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 5", "FOTO", "VIDEO");
+                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "FOTO", "VIDEO");
+                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "FOTO", "VIDEO");
+                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "FOTO", "VIDEO");
+                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "FOTO", "VIDEO");
+                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "FOTO", "VIDEO");
+                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "FOTO", "VIDEO");
+                Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "FOTO", "VIDEO");
+                Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "FOTO", "VIDEO");
+                Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "FOTO", "VIDEO");
+                Lesmateriaal lm15 = new Lesmateriaal(dan5, thema3, "Lesmateriaal 10", "FOTO", "VIDEO");
 
                 var lesmaterialen = new List<Lesmateriaal> {
-                    lm1, lm2, lm3, lm4, lm5, lm6, lm7, lm8, lm9, lm10
+                    lm1, lm2, lm3, lm4, lm5, lm6, lm7, lm8, lm9, lm10, lm11, lm12, lm13, lm14, lm15
                 };
                 _dbContext.Lesmaterialen.AddRange(lesmaterialen);
 
@@ -107,38 +122,46 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 //--Leden met login
                 Gebruiker lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',
                     new DateTime(1998, 02, 03), "België", "Gent", "Vossenlaan", "2", "Beerle", "9000",
-                    "091234583", "Lid", "123456789", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false, DI_DO);
+                    "091234583", "Lid", "123456789", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false, 
+                    DI_DO, kyu3);
                 await CreateUser(lid1.Username, lid1.Email, "P@ssword1", "lid");
 
                 Gebruiker lid2 = new Lid("LidMichael", "michael@gmail.com", "Vermassen", "Michael", 'm',
                     new DateTime(1997, 05, 14), "België", "Gent", "Laanstraat", "72", "Hasselt", "6547",
-                    "094782662", "0470477701", "324754747", new DateTime(2019, 03, 09), "michael@ouders.com", true, true, DI_DO);
+                    "094782662", "0470477701", "324754747", new DateTime(2019, 03, 09), "michael@ouders.com", true, true, 
+                    DI_DO, kyu4);
                 await CreateUser(lid2.Username, lid2.Email, "P@ssword1", "lid");
 
                 //--Leden zonder login
                 Gebruiker lid3 = new Lid("Lid3", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
                     new DateTime(1997, 11, 05), "België", "Beerle", "Molenstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "pol@ouders.com", true, false, ZA);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "pol@ouders.com", true, false, 
+                    ZA, kyu4);
 
                 Gebruiker lid4 = new Lid("Lid4", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "mark@ouders.com", true, false, DI_DO);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "mark@ouders.com", true, false, 
+                    DI_DO, kyu4);
 
                 Gebruiker lid5 = new Lid("Lid5", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "louis@ouders.com", true, false, DI_DO);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "louis@ouders.com", true, false, 
+                    DI_DO, kyu4);
 
                 Gebruiker lid6 = new Lid("Lid6", "Lid6@gmail.com", "Van Onderen", "Justine", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "justine@ouders.com", true, false, DI_DO);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "justine@ouders.com", true, false, 
+                    DI_DO, kyu3);
 
                 Gebruiker lid7 = new Lid("Lid7", "Lid6@gmail.com", "Van Onderen", "Sien", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, DI_DO);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, 
+                    DI_DO, kyu5);
 
                 Gebruiker lid8 = new Lid("Lid8", "Lid8@gmail.com", "Van Schuinen", "Neeri", 'm',
                     new DateTime(1960, 08, 05), "Duitsland", "Passichi", "Jiaefestraat", "8", "Verdegem", "1234",
-                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, DI_DO);
+                    "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, 
+                    DI_DO, kyu5);
 
                 //--Lesgevers
                 Gebruiker lesgever1 = new Lesgever("LesgeverHans", "hans@gmail.com", "Van Der Staak", "Hans", 'm',

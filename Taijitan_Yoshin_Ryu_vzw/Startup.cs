@@ -49,6 +49,7 @@ namespace Taijitan_Yoshin_Ryu_vzw {
             services.AddScoped<ITrainingsmomentRepository, TrainingsmomentRepository>();
             services.AddScoped<IAanwezigheidRepository, AanwezigheidsRepository>();
             services.AddScoped<ISessieRepository, SessieRepository>();
+            services.AddScoped<IGraadRepository , GraadRepository>();
             services.AddScoped<GebruikerFilter>();
             services.AddSession();
 

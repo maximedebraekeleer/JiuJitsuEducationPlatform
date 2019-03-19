@@ -20,7 +20,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         public GraadLesmateriaalThema(Graad graad, LesmateriaalThema lesmateriaalThema) : this()
         {
             Graad = graad;
-            GraadId = Graad.Id;
+            GraadId = Graad.GraadId;
 
             LesmateriaalThema = lesmateriaalThema;
             LesmateriaalThemaId = LesmateriaalThema.Id;

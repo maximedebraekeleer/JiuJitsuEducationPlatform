@@ -1,7 +1,49 @@
-﻿
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.LesmateriaalViewModel
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lesmateriaal";
 }
+@*@section AddCss {
+        <link rel="stylesheet" href="~/css/sessieStart.css" asp-append-version="true" />
+    }*@
+<div style="padding-top: 30px;">
 
-<img src="~/images/lesmateriaalModuleVoorbeeld.jpg" alt="Voorbeeld Lesmateriaal" id="lesmateriaalModuleVoorbeeld" />
+    <h3>Welkom @Model.HuidigLid.Voornaam @Model.HuidigLid.Naam</h3>
 
+    <ul>
+        @foreach (var graad in Model.Graden)
+        {
+            if (graad.GraadId <= Model.HuidigLid.Graad.GraadId)
+            {
+                <li>
+                    @graad.GraadNaam
+                    <ul>
+                        @foreach (var thema in graad.LesmateriaalThemas)
+                        {
+                            <li>
+                                @thema.LesmateriaalThemaNaam
+                                <ul>
+                                    @foreach (var lesmateriaal in thema.Lesmaterialen)
+                                    {
+                                        <li>
+                                            @if (lesmateriaal.Graad == graad)
+                                            {
+                                                @lesmateriaal.InhoudTekst;
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li style="color: red;">
+                    @graad.GraadNaam 🔒
+                </li>
+            }
+        }
+    </ul>
+</div>

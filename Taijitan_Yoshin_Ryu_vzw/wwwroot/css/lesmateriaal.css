@@ -1,4 +1,21 @@
-﻿content-wrapper{
-    display: flex;
+﻿.lesmateriaalContent-wrapper {
+    display: flex; 
+    min-height: 100%;
+    top: 20vh;
+}
 
+.kyu-nav, .thema-nav
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.kyu-nav {
+    background: #e6e6e6;
+}
+
+.thema-nav {
+    background: #f2f2f2;
 }

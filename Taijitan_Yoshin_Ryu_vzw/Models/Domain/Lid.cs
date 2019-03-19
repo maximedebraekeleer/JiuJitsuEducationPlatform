@@ -10,7 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region Constructors
-        protected Lid() : base() {
+        public Lid() : base() {
 
         }
 

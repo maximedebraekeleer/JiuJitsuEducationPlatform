@@ -14,12 +14,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         [Required(ErrorMessage = "Geef een wachtwoord op.")]
         [DataType(DataType.Password)]
         public string Wachtwoord { get; set; }
+        public List<Lid> ExtraAanwezigen { get; }
 
-        public SessieViewModel(List<Lid> leden, Sessie sessie, List<Lid> aanwezigheden)
+        public SessieViewModel(List<Lid> leden, Sessie sessie, List<Lid> aanwezigheden, List<Lid> extraAanwezigen)
         {            
             Leden = leden;
             Sessie = sessie;
             AanwezigeLeden = aanwezigheden;
+            ExtraAanwezigen = extraAanwezigen;
         }                    
     }
 }

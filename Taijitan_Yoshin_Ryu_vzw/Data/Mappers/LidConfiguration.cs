@@ -8,6 +8,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
             #region Relaties
             builder.HasOne(t => t.Formule)
                 .WithMany(t => t.Leden);
+
+            builder.HasOne(t => t.Graad)
+                .WithMany();
             #endregion
         }
     }

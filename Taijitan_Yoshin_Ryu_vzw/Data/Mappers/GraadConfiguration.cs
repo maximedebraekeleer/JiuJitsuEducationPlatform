@@ -17,7 +17,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
             #endregion
 
             #region Primary Key
-            builder.HasKey(t => t.Id);
+            builder.HasKey(t => t.GraadId);
             #endregion
         }
     }

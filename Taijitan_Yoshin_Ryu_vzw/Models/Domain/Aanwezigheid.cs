@@ -9,6 +9,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         public int Id { get; set; } //Id is auto-increment
         public Lid Lid { get; set; }
         public Sessie Sessie { get; set; } //Relatie
+        public bool IsExtra { get; set; }
         #endregion
 
         #region Constructors
@@ -16,9 +17,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
 
         }
 
-        public Aanwezigheid(Lid lid, Sessie sessie) {
+        public Aanwezigheid(Lid lid, Sessie sessie, bool isExtra = false) {
             Lid = lid;
             Sessie = sessie;
+            IsExtra = isExtra;
         }
         #endregion
 

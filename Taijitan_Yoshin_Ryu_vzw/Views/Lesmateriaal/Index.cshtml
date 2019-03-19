@@ -1,49 +1,65 @@
-﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.LesmateriaalViewModel
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.LesmateriaalViewModels.LesmateriaalViewModel
 
 @{
     ViewData["Title"] = "Lesmateriaal";
 }
-@*@section AddCss {
-        <link rel="stylesheet" href="~/css/sessieStart.css" asp-append-version="true" />
-    }*@
-<div style="padding-top: 30px;">
-
-    <h3>Welkom @Model.HuidigLid.Voornaam @Model.HuidigLid.Naam</h3>
-
-    <ul>
-        @foreach (var graad in Model.Graden)
-        {
-            if (graad.GraadId <= Model.HuidigLid.Graad.GraadId)
-            {
-                <li>
-                    @graad.GraadNaam
-                    <ul>
-                        @foreach (var thema in graad.LesmateriaalThemas)
+@section AddCss {
+        <link rel="stylesheet" href="~/css/lesmateriaal.css" asp-append-version="true" />
+    }
+@section Scripts {
+        <script src="~/js/lesmateriaal.js"></script>
+}
+        <div class="lesmateriaalContent-wrapper">
+            <div class="kyu-nav col-lg-2">
+                <ul>
+                    @{
+                        foreach (var kyu in Model.Graden)
                         {
-                            <li>
-                                @thema.LesmateriaalThemaNaam
-                                <ul>
-                                    @foreach (var lesmateriaal in thema.Lesmaterialen)
-                                    {
-                                        <li>
-                                            @if (lesmateriaal.Graad == graad)
-                                            {
-                                                @lesmateriaal.InhoudTekst;
-                                            }
-                                        </li>
-                                    }
-                                </ul>
-                            </li>
+                            if (kyu.GraadId > Model.HuidigLid.Graad.GraadId)
+                            {
+                                <li class="kyu-locked" id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:"></div><span>@kyu.GraadNaam</span><i class="fas fa-lock"></i></li>
+                            }
+                            else
+                            {
+                                if (kyu.GraadId == Model.HuidigLid.Graad.GraadId)
+                                {
+                                    <li id="@kyu.GraadId" class="geselecteerdeKyu"><div class="kyu-kleur" style="background-color:"></div><span>@kyu.GraadNaam</span></li>
+                                }
+                                else
+                                {
+                                    <li id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:"></div><span>@kyu.GraadNaam</span></li>
+                                }
+                            }
                         }
-                    </ul>
-                </li>
-            }
-            else
-            {
-                <li style="color: red;">
-                    @graad.GraadNaam 🔒
-                </li>
-            }
-        }
-    </ul>
-</div>
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-2" id="thema-nav">
+                
+            </div>
+            <div class="lesmateriaal-wrapper col-lg-10">
+
+            </div>
+        </div>
+        <script>
+            $('document').ready(() => {
+                let url = '@Url.Action("ThemaView","Lesmateriaal", new { GraadId = "replace" })';
+                url = url.replace("replace", @Model.HuidigLid.Graad.GraadId);
+                $.get(url, {}, function (response) {
+                    $("#thema-nav").html(response);
+                });
+            });
+
+            $('.kyu-nav > ul > li').click((e) => {
+                let url = '@Url.Action("ThemaView","Lesmateriaal", new { GraadId = "replace" })';
+                url = url.replace("replace", e.target.id);
+                    $.get(url, {}, function (response) {
+                    $("#thema-nav").html(response);
+                });
+                $('.geselecteerdeKyu').removeClass('geselecteerdeKyu');
+                e.target.classList.add('geselecteerdeKyu');
+            });
+
+
+        </script>
+   

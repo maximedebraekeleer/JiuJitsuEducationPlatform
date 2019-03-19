@@ -11,15 +11,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         public List<Lid> Leden { get; }
         public List<Lid> AanwezigeLeden { get; set; }
         public Sessie Sessie { get; }
+        [Required(ErrorMessage = "Geef een wachtwoord op.")]
+        [DataType(DataType.Password)]
+        public string Wachtwoord { get; set; }
 
         public SessieViewModel(List<Lid> leden, Sessie sessie, List<Lid> aanwezigheden)
         {            
             Leden = leden;
             Sessie = sessie;
             AanwezigeLeden = aanwezigheden;
-        } 
-        
-
-        
+        }                    
     }
 }

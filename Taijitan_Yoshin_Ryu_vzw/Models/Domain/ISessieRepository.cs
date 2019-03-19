@@ -11,6 +11,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
 
         Sessie GetByDatumBeginUur(DateTime datumBeginUur);
         void Add(Sessie sessie);
+        void Remove(Sessie sessie);
         void SaveChanges();
     }
 }

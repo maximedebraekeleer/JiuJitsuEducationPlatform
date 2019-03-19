@@ -7,33 +7,39 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
 {
     public class Lesmateriaal
     {
-        #region properties
-
+        #region Properties
         public int Id { get; set; }
         public string InhoudTekst { get; set; }
         public string InhoudAfbeeldingen { get; set; }
         public string InhoudVideo { get; set; }
-
         #endregion
 
-        #region constructor
+        #region Relations
+        public Graad Graad { get; set; }
+        public LesmateriaalThema LesmateriaalThema { get; set; }
+        #endregion
 
-        public Lesmateriaal(string InhoudTekst, string InhoudAfbeeldingen, string InhoudVideo)
+        #region Constructor
+        protected Lesmateriaal()
         {
-            this.InhoudTekst = InhoudTekst;
-            this.InhoudAfbeeldingen = InhoudAfbeeldingen;
-            this.InhoudVideo = InhoudVideo;
+
         }
 
+        public Lesmateriaal(Graad graad, LesmateriaalThema lesmateriaalThema, string inhoudTekst, string inhoudAfbeeldingen, string inhoudVideo)
+        {
+            Graad = graad;
+            LesmateriaalThema = lesmateriaalThema;
+            InhoudTekst = inhoudTekst;
+            InhoudAfbeeldingen = inhoudAfbeeldingen;
+            InhoudVideo = inhoudVideo;
+        }
         #endregion
 
-        #region methods
-
+        #region Methods
         public ICollection<string> geefAlleAfbeeldingen()
         {
-            return this.InhoudAfbeeldingen.Split(',');
+            return InhoudAfbeeldingen.Split(',');
         }
-
         #endregion
     }
 }

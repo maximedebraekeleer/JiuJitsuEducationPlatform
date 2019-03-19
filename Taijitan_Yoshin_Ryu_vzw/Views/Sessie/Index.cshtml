@@ -31,17 +31,39 @@
                 }
             </ul>
             <div class="buttonPanel">
-                <form asp-controller="Gebruiker">
-                    <button>Cancel</button>
+                <button data-toggle="modal" data-target="#CancelModal">Cancel</button>
+                <form class="form-horizontal">
+                    <button asp-controller="Sessie" asp-action="RegistreerAanwezigheidNietInLijst">Lid toevoegen</button>
                 </form>
-                <button>Lid toevoegen</button>
-                <form asp-controller="Gebruiker">
-                    <button>Bevestigen</button>
+                <form>
+                    <button asp-controller="Gebruiker">Bevestigen</button>
                 </form>
             </div>
         </div>
-
-
+    </div>
+</div>
+<div class="modal fade" id="CancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLongTitle">Voer het wachtwoord in van @User.Identity.Name om de sessie te annuleren.</h4>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off" >
+                    <div class="form-group">
+                        <label asp-for="Wachtwoord"></label>
+                        <input asp-for="Wachtwoord" class="form-control" type="password" placeholder="Wachtwoord" required/>
+                        <span asp-validation-for="Wachtwoord" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button asp-controller="Sessie" asp-action="Cancel">Annuleer sessie</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <script>

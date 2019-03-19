@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
@@ -27,17 +28,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             //return View(GeefLeden(GeefFormules(trainingsmomenten)));
 
             //WERENDE VERSIE
-            Trainingsmoment trainingsMoment;            
-
-            //Donderdag wordt gekozen op localhost
-            if (HttpContext.Request.Host.Host.ToLower().Equals("localhost")) {
-                 trainingsMoment = _trainingsmomenten.getByDagNummer(4/*Donderdag*/).FirstOrDefault();
-            }
-            //Welk trainingsmomenten
-            else
-            {
-                trainingsMoment = _trainingsmomenten.getByDagNummer((int)DateTime.Today.DayOfWeek).FirstOrDefault();
-            }            
+            Trainingsmoment trainingsMoment = GeefTrainingsmomenten().FirstOrDefault();
+                      
             if (trainingsMoment == null)
             {
                 TempData["error"] = $"Er zijn vandaag geen sessies";
@@ -66,8 +58,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             GeefHuidigeSessie();
 
             Lid lid = (Lid)_gebruikers.GetByUserName(username);
-            if (_aanwezigheden.GetbyLid(lid).Any(a => a.Sessie == HuidigeSessie)) {
-                //TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";
+            Aanwezigheid aanwezigheid = _aanwezigheden.GetbyLid(lid).Where(a => a.Sessie == HuidigeSessie).FirstOrDefault();
+            if (aanwezigheid != null) {
+                //TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";                
+                _aanwezigheden.Remove(aanwezigheid);
+                _aanwezigheden.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             _aanwezigheden.Add(new Aanwezigheid(lid, HuidigeSessie));
@@ -76,13 +71,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult AanwezigLidNietInLijst()
+        public IActionResult RegistreerAanwezigheidNietInLijst()
         {
             return View();
         }
-        public IActionResult AanwezigGast()
+        
+        public IActionResult Cancel(string password)
         {
-            return View();
+            //var result = await _signing.PasswordSignInAsync(User.Identity.Name, password);
+            GeefHuidigeSessie();
+            _sessies.Remove(HuidigeSessie);
+            _sessies.SaveChanges();
+            TempData["error"] = $"De sessie is geannuleerd.";
+            return RedirectToAction(nameof(Lesgever), "Gebruiker");
         }
 
 
@@ -107,23 +108,18 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             HuidigeSessie = _sessies.GetByDatumBeginUur(datumBeginUur);
         }
 
-        //private List<Lid> GeefLeden(List<Formule> formules)
-        //{
-        //    List<Lid> leden = new List<Lid>();
-        //    formules.ForEach(f => leden.AddRange(_gebruikers.getLedenByFormule(f)));
-        //    return leden;
-        //}
-
-        //private List<Formule> GeefFormules(IEnumerable<Trainingsmoment> trainingsmomenten)
-        //{
-        //    List<Formule> formules2 = _formules.getByTrainingsmoment(trainingsmomenten.FirstOrDefault()).ToList();
-        //    List<Formule> formules = _formules.getAll().ToList();
-        //    return formules;
-        //}
-
         private IEnumerable<Trainingsmoment> GeefTrainingsmomenten()
         {
-            IEnumerable<Trainingsmoment> trainingsmomenten = _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek);
+            IEnumerable<Trainingsmoment> trainingsmomenten;
+            //Donderdag wordt gekozen op localhost, anders de huidige dag
+            if (HttpContext.Request.Host.Host.ToLower().Equals("localhost"))
+            {
+                trainingsmomenten = _trainingsmomenten.getByDagNummer(4/*Donderdag*/);
+            }
+            else {
+                trainingsmomenten = _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek);
+            }
+            
             return trainingsmomenten;
         }
     }

@@ -11,6 +11,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         public DbSet<Gebruiker> Gebruikers { get; set; }
         public DbSet<Sessie> Sessies { get; set; }
         public DbSet<Trainingsmoment> Trainingsmomenten { get; set; }
+        public DbSet<Graad> Graden { get; set; }
+        public DbSet<LesmateriaalThema> LesmateriaalThemas { get; set; }
+        public DbSet<Lesmateriaal> Lesmaterialen { get; set; }
         #endregion
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -33,11 +36,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
             builder.ApplyConfiguration(new SessieConfiguration());
             builder.ApplyConfiguration(new TrainingsmomentConfiguration());
 
+            builder.ApplyConfiguration(new GraadConfiguration());
+            builder.ApplyConfiguration(new LesmateriaalThemaConfiguration());
+            builder.ApplyConfiguration(new GraadLesmateriaalThemaConfiguration());
+            builder.ApplyConfiguration(new LesmateriaalConfiguration());
+
             //Ignores
             builder.Ignore<Beheerder>();
-            builder.Ignore<Graad>();
-            builder.Ignore<Lesmateriaal>();
-            builder.Ignore<LesmateriaalThema>();
         }
     }
 }

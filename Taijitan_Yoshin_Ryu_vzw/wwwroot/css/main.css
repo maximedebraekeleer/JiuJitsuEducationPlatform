@@ -21,14 +21,15 @@ button {
 
 .body-content {
     position: relative;
-    height: 95vh;
+    height: 100vh;
+    margin-top: 0vh;
 }
 
 .content-wrapper {
     position: absolute;
     min-width: 100%;
     left: 0;
-    top: 48%;
+    top: 45%;
     transform: translateY(-50%);
 }
 
@@ -71,10 +72,6 @@ button {
 
 .navbar-nav > .gebruikerEmail {
     line-height: 50px;
-}
-
-.index-wrapper{
-    margin-top: 20vh;
 }
 
 footer {

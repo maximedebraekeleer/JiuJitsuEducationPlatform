@@ -24,5 +24,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
                 .Include(f => f.GraadLesmateriaalThemas).ThenInclude(op => op.LesmateriaalThema)
                 .ThenInclude(t => t.Lesmaterialen).ToList();
         }
+
+        public Graad GetGraadWithId(int Graadid)
+        {
+            Graad graad = _graden.Where(g => g.GraadId == Graadid).Include(f => f.GraadLesmateriaalThemas).ThenInclude(op => op.LesmateriaalThema)
+                .ThenInclude(t => t.Lesmaterialen).First();
+            return graad;
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
     public interface IGraadRepository
     {
         IEnumerable<Graad> GetAll();
+        Graad GetGraadWithId(int graad);
     }
 }

@@ -82,10 +82,29 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
 
         public IActionResult RegistreerAanwezigNietInLijst()
         {
-            return View();
+            Trainingsmoment trainingsMoment = GeefTrainingsmomenten().FirstOrDefault();
+
+            if (trainingsMoment == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
+            MaakHuidigeSessie(trainingsMoment);
+
+            //Formules ophalen die deze trainingsmomenten bevatten
+            IList<Formule> formulesFiltered = _formules.getAll().Where(f => !f.bevatTrainingsmoment(trainingsMoment)).ToList();
+            List<Lid> ledenNietOpDag = new List<Lid>();
+            foreach (Formule f in formulesFiltered)
+            {
+                ledenNietOpDag.AddRange(f.Leden);
+            }
+
+            ledenNietOpDag.ToList();
+            return View(ledenNietOpDag);
         }
         public IActionResult RegistreerAanwezigGast()
         {
+            //Gastviewmodel wordt gebruikt
             return View();
         }
         [HttpPost]

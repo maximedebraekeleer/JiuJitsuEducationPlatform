@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
+namespace Taijitan_Yoshin_Ryu_vzw.Models.LesmateriaalViewModels
 {
     public class LesmateriaalViewModel
     {

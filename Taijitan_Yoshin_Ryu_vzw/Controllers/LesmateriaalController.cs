@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Taijitan_Yoshin_Ryu_vzw.Filters;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
-using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
+using Taijitan_Yoshin_Ryu_vzw.Models.LesmateriaalViewModels;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 {
@@ -18,10 +18,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             _graden = graden;
         }
 
+        public IActionResult ThemaView(int GraadId)
+        {
+            ViewBag.GeselecteerdeGraad = _graden.GetGraadWithId(GraadId);
+            return PartialView("~/Views/Lesmateriaal/Thema.cshtml");
+        }
+
         [ServiceFilter(typeof(GebruikerFilter))]
         public IActionResult Index(Gebruiker gebruiker)
         {
             return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
         }
+
     }
 }

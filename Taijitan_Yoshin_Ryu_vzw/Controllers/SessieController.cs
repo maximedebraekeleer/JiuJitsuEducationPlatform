@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
 
@@ -202,6 +203,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             }
             
             return trainingsmomenten;
+        }
+        [HttpPost]
+        public void AanwezigenToevoegen(string aanwezigen)
+        {
+            String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
+            GeefHuidigeSessie();
+            foreach (var a in aanwezig)
+            {
+                HuidigeSessie.voegAanwezigheidToe((Lid)_gebruikers.GetByUserName(a));
+            }
+            _sessies.SaveChanges();
         }
     }
 }

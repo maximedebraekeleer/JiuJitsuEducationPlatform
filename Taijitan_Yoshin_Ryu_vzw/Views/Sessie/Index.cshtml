@@ -6,53 +6,41 @@
 @section AddCss {
     <link rel="stylesheet" href="~/css/sessieStart.css" asp-append-version="true" />
 }
-    <div class="content-wrapper">        
-        <div class="sessie-wrapper">
-            <div class="sessie-content">
-                @if (TempData["error"] != null)
+<div class="content-wrapper">
+    <div class="sessie-wrapper">
+        <div class="sessie-content">
+            @if (TempData["error"] != null)
+            {
+                <div class="alert alert-error">@TempData["error"]</div>
+            }
+            <h3>Aanwezigheden - @Model.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</h3>
+
+            <ul class="ledenlijst">
+                @foreach (var item in Model.Leden)
                 {
-                    <div class="alert alert-error">@TempData["error"]</div>
+                    <li class="ledenlijstLid" id="@item.Username">
+                        @item.Voornaam @item.Naam - @item.Username
+                    </li>
                 }
-                <h3>Aanwezigheden - @Model.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</h3>
-
-                <ul class="ledenlijst">
-                    @foreach (var item in Model.Leden)
+                @if (Model.ExtraAanwezigen.Count > 0)
+                {
+                    <li><h5>Extra aanwezigheden</h5></li>
+                    foreach (var item in Model.ExtraAanwezigen)
                     {
-
-                        if (Model.AanwezigeLeden.Contains(item))
-                        {
-                            <li class="ledenlijstLid aanwezig">
-                                <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="ledenlijstLid">
-                                <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
-                            </li>
-                        }
+                        <li class="ledenlijstLid aanwezig" id="@item.Username">
+                            @item.Voornaam @item.Naam - @item.Username
+                        </li>
                     }
-                    @if (Model.ExtraAanwezigen.Count>0)
-                    {
-                        <li><h5>Extra aanwezigheden</h5></li>
-                        foreach (var item in Model.ExtraAanwezigen)
-                        {
-                            <li class="ledenlijstLid aanwezig">
-                                <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
-                            </li>
-                        }
-                    }                   
-                </ul>
-                <div class="buttonPanel">
-                    <button data-toggle="modal" data-target="#CancelModal">Cancel</button>
-                    <button data-toggle="modal" data-target="#NietInLijstModal">Lid toevoegen</button>
-                    <form>
-                        <button asp-controller="Gebruiker">Bevestigen</button>
-                    </form>
-                </div>
+                }
+            </ul>
+            <div class="buttonPanel">
+                <button data-toggle="modal" data-target="#CancelModal">Cancel</button>
+                <button data-toggle="modal" data-target="#NietInLijstModal">Lid toevoegen</button>
+                <button id="aanwezighedenBevestigen">Bevestigen</button>
             </div>
         </div>
     </div>
+</div>
 <div class="modal fade" id="CancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -100,16 +88,44 @@
     </div>
 </div>
 <script>
-    var leden = document.getElementsByClassName("ledenlijstLid");
 
-    for (var i = 0; i < leden.length; i++) {
-        leden[i].addEventListener('click', (e) => {
+    
+
+    
+
+    $('document').ready(() => {
+
+        var aanwezigen = [];
+
+        $('.ledenlijstLid').click((e) => {
             if (e.target.classList.contains('aanwezig')) {
                 e.target.classList.remove('aanwezig');
-            } else
+                aanwezigen = jQuery.grep(aanwezigen, (a) => {
+                    return a != e.target.id;
+                });
+            } else {
                 e.target.classList.add('aanwezig');
+                aanwezigen.push(e.target.id);
+            }
+            console.log(aanwezigen);
+
         });
-    }
+
+        $('#aanwezighedenBevestigen').click(() => {
+
+            console.log(JSON.stringify(aanwezigen));
+            $.ajax({
+                type: "POST",
+                url: "/Sessie/AanwezigenToevoegen",
+                data: {aanwezigen: JSON.stringify(aanwezigen)},
+                success: () => {
+                    console.log('finished');
+                }
+            });
+        });
+
+    });
+
     window.setTimeout(function () {
         $(".alert").fadeTo(500, 0).slideUp(500, function () {
             $(this).remove();

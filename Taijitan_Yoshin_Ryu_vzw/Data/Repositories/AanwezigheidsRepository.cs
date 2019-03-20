@@ -39,7 +39,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public IEnumerable<Aanwezigheid> GetbySessie(Sessie sessie)
         {
-            return _aanwezigheden.Where(a => a.Sessie == sessie).ToList();
+            return _aanwezigheden.Include(a => a.Lid).Where(a => a.Sessie == sessie).ToList();
         }
 
         public void Remove(Aanwezigheid aanwezigheid)

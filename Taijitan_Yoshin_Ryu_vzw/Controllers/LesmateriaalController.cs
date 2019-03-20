@@ -24,6 +24,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             return PartialView("~/Views/Lesmateriaal/Thema.cshtml");
         }
 
+        public IActionResult LesmateriaalView(string ThemaNaam, int GraadId)
+        {
+            ViewBag.ThemaNaam = ThemaNaam;
+            
+            return PartialView("~/Views/Lesmateriaal/LesmateriaalHead.cshtml");
+        }
+
+        public IActionResult LesmateriaalView(string ThemaNaam, int GraadId, int LesmateriaalId)
+        {
+            ViewBag.Lesmaterialen = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
+            return PartialView("~/Views/Lesmateriaal/Lesmateriaal.cshtml");
+        }
+
         [ServiceFilter(typeof(GebruikerFilter))]
         public IActionResult Index(Gebruiker gebruiker)
         {

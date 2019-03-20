@@ -1,8 +1,19 @@
 ﻿@model Taijitan_Yoshin_Ryu_vzw.Models.LesmateriaalViewModels.LesmateriaalViewModel
 
 <ul>
-    @foreach (var thema in ViewBag.GeselecteerdeGraad.LesmateriaalThemas)
-    {
-        <li>@thema.LesmateriaalThemaNaam</li>
+    @{
+        int counter = 0;
+        foreach (var thema in ViewBag.GeselecteerdeGraad.LesmateriaalThemas)
+        {
+            if (counter == 0)
+            {
+                <li class="geselecteerdThema">@thema.LesmateriaalThemaNaam</li>
+            }
+            else
+            {
+                <li>@thema.LesmateriaalThemaNaam</li>
+            }
+            counter++;
+        }
     }
 </ul>

@@ -1,7 +1,15 @@
-﻿body {
+﻿html{
     height: 100%;
-    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100vw;
     padding: 0;
+    margin: 0;
+}
+
+.navbar{
     margin: 0;
 }
 
@@ -20,9 +28,9 @@ button {
     }
 
 .body-content {
-    position: relative;
-    height: 100vh;
-    margin-top: 0vh;
+    display: block;
+    height: 100%;
+    padding-top: 50px;
 }
 
 .content-wrapper {

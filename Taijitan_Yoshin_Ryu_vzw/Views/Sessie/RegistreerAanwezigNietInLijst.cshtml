@@ -1,0 +1,28 @@
+﻿@model List<Taijitan_Yoshin_Ryu_vzw.Models.Domain.Lid>
+@{
+    ViewData["Title"] = "RegistreerAanwezigNietInLijst";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section AddCss {
+    <link rel="stylesheet" href="~/css/sessieStart.css" asp-append-version="true" />
+}
+<div class="content-wrapper">
+    <div class="sessie-wrapper">
+        <div class="sessie-content">
+            @if (TempData["error"] != null)
+            {
+                <div class="alert alert-error">@TempData["error"]</div>
+            }
+            <h3>Aanwezigheden - Leden die vandaag geen les hebben</h3>
+
+            <ul class="ledenlijst">
+                @foreach (var item in Model)
+                {
+                    <li class="ledenlijstLid aanwezig">
+                        <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

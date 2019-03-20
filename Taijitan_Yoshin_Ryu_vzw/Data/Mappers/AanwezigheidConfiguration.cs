@@ -22,6 +22,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers {
                 .WithMany(t => t.Aanwezigheden)
                 .OnDelete(DeleteBehavior.Restrict);
             #endregion
+            #region properties
+            builder.Property(a => a.IsExtra).IsRequired();
+            #endregion
         }
     }
 }

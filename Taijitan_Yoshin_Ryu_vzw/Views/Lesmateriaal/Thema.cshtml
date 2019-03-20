@@ -1,0 +1,8 @@
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.LesmateriaalViewModels.LesmateriaalViewModel
+
+<ul>
+    @foreach (var thema in ViewBag.GeselecteerdeGraad.LesmateriaalThemas)
+    {
+        <li>@thema.LesmateriaalThemaNaam</li>
+    }
+</ul>

@@ -1,4 +1,72 @@
-﻿content-wrapper{
-    display: flex;
-
+﻿.lesmateriaalContent-wrapper {
+    display: flex; 
+    min-height: 100%;
+    margin-top: 6.9vh;
 }
+
+.kyu-nav, .thema-nav
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 0;
+}
+
+.kyu-kleur{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: red;
+    display: inline-block;
+    pointer-events: none;
+}
+
+    .kyu-nav > ul, #thema-nav > ul{
+        margin-top: 5vh;
+        list-style: none;
+        width: 100%;
+        padding: 0;
+    }
+
+        .kyu-nav > ul > li, #thema-nav > ul > li{
+            padding: 15px 0 15px 0;
+            text-align: left;
+            display: flex;
+            padding-left: 27.5%;
+            line-height: 120%;
+        }
+
+            .kyu-nav > ul > li.kyu-locked:hover {
+                cursor: default;
+                background-color: rgba(0,0,0,0);
+            }
+
+        .kyu-nav > ul > li > span{
+            margin: 0 10px 0 10px;
+            pointer-events: none;
+        }
+
+            .kyu-nav > ul > li:hover {
+                background-color: #d9d9d9;
+                cursor: pointer;
+            }
+
+            .kyu-nav {
+                background: #e6e6e6;
+            }
+
+.geselecteerdeKyu {
+    background-color: #d9d9d9;
+}
+
+#thema-nav {
+    background: #f2f2f2;
+    padding: 0;
+}
+
+    #thema-nav > ul > li:hover {
+        cursor: pointer;
+        background-color: #e5e5e5;
+    }
+

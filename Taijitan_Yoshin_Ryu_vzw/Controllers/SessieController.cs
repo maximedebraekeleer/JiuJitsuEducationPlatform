@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
 
@@ -15,13 +16,18 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
         private readonly IAanwezigheidRepository _aanwezigheden;
         private readonly ISessieRepository _sessies;
         private Sessie HuidigeSessie;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public SessieController(IFormuleRepository formules, ITrainingsmomentRepository trainingsmomenten, IGebruikerRepository gebruikers, IAanwezigheidRepository aanwezigheden, ISessieRepository sessieRepository) {
+        public SessieController(IFormuleRepository formules, ITrainingsmomentRepository trainingsmomenten, IGebruikerRepository gebruikers, IAanwezigheidRepository aanwezigheden, ISessieRepository sessieRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        {
             _formules = formules;
             _trainingsmomenten = trainingsmomenten;
             _gebruikers = gebruikers;
             _aanwezigheden = aanwezigheden;
             _sessies = sessieRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
         public IActionResult Index() {
             IEnumerable<Trainingsmoment> trainingsmomenten = GeefTrainingsmomenten();
@@ -50,8 +56,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
 
             List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(HuidigeSessie).Select(l => l.Lid).ToList();
 
+            IEnumerable<Aanwezigheid> SessieAanwezigheden = _aanwezigheden.GetbySessie(HuidigeSessie);
+            IEnumerable<Aanwezigheid> extraAanwezigheden = SessieAanwezigheden.Where(a => a.IsExtra == true);
+            List<Lid> leden = extraAanwezigheden.Select(l => l.Lid).ToList();
+
             //Gefilterde leden teruggeven
-            return View(new SessieViewModel(ledenOpdag, HuidigeSessie, aanwezigeLeden));
+            return View(new SessieViewModel(ledenOpdag, HuidigeSessie, aanwezigeLeden, leden));
         }
 
         public IActionResult RegistreerAanwezigheid(string username) {
@@ -71,19 +81,91 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult RegistreerAanwezigheidNietInLijst()
+        public IActionResult RegistreerAanwezigNietInLijst()
         {
+            Trainingsmoment trainingsMoment = GeefTrainingsmomenten().FirstOrDefault();
+
+            if (trainingsMoment == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
+            MaakHuidigeSessie(trainingsMoment);
+
+            //Formules ophalen die deze trainingsmomenten bevatten
+            IList<Formule> formulesFiltered = _formules.getAll().Where(f => !f.bevatTrainingsmoment(trainingsMoment)).ToList();
+            List<Lid> ledenNietOpDag = new List<Lid>();
+            foreach (Formule f in formulesFiltered)
+            {
+                ledenNietOpDag.AddRange(f.Leden);
+            }
+
+            ledenNietOpDag.ToList();
+            return View(ledenNietOpDag);
+        }
+        public IActionResult RegistreerAanwezigGast()
+        {
+            //Gastviewmodel wordt gebruikt
             return View();
         }
-        
-        public IActionResult Cancel(string password)
+        [HttpPost]
+        public IActionResult RegistreerAanwezigGast(GastViewModel gvm)
         {
-            //var result = await _signing.PasswordSignInAsync(User.Identity.Name, password);
-            GeefHuidigeSessie();
-            _sessies.Remove(HuidigeSessie);
-            _sessies.SaveChanges();
-            TempData["error"] = $"De sessie is geannuleerd.";
-            return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    GeefHuidigeSessie();
+                    Lid gast = new Lid
+                    {
+                        Username = gvm.Username,
+                        Email = gvm.Email,
+                        Naam = gvm.Naam,
+                        Voornaam = gvm.Voornaam,
+                        GeboorteDatum = gvm.GeboorteDatum,
+                        GeboorteLand = gvm.GeboorteLand,
+                        GeboorteStad = gvm.GeboorteStad,
+                        Straat = gvm.Straat,
+                        HuisNummer = gvm.HuisNummer,
+                        Gemeente = gvm.Gemeente,
+                        Postcode = gvm.Postcode,
+                        TelefoonNummer = gvm.TelefoonNummer,
+                        GsmNummer = gvm.GsmNummer,
+                        EmailOuders = gvm.EmailOuders,
+                    };
+                    _gebruikers.Add(gast);
+                    _gebruikers.SaveChanges();                    
+                    _aanwezigheden.Add(new Aanwezigheid(gast, HuidigeSessie, true));
+                    _aanwezigheden.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return new EmptyResult();
+        }
+        
+
+        public async System.Threading.Tasks.Task<IActionResult> CancelAsync(string Wachtwoord)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, Wachtwoord, lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                GeefHuidigeSessie();
+                _sessies.Remove(HuidigeSessie);
+                _sessies.SaveChanges();
+                TempData["error"] = $"De sessie is geannuleerd.";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }            
+            else
+            {
+                TempData["error"] = $"Fout wachtwoord, de sessie werd niet geannuleerd.";
+                return RedirectToAction(nameof(Index));
+            }
+            
         }
 
 
@@ -94,7 +176,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
 
             if (!_sessies.GetAll().Any(x => x.BeginDatumEnTijd == datumBeginUur)) {
                 HuidigeSessie = new Sessie(datumBeginUur, datumEindUur, sensei);
-                _sessies.Add(HuidigeSessie);
+                _sessies.Add(HuidigeSessie); 
                 _sessies.SaveChanges();
             }
             else {
@@ -121,6 +203,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             }
             
             return trainingsmomenten;
+        }
+        [HttpPost]
+        public void AanwezigenToevoegen(string aanwezigen)
+        {
+            String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
+            GeefHuidigeSessie();
+            foreach (var a in aanwezig)
+            {
+                HuidigeSessie.voegAanwezigheidToe((Lid)_gebruikers.GetByUserName(a));
+            }
+            _sessies.SaveChanges();
         }
     }
 }

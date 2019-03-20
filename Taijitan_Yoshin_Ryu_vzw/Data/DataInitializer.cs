@@ -133,32 +133,32 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 await CreateUser(lid2.Username, lid2.Email, "P@ssword1", "lid");
 
                 //--Leden zonder login
-                Gebruiker lid3 = new Lid("Lid3", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
+                Gebruiker lid3 = new Lid("Lid0003", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
                     new DateTime(1997, 11, 05), "België", "Beerle", "Molenstraat", "8", "Verdegem", "1234",
                     "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "pol@ouders.com", true, false, 
                     ZA, kyu4);
 
-                Gebruiker lid4 = new Lid("Lid4", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
+                Gebruiker lid4 = new Lid("Lid0004", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "mark@ouders.com", true, false, 
                     DI_DO, kyu4);
 
-                Gebruiker lid5 = new Lid("Lid5", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
+                Gebruiker lid5 = new Lid("Lid0005", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "louis@ouders.com", true, false, 
                     DI_DO, kyu4);
 
-                Gebruiker lid6 = new Lid("Lid6", "Lid6@gmail.com", "Van Onderen", "Justine", 'v',
+                Gebruiker lid6 = new Lid("Lid0006", "Lid6@gmail.com", "Van Onderen", "Justine", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "justine@ouders.com", true, false, 
                     DI_DO, kyu3);
 
-                Gebruiker lid7 = new Lid("Lid7", "Lid6@gmail.com", "Van Onderen", "Sien", 'v',
+                Gebruiker lid7 = new Lid("Lid0007", "Lid6@gmail.com", "Van Onderen", "Sien", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, 
                     DI_DO, kyu5);
 
-                Gebruiker lid8 = new Lid("Lid8", "Lid8@gmail.com", "Van Schuinen", "Neeri", 'm',
+                Gebruiker lid8 = new Lid("Lid0008", "Lid8@gmail.com", "Van Schuinen", "Neeri", 'm',
                     new DateTime(1960, 08, 05), "Duitsland", "Passichi", "Jiaefestraat", "8", "Verdegem", "1234",
                     "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "sien@ouders.com", true, false, 
                     DI_DO, kyu5);

@@ -24,7 +24,8 @@
                 }
                 @if (Model.ExtraAanwezigen.Count > 0)
                 {
-                    <li><h5>Extra aanwezigheden</h5></li>
+                    <p>---------</p>
+                    <h5>Extra aanwezigheden</h5>
                     foreach (var item in Model.ExtraAanwezigen)
                     {
                         <li class="ledenlijstLid aanwezig" id="@item.Username">
@@ -37,6 +38,7 @@
                 <button data-toggle="modal" data-target="#CancelModal">Cancel</button>
                 <button data-toggle="modal" data-target="#NietInLijstModal">Lid toevoegen</button>
                 <button id="aanwezighedenBevestigen">Bevestigen</button>
+                
             </div>
         </div>
     </div>
@@ -120,8 +122,9 @@
                 data: {aanwezigen: JSON.stringify(aanwezigen)},
                 success: () => {
                     console.log('finished');
-                }
-            });
+                    window.location.href = "/Sessie/SessieAanwezigen/";
+                }                
+            }); 
         });
 
     });

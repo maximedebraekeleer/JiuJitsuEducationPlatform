@@ -35,9 +35,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Formule WO_ZA = new Formule("WO_ZA");
                 Formule WO = new Formule("WO");
                 Formule ZA = new Formule("ZA");
+                Formule gast = new Formule("gast");
 
                 var formules = new List<Formule> {
-                    DI_DO, DI_ZA, WO_ZA, WO, ZA
+                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast
                 };
                 _dbContext.Formules.AddRange(formules);
 

@@ -1,0 +1,23 @@
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.AanwezigenViewModel
+
+@{
+    ViewData["Title"] = "Aanwezigen sessie";
+}
+@section AddCss {
+    <link rel="stylesheet" href="~/css/sessieStart.css" asp-append-version="true" />
+}
+<div class="content-wrapper">
+    <div class="sessie-wrapper">
+        <div class="sessie-content">
+            <h3>Aanwezige leden</h3>
+            <ul class="ledenlijst">
+                @foreach (var item in Model.AanwezigeLeden)
+                {
+                    <li class="ledenlijstLid">
+                        <a asp-controller="Lesmateriaal" asp-action="Index" @*asp-route-username="@item.Username"*@>@item.Voornaam @item.Naam</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -126,10 +126,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
                         gvm.HuisNummer,
                         gvm.Gemeente,
                         gvm.Postcode,
-                        gvm.TelefoonNummer,
-                        gvm.GsmNummer,
-                        "00000000000",
-                        DateTime.Now,
+                        "+3291112211",
+                        "0470055701",
+                        "96032732925",
+                        DateTime.Today,
                         gvm.EmailOuders,
                         false,
                         false,
@@ -146,11 +146,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
                     return RedirectToAction(nameof(Index));   
         }
         
-
-        public async System.Threading.Tasks.Task<IActionResult> CancelAsync(string Wachtwoord)
+        [HttpPost]
+        public async System.Threading.Tasks.Task<IActionResult> CancelAsync(SessieViewModel svm)
         {
             var user = await _userManager.GetUserAsync(User);
-            var result = await _signInManager.CheckPasswordSignInAsync(user, Wachtwoord, lockoutOnFailure: false);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, svm.Wachtwoord, lockoutOnFailure: false);
             if (result.Succeeded)
             {
                 GeefHuidigeSessie();

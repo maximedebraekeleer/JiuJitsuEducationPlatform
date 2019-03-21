@@ -53,14 +53,14 @@
                 <h4 class="modal-title" id="exampleModalLongTitle">Voer het wachtwoord in van @User.Identity.Name om de sessie te annuleren.</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form asp-controller="Sessie" asp-action="CancelAsync">
                     <div class="form-group">
                         <label asp-for="Wachtwoord"></label>
                         <input asp-for="Wachtwoord" class="form-control" type="password" placeholder="Wachtwoord" required />
                         <span asp-validation-for="Wachtwoord" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <button asp-controller="Sessie" asp-action="CancelAsync">Annuleer sessie</button>
+                        <button type="submit">Annuleer sessie</button>
                     </div>
                 </form>
             </div>

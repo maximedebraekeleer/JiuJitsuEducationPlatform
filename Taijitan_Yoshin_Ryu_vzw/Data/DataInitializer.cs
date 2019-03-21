@@ -182,6 +182,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
 
                 _dbContext.Gebruikers.AddRange(gebruikers);
 
+                //--Commentaar
+                _dbContext.Commentaren.Add(new Commentaar("nieuwe comment", (Lid)lid1, null));
+                _dbContext.Commentaren.Add(new Commentaar("nog een comment", (Lid)lid1, null));
+                _dbContext.Commentaren.Add(new Commentaar("derde comment", (Lid)lid2, null));
+                _dbContext.Commentaren.Add(new Commentaar("vierde comment", (Lid)lid1, null));
+
                 //Alles opslaan
                 _dbContext.SaveChanges();
             }

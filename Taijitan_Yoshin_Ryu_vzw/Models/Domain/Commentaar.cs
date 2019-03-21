@@ -31,7 +31,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         }
         #endregion
         #region Methods
-
+        public void markeerGezien()
+        {
+            IsNew = false;
+        }
         #endregion
     }
 }

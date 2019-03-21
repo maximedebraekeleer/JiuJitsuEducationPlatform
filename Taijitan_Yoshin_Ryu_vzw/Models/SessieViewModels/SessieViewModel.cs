@@ -22,6 +22,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
             Sessie = sessie;
             AanwezigeLeden = aanwezigheden;
             ExtraAanwezigen = extraAanwezigen;
-        }                    
+        }
+        public SessieViewModel()
+        {
+
+        }
     }
 }

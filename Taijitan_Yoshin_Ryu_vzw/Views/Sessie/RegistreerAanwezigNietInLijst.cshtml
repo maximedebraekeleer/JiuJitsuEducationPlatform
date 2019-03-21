@@ -1,4 +1,4 @@
-﻿@model List<Taijitan_Yoshin_Ryu_vzw.Models.Domain.Lid>
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.andereLedenViewModel
 @{
     ViewData["Title"] = "RegistreerAanwezigNietInLijst";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,11 +16,21 @@
             <h3>Aanwezigheden - Leden die vandaag geen les hebben</h3>
 
             <ul class="ledenlijst">
-                @foreach (var item in Model)
+                @foreach (var item in Model.LedenNietOpDag)
                 {
-                    <li class="ledenlijstLid aanwezig">
-                        <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
-                    </li>
+
+                    if (Model.Aanwezigheden.Contains(item))
+                    {
+                        <li class="ledenlijstLid aanwezig">
+                            <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="ledenlijstLid">
+                            <a asp-controller="Sessie" asp-action="RegistreerAanwezigheid" asp-route-username="@item.Username">@item.Voornaam @item.Naam</a>
+                        </li>
+                    }
                 }
             </ul>
         </div>

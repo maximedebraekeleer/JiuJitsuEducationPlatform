@@ -1,7 +1,6 @@
 ﻿.lesmateriaalContent-wrapper {
     display: flex; 
-    min-height: 100%;
-    margin-top: 6.9vh;
+    min-height: 100%;  
 }
 
 .kyu-nav, .thema-nav
@@ -70,3 +69,22 @@
         background-color: #e5e5e5;
     }
 
+.geselecteerdThema {
+    background-color: #e5e5e5;
+}
+
+.lesmateriaal-wrapper{
+        margin-top: 5vh;
+}
+
+.lesmateriaal-wrapper > .dropdown > button{
+    margin: 0 !important;
+}
+
+div.dropdown-menu{
+    flex-direction: column;
+}
+
+.open > .dropdown-menu {
+    display: flex;
+}

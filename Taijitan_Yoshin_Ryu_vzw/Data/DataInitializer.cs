@@ -35,9 +35,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 Formule WO_ZA = new Formule("WO_ZA");
                 Formule WO = new Formule("WO");
                 Formule ZA = new Formule("ZA");
+                Formule gast = new Formule("gast");
 
                 var formules = new List<Formule> {
-                    DI_DO, DI_ZA, WO_ZA, WO, ZA
+                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast
                 };
                 _dbContext.Formules.AddRange(formules);
 
@@ -97,8 +98,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
                 dan5.AddLesmateriaalThema(thema2, thema3);
 
                 //3-Lesmateriaal toevoegen
-                Lesmateriaal lm1 = new Lesmateriaal(kyu1, thema1, "Lesmateriaal 1", "FOTO", "VIDEO");
-                Lesmateriaal lm2 = new Lesmateriaal(kyu1, thema2, "Lesmateriaal 2", "FOTO", "VIDEO");
+                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "FOTO", "leuner_zijwaarts_1");
+                Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "FOTO", "leuner_zijwaarts_2");
                 Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "FOTO", "VIDEO");
                 Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "FOTO", "VIDEO");
                 Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "FOTO", "VIDEO");

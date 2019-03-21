@@ -55,13 +55,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             ledenOpdag.ToList();
 
             List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(HuidigeSessie).Select(l => l.Lid).ToList();
-
-            IEnumerable<Aanwezigheid> SessieAanwezigheden = _aanwezigheden.GetbySessie(HuidigeSessie);
-            IEnumerable<Aanwezigheid> extraAanwezigheden = SessieAanwezigheden.Where(a => a.IsExtra == true);
-            List<Lid> leden = extraAanwezigheden.Select(l => l.Lid).ToList();
+            List<Lid> andereLeden =  _aanwezigheden.GetbySessie(HuidigeSessie).Where(a => a.IsExtra).Select(l => l.Lid).ToList();
 
             //Gefilterde leden teruggeven
-            return View(new SessieViewModel(ledenOpdag, HuidigeSessie, aanwezigeLeden, leden));
+            return View(new SessieViewModel(ledenOpdag, HuidigeSessie, aanwezigeLeden, andereLeden));
         }
 
         public IActionResult RegistreerAanwezigheid(string username) {
@@ -75,7 +72,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
                 _aanwezigheden.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            _aanwezigheden.Add(new Aanwezigheid(lid, HuidigeSessie));
+            _aanwezigheden.Add(new Aanwezigheid(lid, HuidigeSessie, true));
             _aanwezigheden.SaveChanges();
             //TempData["message"] = $"{lid.Voornaam}{lid.Naam} is succesvol geregistreerd als aanwezig.";
             return RedirectToAction(nameof(Index));
@@ -92,7 +89,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             }
             MaakHuidigeSessie(trainingsMoment);
 
-            //Formules ophalen die deze trainingsmomenten bevatten
+            //Formules ophalen die deze trainingsmomenten niet bevatten
             IList<Formule> formulesFiltered = _formules.getAll().Where(f => !f.bevatTrainingsmoment(trainingsMoment)).ToList();
             List<Lid> ledenNietOpDag = new List<Lid>();
             foreach (Formule f in formulesFiltered)
@@ -101,7 +98,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             }
 
             ledenNietOpDag.ToList();
-            return View(ledenNietOpDag);
+            List<Lid> extraAanwezigheden = _aanwezigheden.GetbySessie(HuidigeSessie).Where(a => a.IsExtra).Select(l => l.Lid).ToList();
+            return View(new andereLedenViewModel(ledenNietOpDag, extraAanwezigheden));
         }
         public IActionResult RegistreerAanwezigGast()
         {
@@ -111,40 +109,41 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
         [HttpPost]
         public IActionResult RegistreerAanwezigGast(GastViewModel gvm)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
+                return View();
+            }          
                     GeefHuidigeSessie();
-                    Lid gast = new Lid
-                    {
-                        Username = gvm.Username,
-                        Email = gvm.Email,
-                        Naam = gvm.Naam,
-                        Voornaam = gvm.Voornaam,
-                        GeboorteDatum = gvm.GeboorteDatum,
-                        GeboorteLand = gvm.GeboorteLand,
-                        GeboorteStad = gvm.GeboorteStad,
-                        Straat = gvm.Straat,
-                        HuisNummer = gvm.HuisNummer,
-                        Gemeente = gvm.Gemeente,
-                        Postcode = gvm.Postcode,
-                        TelefoonNummer = gvm.TelefoonNummer,
-                        GsmNummer = gvm.GsmNummer,
-                        EmailOuders = gvm.EmailOuders,
-                    };
+                    Lid gast = new Lid(gvm.Username,
+                        gvm.Email,
+                       gvm.Naam,
+                       gvm.Voornaam,
+                       'm',
+                       gvm.GeboorteDatum,                       
+                       gvm.GeboorteLand,
+                        gvm.GeboorteStad,
+                        gvm.Straat,
+                        gvm.HuisNummer,
+                        gvm.Gemeente,
+                        gvm.Postcode,
+                        gvm.TelefoonNummer,
+                        gvm.GsmNummer,
+                        "00000000000",
+                        DateTime.Now,
+                        gvm.EmailOuders,
+                        false,
+                        false,
+                        _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),    
+                        new Graad(0, "gast")
+                        );
+                   
                     _gebruikers.Add(gast);
-                    _gebruikers.SaveChanges();                    
+                    _gebruikers.SaveChanges();
+
                     _aanwezigheden.Add(new Aanwezigheid(gast, HuidigeSessie, true));
                     _aanwezigheden.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    ModelState.AddModelError("", e.Message);
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return new EmptyResult();
+
+                    return RedirectToAction(nameof(Index));   
         }
         
 
@@ -210,10 +209,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
             String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
             GeefHuidigeSessie();
             foreach (var a in aanwezig)
-            {
+            {                
                 HuidigeSessie.voegAanwezigheidToe((Lid)_gebruikers.GetByUserName(a));
             }
-            _sessies.SaveChanges();
+            _sessies.SaveChanges();                        
+        }
+        public IActionResult SessieAanwezigen() {
+            GeefHuidigeSessie();
+            List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(HuidigeSessie).Select(l => l.Lid).ToList();
+            return View(new AanwezigenViewModel(aanwezigeLeden));
+            
         }
     }
 }

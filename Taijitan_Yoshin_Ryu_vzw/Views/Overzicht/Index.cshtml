@@ -9,11 +9,13 @@
             <tr>
                 <th>Lid</th>
                 <th>Sessie</th>
+                <th>Reguliere aanwezigheid</th>
             </tr>
             @foreach (var item in Model) {
                 <tr>
                     <td>@item.Lid.Voornaam @item.Lid.Naam</td>
                     <td>@item.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@(item.IsExtra ? "Nee" : "Ja";) </td>
                 </tr>
             }
         </table>

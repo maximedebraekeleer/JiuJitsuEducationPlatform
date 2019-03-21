@@ -17,6 +17,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         #region Relations
         public Graad Graad { get; set; }
         public LesmateriaalThema LesmateriaalThema { get; set; }
+        public ICollection<Commentaar> Commentaren { get; set; }
         #endregion
 
         #region Constructor

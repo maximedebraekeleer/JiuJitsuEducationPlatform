@@ -8,12 +8,12 @@ using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
 {
-    public class LesmateriaalConfiguration : IEntityTypeConfiguration<Lesmateriaal>
+    public class CommentaarConfiguration : IEntityTypeConfiguration<Commentaar>
     {
-        public void Configure(EntityTypeBuilder<Lesmateriaal> builder)
+        public void Configure(EntityTypeBuilder<Commentaar> builder)
         {
             #region Table
-            builder.ToTable("Lesmateriaal");
+            builder.ToTable("Commentaar");
             #endregion
 
             #region Primary Key
@@ -21,14 +21,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Mappers
             #endregion
 
             #region Relations
-            builder.HasOne(t => t.Graad)
-                .WithMany();
+            builder.HasOne(c => c.Lesmateriaal)
+                .WithMany(lm => lm.Commentaren);
 
-            builder.HasOne(t => t.LesmateriaalThema)
-                .WithMany(lt => lt.Lesmaterialen);
-
-            builder.HasMany(l => l.Commentaren)
-                .WithOne(c => c.Lesmateriaal);
+            builder.HasOne(c => c.Lid);
             #endregion
         }
     }

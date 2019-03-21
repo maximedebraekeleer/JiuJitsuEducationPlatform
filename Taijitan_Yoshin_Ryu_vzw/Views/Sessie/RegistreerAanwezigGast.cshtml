@@ -1,90 +1,90 @@
 ﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.GastViewModel
 @{
-    ViewData["Title"] = "ViewRegistreerAanwezigGast";
+    ViewData["Title"] = "Registreer aanwezigheid gast";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>ViewRegistreerAanwezigGast</h2>
-        <form id="profile-form" method="post">
-            <div class="form-content">
-                <div class="form-divider">
-                    <div class="form-group">
-                            <label asp-for="Username"></label>
-                            <input asp-for="Username" class="form-control" />
-                            <span asp-validation-for="Username" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Voornaam"></label>
-                        <input asp-for="Voornaam" class="form-control" />
-                        <span asp-validation-for="Voornaam" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Naam"></label>
-                        <input asp-for="Naam" class="form-control" />
-                        <span asp-validation-for="Naam" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="GeboorteDatum"></label>
-                        <input asp-for="GeboorteDatum" class="form-control" />
-                        <span asp-validation-for="GeboorteDatum" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="GeboorteLand"></label>
-                        <input asp-for="GeboorteLand" class="form-control" />
-                        <span asp-validation-for="GeboorteLand" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="GeboorteStad"></label>
-                        <input asp-for="GeboorteStad " class="form-control"/>
-                        <span asp-validation-for="GeboorteStad" class="text-danger"></span>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label asp-for="Straat"></label>
-                        <input asp-for="Straat" class="form-control" />
-                        <span asp-validation-for="Straat" class="text-danger"></span>
-                    </div>
+<div style="padding: 5vw 7vw">
+    <h2>Registreer aanwezigheid gast</h2>
+    <form id="profile-form" method="post">
+        <div class="form-content">
+            <div class="form-divider">
+                <div class="form-group">
+                    <label asp-for="Username"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
-                <div class="form-divider">
-                    <div class="form-group">
-                        <label asp-for="HuisNummer"></label>
-                        <input asp-for="HuisNummer" class="form-control" />
-                        <span asp-validation-for="HuisNummer" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Gemeente"></label>
-                        <input asp-for="Gemeente" class="form-control" />
-                        <span asp-validation-for="Gemeente" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Postcode"></label>
-                        <input asp-for="Postcode" class="form-control" />
-                        <span asp-validation-for="Postcode" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="TelefoonNummer"></label>
-                        <input asp-for="TelefoonNummer" class="form-control" />
-                        <span asp-validation-for="TelefoonNummer" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="GsmNummer"></label>
-                        <input asp-for="GsmNummer" class="form-control" />
-                        <span asp-validation-for="GsmNummer" class="text-danger"></span>
-                    </div>                    
-                    <div class="form-group">
-                        <label asp-for="EmailOuders"></label>
-                        <input asp-for="EmailOuders" class="form-control" />
-                        <span asp-validation-for="EmailOuders" class="text-danger"></span>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Voornaam"></label>
+                    <input asp-for="Voornaam" class="form-control" />
+                    <span asp-validation-for="Voornaam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Naam"></label>
+                    <input asp-for="Naam" class="form-control" />
+                    <span asp-validation-for="Naam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GeboorteDatum"></label>
+                    <input asp-for="GeboorteDatum" class="form-control" />
+                    <span asp-validation-for="GeboorteDatum" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GeboorteLand"></label>
+                    <input asp-for="GeboorteLand" class="form-control" />
+                    <span asp-validation-for="GeboorteLand" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GeboorteStad"></label>
+                    <input asp-for="GeboorteStad " class="form-control" />
+                    <span asp-validation-for="GeboorteStad" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Straat"></label>
+                    <input asp-for="Straat" class="form-control" />
+                    <span asp-validation-for="Straat" class="text-danger"></span>
                 </div>
             </div>
-            
-            <button type="submit">Registreer</button>
-        </form>
-   
+            <div class="form-divider">
+                <div class="form-group">
+                    <label asp-for="HuisNummer"></label>
+                    <input asp-for="HuisNummer" class="form-control" />
+                    <span asp-validation-for="HuisNummer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gemeente"></label>
+                    <input asp-for="Gemeente" class="form-control" />
+                    <span asp-validation-for="Gemeente" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Postcode"></label>
+                    <input asp-for="Postcode" class="form-control" />
+                    <span asp-validation-for="Postcode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TelefoonNummer"></label>
+                    <input asp-for="TelefoonNummer" class="form-control" />
+                    <span asp-validation-for="TelefoonNummer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GsmNummer"></label>
+                    <input asp-for="GsmNummer" class="form-control" />
+                    <span asp-validation-for="GsmNummer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailOuders"></label>
+                    <input asp-for="EmailOuders" class="form-control" />
+                    <span asp-validation-for="EmailOuders" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit">Registreer</button>
+    </form>
+</div>

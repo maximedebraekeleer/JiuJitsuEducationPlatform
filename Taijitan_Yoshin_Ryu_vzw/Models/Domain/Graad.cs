@@ -46,6 +46,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         {
             return GraadNaam;
         }
+
+        public GraadLesmateriaalThema GetLesmateriaalThemaByName(string Thema)
+        {
+            return GraadLesmateriaalThemas.Where(g => g.LesmateriaalThema.LesmateriaalThemaNaam == Thema).First();
+        }
+
+        public List<Lesmateriaal> GeefLesmateriaalMetThema(string Thema)
+        {
+            return LesmateriaalThemas.Where(l => l.LesmateriaalThemaNaam == Thema).First()
+                .Lesmaterialen.Where(l => l.Graad == this).ToList();       
+        }
         #endregion
     }
 }

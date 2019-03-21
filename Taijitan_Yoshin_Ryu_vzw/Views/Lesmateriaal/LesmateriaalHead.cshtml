@@ -1,0 +1,11 @@
+﻿<div class="dropdown">
+    <button class="dropdown-toggle" type="button" id="lesmateriaalDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @ViewBag.ThemaNaam
+    </button>
+    <div class="dropdown-menu" aria-labelledby="lesmateriaalDropdown">
+        @foreach (var l in ViewBag.Lesmaterialen)
+        {
+            <a class="dropdown-item" href="#">@l.Id</a>
+        }
+    </div>
+</div>

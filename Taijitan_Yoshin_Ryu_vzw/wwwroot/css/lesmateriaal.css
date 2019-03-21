@@ -81,8 +81,8 @@
         margin-top: 5vh;
 }
 
-.lesmateriaal-wrapper > .dropdown > button{
-    margin: 0 !important;
+.lesmateriaal-wrapper > #lesmateriaalHead > .dropdown > button{
+    margin: 0;
 }
 
 div.dropdown-menu{

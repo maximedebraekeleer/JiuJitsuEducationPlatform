@@ -7,15 +7,34 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
 {
     public class Lid : Gebruiker
     {
+        #region Regions
+        private Formule _formule;
+        private Graad _graad;
+        #endregion
+
         #region Properties
-        public Formule Formule { get; set; } //Relatie
-        public Graad Graad { get; set; } //Relatie
+        public Formule Formule
+        {
+            get => _formule;
+            set
+            {
+                _formule = value ?? throw new ArgumentException("Formule mag niet leeg zijn");
+            }
+        }
+        public Graad Graad
+        {
+            get => _graad;
+            set
+            {
+                _graad = value ?? throw new ArgumentException("Graad mag niet leeg zijn");
+            }
+        }
         #endregion
 
         #region Constructors
         public Lid() : base()
         {
-            
+
         }
 
         public Lid(string username, string email, string naam, string voornaam, char geslacht, DateTime geboorteDatum,

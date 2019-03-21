@@ -37,57 +37,42 @@
             <div class="col-lg-2" id="thema-nav">
                 
             </div>
-            <div class="lesmateriaal-wrapper col-lg-10" id="lesmateriaal">
+            <div class="lesmateriaal-wrapper col-lg-10">
+                <div id="lesmateriaalHead">
 
+                </div>
+                <div id="lesmateriaal">
+
+                </div>
             </div>
         </div>
         <script>
             $('document').ready(() => {
-
-                $('.dropdown-item').on('click', (e) => {
-                    
-                });
-
                 $.ajax({
                     type: "POST",
                     url: "/Lesmateriaal/ThemaView",
-                    data: { GraadId: @Model.HuidigLid.Graad.GraadId},
+                    data: { GraadId: @Model.HuidigLid.Graad.GraadId
+                    },
                     success: (r) => {
                         $('#thema-nav').html(r);
-                    }
+                    },
+                    complete: () => {
+                        $.ajax({
+                            type: "POST",
+                            url: "/Lesmateriaal/LesmateriaalViewHead",
+                            data: {
+                                GraadId: $('.geselecteerdeKyu').get(0).id,
+                                ThemaNaam: $('.geselecteerdThema').get(0).innerHTML
+                            },
+                            success: (r) => {
+                                $('#lesmateriaalHead').html(r);
+                            }
+                        });
+                    }                
                 });
 
 
-
-                $('#thema-nav').on('click', (e) => {
-                if (!e.target.classList.contains('geselecteerdThema')) {
-
-                    $.ajax({
-                        type: "POST",
-                        url: "/Lesmateriaal/LesmateriaalView",
-                        data: {
-                            GraadId: $('.geselecteerdeKyu').get(0).id,
-                            ThemaNaam: e.target.innerHTML
-                        },
-                        success: (r) => {
-                            $('#lesmateriaal').html(r);
-                        }
-                    });
-
-                    $('.geselecteerdThema').removeClass('geselecteerdThema');
-                    e.target.classList.add('geselecteerdThema');
-                }
+                
             });
-            });
-
-            $('.kyu-nav > ul > li').click((e) => {
-                    $.get("/Lesmateriaal/ThemaView", {GraadId: e.target.id}, function (response) {
-                    $("#thema-nav").html(response);
-                });
-                $('.geselecteerdeKyu').removeClass('geselecteerdeKyu');
-                e.target.classList.add('geselecteerdeKyu');
-            });
-
-
         </script>
    

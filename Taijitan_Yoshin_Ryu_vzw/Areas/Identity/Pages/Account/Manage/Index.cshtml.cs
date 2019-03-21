@@ -154,7 +154,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage {
                 InfoFederaleAangelegenheden = infoFederale
             };
 
-
             return Page();
         }
 

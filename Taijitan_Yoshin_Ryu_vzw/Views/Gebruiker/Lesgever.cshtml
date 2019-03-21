@@ -1,4 +1,4 @@
-﻿
+﻿@model int
 @{
     ViewData["Title"] = "Leerkracht";
 }
@@ -23,9 +23,14 @@
                 <h5>Sessie starten</h5>
             </div>
         </a>
-        <div class="userModule" id="module_meldingenBijCommentaar">
-            <h5>Melding bij nieuwe commentaar</h5>
-        </div>
+        <a asp-controller="Lesmateriaal" asp-action="NieuweCommentaren">
+            <div class="userModule item" id="module_meldingenBijCommentaar">
+                @if (Model > 0) {
+                    <span class="notify-badge">@Model nieuwe commentaren</span>
+                }                
+                <h5>Melding bij nieuwe commentaar</h5>
+            </div>
+        </a>       
     </div>
 </div>
 

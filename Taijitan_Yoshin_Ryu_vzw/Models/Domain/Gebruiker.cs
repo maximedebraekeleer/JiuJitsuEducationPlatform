@@ -105,7 +105,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             get => _geboorteDatum;
             set
             {
-                if(DateTime.Compare(value, DateTime.Today) > 0)
+                if (DateTime.Compare(value, DateTime.Today) > 0)
                     throw new ArgumentException("Geboortedatum kan niet ouder zijn dan vandaag");
                 if (DateTime.Compare(value, (DateTime.Today).AddYears(-99)) < 0)
                     throw new ArgumentException("Geboortedatum kan niet meer dan 99 jaar geleden zijn");
@@ -113,17 +113,182 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             }
         }
 
-        public string GeboorteLand { get => _geboorteLand; set => _geboorteLand = value; }
-        public string GeboorteStad { get => _geboorteStad; set => _geboorteStad = value; }
-        public string Straat { get => _straat; set => _straat = value; }
-        public string HuisNummer { get => _huisNummer; set => _huisNummer = value; }
-        public string Gemeente { get => _gemeente; set => _gemeente = value; }
-        public string Postcode { get => _postcode; set => _postcode = value; }
-        public string TelefoonNummer { get => _telefoonNummer; set => _telefoonNummer = value; }
-        public string GsmNummer { get => _gsmNummer; set => _gsmNummer = value; }
-        public string RijksregisterNummer { get => _rijksregisterNummer; set => _rijksregisterNummer = value; }
-        public DateTime InschrijvingsDatum { get => _inschrijvingsDatum; set => _inschrijvingsDatum = value; }
-        public string EmailOuders { get => _emailOuders; set => _emailOuders = value; }
+        public string GeboorteLand
+        {
+            get => _geboorteLand;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Geboorteland mag niet leeg zijn");
+
+                Regex regex = new Regex(@"\d");
+                Match match = regex.Match(value);
+                if (match.Success)
+                    throw new ArgumentException("Geboorteland mag geen cijfers bevatten");
+                _geboorteLand = value;
+            }
+        }
+
+        public string GeboorteStad
+        {
+            get => _geboorteStad;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Geboortestad mag niet leeg zijn");
+
+                Regex regex = new Regex(@"\d");
+                Match match = regex.Match(value);
+                if (match.Success)
+                    throw new ArgumentException("Geboortestad mag geen cijfers bevatten");
+                _geboorteStad = value;
+            }
+        }
+
+        public string Straat
+        {
+            get => _straat;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Straat mag niet leeg zijn");
+
+                Regex regex = new Regex(@"\d");
+                Match match = regex.Match(value);
+                if (match.Success)
+                    throw new ArgumentException("Straat mag geen cijfers bevatten");
+                _straat = value;
+            }
+        }
+
+        public string HuisNummer
+        {
+            get => _huisNummer;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Huisnummer mag niet leeg zijn");
+
+                Regex regex = new Regex(@"^[0-9]+[a-zA-Z]*");
+                Match match = regex.Match(value);
+                if (!match.Success)
+                    throw new ArgumentException("Ongeldig huisnummer");
+                _huisNummer = value;
+            }
+        }
+
+        public string Gemeente
+        {
+            get => _gemeente;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Gemeente mag niet leeg zijn");
+
+                Regex regex = new Regex(@"\d");
+                Match match = regex.Match(value);
+                if (match.Success)
+                    throw new ArgumentException("Gemeente mag geen cijfers bevatten");
+                _gemeente = value;
+            }
+        }
+
+        public string Postcode
+        {
+            get => _postcode;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Postcode mag niet leeg zijn");
+
+                Regex regex = new Regex(@"^\d{4}$");
+                Match match = regex.Match(value);
+                if (!match.Success)
+                    throw new ArgumentException("Postcode moet uit vier cijfers bestaan");
+                _postcode = value;
+            }
+        }
+
+        public string TelefoonNummer
+        {
+            get => _telefoonNummer;
+            set
+            {
+                if (value == null)
+                    throw new ArgumentException("Telefoonnummer mag niet Null zijn");
+
+                //Mag leeg zijn
+                Regex regex = new Regex(@"^\d{9}$|^\+\d{10}$|^$");
+                Match match = regex.Match(value);
+                if (!match.Success)
+                    throw new ArgumentException("Ongeldig telefoonnummer");
+                _telefoonNummer = value;
+            }
+        }
+        public string GsmNummer
+        {
+            get => _gsmNummer;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Gsmnummer mag niet leeg zijn");
+
+                Regex regex = new Regex(@"^\d{10}$|^\+\d{11}$");
+                Match match = regex.Match(value);
+                if (!match.Success)
+                    throw new ArgumentException("Ongeldig gsmnummer");
+                _gsmNummer = value;
+            }
+        }
+        public string RijksregisterNummer
+        {
+            get => _rijksregisterNummer;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Rijksregisternummer mag niet leeg zijn");
+
+                Regex regex = new Regex(@"^\d{11}$");
+                Match match = regex.Match(value);
+                if (!match.Success)
+                    throw new ArgumentException("Ongeldig Rijksregisternummer");
+
+                int beginGetal = Int32.Parse(value.Substring(0, 9));
+                int controleGetal = Int32.Parse(value.Substring(value.Length - 2));
+                if (beginGetal % 97 != (97 - controleGetal))
+                    throw new ArgumentException("Ongeldig Rijksregisternummer");
+
+                _rijksregisterNummer = value;
+            }
+        }
+
+        public DateTime InschrijvingsDatum
+        {
+            get => _inschrijvingsDatum;
+            set
+            {
+                if (DateTime.Compare(value, DateTime.Today) > 0)
+                    throw new ArgumentException("InschrijvingsDatum kan niet ouder zijn dan vandaag");
+                _inschrijvingsDatum = value;
+            }
+        }
+        public string EmailOuders
+        {
+            get => _emailOuders;
+            set
+            {
+                if (value == null)
+                    throw new ArgumentException("E-mailadres mag niet leeg zijn");
+
+                Regex regex = new Regex(@"[^@]+@.*\..*$|^$");
+                Match match = regex.Match(value);
+                if (!match.Success)
+                    throw new ArgumentException("Ongeldig E-mailadres");
+
+                _emailOuders = value;
+            }
+        }
+
         public bool InfoClubAangelegenheden { get; set; }
         public bool InfoFederaleAangelegenheden { get; set; }
         #endregion

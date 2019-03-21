@@ -4,7 +4,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
     public class Lesgever : Gebruiker {
 
         #region Constructors
-        protected Lesgever() : base() {
+        public Lesgever() : base() {
         }
 
         public Lesgever(string username, string email, string naam, string voornaam, char geslacht, DateTime geboorteDatum,

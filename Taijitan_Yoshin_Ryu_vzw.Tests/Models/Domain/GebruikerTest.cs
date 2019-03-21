@@ -8,11 +8,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
 {
     public class GebruikerTest
     {
-        #region Attributen
+        #region Fields
         private Gebruiker _gebruiker;
-        public DateTime HuidigeDatum = DateTime.Today;
+        public readonly DateTime _huidigeDatum;
         #endregion
 
+        #region Constructors
+        public GebruikerTest()
+        {
+            _huidigeDatum = DateTime.Today;
+        }
+        #endregion
 
         //Username
         [Theory]
@@ -118,21 +124,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
         [Fact]
         public void GebruikerMaken_GeboorteDatumNaVandaag_ThrowsException()
         {
-            DateTime geboorteDatum = HuidigeDatum.AddYears(2);
+            DateTime geboorteDatum = _huidigeDatum.AddYears(2);
             Assert.Throws<ArgumentException>(() => new Gebruiker { GeboorteDatum = geboorteDatum });
         }
 
         [Fact]
         public void GebruikerMaken_GeboorteDatumOuderDan99Jaar1_ThrowsException()
         {
-            DateTime geboorteDatum = HuidigeDatum.AddYears(-100);
+            DateTime geboorteDatum = _huidigeDatum.AddYears(-100);
             Assert.Throws<ArgumentException>(() => new Gebruiker { GeboorteDatum = geboorteDatum });
         }
 
         [Fact]
         public void GebruikerMaken_GeboorteDatumOuderDan99Jaar2_ThrowsException()
         {
-            DateTime geboorteDatum = HuidigeDatum.AddYears(-200);
+            DateTime geboorteDatum = _huidigeDatum.AddYears(-200);
             Assert.Throws<ArgumentException>(() => new Gebruiker { GeboorteDatum = geboorteDatum });
         }
 
@@ -144,6 +150,239 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
             Assert.Equal(_gebruiker.GeboorteDatum, geboorteDatum);
         }
 
-        //
+        //GeboorteLand
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("België32")]
+        [InlineData("123")]
+        public void GebruikerMaken_GeboorteLandOngeldig_ThrowsException(string geboorteLand)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { GeboorteLand = geboorteLand });
+        }
+
+        [Fact]
+        public void GebruikerMaken_GeboorteLandCorrect_GeboorteLandToegevoegd()
+        {
+            string geboorteland = "België";
+            _gebruiker = new Gebruiker { GeboorteLand = geboorteland };
+            Assert.Equal(_gebruiker.GeboorteLand, geboorteland);
+        }
+
+        //GeboorteStad
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("Gent9000")]
+        [InlineData("123")]
+        public void GebruikerMaken_GeboorteStadOngeldig_ThrowsException(string geboorteStad)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { GeboorteStad = geboorteStad });
+        }
+
+        [Fact]
+        public void GebruikerMaken_GeboorteStadCorrect_GeboorteStadToegevoegd()
+        {
+            string geboorteStad = "Gent";
+            _gebruiker = new Gebruiker { GeboorteStad = geboorteStad };
+            Assert.Equal(_gebruiker.GeboorteStad, geboorteStad);
+        }
+
+        //GeboorteStad
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("Rijschootstraat 12")]
+        [InlineData("Rijschootstraat1")]
+        public void GebruikerMaken_StraatOngeldig_ThrowsException(string straat)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { Straat = straat });
+        }
+
+        [Fact]
+        public void GebruikerMaken_StraatCorrect_StraatToegevoegd()
+        {
+            string straat = "Rijschootstraat";
+            _gebruiker = new Gebruiker { Straat = straat };
+            Assert.Equal(_gebruiker.Straat, straat);
+        }
+
+        //HuisNummer
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("B12")]
+        [InlineData("TwaalfB")]
+        public void GebruikerMaken_HuisNummerOngeldig_ThrowsException(string huisnummer)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { HuisNummer = huisnummer });
+        }
+
+        [Theory]
+        [InlineData("12")]
+        [InlineData("12B")]
+        public void GebruikerMaken_HuisNummerCorrect_HuisNummerToegevoegd(string huisNummer)
+        {
+            _gebruiker = new Gebruiker { HuisNummer = huisNummer };
+            Assert.Equal(_gebruiker.HuisNummer, huisNummer);
+        }
+
+        //Gemeente
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("Ertvelde9940")]
+        [InlineData("9940")]
+        public void GebruikerMaken_GemeenteOngeldig_ThrowsException(string gemeente)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { Gemeente = gemeente });
+        }
+
+        [Fact]
+        public void GebruikerMaken_GemeenteCorrect_GemeenteToegevoegd()
+        {
+            string gemeente = "Ertvelde";
+            _gebruiker = new Gebruiker { Gemeente = gemeente };
+            Assert.Equal(_gebruiker.Gemeente, gemeente);
+        }
+
+        //Postcode
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("9000BE")]
+        [InlineData("900")]
+        [InlineData("B5000")]
+        public void GebruikerMaken_PostcodeOngeldig_ThrowsException(string postcode)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { Postcode = postcode });
+        }
+
+        [Fact]
+        public void GebruikerMaken_PostcodeCorrect_PostcodeToegevoegd()
+        {
+            string postcode = "9000";
+            _gebruiker = new Gebruiker { Postcode = postcode };
+            Assert.Equal(_gebruiker.Postcode, postcode);
+        }
+
+        //TelefoonNummer
+        [Theory]
+        [InlineData(null)]
+        [InlineData("  ")]
+        [InlineData("+32911122110")]
+        [InlineData("+329111221")]
+        [InlineData("0911122110")]
+        [InlineData("09111221")]
+        public void GebruikerMaken_TelefoonNummerOngeldig_ThrowsException(string telefoonNummer)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { TelefoonNummer = telefoonNummer });
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("+3291112211")]
+        [InlineData("091112211")]
+        public void GebruikerMaken_TelefoonNummerCorrect_TelefoonNummerToegevoegd(string telefoonNummer)
+        {
+            _gebruiker = new Gebruiker { TelefoonNummer = telefoonNummer };
+            Assert.Equal(_gebruiker.TelefoonNummer, telefoonNummer);
+        }
+
+        //GsmNummer
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("abc")]
+        [InlineData("04b70055700")]
+        [InlineData("+3247005570")]
+        [InlineData("+3247005570i")]
+        public void GebruikerMaken_GsmNummerOngeldig_ThrowsException(string gsmNummer)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { GsmNummer = gsmNummer });
+        }
+
+        [Theory]
+        [InlineData("0470055701")]
+        [InlineData("+32470055701")]
+        public void GebruikerMaken_GsmNummerCorrect_GsmNummerToegevoegd(string gsmNummer)
+        {
+            _gebruiker = new Gebruiker { GsmNummer = gsmNummer };
+            Assert.Equal(_gebruiker.GsmNummer, gsmNummer);
+        }
+
+        //RijksregisterNummer
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData("abc")]
+        [InlineData("123456789")]
+        [InlineData("87011033155")]
+        [InlineData("97011033156")]
+        public void GebruikerMaken_RijksregisterNummerOngeldig_ThrowsException(string rijksregisterNummer)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { RijksregisterNummer = rijksregisterNummer });
+        }
+
+        [Theory]
+        [InlineData("97011033155")]
+        [InlineData("96032732925")]
+        public void GebruikerMaken_RijksregisterNummerCorrect_RijksregisterNummerToegevoegd(string rijksregisterNummer)
+        {
+            _gebruiker = new Gebruiker { RijksregisterNummer = rijksregisterNummer };
+            Assert.Equal(_gebruiker.RijksregisterNummer, rijksregisterNummer);
+        }
+
+        //InschrijvingsDatum
+        [Fact]
+        public void GebruikerMaken_InschrijvingsDatumNaVandaag_ThrowsException()
+        {
+            DateTime inschrijvingsDatum = _huidigeDatum.AddYears(1);
+            Assert.Throws<ArgumentException>(() => new Gebruiker { InschrijvingsDatum = inschrijvingsDatum });
+        }
+
+        [Fact]
+        public void GebruikerMaken_InschrijvingsDatumCorrect1_InschrijvingsDatumToegevoegd()
+        {
+            DateTime inschrijvingsDatum = new DateTime(1997, 3, 19);
+            _gebruiker = new Gebruiker { InschrijvingsDatum = inschrijvingsDatum };
+            Assert.Equal(_gebruiker.InschrijvingsDatum, inschrijvingsDatum);
+        }
+
+        [Fact]
+        public void GebruikerMaken_InschrijvingsDatumCorrect2_InschrijvingsDatumToegevoegd()
+        {
+            DateTime inschrijvingsDatum = _huidigeDatum;
+            _gebruiker = new Gebruiker { InschrijvingsDatum = inschrijvingsDatum };
+            Assert.Equal(_gebruiker.InschrijvingsDatum, inschrijvingsDatum);
+        }
+
+        //EmailOuders
+        [Theory]
+        [InlineData(null)]
+        [InlineData("  ")]
+        [InlineData("daan/gmail.com")]
+        [InlineData("@gmail.com")]
+        public void GebruikerMaken_EmailOudersOngeldig_ThrowsException(string emailOuders)
+        {
+            Assert.Throws<ArgumentException>(() => new Gebruiker { EmailOuders = emailOuders });
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("daan@gmail.com")]
+        public void GebruikerMaken_EmailOudersCorrect_EmailOudersToegevoegd(string emailOuders)
+        {
+            _gebruiker = new Gebruiker { EmailOuders = emailOuders };
+            Assert.Equal(_gebruiker.EmailOuders, emailOuders);
+        }
     }
 }

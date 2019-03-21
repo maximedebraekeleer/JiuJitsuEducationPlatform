@@ -12,10 +12,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
     public class LesmateriaalController : Controller
     {
         private readonly IGraadRepository _graden;
+        private readonly ICommentaarRepository _commentaren;
 
-        public LesmateriaalController(IGraadRepository graden)
+        public LesmateriaalController(IGraadRepository graden, ICommentaarRepository commentaren)
         {
             _graden = graden;
+            _commentaren = commentaren;
         }
 
         public IActionResult ThemaView(int GraadId)
@@ -41,6 +43,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         public IActionResult Index(Gebruiker gebruiker)
         {
             return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
+        }
+
+        public IActionResult NieuweCommentaren()
+        {
+            List<Commentaar> commentaren = _commentaren.GetNew().ToList();
+            _commentaren.GetNew().ToList().ForEach(c => c.markeerGezien());
+            _commentaren.SaveChanges();
+            return View(new CommentaarViewModel(commentaren));
         }
 
     }

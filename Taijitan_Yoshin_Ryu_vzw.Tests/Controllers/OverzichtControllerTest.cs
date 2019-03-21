@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,24 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         }
 
         #region Index
-        [Fact(Skip = "Moet nog geimplementeerd worden")]
+        [Fact]
         public void Index_GeefViewModelTerug() {
+            _aanwezigheidRepo.Setup(a => a.GetAll()).Returns(_dummyContext.Aanwezigheden);
+            IActionResult actionResult = _overzichtController.Index();
+            IList<Aanwezigheid> aanwezigheden = (actionResult as ViewResult)?.Model as IList<Aanwezigheid>;
+
+            Assert.Equal(2, aanwezigheden.Count);
+            Assert.Equal("Lid0003", aanwezigheden?[0].Lid.Username);
+            Assert.Equal("Lid0004", aanwezigheden?[1].Lid.Username);
         }
+
+
+        //[Fact]
+        //public void Index_TrowsNotFound() {
+        //    _aanwezigheidRepo.Setup(a => a.GetAll()).Returns((Aanwezigheid)null);
+        //    IActionResult action = _overzichtController.Index();
+        //    Assert.IsType<NotFoundResult>(action);
+        //}
 
         #endregion
     }

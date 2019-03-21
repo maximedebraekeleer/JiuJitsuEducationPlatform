@@ -12,9 +12,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
     public class GebruikerController : Controller
     {
         private readonly IGebruikerRepository _gebruikerRepository;
+        private readonly ICommentaarRepository _commentaren;
 
-        public GebruikerController(IGebruikerRepository gebruikerRepository) {
+        public GebruikerController(IGebruikerRepository gebruikerRepository, ICommentaarRepository commentaren)
+        {
             _gebruikerRepository = gebruikerRepository;
+            _commentaren = commentaren;
         }
 
         [ServiceFilter(typeof(GebruikerFilter))]
@@ -24,7 +27,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
                 return View("Lid");
 
             else if (gebruiker is Lesgever)
-                return View("Lesgever");
+                return View("Lesgever", _commentaren.GetNew().Count());
 
             else
                 return View("Error");
@@ -37,7 +40,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
         [Authorize(Policy = "Lesgever")]
         public IActionResult Lesgever() {
-            return View();
+            return View(_commentaren.GetNew().Count());
         }
     }
 }

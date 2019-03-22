@@ -40,7 +40,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         }
 
         [ServiceFilter(typeof(GebruikerFilter))]
-        public IActionResult Index(Gebruiker gebruiker)
+        public IActionResult Index(Gebruiker gebruiker, string username)
         {
             return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
         }

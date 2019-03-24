@@ -18,7 +18,8 @@
             <ul class="ledenlijst">
                 @foreach (var item in Model.Leden)
                 {
-                    <li class="ledenlijstLid" id="@item.Username">
+                    var klasse = Model.AanwezigeLeden.Contains(item) ? "ledenlijstLid aanwezig" : "ledenlijstLid";
+                    <li class="@klasse " id="@item.Username">
                         @item.Voornaam @item.Naam - @item.Username
                     </li>
                 }
@@ -37,7 +38,7 @@
             <div class="buttonPanel">
                 <button data-toggle="modal" data-target="#CancelModal">Cancel</button>
                 <button data-toggle="modal" data-target="#NietInLijstModal">Lid toevoegen</button>
-                <button id="aanwezighedenBevestigen">Bevestigen</button>
+                <button data-toggle="modal" data-target="#BevestigModal">Bevestigen</button>
                 
             </div>
         </div>
@@ -50,17 +51,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="exampleModalLongTitle">Voer het wachtwoord in van @User.Identity.Name om de sessie te annuleren.</h4>
+                <h4 class="modal-title" id="exampleModalLongTitle">Bent u zeker dat u de sessie wilt annuleren?</h4>
             </div>
             <div class="modal-body">
-                <form asp-controller="Sessie" asp-action="CancelAsync">
+                <form asp-controller="Sessie" asp-action="Cancel">                    
                     <div class="form-group">
-                        <label asp-for="Wachtwoord"></label>
-                        <input asp-for="Wachtwoord" class="form-control" type="password" placeholder="Wachtwoord" required />
-                        <span asp-validation-for="Wachtwoord" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit">Annuleer sessie</button>
+                        <button type="submit" class="cancel">Annuleer sessie</button>
                     </div>
                 </form>
             </div>
@@ -74,7 +70,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="exampleModalLongTitle">Is dit de eerste keer dat je les volgt?</h4>
+                <h4 class="modal-title" id="exampleModalLongTitle">Is dit de eerste keer dat u les volgt?</h4>
             </div>
             <div class="modal-body">
                 <div class="buttonPanel">
@@ -89,29 +85,58 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="BevestigModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLongTitle">Bent u zeker dat u de aanwezigheden wilt afsluiten?</h4>
+            </div>
+            <div class="modal-body">
+                <div class="buttonPanel">                    
+                    <button data-dismiss="modal">Annuleer</button>
+                    <button id="aanwezighedenBevestigen">Bevestigen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 
-    
-
-    
-
-    $('document').ready(() => {
+    $('document').ready(() => { 
 
         var aanwezigen = [];
 
-        $('.ledenlijstLid').click((e) => {
-            if (e.target.classList.contains('aanwezig')) {
-                e.target.classList.remove('aanwezig');
-                aanwezigen = jQuery.grep(aanwezigen, (a) => {
-                    return a != e.target.id;
-                });
-            } else {
-                e.target.classList.add('aanwezig');
-                aanwezigen.push(e.target.id);
-            }
-            console.log(aanwezigen);
-
+        /*Bij het laden van de pagina moet de array aanwezigen opgevuld worden met de leden 
+         die op dat moment al aanwezig zijn, zodat als er op geklikt wordt ze uit de lijst verdwijnen
+        $(function () {
+            $('.ledenlijst li').each(function () {
+                if ($(this).hasClass('aanwezig')) {
+                    aanwezigen.push($(this).id);
+                } else {
+                    aanwezigen = jQuery.grep(aanwezigen, (a) => {
+                        return a != $(this).id;
+                    });
+                }
+            });
         });
+         */   
+
+        $('.ledenlijstLid').click((e) => {
+             if (e.target.classList.contains('aanwezig')) {
+                 e.target.classList.remove('aanwezig');
+                 aanwezigen = jQuery.grep(aanwezigen, (a) => {
+                     return a != e.target.id;
+                 });
+             } else {
+                 e.target.classList.add('aanwezig');
+                 aanwezigen.push(e.target.id);
+             }
+             console.log(aanwezigen);
+
+         });
 
         $('#aanwezighedenBevestigen').click(() => {
 
@@ -127,8 +152,15 @@
             }); 
         });
 
-    });
+    });    
+    /*bij het toevoegen van een ander lid(gast, of andere formule) moeten de aanwezigheden 
+      ook al is opgeslagen worden zodat ze niet verdwijnen.
 
+      window.onbeforeunload = function () {
+        $('#aanwezighedenBevestigen').click();
+    }
+     */
+    
     window.setTimeout(function () {
         $(".alert").fadeTo(500, 0).slideUp(500, function () {
             $(this).remove();

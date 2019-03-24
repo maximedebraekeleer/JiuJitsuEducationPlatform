@@ -48,7 +48,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         public IActionResult NieuweCommentaren()
         {
             List<Commentaar> commentaren = _commentaren.GetNew().ToList();
-            _commentaren.GetNew().ToList().ForEach(c => c.markeerGezien());
+            commentaren.ForEach(c => c.markeerGezien());
             _commentaren.SaveChanges();
             return View(new CommentaarViewModel(commentaren));
         }

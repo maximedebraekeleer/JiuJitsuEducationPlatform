@@ -36,6 +36,10 @@
             line-height: 120%;
         }
 
+            .kyu-nav > ul > li.kyu-locked {
+                pointer-events: none;
+            }
+
             .kyu-nav > ul > li.kyu-locked:hover {
                 cursor: default;
                 background-color: rgba(0,0,0,0);
@@ -77,8 +81,8 @@
         margin-top: 5vh;
 }
 
-.lesmateriaal-wrapper > .dropdown > button{
-    margin: 0 !important;
+.lesmateriaal-wrapper > #lesmateriaalHead > .dropdown > button{
+    margin: 0;
 }
 
 div.dropdown-menu{

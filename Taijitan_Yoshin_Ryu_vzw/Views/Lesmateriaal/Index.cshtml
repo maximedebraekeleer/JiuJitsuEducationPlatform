@@ -17,17 +17,17 @@
                         {
                             if (kyu.GraadId > Model.HuidigLid.Graad.GraadId)
                             {
-                                <li class="kyu-locked" id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:"></div><span>@kyu.GraadNaam</span><i class="fas fa-lock"></i></li>
+                                <li class="kyu-locked" id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span><i class="fas fa-lock"></i></li>
                             }
                             else
                             {
                                 if (kyu.GraadId == Model.HuidigLid.Graad.GraadId)
                                 {
-                                    <li id="@kyu.GraadId" class="geselecteerdeKyu"><div class="kyu-kleur" style="background-color:"></div><span>@kyu.GraadNaam</span></li>
+                                    <li id="@kyu.GraadId" class="geselecteerdeKyu"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span></li>
                                 }
                                 else
                                 {
-                                    <li id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:"></div><span>@kyu.GraadNaam</span></li>
+                                    <li id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span></li>
                                 }
                             }
                         }

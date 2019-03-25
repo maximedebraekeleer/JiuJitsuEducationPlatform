@@ -186,6 +186,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
         {
             String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
             Sessie huidigesessie = GeefHuidigeSessie();
+            _aanwezigheden.RemoveBySessie(huidigesessie);
             foreach (var a in aanwezig)
             {
                 huidigesessie.voegAanwezigheidToe((Lid)_gebruikers.GetByUserName(a));

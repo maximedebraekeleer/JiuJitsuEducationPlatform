@@ -9,8 +9,10 @@
 @section Scripts {
         <script src="~/js/lesmateriaal.js"></script>
 }
+
+        <span style="display: none;" id="GraadIdGebruiker">@Model.HuidigLid.Graad.GraadId</span>
         <div class="lesmateriaalContent-wrapper">
-            <div class="kyu-nav col-lg-2">
+            <div class="kyu-nav">
                 <ul>
                     @{
                         foreach (var kyu in Model.Graden)
@@ -34,10 +36,10 @@
                     }
                 </ul>
             </div>
-            <div class="col-lg-2" id="thema-nav">
+            <div id="thema-nav">
                 
             </div>
-            <div class="lesmateriaal-wrapper col-lg-10">
+            <div class="lesmateriaal-wrapper">
                 <div id="lesmateriaalHead">
 
                 </div>
@@ -46,33 +48,3 @@
                 </div>
             </div>
         </div>
-        <script>
-            $('document').ready(() => {
-                $.ajax({
-                    type: "POST",
-                    url: "/Lesmateriaal/ThemaView",
-                    data: { GraadId: @Model.HuidigLid.Graad.GraadId
-                    },
-                    success: (r) => {
-                        $('#thema-nav').html(r);
-                    },
-                    complete: () => {
-                        $.ajax({
-                            type: "POST",
-                            url: "/Lesmateriaal/LesmateriaalViewHead",
-                            data: {
-                                GraadId: $('.geselecteerdeKyu').get(0).id,
-                                ThemaNaam: $('.geselecteerdThema').get(0).innerHTML
-                            },
-                            success: (r) => {
-                                $('#lesmateriaalHead').html(r);
-                            }
-                        });
-                    }                
-                });
-
-
-                
-            });
-        </script>
-   

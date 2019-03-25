@@ -1,5 +1,43 @@
 ﻿$('document').ready(() => {
 
+        $.ajax({
+            type: "POST",
+            url: "/Lesmateriaal/ThemaView",
+            data: {
+                GraadId: $('#GraadIdGebruiker').get(0).textContent
+            },
+        success: (r) => {
+            $('#thema-nav').html(r);
+        },
+        complete: () => {
+            $.ajax({
+                type: "POST",
+                url: "/Lesmateriaal/LesmateriaalViewHead",
+                data: {
+                    GraadId: $('.geselecteerdeKyu').get(0).id,
+                    ThemaNaam: $('.geselecteerdThema').get(0).innerHTML
+                },
+                success: (r) => {
+                    $('#lesmateriaalHead').html(r);
+                },
+                complete: () => {
+                    $.ajax({
+                        type: "POST",
+                        url: "Lesmateriaal/LesmateriaalView",
+                        data: {
+                            ThemaNaam: $('.geselecteerdThema').get(0).textContent,
+                            GraadId: $('.geselecteerdeKyu').get(0).id,
+                            LesmateriaalId: $('.dropdown-item').get(0).id
+                        },
+                        success: (response) => {
+                            $('#lesmateriaal').html(response);
+                        }
+                    });
+                }
+            });
+        }                
+                });
+
 $('#thema-nav').on('click', (e) => {
     if (!e.target.classList.contains('geselecteerdThema')) {
 
@@ -23,7 +61,20 @@ $('#thema-nav').on('click', (e) => {
 });
 
 function laadLesmateriaal(e) {
-    console.log(e);
+
+    $.ajax({
+        type: "POST",
+        url: "Lesmateriaal/LesmateriaalView",
+        data: {
+            ThemaNaam: $('.geselecteerdThema').get(0).textContent,
+            GraadId: $('.geselecteerdeKyu').get(0).id,
+            LesmateriaalId: e.id
+        },
+        success: (response) => {
+            $('#lesmateriaal').html(response);
+        }
+    });
+
 }
 
 
@@ -34,4 +85,3 @@ $('.kyu-nav > ul > li').click((e) => {
     $('.geselecteerdeKyu').removeClass('geselecteerdeKyu');
     e.target.classList.add('geselecteerdeKyu');
 });
-

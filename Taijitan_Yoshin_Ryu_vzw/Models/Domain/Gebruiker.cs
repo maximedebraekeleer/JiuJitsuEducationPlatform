@@ -35,7 +35,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value) || value.Length < 7)
-                    throw new ArgumentException("Username mag niet leeg zijn en moet minstens 7 karakters bevatten");
+                    throw new ArgumentException("Username/Username mag niet leeg zijn en moet minstens 7 karakters bevatten");
                 _username = value;
             }
         }
@@ -46,12 +46,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("E-mailadres mag niet leeg zijn");
+                    throw new ArgumentException("Email/E-mailadres mag niet leeg zijn");
 
                 Regex regex = new Regex(@"[^@]+@.*\..*$");
                 Match match = regex.Match(value);
                 if (!match.Success)
-                    throw new ArgumentException("Ongeldig E-mailadres");
+                    throw new ArgumentException("Email/Ongeldig E-mailadres");
 
                 _email = value;
             }
@@ -63,12 +63,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Naam mag niet leeg zijn");
+                    throw new ArgumentException("Naam/Naam mag niet leeg zijn");
 
                 Regex regex = new Regex(@"\d");
                 Match match = regex.Match(value);
                 if (match.Success)
-                    throw new ArgumentException("Naam mag geen cijfers bevatten");
+                    throw new ArgumentException("Naam/Naam mag geen cijfers bevatten");
                 _naam = value;
             }
         }
@@ -79,12 +79,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Voornaam mag niet leeg zijn");
+                    throw new ArgumentException("Voornaam/Voornaam mag niet leeg zijn");
 
                 Regex regex = new Regex(@"\d");
                 Match match = regex.Match(value);
                 if (match.Success)
-                    throw new ArgumentException("Voornaam mag geen cijfers bevatten");
+                    throw new ArgumentException("Voornaam/Voornaam mag geen cijfers bevatten");
                 _voornaam = value;
             }
         }
@@ -95,7 +95,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (value != 'm' && value != 'v')
-                    throw new ArgumentException("Geslacht moet 'm' of 'v' zijn");
+                    throw new ArgumentException("Geslacht/Geslacht moet 'm' of 'v' zijn");
                 _geslacht = value;
             }
         }
@@ -106,9 +106,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (DateTime.Compare(value, DateTime.Today) > 0)
-                    throw new ArgumentException("Geboortedatum kan niet ouder zijn dan vandaag");
+                    throw new ArgumentException("GeboorteDatum/Geboortedatum kan niet ouder zijn dan vandaag");
                 if (DateTime.Compare(value, (DateTime.Today).AddYears(-99)) < 0)
-                    throw new ArgumentException("Geboortedatum kan niet meer dan 99 jaar geleden zijn");
+                    throw new ArgumentException("GeboorteDatum/Geboortedatum kan niet meer dan 99 jaar geleden zijn");
                 _geboorteDatum = value;
             }
         }
@@ -119,12 +119,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Geboorteland mag niet leeg zijn");
+                    throw new ArgumentException("GeboorteLand/Geboorteland mag niet leeg zijn");
 
                 Regex regex = new Regex(@"\d");
                 Match match = regex.Match(value);
                 if (match.Success)
-                    throw new ArgumentException("Geboorteland mag geen cijfers bevatten");
+                    throw new ArgumentException("GeboorteLand/Geboorteland mag geen cijfers bevatten");
                 _geboorteLand = value;
             }
         }
@@ -135,12 +135,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Geboortestad mag niet leeg zijn");
+                    throw new ArgumentException("GeboorteStad/Geboortestad mag niet leeg zijn");
 
                 Regex regex = new Regex(@"\d");
                 Match match = regex.Match(value);
                 if (match.Success)
-                    throw new ArgumentException("Geboortestad mag geen cijfers bevatten");
+                    throw new ArgumentException("GeboorteStad/Geboortestad mag geen cijfers bevatten");
                 _geboorteStad = value;
             }
         }
@@ -151,12 +151,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Straat mag niet leeg zijn");
+                    throw new ArgumentException("Straat/Straat mag niet leeg zijn");
 
                 Regex regex = new Regex(@"\d");
                 Match match = regex.Match(value);
                 if (match.Success)
-                    throw new ArgumentException("Straat mag geen cijfers bevatten");
+                    throw new ArgumentException("Straat/Straat mag geen cijfers bevatten");
                 _straat = value;
             }
         }
@@ -167,12 +167,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Huisnummer mag niet leeg zijn");
+                    throw new ArgumentException("HuisNummer/Huisnummer mag niet leeg zijn");
 
                 Regex regex = new Regex(@"^[0-9]+[a-zA-Z]*");
                 Match match = regex.Match(value);
                 if (!match.Success)
-                    throw new ArgumentException("Ongeldig huisnummer");
+                    throw new ArgumentException("HuisNummer/Ongeldig huisnummer");
                 _huisNummer = value;
             }
         }
@@ -183,12 +183,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Gemeente mag niet leeg zijn");
+                    throw new ArgumentException("Gemeente/Gemeente mag niet leeg zijn");
 
                 Regex regex = new Regex(@"\d");
                 Match match = regex.Match(value);
                 if (match.Success)
-                    throw new ArgumentException("Gemeente mag geen cijfers bevatten");
+                    throw new ArgumentException("Gemeente/Gemeente mag geen cijfers bevatten");
                 _gemeente = value;
             }
         }
@@ -199,12 +199,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Postcode mag niet leeg zijn");
+                    throw new ArgumentException("Postcode/Postcode mag niet leeg zijn");
 
                 Regex regex = new Regex(@"^\d{4}$");
                 Match match = regex.Match(value);
                 if (!match.Success)
-                    throw new ArgumentException("Postcode moet uit vier cijfers bestaan");
+                    throw new ArgumentException("Postcode/Postcode moet uit vier cijfers bestaan");
                 _postcode = value;
             }
         }
@@ -220,7 +220,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
                     Regex regex = new Regex(@"^\d{9}$|^\+\d{10}$|^$");
                     Match match = regex.Match(value);
                     if (!match.Success)
-                        throw new ArgumentException("Ongeldig telefoonnummer");
+                        throw new ArgumentException("TelefoonNummer/Ongeldig telefoonnummer");
                 }
 
                 _telefoonNummer = value;
@@ -233,12 +233,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Gsmnummer mag niet leeg zijn");
+                    throw new ArgumentException("GsmNummer/Gsmnummer mag niet leeg zijn");
 
                 Regex regex = new Regex(@"^\d{10}$|^\+\d{11}$");
                 Match match = regex.Match(value);
                 if (!match.Success)
-                    throw new ArgumentException("Ongeldig gsmnummer");
+                    throw new ArgumentException("GsmNummer/Ongeldig gsmnummer");
                 _gsmNummer = value;
             }
         }
@@ -249,17 +249,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Rijksregisternummer mag niet leeg zijn");
+                    throw new ArgumentException("RijksregisterNummer/Rijksregisternummer mag niet leeg zijn");
 
                 Regex regex = new Regex(@"^\d{11}$");
                 Match match = regex.Match(value);
                 if (!match.Success)
-                    throw new ArgumentException("Ongeldig Rijksregisternummer");
+                    throw new ArgumentException("RijksregisterNummer/Ongeldig Rijksregisternummer");
 
                 int beginGetal = Int32.Parse(value.Substring(0, 9));
                 int controleGetal = Int32.Parse(value.Substring(value.Length - 2));
                 if (beginGetal % 97 != (97 - controleGetal))
-                    throw new ArgumentException("Ongeldig Rijksregisternummer");
+                    throw new ArgumentException("RijksregisterNummer/Ongeldig Rijksregisternummer");
 
                 _rijksregisterNummer = value;
             }
@@ -271,7 +271,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             set
             {
                 if (DateTime.Compare(value, DateTime.Today) > 0)
-                    throw new ArgumentException("InschrijvingsDatum kan niet ouder zijn dan vandaag");
+                    throw new ArgumentException("InschrijvingsDatum/InschrijvingsDatum kan niet ouder zijn dan vandaag");
                 _inschrijvingsDatum = value;
             }
         }
@@ -286,7 +286,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
                     Regex regex = new Regex(@"[^@]+@.*\..*$|^$");
                     Match match = regex.Match(value);
                     if (!match.Success)
-                        throw new ArgumentException("Ongeldig E-mailadres");
+                        throw new ArgumentException("EmailOuders/Ongeldig E-mailadres");
                 }
 
                 _emailOuders = value;

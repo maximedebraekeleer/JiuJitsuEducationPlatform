@@ -214,17 +214,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             get => _telefoonNummer;
             set
             {
-                if (value == null)
-                    throw new ArgumentException("Telefoonnummer mag niet Null zijn");
-
                 //Mag leeg zijn
-                Regex regex = new Regex(@"^\d{9}$|^\+\d{10}$|^$");
-                Match match = regex.Match(value);
-                if (!match.Success)
-                    throw new ArgumentException("Ongeldig telefoonnummer");
+                if (value != null)
+                {
+                    Regex regex = new Regex(@"^\d{9}$|^\+\d{10}$|^$");
+                    Match match = regex.Match(value);
+                    if (!match.Success)
+                        throw new ArgumentException("Ongeldig telefoonnummer");
+                }
+
                 _telefoonNummer = value;
             }
         }
+
         public string GsmNummer
         {
             get => _gsmNummer;
@@ -240,6 +242,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
                 _gsmNummer = value;
             }
         }
+
         public string RijksregisterNummer
         {
             get => _rijksregisterNummer;
@@ -272,18 +275,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
                 _inschrijvingsDatum = value;
             }
         }
+
         public string EmailOuders
         {
             get => _emailOuders;
             set
             {
-                if (value == null)
-                    throw new ArgumentException("E-mailadres mag niet leeg zijn");
-
-                Regex regex = new Regex(@"[^@]+@.*\..*$|^$");
-                Match match = regex.Match(value);
-                if (!match.Success)
-                    throw new ArgumentException("Ongeldig E-mailadres");
+                if (value != null)
+                {
+                    Regex regex = new Regex(@"[^@]+@.*\..*$|^$");
+                    Match match = regex.Match(value);
+                    if (!match.Success)
+                        throw new ArgumentException("Ongeldig E-mailadres");
+                }
 
                 _emailOuders = value;
             }

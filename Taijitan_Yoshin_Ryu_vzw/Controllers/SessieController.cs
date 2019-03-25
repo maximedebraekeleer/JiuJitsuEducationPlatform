@@ -126,7 +126,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers {
                         false,
                         false,
                         _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),    
-                        new Graad(0, "gast")
+                        new Graad(0, "gast", "")
                         );
                    
                     _gebruikers.Add(gast);

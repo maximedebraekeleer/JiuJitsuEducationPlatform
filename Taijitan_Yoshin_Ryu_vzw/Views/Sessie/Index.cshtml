@@ -75,10 +75,10 @@
             <div class="modal-body">
                 <div class="buttonPanel">
                     <form>
-                        <button asp-controller="Sessie" asp-action="RegistreerAanwezigGast">Eerste keer</button>
+                        <button asp-controller="Sessie" asp-action="RegistreerAanwezigGast" class="lidtoevoegenModalButton">Eerste keer</button>
                     </form>
                     <form>
-                        <button asp-controller="Sessie" asp-action="RegistreerAanwezigNietInLijst">Ik ben geregistreerd</button>
+                        <button asp-controller="Sessie" asp-action="RegistreerAanwezigNietInLijst" class="lidtoevoegenModalButton">Ik ben geregistreerd</button>
                     </form>
                 </div>
             </div>
@@ -108,21 +108,15 @@
     $('document').ready(() => { 
 
         var aanwezigen = [];
-
         /*Bij het laden van de pagina moet de array aanwezigen opgevuld worden met de leden 
          die op dat moment al aanwezig zijn, zodat als er op geklikt wordt ze uit de lijst verdwijnen
-        $(function () {
-            $('.ledenlijst li').each(function () {
-                if ($(this).hasClass('aanwezig')) {
-                    aanwezigen.push($(this).id);
-                } else {
-                    aanwezigen = jQuery.grep(aanwezigen, (a) => {
-                        return a != $(this).id;
-                    });
-                }
-            });
+         */
+
+        $('.aanwezig').each((e) => {
+
+            aanwezigen.push($('.aanwezig').get(e).id);
+
         });
-         */   
 
         $('.ledenlijstLid').click((e) => {
              if (e.target.classList.contains('aanwezig')) {
@@ -134,22 +128,29 @@
                  e.target.classList.add('aanwezig');
                  aanwezigen.push(e.target.id);
              }
-             console.log(aanwezigen);
-
          });
 
         $('#aanwezighedenBevestigen').click(() => {
 
-            console.log(JSON.stringify(aanwezigen));
             $.ajax({
                 type: "POST",
                 url: "/Sessie/AanwezigenToevoegen",
                 data: {aanwezigen: JSON.stringify(aanwezigen)},
                 success: () => {
-                    console.log('finished');
                     window.location.href = "/Sessie/SessieAanwezigen/";
                 }                
             }); 
+        });
+
+        $('.lidtoevoegenModalButton').on('click', () => {
+
+            console.log('click');
+            $.ajax({
+                type: "POST",
+                url: "/Sessie/AanwezigenToevoegen",
+                data: { aanwezigen: JSON.stringify(aanwezigen) }
+            }); 
+
         });
 
     });    
@@ -160,6 +161,9 @@
         $('#aanwezighedenBevestigen').click();
     }
      */
+
+
+
     
     window.setTimeout(function () {
         $(".alert").fadeTo(500, 0).slideUp(500, function () {

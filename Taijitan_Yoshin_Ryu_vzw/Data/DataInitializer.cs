@@ -110,21 +110,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 dan5.AddLesmateriaalThema(thema2, thema3);
 
                 //3-Lesmateriaal toevoegen
-                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "UITLEG", "FOTO", "https://www.youtube.com/watch?v=AK3JHV6m0Hw&feature=youtu.be");
-                Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "UITLEG", "FOTO", "https://youtu.be/LW9X2fKjqCE");
-                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "UITLEG", "FOTO", "https://youtu.be/n6FpLqLLbxY");
-                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "FOTO", "https://youtu.be/YvFtXBxtHTU");
-                Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "UITLEG", "FOTO", "https://youtu.be/eQF3wyz0-XA");
-                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "UITLEG", "FOTO", "https://youtu.be/QiC8jL90CFA");
-                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "FOTO", "https://youtu.be/-uFxLGtMwPc");
-                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "UITLEG", "FOTO", "https://youtu.be/j635OEznJVc");
-                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "UITLEG", "FOTO", "https://youtu.be/Q7SgyO0DNYs");
-                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "https://youtu.be/4CNpMlF3pMs");
-                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "https://youtu.be/DXXE0Rs5EDY");
-                Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "https://youtu.be/S99HTXM96go");
-                Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm15 = new Lesmateriaal(dan5, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
+                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "UITLEG", "FOTO", "LW9X2fKjqCE");
+                Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "UITLEG", "FOTO", "LW9X2fKjqCE");
+                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "UITLEG", "FOTO", "n6FpLqLLbxY");
+                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "FOTO", "YvFtXBxtHTU");
+                Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "UITLEG", "FOTO", "eQF3wyz0-XA");
+                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "UITLEG", "FOTO", "QiC8jL90CFA");
+                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "FOTO", "-uFxLGtMwPc");
+                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "UITLEG", "FOTO", "j635OEznJVc");
+                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "UITLEG", "FOTO", "Q7SgyO0DNYs");
+                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "4CNpMlF3pMs");
+                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "DXXE0Rs5EDY");
+                Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
+                Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
+                Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
+                Lesmateriaal lm15 = new Lesmateriaal(dan5, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
 
                 var lesmaterialen = new List<Lesmateriaal> {
                     lm1, lm2, lm3, lm4, lm5, lm6, lm7, lm8, lm9, lm10, lm11, lm12, lm13, lm14, lm15

@@ -35,7 +35,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
         public IActionResult LesmateriaalView(string ThemaNaam, int GraadId, int LesmateriaalId)
         {
-            ViewBag.Lesmaterialen = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
+            ViewBag.Lesmateriaal = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
             return PartialView("~/Views/Lesmateriaal/Lesmateriaal.cshtml");
         }
 

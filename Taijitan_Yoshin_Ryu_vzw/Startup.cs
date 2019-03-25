@@ -52,6 +52,7 @@ namespace Taijitan_Yoshin_Ryu_vzw {
             services.AddScoped<IGraadRepository , GraadRepository>();
             services.AddScoped<ICommentaarRepository , CommentaarRepository>();
             services.AddScoped<GebruikerFilter>();
+            services.AddScoped<SessieFilter>();
             services.AddSession();
 
             services.AddMvc()

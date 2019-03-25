@@ -29,8 +29,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Trainingsmoment Donderdag = new Trainingsmoment(4, "Donderdag", "18:00", "20:00");
                 Trainingsmoment Zaterdag = new Trainingsmoment(6, "Zaterdag", "10:00", "11:30");
 
+                Trainingsmoment Develop_Maandag = new Trainingsmoment(1, "Maandag", "08:00", "16:00");
+
+
                 var trainingsmomenten = new List<Trainingsmoment> {
-                    Dinsdag, Woensdag, Donderdag, Zaterdag
+                    Dinsdag, Woensdag, Donderdag, Zaterdag, Develop_Maandag
                 };
                 _dbContext.Trainingsmomenten.AddRange(trainingsmomenten);
 
@@ -42,8 +45,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Formule ZA = new Formule("ZA");
                 Formule gast = new Formule("gast");
 
+                Formule Develop_MA = new Formule("Develop_MA");
+
                 var formules = new List<Formule> {
-                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast
+                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast, Develop_MA
                 };
                 _dbContext.Formules.AddRange(formules);
 
@@ -60,6 +65,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 WO.AddTrainingsmoment(Woensdag);
 
                 ZA.AddTrainingsmoment(Zaterdag);
+
+                Develop_MA.AddTrainingsmoment(Develop_Maandag);
 
                 //Lesmateriaal
                 //1-Thema's toevoegen
@@ -129,45 +136,45 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Gebruiker lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',
                     new DateTime(1998, 02, 03), "België", "Gent", "Vossenlaan", "2", "Beerle", "9000",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false,
-                    DI_DO, kyu3);
+                    Develop_MA, kyu3);
                 await CreateUser(lid1.Username, lid1.Email, "P@ssword1", "lid");
 
                 Gebruiker lid2 = new Lid("LidMichael", "michael@gmail.com", "Vermassen", "Michael", 'm',
                     new DateTime(1997, 05, 14), "België", "Gent", "Laanstraat", "72", "Hasselt", "6547",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 09), "michael@ouders.com", true, true,
-                    DI_DO, kyu4);
+                    Develop_MA, kyu4);
                 await CreateUser(lid2.Username, lid2.Email, "P@ssword1", "lid");
 
                 //--Leden zonder login
                 Gebruiker lid3 = new Lid("Lid0003", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
                     new DateTime(1997, 11, 05), "België", "Beerle", "Molenstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "pol@ouders.com", true, false,
-                    ZA, kyu4);
+                    Develop_MA, kyu4);
 
                 Gebruiker lid4 = new Lid("Lid0004", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "mark@ouders.com", true, false,
-                    DI_DO, kyu4);
+                    Develop_MA, kyu4);
 
                 Gebruiker lid5 = new Lid("Lid0005", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "louis@ouders.com", true, false,
-                    DI_DO, kyu4);
+                    Develop_MA, kyu4);
 
                 Gebruiker lid6 = new Lid("Lid0006", "Lid6@gmail.com", "Van Onderen", "Justine", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "justine@ouders.com", true, false,
-                    DI_DO, kyu3);
+                    Develop_MA, kyu3);
 
                 Gebruiker lid7 = new Lid("Lid0007", "Lid6@gmail.com", "Van Onderen", "Sien", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "sien@ouders.com", true, false,
-                    DI_DO, kyu5);
+                    Develop_MA, kyu5);
 
                 Gebruiker lid8 = new Lid("Lid0008", "Lid8@gmail.com", "Van Schuinen", "Neeri", 'm',
                     new DateTime(1960, 08, 05), "Duitsland", "Passichi", "Jiaefestraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "sien@ouders.com", true, false,
-                    DI_DO, kyu5);
+                    Develop_MA, kyu5);
 
                 //--Lesgevers
                 Gebruiker lesgever1 = new Lesgever("LesgeverHans", "hans@gmail.com", "Van Der Staak", "Hans", 'm',

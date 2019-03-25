@@ -10,6 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         IEnumerable<Sessie> GetAll();
 
         Sessie GetByDatumBeginUur(DateTime datumBeginUur);
+        Sessie GetByDatumEnUur(DateTime huidigeDatumEnUur);
         void Add(Sessie sessie);
         void Remove(Sessie sessie);
         void SaveChanges();

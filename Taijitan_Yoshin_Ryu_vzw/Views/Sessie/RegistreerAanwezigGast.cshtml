@@ -28,6 +28,11 @@
                     <input asp-for="Naam" class="form-control" />
                     <span asp-validation-for="Naam" class="text-danger"></span>
                 </div>
+                <label asp-for="Geslacht"></label>
+                <div class="form-group">                    
+                    <label><input asp-for="Geslacht" value="m" type="radio" />Man</label>
+                    <label><input asp-for="Geslacht" value="v" type="radio" />Vrouw</label>
+                </div>
                 <div class="form-group">
                     <label asp-for="GeboorteDatum"></label>
                     <input asp-for="GeboorteDatum" class="form-control" />

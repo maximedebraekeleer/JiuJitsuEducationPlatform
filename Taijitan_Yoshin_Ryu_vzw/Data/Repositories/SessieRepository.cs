@@ -32,12 +32,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             return _sessies.Where(x => x.BeginDatumEnTijd == datumBeginUur).FirstOrDefault();
         }
 
+        public Sessie GetByDatumEnUur(DateTime huidigeDatumEnUur)
+        {
+            return _sessies
+                .Where(s => huidigeDatumEnUur >= s.BeginDatumEnTijd && huidigeDatumEnUur <= s.EindDatumEnTijd)
+                .FirstOrDefault();
+        }
+
         public void Remove(Sessie sessie)
         {
             _sessies.Remove(sessie);
         }
 
-            public void SaveChanges()
+        public void SaveChanges()
         {
             _context.SaveChanges();
         }

@@ -75,15 +75,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 //2-Graden toevoegen
                 Graad kyu6 = new Graad(1, "6e kyu", "#ffffff");
                 Graad kyu5 = new Graad(2, "5e kyu", "#e6d259");
-                Graad kyu4 = new Graad(3, "4e kyu", "dc8e4e");
-                Graad kyu3 = new Graad(4, "3e kyu", "8edb4f");
-                Graad kyu2 = new Graad(5, "2e kyu", "4eafda");
-                Graad kyu1 = new Graad(6, "1e kyu", "80371c");
-                Graad dan1 = new Graad(7, "1e dan", "000000");
-                Graad dan2 = new Graad(8, "2e dan", "000000");
-                Graad dan3 = new Graad(9, "3e dan", "000000");
-                Graad dan4 = new Graad(10, "4e dan", "000000");
-                Graad dan5 = new Graad(11, "5e dan", "000000");
+                Graad kyu4 = new Graad(3, "4e kyu", "#dc8e4e");
+                Graad kyu3 = new Graad(4, "3e kyu", "#8edb4f");
+                Graad kyu2 = new Graad(5, "2e kyu", "#4eafda");
+                Graad kyu1 = new Graad(6, "1e kyu", "#80371c");
+                Graad dan1 = new Graad(7, "1e dan", "#000000");
+                Graad dan2 = new Graad(8, "2e dan", "#000000");
+                Graad dan3 = new Graad(9, "3e dan", "#000000");
+                Graad dan4 = new Graad(10, "4e dan", "#000000");
+                Graad dan5 = new Graad(11, "5e dan", "#000000");
 
                 var graden = new List<Graad> {
                     kyu6, kyu5, kyu4, kyu3, kyu2, kyu1, dan1, dan2, dan3, dan4, dan5
@@ -103,18 +103,18 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 dan5.AddLesmateriaalThema(thema2, thema3);
 
                 //3-Lesmateriaal toevoegen
-                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "UITLEG", "FOTO", "leuner_zijwaarts_1");
-                Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "UITLEG", "FOTO", "leuner_zijwaarts_2");
-                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
-                Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
+                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "UITLEG", "FOTO", "https://www.youtube.com/watch?v=AK3JHV6m0Hw&feature=youtu.be");
+                Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "UITLEG", "FOTO", "https://youtu.be/LW9X2fKjqCE");
+                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "UITLEG", "FOTO", "https://youtu.be/n6FpLqLLbxY");
+                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "FOTO", "https://youtu.be/YvFtXBxtHTU");
+                Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "UITLEG", "FOTO", "https://youtu.be/eQF3wyz0-XA");
+                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "UITLEG", "FOTO", "https://youtu.be/QiC8jL90CFA");
+                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "FOTO", "https://youtu.be/-uFxLGtMwPc");
+                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "UITLEG", "FOTO", "https://youtu.be/j635OEznJVc");
+                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "UITLEG", "FOTO", "https://youtu.be/Q7SgyO0DNYs");
+                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "https://youtu.be/4CNpMlF3pMs");
+                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "https://youtu.be/DXXE0Rs5EDY");
+                Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "https://youtu.be/S99HTXM96go");
                 Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
                 Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");
                 Lesmateriaal lm15 = new Lesmateriaal(dan5, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "VIDEO");

@@ -18,9 +18,13 @@ $('#thema-nav').on('click', (e) => {
         $('.geselecteerdThema').removeClass('geselecteerdThema');
         e.target.classList.add('geselecteerdThema');
     }
-});
-            });
+    });
 
+});
+
+function laadLesmateriaal(e) {
+    console.log(e);
+}
 
 
 $('.kyu-nav > ul > li').click((e) => {

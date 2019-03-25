@@ -1,0 +1,23 @@
+﻿.sessie-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.sessie-content {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    display: inline-block;
+    margin: 10px auto;
+    padding: 3vh 4vw;
+}
+.card {
+    background-color: ghostwhite;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    margin: 5px 0px 0px 5px
+}
+/* Add some padding inside the card bodu */
+.card-body {
+    padding: 2px 16px;
+}

@@ -10,10 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
     {
         public List<Lid> Leden { get; }
         public List<Lid> AanwezigeLeden { get; set; }
-        public Sessie Sessie { get; }
-        [Required(ErrorMessage = "Geef een wachtwoord op.")]
-        [DataType(DataType.Password)]
-        public string Wachtwoord { get; set; }
+        public Sessie Sessie { get; }        
         public List<Lid> ExtraAanwezigen { get; }
 
         public SessieViewModel(List<Lid> leden, Sessie sessie, List<Lid> aanwezigheden, List<Lid> extraAanwezigen)
@@ -22,10 +19,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
             Sessie = sessie;
             AanwezigeLeden = aanwezigheden;
             ExtraAanwezigen = extraAanwezigen;
-        }
-        public SessieViewModel()
-        {
-
         }
     }
 }

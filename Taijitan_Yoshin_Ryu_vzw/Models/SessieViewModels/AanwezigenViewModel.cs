@@ -24,7 +24,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         public AanwezigenViewModel(List<Aanwezigheid> aanwezigheden)
         {
             Aanwezigheden = aanwezigheden;
+
             Datum = DateTime.Today;
+            Naam = "";
         }
     }
 }

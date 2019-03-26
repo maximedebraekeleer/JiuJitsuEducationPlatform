@@ -90,6 +90,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         {
             Aanwezigheden.Clear();
         }
+
+        public bool bevatDatumEnTijd(DateTime datumEnUur)
+        {
+            return datumEnUur >= BeginDatumEnTijd.Date && datumEnUur <= EindDatumEnTijd.Date;
+        }
         #endregion
     }
 }

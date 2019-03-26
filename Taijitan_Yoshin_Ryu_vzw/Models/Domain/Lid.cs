@@ -56,5 +56,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             return !formulesMetLes.Contains(Formule);
         }
         #endregion
+
+        #region Methods
+        public bool bevatFormule(int formuleId)
+        {
+            return Formule.Id == formuleId;
+        }
+        #endregion
     }
 }

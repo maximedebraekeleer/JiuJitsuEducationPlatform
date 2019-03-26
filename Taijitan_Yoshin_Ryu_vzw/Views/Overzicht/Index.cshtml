@@ -8,12 +8,33 @@
 
     <form>
         <div class="form-inline">
+            <label>Filtering</label>
+
             <div class="form-group">
                 <label for="formuleId"></label>
                 <select id="formuleId" name="formuleId" asp-items="@(ViewData["Formules"] as SelectList)" class="form-control">
                     <option value="-1">-- Alle formules --</option>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="naam"></label>
+                <input asp-for="Naam" id="naam" class="form-control" placeholder="-- Alle namen --" />
+            </div>
+
+            <div class="form-group">
+                <label for="datumFilter"></label>
+                <select id="datumFilter" name="datumFilter" asp-items="@(ViewData["DatumFilterOpties"] as SelectList)" class="form-control">
+                    <option value="0">-- Alle datums --</option>
+                    <option value="1">Kies een datum</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="datumPicker">
+                <label for="datum"></label>
+                <input asp-for="Datum" class="form-control" />
+            </div>
+
             <button type="submit" class="btn btn-default">Submit</button>
         </div>
     </form>
@@ -55,3 +76,7 @@
         }
     </table>
 </div>
+
+<script>
+    console.log("test");
+</script>

@@ -45,6 +45,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
 
         }
 
+        #region index
+        [Fact]
+        public void index_geefviewmodelterug()
+        {
+        }
         //[Fact]
         //public void Index_TrowsNotFound() {
         //    _graadRepo.Setup(g => g.GetAll()).Returns((Graad)null);
@@ -60,11 +65,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
 
             IActionResult actionResult = _lesmateriaalController.NieuweCommentaren();
             CommentaarViewModel cvm = (actionResult as ViewResult)?.Model as CommentaarViewModel;
-
-
-        }
         #endregion
+        #region LesmateriaalView
 
+        #endregion
+        #region LesmateriaalViewHead
+
+        #endregion
+        #region NieuweCommentaren
+
+        #endregion
     }
 }
 

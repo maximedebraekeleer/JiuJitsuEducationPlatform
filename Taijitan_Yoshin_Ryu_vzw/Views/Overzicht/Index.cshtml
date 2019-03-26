@@ -1,23 +1,57 @@
-﻿@model List<Taijitan_Yoshin_Ryu_vzw.Models.Domain.Aanwezigheid>
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.AanwezigenViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-    <div style="padding: 5vw 7vw">
-        <h2>Overzicht aanwezigheden</h2>
-        <table class="table table-striped table-condensed table-bordered">
+<div style="padding: 5vw 7vw">
+    <h2>Overzicht aanwezigheden</h2>
+
+    <form>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="formuleId"></label>
+                <select id="formuleId" name="formuleId" asp-items="@(ViewData["Formules"] as SelectList)" class="form-control">
+                    <option value="-1">-- Alle formules --</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </form>
+    <p></p>
+
+    @*<div class="form-group">
+            <label asp-for="Datum"></label>
+            <input asp-for="Datum" class="form-control" />
+            <span asp-validation-for="Datum" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Naam"></label>
+            <input asp-for="Naam" class="form-control" />
+            <span asp-validation-for="Naam" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Formule"></label>
+            <select asp-for="Formule" asp-items="@(ViewData["Formules"] as SelectList)" class="form-control">
+                <option value="">-- select formule --</option>
+            </select>
+            <span asp-validation-for="Formule" class="text-danger"></span>
+        </div>*@
+
+    <table class="table table-striped table-condensed table-bordered">
+        <tr>
+            <th>Lid</th>
+            <th>Sessie</th>
+            <th>Reguliere aanwezigheid</th>
+        </tr>
+        @foreach (var item in Model.Aanwezigheden)
+        {
             <tr>
-                <th>Lid</th>
-                <th>Sessie</th>
-                <th>Reguliere aanwezigheid</th>
+                <td>@item.Lid.Voornaam @item.Lid.Naam</td>
+                <td>@item.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@(item.IsExtra ? "Nee" : "Ja") </td>
             </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Lid.Voornaam @item.Lid.Naam</td>
-                    <td>@item.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@(item.IsExtra ? "Nee" : "Ja") </td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
+</div>

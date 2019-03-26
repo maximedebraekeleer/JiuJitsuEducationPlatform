@@ -29,11 +29,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Trainingsmoment Donderdag = new Trainingsmoment(4, "Donderdag", "18:00", "20:00");
                 Trainingsmoment Zaterdag = new Trainingsmoment(6, "Zaterdag", "10:00", "11:30");
 
-                Trainingsmoment Develop_Maandag = new Trainingsmoment(1, "Maandag", "08:00", "16:00");
+                Trainingsmoment Develop = new Trainingsmoment(2, "Dinsdag", "08:00", "23:00");
 
 
                 var trainingsmomenten = new List<Trainingsmoment> {
-                    Dinsdag, Woensdag, Donderdag, Zaterdag, Develop_Maandag
+                    Dinsdag, Woensdag, Donderdag, Zaterdag, Develop
                 };
                 _dbContext.Trainingsmomenten.AddRange(trainingsmomenten);
 
@@ -45,7 +45,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Formule ZA = new Formule("ZA");
                 Formule gast = new Formule("gast");
 
-                Formule Develop_MA = new Formule("Develop_MA");
+                Formule Develop_MA = new Formule("Develop");
 
                 var formules = new List<Formule> {
                     DI_DO, DI_ZA, WO_ZA, WO, ZA, gast, Develop_MA
@@ -66,7 +66,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
 
                 ZA.AddTrainingsmoment(Zaterdag);
 
-                Develop_MA.AddTrainingsmoment(Develop_Maandag);
+                Develop_MA.AddTrainingsmoment(Develop);
 
                 //Lesmateriaal
                 //1-Thema's toevoegen
@@ -149,7 +149,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Gebruiker lid3 = new Lid("Lid0003", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
                     new DateTime(1997, 11, 05), "België", "Beerle", "Molenstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "pol@ouders.com", true, false,
-                    Develop_MA, kyu4);
+                    DI_DO, kyu4);
 
                 Gebruiker lid4 = new Lid("Lid0004", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",

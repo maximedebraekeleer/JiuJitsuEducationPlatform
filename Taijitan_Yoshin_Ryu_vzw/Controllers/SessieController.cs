@@ -43,24 +43,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
             DateTime datumBeginUur = trainingsMoment.geefDatumBeginUur();
             DateTime datumEindUur = trainingsMoment.geefDatumEindUur();
-            Lesgever huidigeLesgever = (Lesgever)_gebruikers.GetByUserName(gebruiker.Username);
-
-            Sessie sessieHuidig;
-
+            Lesgever huidigeLesgever = (Lesgever)gebruiker;
+            
             if (huidigeSessie == null)
             {
-                Sessie sessie = new Sessie(datumBeginUur, datumEindUur, huidigeLesgever);
-                _sessies.Add(sessie);
+                huidigeSessie = new Sessie(datumBeginUur, datumEindUur, huidigeLesgever);
+                _sessies.Add(huidigeSessie);
                 _sessies.SaveChanges();
-                sessieHuidig = sessie;
             }
-            else
-            {
-                sessieHuidig = huidigeSessie;
-            }
-
+            
             //Formules ophalen die deze trainingsmomenten bevatten
-            IList<Formule> formulesFiltered = _formules.getAll().Where(f => f.bevatTrainingsmoment(trainingsMoment)).ToList();
+            List<Formule> formulesFiltered = _formules.getAll().Where(f => f.bevatTrainingsmoment(trainingsMoment)).ToList();
 
             //Leden uit deze modules halen
             List<Lid> ledenOpdag = new List<Lid>();
@@ -71,11 +64,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             }
             ledenOpdag.ToList();
 
-            List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(sessieHuidig).Select(l => l.Lid).ToList();
-            List<Lid> andereLeden = _aanwezigheden.GetbySessie(sessieHuidig).Where(a => a.IsExtra).Select(l => l.Lid).ToList();
+            List<Lid> aanwezigeLeden = huidigeSessie.GeefAanwezigeLeden();
+            List<Lid> andereLeden = huidigeSessie.GeefExtraAanwezigeLeden();
 
             //Gefilterde leden teruggeven
-            return View(new SessieViewModel(ledenOpdag, sessieHuidig, aanwezigeLeden, andereLeden));
+            return View(new SessieViewModel(ledenOpdag, huidigeSessie, aanwezigeLeden, andereLeden));
         }
 
         public IActionResult RegistreerAanwezigheid(Sessie huidigeSessie, string username)
@@ -83,15 +76,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             Lid lid = (Lid)_gebruikers.GetByUserName(username);
             Aanwezigheid aanwezigheid = _aanwezigheden.GetbyLid(lid).Where(a => a.Sessie == huidigeSessie).FirstOrDefault();
             if (aanwezigheid != null)
-            {
-                //TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";                
+            {          
                 _aanwezigheden.Remove(aanwezigheid);
                 _aanwezigheden.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            _aanwezigheden.Add(new Aanwezigheid(lid, huidigeSessie, true));
-            _aanwezigheden.SaveChanges();
-            //TempData["message"] = $"{lid.Voornaam}{lid.Naam} is succesvol geregistreerd als aanwezig.";
+            aanwezigheid = new Aanwezigheid(lid, huidigeSessie, true);
+            huidigeSessie.VoegAanwezigheidToe(lid, true);
+            _sessies.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
@@ -113,7 +105,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             }
 
             ledenNietOpDag.ToList();
-            List<Lid> extraAanwezigheden = _aanwezigheden.GetbySessie(huidigeSessie).Where(a => a.IsExtra).Select(l => l.Lid).ToList();
+            List<Lid> extraAanwezigheden = huidigeSessie.GeefExtraAanwezigeLeden();
+
             return View(new andereLedenViewModel(ledenNietOpDag, extraAanwezigheden));
         }
 
@@ -129,7 +122,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             {
                 return View();
             }
-            Lid gast = new Lid(gvm.Username,
+            //try {
+                Lid gast = new Lid(gvm.Username,
                 gvm.Email,
                gvm.Naam,
                gvm.Voornaam,
@@ -152,11 +146,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
                 new Graad(0, "gast", "")
                 );
 
-            _gebruikers.Add(gast);
-            _gebruikers.SaveChanges();
+                _gebruikers.Add(gast);
+                _gebruikers.SaveChanges();
 
-            _aanwezigheden.Add(new Aanwezigheid(gast, huidigeSessie, true));
-            _aanwezigheden.SaveChanges();
+            huidigeSessie.VoegAanwezigheidToe(gast, true);
+            _sessies.SaveChanges();
+                //_aanwezigheden.Add(new Aanwezigheid(gast, huidigeSessie, true));
+                //_aanwezigheden.SaveChanges();
+            //}
+            //catch (Exception e)
+            ///{
+             //   string[] error = e.Message.Split('/');
+            //    ModelState.AddModelError(error[0], error[1]);
+            //}
 
             return RedirectToAction(nameof(Index));
         }
@@ -174,33 +176,27 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         public void AanwezigenToevoegen(Sessie huidigeSessie, string aanwezigen)
         {
             String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
-            _aanwezigheden.RemoveBySessie(huidigeSessie);
+            huidigeSessie.ClearAanwezigheden();
+            Lid lid;
+            bool isExtra;
+            List<Formule> formulesMetLes = _formules.getAll().Where(f => f.bevatTrainingsmoment(GeefTrainingsmoment())).ToList();
             foreach (var a in aanwezig)
             {
-                huidigeSessie.voegAanwezigheidToe((Lid)_gebruikers.GetByUserName(a));
+                lid = (Lid)_gebruikers.GetByUserName(a);
+                isExtra = lid.IsExtra(formulesMetLes);
+                huidigeSessie.VoegAanwezigheidToe(lid, isExtra);
             }
             _sessies.SaveChanges();
         }
 
         public IActionResult SessieAanwezigen(Sessie huidigeSessie)
         {
-            List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(huidigeSessie).Select(l => l.Lid).ToList();
-            return View(new AanwezigenViewModel(aanwezigeLeden));
+            List<Aanwezigheid> aanwezigheden = huidigeSessie.Aanwezigheden.ToList();
+            return View(new AanwezigenViewModel(aanwezigheden));
         }
 
         private Trainingsmoment GeefTrainingsmoment()
         {
-            //IEnumerable<Trainingsmoment> trainingsmomenten;
-            ////Donderdag wordt gekozen op localhost, anders de huidige dag
-            //if (HttpContext.Request.Host.Host.ToLower().Equals("localhost"))
-            //{
-            //    return _trainingsmomenten.getByDagNummer(4/*Donderdag*/).First();
-            //}
-            //else
-            //{
-            //    return _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek).First();
-            //}
-
             return _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek).First();
         }
     }

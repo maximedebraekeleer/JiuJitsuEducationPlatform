@@ -59,10 +59,37 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         #endregion
 
         #region Methods
-        public void voegAanwezigheidToe(Lid lid)
+        public void VoegAanwezigheidToe(Lid lid, Boolean extraAanwezigheid)
         {
-            Aanwezigheden.Add(new Aanwezigheid(lid, this));
-        }        
+            Aanwezigheden.Add(new Aanwezigheid(lid, this, extraAanwezigheid));
+        }
+
+        public List<Lid> GeefExtraAanwezigeLeden()
+        {
+            List<Lid> extraAanwezigheden = new List<Lid>();
+            foreach(var aanwezigheid in Aanwezigheden)
+            {
+                if(aanwezigheid.IsExtra)
+                extraAanwezigheden.Add(aanwezigheid.Lid);
+            }
+
+            return extraAanwezigheden;
+        }
+
+        public List<Lid> GeefAanwezigeLeden()
+        {
+            List<Lid> aanwezigheden = new List<Lid>();
+            foreach (var aanwezigheid in Aanwezigheden)
+            {
+                aanwezigheden.Add(aanwezigheid.Lid);
+            }
+            return aanwezigheden;
+        }
+
+        public void ClearAanwezigheden()
+        {
+            Aanwezigheden.Clear();
+        }
         #endregion
     }
 }

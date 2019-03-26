@@ -29,12 +29,14 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public Sessie GetByDatumBeginUur(DateTime datumBeginUur)
         {
-            return _sessies.Where(x => x.BeginDatumEnTijd == datumBeginUur).FirstOrDefault();
+            return _sessies.Include(s => s.Aanwezigheden).Where(x => x.BeginDatumEnTijd == datumBeginUur).FirstOrDefault();
         }
 
         public Sessie GetByDatumEnUur(DateTime huidigeDatumEnUur)
         {
             return _sessies
+                .Include(s => s.Aanwezigheden)
+                .ThenInclude(a => a.Lid)
                 .Where(s => huidigeDatumEnUur >= s.BeginDatumEnTijd && huidigeDatumEnUur <= s.EindDatumEnTijd)
                 .FirstOrDefault();
         }

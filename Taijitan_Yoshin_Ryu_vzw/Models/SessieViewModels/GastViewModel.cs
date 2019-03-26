@@ -49,7 +49,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
         public string GsmNummer { get; set; }
         public string RijksregisterNummer { get; set; }
-        [Display(Name = "E-mailadres")]
+        [Display(Name = "E-mailadres ouders")]
         [EmailAddress(ErrorMessage = "Ongeldig E-mailadres.")]
         public string EmailOuders { get; set; } //Niet verplicht
         #endregion

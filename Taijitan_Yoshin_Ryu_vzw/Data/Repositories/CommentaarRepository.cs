@@ -19,7 +19,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public IEnumerable<Commentaar> GetNew()
         {
-            return _commentaren.Where(c => c.IsNew).ToList();
+            return _commentaren.Where(c => c.IsNew).Include(c => c.Lesmateriaal).Include(c => c.Lid).ToList();
         }
 
         public void SaveChanges()

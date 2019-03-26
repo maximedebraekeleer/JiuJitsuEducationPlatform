@@ -36,7 +36,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
         #region Constructors
         public LidTest()
         {
-            _graad = new Graad(1, "Graad 1");
+            _graad = new Graad(1, "Graad 1", "#ffffff");
             _formule = new Formule("Formule 1") { Id = 1 };
         }
         #endregion

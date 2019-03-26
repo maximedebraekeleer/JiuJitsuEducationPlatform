@@ -14,7 +14,7 @@
                 @foreach (var item in Model.AanwezigeLeden)
                 {
                     <li class="ledenlijstLid">
-                        <a asp-controller="Lesmateriaal" asp-action="Index" @*asp-route-username="@item.Username"*@>@item.Voornaam @item.Naam</a>
+                        <a asp-controller="Lesmateriaal" asp-action="Index" asp-route-username="@item.Username">@item.Voornaam @item.Naam - @item.Username</a>
                     </li>
                 }
             </ul>

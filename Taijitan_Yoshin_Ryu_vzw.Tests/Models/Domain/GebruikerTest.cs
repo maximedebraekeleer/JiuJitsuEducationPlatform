@@ -274,8 +274,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
 
         //TelefoonNummer
         [Theory]
-        [InlineData(null)]
-        [InlineData("  ")]
         [InlineData("+32911122110")]
         [InlineData("+329111221")]
         [InlineData("0911122110")]
@@ -286,6 +284,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
         }
 
         [Theory]
+        [InlineData(null)]
         [InlineData("")]
         [InlineData("+3291112211")]
         [InlineData("091112211")]
@@ -367,8 +366,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
 
         //EmailOuders
         [Theory]
-        [InlineData(null)]
-        [InlineData("  ")]
         [InlineData("daan/gmail.com")]
         [InlineData("@gmail.com")]
         public void GebruikerMaken_EmailOudersOngeldig_ThrowsException(string emailOuders)
@@ -377,6 +374,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
         }
 
         [Theory]
+        [InlineData(null)]
         [InlineData("")]
         [InlineData("daan@gmail.com")]
         public void GebruikerMaken_EmailOudersCorrect_EmailOudersToegevoegd(string emailOuders)

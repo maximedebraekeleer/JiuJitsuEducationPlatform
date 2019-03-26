@@ -26,21 +26,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             return PartialView("~/Views/Lesmateriaal/Thema.cshtml");
         }
 
-        public IActionResult LesmateriaalView(string ThemaNaam, int GraadId)
+        public IActionResult LesmateriaalViewHead(string ThemaNaam, int GraadId)
         {
             ViewBag.ThemaNaam = ThemaNaam;
-            
+            ViewBag.Lesmaterialen = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam);
             return PartialView("~/Views/Lesmateriaal/LesmateriaalHead.cshtml");
         }
 
         public IActionResult LesmateriaalView(string ThemaNaam, int GraadId, int LesmateriaalId)
         {
-            ViewBag.Lesmaterialen = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
+            ViewBag.Lesmateriaal = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
             return PartialView("~/Views/Lesmateriaal/Lesmateriaal.cshtml");
         }
 
         [ServiceFilter(typeof(GebruikerFilter))]
-        public IActionResult Index(Gebruiker gebruiker)
+        public IActionResult Index(Gebruiker gebruiker, string username)
         {
             return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
         }
@@ -48,7 +48,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         public IActionResult NieuweCommentaren()
         {
             List<Commentaar> commentaren = _commentaren.GetNew().ToList();
-            _commentaren.GetNew().ToList().ForEach(c => c.markeerGezien());
+            commentaren.ForEach(c => c.markeerGezien());
             _commentaren.SaveChanges();
             return View(new CommentaarViewModel(commentaren));
         }

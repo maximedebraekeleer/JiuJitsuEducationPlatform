@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
@@ -9,6 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
     {
         #region Properties
         public int Id { get; set; }
+        public string Titel { get; set; }
         public string InhoudTekst { get; set; }
         public string InhoudAfbeeldingen { get; set; }
         public string InhoudVideo { get; set; }
@@ -26,10 +28,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
 
         }
 
-        public Lesmateriaal(Graad graad, LesmateriaalThema lesmateriaalThema, string inhoudTekst, string inhoudAfbeeldingen, string inhoudVideo)
+        public Lesmateriaal(Graad graad, LesmateriaalThema lesmateriaalThema, string titel, string inhoudTekst, string inhoudAfbeeldingen, string inhoudVideo)
         {
             Graad = graad;
             LesmateriaalThema = lesmateriaalThema;
+            Titel = titel;
             InhoudTekst = inhoudTekst;
             InhoudAfbeeldingen = inhoudAfbeeldingen;
             InhoudVideo = inhoudVideo;

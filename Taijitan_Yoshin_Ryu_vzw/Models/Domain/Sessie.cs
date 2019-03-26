@@ -62,7 +62,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         public void voegAanwezigheidToe(Lid lid)
         {
             Aanwezigheden.Add(new Aanwezigheid(lid, this));
-        }
+        }        
         #endregion
     }
 }

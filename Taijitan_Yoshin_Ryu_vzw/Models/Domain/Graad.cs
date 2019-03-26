@@ -13,6 +13,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int GraadId { get; set; }
         public string GraadNaam { get; set; }
+        public string Kleur { get; set; }
         #endregion
 
         #region Collections
@@ -26,10 +27,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             GraadLesmateriaalThemas = new HashSet<GraadLesmateriaalThema>();
         }
 
-        public Graad(int graadId, string graadNaam) : this()
+        public Graad(int graadId, string graadNaam, string kleur) : this()
         {
             GraadId = graadId;
             GraadNaam = graadNaam;
+            Kleur = kleur;
         }
         #endregion
 

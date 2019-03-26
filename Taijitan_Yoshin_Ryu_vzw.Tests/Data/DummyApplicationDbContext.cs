@@ -13,14 +13,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
         public Sessie HuidigeSessie { get; }
         public IEnumerable<Trainingsmoment> Trainingsmomenten { get; set; }
         public IEnumerable<Graad> Graden { get; set; }
+        public IEnumerable<Commentaar> Commentaren { get; set; }
 
         public Trainingsmoment Dinsdag;
         public Trainingsmoment Woensdag;
-        public Gebruiker lid3;
+        public Gebruiker lid1;
         public Gebruiker lid4;
         public Gebruiker lesgever1;
         public Gebruiker lesgever2;
         public Gebruiker gebruiker1;
+        public Commentaar commentaar1;
+        public Commentaar commentaar2;
 
         public DummyApplicationDbContext()
         {
@@ -64,7 +67,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
 
             #region Gebruikers
             //--Leden zonder login
-            Gebruiker lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',
+            lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',
                     new DateTime(1998, 02, 03), "België", "Gent", "Vossenlaan", "2", "Beerle", "9000",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false,
                     DI_DO, kyu3);
@@ -125,7 +128,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
 
 
             //toevoegen aan lijst
-            Gebruikers = new[] { lid3, lid4, /* lid5, lid6, lid7, lid8, lesgever1, lesgever2,*/ gebruiker1 };
+            Gebruikers = new[] { lid1, lid4,  lid5, lid6, lid7, lid8, lesgever1, lesgever2, gebruiker1 };
             #endregion
 
 
@@ -142,14 +145,33 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
 
 
             #region Aanwezigheden
-            Aanwezigheid aanwezigheid3 = new Aanwezigheid((Lid)lid3, sessie14_2);
+            Aanwezigheid aanwezigheid3 = new Aanwezigheid((Lid)lid1, sessie14_2);
             Aanwezigheid aanwezigheid4 = new Aanwezigheid((Lid)lid4, sessie14_2);
-            //Aanwezigheid aanwezigheid1 = new Aanwezigheid((Lid)lid7, sessie10_3);
-            //Aanwezigheid aanwezigheid2 = new Aanwezigheid((Lid)lid8, sessie10_3);
+            Aanwezigheid aanwezigheid1 = new Aanwezigheid((Lid)lid7, sessie10_3);
+            Aanwezigheid aanwezigheid2 = new Aanwezigheid((Lid)lid8, sessie10_3);
             //toevoegen aan lijst
             Aanwezigheden = new[] { aanwezigheid3, aanwezigheid4 };
             #endregion
 
+            #region LesmateriaalThema
+
+            LesmateriaalThema lesmateriaalThema1 = new LesmateriaalThema("Thema 1");
+            LesmateriaalThema lesmateriaalThema2 = new LesmateriaalThema("Thema 2");
+            #endregion
+
+            #region Lesmateriaal
+
+            Lesmateriaal lesmateriaal1 = new Lesmateriaal(kyu1, lesmateriaalThema1, "Lesmateriaal1", "wat tekst", "afbeelding", "video");
+            Lesmateriaal lesmateriaal2 = new Lesmateriaal(dan1, lesmateriaalThema2, "Lesmateriaal2", "wat tekst", "afbeelding", "video");
+            #endregion
+
+            #region Commentaar
+            commentaar1 = new Commentaar("Commentaar 1", (Lid)lid1, lesmateriaal1);
+            commentaar2 = new Commentaar("Commentaar 2", (Lid)lid4, lesmateriaal2);
+
+            Commentaren = new[] { commentaar1, commentaar2 };
+
+            #endregion
 
         }
     }

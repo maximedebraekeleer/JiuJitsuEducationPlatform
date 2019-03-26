@@ -8,10 +8,8 @@ using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
 using Taijitan_Yoshin_Ryu_vzw.Tests.Data;
 using Xunit;
 
-namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
-{
-    public class SessieControlerTest
-    {
+namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
+    public class SessieControlerTest {
 
         private readonly SessieController _sessieController;
         private readonly Mock<IFormuleRepository> _formules;
@@ -19,11 +17,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
         private readonly Mock<IGebruikerRepository> _gebruikers;
         private readonly Mock<IAanwezigheidRepository> _aanwezigheden;
         private readonly Mock<ISessieRepository> _sessies;
+        private readonly Mock<IGraadRepository> _graden;
         private readonly DummyApplicationDbContext _dummContext;
         private Sessie HuidigeSessie;
 
-        public SessieControlerTest()
-        {
+        public SessieControlerTest() {
             _dummContext = new DummyApplicationDbContext();
             _sessies = new Mock<ISessieRepository>();
             HuidigeSessie = _dummContext.HuidigeSessie;
@@ -31,40 +29,36 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
             _formules = new Mock<IFormuleRepository>();
             _gebruikers = new Mock<IGebruikerRepository>();
             _trainingsmomenten = new Mock<ITrainingsmomentRepository>();
-            _sessieController = new SessieController(_formules.Object, _trainingsmomenten.Object, _gebruikers.Object, _aanwezigheden.Object, _sessies.Object)
-            {
+            _graden = new Mock<IGraadRepository>();
+            _sessieController = new SessieController(_formules.Object, _trainingsmomenten.Object, _gebruikers.Object, _aanwezigheden.Object, _sessies.Object, _graden.Object) {
                 TempData = new Mock<ITempDataDictionary>().Object
             };
         }
 
-        //[Fact]
-        //public void Index_GeefDeJuisteView()
-        //{
-        //    _gebruikersRepo.Setup(g => g.GetByUserName("LesgeverHans")).Returns(_dummContext.lesgever1);
 
-        //    var actionResult = _sessieController.Index() as RedirectToActionResult;
-        //    //SessieViewModel sessieVM = (actionResult as ViewResult)?.Model as SessieViewModel;
-        //    Assert.Equal("Lesgever", actionResult?.ActionName);
 
-        //}
-
-        //#region RegistratieAanwezigheid
-        //[Fact]
-        //public void RegistratieAanwezigheid_Test()
-        //{
-        //    _gebruikersRepo.Setup(g => g.GetByUserName("Lid3")).Returns(_dummContext.lid3);
-
-        //    var actionResult = _sessieController.RegistreerAanwezigheid("Lid3") as RedirectToActionResult;
-
-        //    Assert.Equal("Index", actionResult?.ActionName);
-        //}
-        //#endregion
         #region Index
+        [Fact]
+        public void Index_GeefDeJuisteView() {
+            _gebruikers.Setup(g => g.GetByUserName("LesgeverHans")).Returns(_dummContext.lesgever1);
+            Gebruiker gebruiker = _dummContext.gebruiker1;
+            Sessie sessie = _dummContext.HuidigeSessie;
+            var actionResult = _sessieController.Index(gebruiker,sessie) as RedirectToActionResult;
+            //SessieViewModel sessieVM = (actionResult as ViewResult)?.Model as SessieViewModel;
+            Assert.Equal("Lesgever", actionResult?.ActionName);
 
+        }
         #endregion
 
         #region RegistreerAanwezigheid
+        [Fact]
+        public void RegistratieAanwezigheid_Test() {
+            _gebruikers.Setup(g => g.GetByUserName("LidMaxime")).Returns(_dummContext.lid1);
+            Sessie sessie = _dummContext.HuidigeSessie;
+            var actionResult = _sessieController.RegistreerAanwezigheid(sessie,"Lid3") as RedirectToActionResult;
 
+            Assert.Equal("Index", actionResult?.ActionName);
+        }
         #endregion
 
         #region RegistreerAanwezigNietInLijst
@@ -73,8 +67,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
 
         #region RegistreerAanwezigGast
         [Fact]
-        public void RegistreerAanwezigGast_niewLidInViewModel()
-        {
+        public void RegistreerAanwezigGast_niewLidInViewModel() {
             IActionResult action = _sessieController.RegistreerAanwezigGast(HuidigeSessie);
             GastViewModel gvm = (action as ViewResult)?.Model as GastViewModel;
             Assert.Null(gvm?.Username);
@@ -84,37 +77,33 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
 
         #region POST RegistreerAanwezigGast
         [Fact]
-        public void RegistreerAanwezigGast_validLid_RedirectsToActionIndex()
-        {
+        public void RegistreerAanwezigGast_validLid_RedirectsToActionIndex() {
             _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
-            GastViewModel gvm = new GastViewModel()
-            {
+            GastViewModel gvm = new GastViewModel() {
                 Username = "Gaaaaaaaast",
                 Email = "Gast@gmail.com",
                 Naam = "Tom",
                 Voornaam = "Simons",
                 Geslacht = 'm',
-               GeboorteDatum = new DateTime(1999, 10, 22),
-               GeboorteLand = "België",
+                GeboorteDatum = new DateTime(1999, 10, 22),
+                GeboorteLand = "België",
                 GeboorteStad = "Gent",
                 Straat = "Stationstraat",
                 HuisNummer = "45",
                 Gemeente = "Aalst",
                 Postcode = "9300",
                 TelefoonNummer = "+3291112211",
-                GsmNummer = "0470055701" ,
-                RijksregisterNummer = "96032732925",                
-                EmailOuders =  "OudersGast@hotmail.be"                
+                GsmNummer = "0470055701",
+                RijksregisterNummer = "96032732925",
+                EmailOuders = "OudersGast@hotmail.be"
             };
             RedirectToActionResult action = _sessieController.RegistreerAanwezigGast(HuidigeSessie, gvm) as RedirectToActionResult;
             Assert.Equal("Index", action?.ActionName);
         }
         [Fact]
-        public void RegistreerAanwezigGast_validLid_CreatesAndPersistsLid()
-        {
+        public void RegistreerAanwezigGast_validLid_CreatesAndPersistsLid() {
             _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
-            GastViewModel gvm = new GastViewModel()
-            {
+            GastViewModel gvm = new GastViewModel() {
                 Username = "Gaaaaaaaast",
                 Email = "Gast@gmail.com",
                 Naam = "Tom",
@@ -135,14 +124,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
             _sessieController.RegistreerAanwezigGast(HuidigeSessie, gvm);
             _gebruikers.Verify(m => m.Add(It.IsAny<Gebruiker>()), Times.Once());
             _gebruikers.Verify(m => m.SaveChanges(), Times.Once());
-        }         
+        }
 
         [Fact]
-        public void RegistreeerAanwezigGast_InvalidLid_notCreatedNotPersisted()
-        {
+        public void RegistreeerAanwezigGast_InvalidLid_notCreatedNotPersisted() {
             _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
-            GastViewModel gvm = new GastViewModel()
-            {
+            GastViewModel gvm = new GastViewModel() {
                 Username = "Gaaaaaaaast",
                 Email = "Gast@gmail.com",
                 Naam = "Tom",
@@ -165,11 +152,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
         }
 
         [Fact]
-        public void RegistreerAanwezigGast_ModelStateErrors_PassesViewModelAndViewData()
-        {
+        public void RegistreerAanwezigGast_ModelStateErrors_PassesViewModelAndViewData() {
             _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
-            GastViewModel gvm = new GastViewModel()
-            {
+            GastViewModel gvm = new GastViewModel() {
                 Username = "Gast",
                 Email = "Gast@gmail.com",
                 Naam = "Tom",
@@ -191,13 +176,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
             ViewResult result = _sessieController.RegistreerAanwezigGast(HuidigeSessie, gvm) as ViewResult;
             Assert.Equal("RegistreerAanwezigGast", result?.ViewName);
             Assert.Equal(gvm, result?.Model);
-        }        
+        }
         #endregion
 
         #region Cancel
         [Fact]
-        public void Cancel_sessie_null()
-        {
+        public void Cancel_sessie_null() {
             RedirectToActionResult action = _sessieController.Cancel(null) as RedirectToActionResult;
             Assert.Equal("Gebruiker", action?.ControllerName);
             Assert.Equal("Lesgever", action?.ActionName);
@@ -205,8 +189,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
             _sessies.Verify(m => m.SaveChanges(), Times.Never());
         }
         [Fact]
-        public void Cancel_sessie_annuleert_Sessie()
-        {
+        public void Cancel_sessie_annuleert_Sessie() {
             RedirectToActionResult action = _sessieController.Cancel(HuidigeSessie) as RedirectToActionResult;
             Assert.Equal("Gebruiker", action?.ControllerName);
             Assert.Equal("Lesgever", action?.ActionName);

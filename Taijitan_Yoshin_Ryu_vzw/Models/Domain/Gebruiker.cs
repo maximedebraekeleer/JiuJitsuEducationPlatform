@@ -25,6 +25,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         private string _rijksregisterNummer;
         private DateTime _inschrijvingsDatum;
         private string _emailOuders; //Niet verplicht
+        private List<String> Errors = new List<string>();
         #endregion
 
 
@@ -326,6 +327,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             EmailOuders = emailOuders; //Niet verplicht
             InfoClubAangelegenheden = infoClubAangelegenheden;
             InfoFederaleAangelegenheden = infoFederaleAangelegenheden;
+            //if (Errors.Count > 0)
+            //{
+            //    throw new GebruikerGegevensException(Errors);
+            //}
         }
         #endregion
     }

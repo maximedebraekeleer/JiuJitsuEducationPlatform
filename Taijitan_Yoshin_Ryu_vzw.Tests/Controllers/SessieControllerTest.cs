@@ -1,59 +1,228 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.ViewFeatures;
-//using Moq;
-//using Taijitan_Yoshin_Ryu_vzw.Controllers;
-//using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
-//using Taijitan_Yoshin_Ryu_vzw.Tests.Data;
-//using Xunit;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Moq;
+using System;
+using Taijitan_Yoshin_Ryu_vzw.Controllers;
+using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
+using Taijitan_Yoshin_Ryu_vzw.Tests.Data;
+using Xunit;
 
-//namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
-//    public class SessieControlerTest {
+namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
+{
+    public class SessieControlerTest
+    {
 
-//        private readonly SessieController _sessieController;
-//        private readonly Mock<ISessieRepository> _sessieRepo;
-//        private readonly Mock<IAanwezigheidRepository> _aanwezigheidRepo;
-//        private readonly Mock<IFormuleRepository> _formuleRepo;
-//        private readonly Mock<IGebruikerRepository> _gebruikersRepo;
-//        private readonly Mock<ITrainingsmomentRepository> _trainingsdagRepo;
-//        private readonly DummyApplicationDbContext _dummContext;
+        private readonly SessieController _sessieController;
+        private readonly Mock<IFormuleRepository> _formules;
+        private readonly Mock<ITrainingsmomentRepository> _trainingsmomenten;
+        private readonly Mock<IGebruikerRepository> _gebruikers;
+        private readonly Mock<IAanwezigheidRepository> _aanwezigheden;
+        private readonly Mock<ISessieRepository> _sessies;
+        private readonly DummyApplicationDbContext _dummContext;
+        private Sessie HuidigeSessie;
 
-//        public SessieControlerTest() {
-//            _dummContext = new DummyApplicationDbContext();
-//            _sessieRepo = new Mock<ISessieRepository>();
-//            _sessieRepo.Setup(s => s.GetAll()).Returns(_dummContext.Sessies);
-//            _aanwezigheidRepo = new Mock<IAanwezigheidRepository>();
-//            _aanwezigheidRepo.Setup(a => a.GetAll()).Returns(_dummContext.Aanwezigheden);
-//            _formuleRepo = new Mock<IFormuleRepository>();
-//            _formuleRepo.Setup(f => f.getAll()).Returns(_dummContext.Formules);
-//            _gebruikersRepo = new Mock<IGebruikerRepository>();
-//            //_gebruikersRepo.Setup(g => g.GetAll()).Returns(_dummContext.Gebruikers);
-//            //_gebruikersRepo.Setup(g => g.GetByUserName("Lid3")).Returns(_dummContext.lid3);
-//            _trainingsdagRepo = new Mock<ITrainingsmomentRepository>();
-//            _trainingsdagRepo.Setup(t => t.getAll()).Returns(_dummContext.Trainingsmomenten);
-//            _sessieController = new SessieController(_formuleRepo.Object, _trainingsdagRepo.Object, _gebruikersRepo.Object, _aanwezigheidRepo.Object, _sessieRepo.Object) {
-//                TempData = new Mock<ITempDataDictionary>().Object
-//            };
-//        }
+        public SessieControlerTest()
+        {
+            _dummContext = new DummyApplicationDbContext();
+            _sessies = new Mock<ISessieRepository>();
+            HuidigeSessie = _dummContext.HuidigeSessie;
+            _aanwezigheden = new Mock<IAanwezigheidRepository>();
+            _formules = new Mock<IFormuleRepository>();
+            _gebruikers = new Mock<IGebruikerRepository>();
+            _trainingsmomenten = new Mock<ITrainingsmomentRepository>();
+            _sessieController = new SessieController(_formules.Object, _trainingsmomenten.Object, _gebruikers.Object, _aanwezigheden.Object, _sessies.Object)
+            {
+                TempData = new Mock<ITempDataDictionary>().Object
+            };
+        }
 
-//        [Fact]
-//        public void Index_GeefDeJuisteView() {
-//            _gebruikersRepo.Setup(g => g.GetByUserName("LesgeverHans")).Returns(_dummContext.lesgever1);
+        //[Fact]
+        //public void Index_GeefDeJuisteView()
+        //{
+        //    _gebruikersRepo.Setup(g => g.GetByUserName("LesgeverHans")).Returns(_dummContext.lesgever1);
 
-//            var actionResult = _sessieController.Index() as RedirectToActionResult;
-//            //SessieViewModel sessieVM = (actionResult as ViewResult)?.Model as SessieViewModel;
-//            Assert.Equal("Lesgever", actionResult?.ActionName);
+        //    var actionResult = _sessieController.Index() as RedirectToActionResult;
+        //    //SessieViewModel sessieVM = (actionResult as ViewResult)?.Model as SessieViewModel;
+        //    Assert.Equal("Lesgever", actionResult?.ActionName);
 
-//        }
+        //}
 
-//        #region RegistratieAanwezigheid
-//        [Fact]
-//        public void RegistratieAanwezigheid_Test() {
-//            _gebruikersRepo.Setup(g => g.GetByUserName("Lid3")).Returns(_dummContext.lid3);
+        //#region RegistratieAanwezigheid
+        //[Fact]
+        //public void RegistratieAanwezigheid_Test()
+        //{
+        //    _gebruikersRepo.Setup(g => g.GetByUserName("Lid3")).Returns(_dummContext.lid3);
 
-//            var actionResult = _sessieController.RegistreerAanwezigheid("Lid3") as RedirectToActionResult;
+        //    var actionResult = _sessieController.RegistreerAanwezigheid("Lid3") as RedirectToActionResult;
 
-//            Assert.Equal("Index", actionResult?.ActionName);
-//        }
-//        #endregion
-//    }
-//}
+        //    Assert.Equal("Index", actionResult?.ActionName);
+        //}
+        //#endregion
+        #region Index
+
+        #endregion
+
+        #region RegistreerAanwezigheid
+
+        #endregion
+
+        #region RegistreerAanwezigNietInLijst
+
+        #endregion
+
+        #region RegistreerAanwezigGast
+        [Fact]
+        public void RegistreerAanwezigGast_niewLidInViewModel()
+        {
+            IActionResult action = _sessieController.RegistreerAanwezigGast(HuidigeSessie);
+            GastViewModel gvm = (action as ViewResult)?.Model as GastViewModel;
+            Assert.Null(gvm?.Username);
+
+        }
+        #endregion
+
+        #region POST RegistreerAanwezigGast
+        [Fact]
+        public void RegistreerAanwezigGast_validLid_RedirectsToActionIndex()
+        {
+            _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
+            GastViewModel gvm = new GastViewModel()
+            {
+                Username = "Gaaaaaaaast",
+                Email = "Gast@gmail.com",
+                Naam = "Tom",
+                Voornaam = "Simons",
+                Geslacht = 'm',
+               GeboorteDatum = new DateTime(1999, 10, 22),
+               GeboorteLand = "België",
+                GeboorteStad = "Gent",
+                Straat = "Stationstraat",
+                HuisNummer = "45",
+                Gemeente = "Aalst",
+                Postcode = "9300",
+                TelefoonNummer = "+3291112211",
+                GsmNummer = "0470055701" ,
+                RijksregisterNummer = "96032732925",                
+                EmailOuders =  "OudersGast@hotmail.be"                
+            };
+            RedirectToActionResult action = _sessieController.RegistreerAanwezigGast(HuidigeSessie, gvm) as RedirectToActionResult;
+            Assert.Equal("Index", action?.ActionName);
+        }
+        [Fact]
+        public void RegistreerAanwezigGast_validLid_CreatesAndPersistsLid()
+        {
+            _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
+            GastViewModel gvm = new GastViewModel()
+            {
+                Username = "Gaaaaaaaast",
+                Email = "Gast@gmail.com",
+                Naam = "Tom",
+                Voornaam = "Simons",
+                Geslacht = 'm',
+                GeboorteDatum = new DateTime(1999, 10, 22),
+                GeboorteLand = "België",
+                GeboorteStad = "Gent",
+                Straat = "Stationstraat",
+                HuisNummer = "45",
+                Gemeente = "Aalst",
+                Postcode = "9300",
+                TelefoonNummer = "+3291112211",
+                GsmNummer = "0470055701",
+                RijksregisterNummer = "96032732925",
+                EmailOuders = "OudersGast@hotmail.be"
+            };
+            _sessieController.RegistreerAanwezigGast(HuidigeSessie, gvm);
+            _gebruikers.Verify(m => m.Add(It.IsAny<Gebruiker>()), Times.Once());
+            _gebruikers.Verify(m => m.SaveChanges(), Times.Once());
+        }         
+
+        [Fact]
+        public void RegistreeerAanwezigGast_InvalidLid_notCreatedNotPersisted()
+        {
+            _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
+            GastViewModel gvm = new GastViewModel()
+            {
+                Username = "Gaaaaaaaast",
+                Email = "Gast@gmail.com",
+                Naam = "Tom",
+                Voornaam = "Simons",
+                Geslacht = 'm',
+                GeboorteDatum = new DateTime(DateTime.Now.AddYears(2).Year, 10, 22),
+                GeboorteLand = "België",
+                GeboorteStad = "Gent",
+                Straat = "Stationstraat",
+                HuisNummer = "45",
+                Gemeente = "Aalst",
+                Postcode = "9300",
+                TelefoonNummer = "+3291112211",
+                GsmNummer = "0470055701",
+                RijksregisterNummer = "96032732925",
+                EmailOuders = "OudersGast@hotmail.be"
+            };
+            _gebruikers.Verify(m => m.Add(It.IsAny<Gebruiker>()), Times.Never());
+            _gebruikers.Verify(m => m.SaveChanges(), Times.Never());
+        }
+
+        [Fact]
+        public void RegistreerAanwezigGast_ModelStateErrors_PassesViewModelAndViewData()
+        {
+            _formules.Setup(f => f.getAll()).Returns(_dummContext.Formules);
+            GastViewModel gvm = new GastViewModel()
+            {
+                Username = "Gast",
+                Email = "Gast@gmail.com",
+                Naam = "Tom",
+                Voornaam = "Simons",
+                Geslacht = 'm',
+                GeboorteDatum = new DateTime(1999, 10, 22),
+                GeboorteLand = "België",
+                GeboorteStad = "Gent",
+                Straat = "Stationstraat",
+                HuisNummer = "45",
+                Gemeente = "Aalst",
+                Postcode = "9300",
+                TelefoonNummer = "+3291112211",
+                GsmNummer = "0470055701",
+                RijksregisterNummer = "96032732925",
+                EmailOuders = "OudersGast@hotmail.be"
+            };
+            _sessieController.ModelState.AddModelError("", "Error message");
+            ViewResult result = _sessieController.RegistreerAanwezigGast(HuidigeSessie, gvm) as ViewResult;
+            Assert.Equal("RegistreerAanwezigGast", result?.ViewName);
+            Assert.Equal(gvm, result?.Model);
+        }        
+        #endregion
+
+        #region Cancel
+        [Fact]
+        public void Cancel_sessie_null()
+        {
+            RedirectToActionResult action = _sessieController.Cancel(null) as RedirectToActionResult;
+            Assert.Equal("Gebruiker", action?.ControllerName);
+            Assert.Equal("Lesgever", action?.ActionName);
+            _sessies.Verify(m => m.Remove(It.IsAny<Sessie>()), Times.Never());
+            _sessies.Verify(m => m.SaveChanges(), Times.Never());
+        }
+        [Fact]
+        public void Cancel_sessie_annuleert_Sessie()
+        {
+            RedirectToActionResult action = _sessieController.Cancel(HuidigeSessie) as RedirectToActionResult;
+            Assert.Equal("Gebruiker", action?.ControllerName);
+            Assert.Equal("Lesgever", action?.ActionName);
+            _sessies.Setup(m => m.Remove(It.IsAny<Sessie>()));
+            _sessies.Verify(m => m.Remove(It.IsAny<Sessie>()), Times.Once());
+            _sessies.Verify(m => m.SaveChanges(), Times.Once());
+        }
+        #endregion
+
+        #region POST AanwezigenToevoegen
+
+        #endregion
+
+        #region SessieAanwezigen
+
+        #endregion
+
+    }
+}

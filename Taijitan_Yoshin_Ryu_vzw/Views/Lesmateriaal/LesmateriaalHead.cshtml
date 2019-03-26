@@ -5,7 +5,7 @@
     <div class="dropdown-menu" aria-labelledby="lesmateriaalDropdown">
         @foreach (var l in ViewBag.Lesmaterialen)
         {
-            <li class="dropdown-item" href="#" onclick="laadLesmateriaal(this)">@l.Id</li>
+            <li class="dropdown-item" href="#" onclick="laadLesmateriaal(this)" id="@l.Id">@l.Titel</li>
         }
     </div>
 </div>

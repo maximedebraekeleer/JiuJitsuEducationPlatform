@@ -1,23 +1,31 @@
-﻿@model List<Taijitan_Yoshin_Ryu_vzw.Models.Domain.Aanwezigheid>
+﻿@model Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels.AanwezigenViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-    <div style="padding: 5vw 7vw">
-        <h2>Overzicht aanwezigheden</h2>
-        <table class="table table-striped table-condensed table-bordered">
-            <tr>
-                <th>Lid</th>
-                <th>Sessie</th>
-                <th>Reguliere aanwezigheid</th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Lid.Voornaam @item.Lid.Naam</td>
-                    <td>@item.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@(item.IsExtra ? "Nee" : "Ja") </td>
-                </tr>
-            }
-        </table>
+<div style="padding: 5vw 7vw">
+    <h2>Overzicht aanwezigheden</h2>
+
+    <div class="form-group">
+        <label asp-for="Datum"></label>
+        <input asp-for="Datum" class="form-control" />
+        <span asp-validation-for="Datum" class="text-danger"></span>
     </div>
+
+
+    <table class="table table-striped table-condensed table-bordered">
+        <tr>
+            <th>Lid</th>
+            <th>Sessie</th>
+            <th>Reguliere aanwezigheid</th>
+        </tr>
+        @foreach (var item in Model.Aanwezigheden)
+        {
+            <tr>
+                <td>@item.Lid.Voornaam @item.Lid.Naam</td>
+                <td>@item.Sessie.BeginDatumEnTijd.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@(item.IsExtra ? "Nee" : "Ja") </td>
+            </tr>
+        }
+    </table>
+</div>

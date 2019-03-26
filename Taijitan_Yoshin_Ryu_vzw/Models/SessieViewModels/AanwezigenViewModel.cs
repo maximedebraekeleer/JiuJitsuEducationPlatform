@@ -21,12 +21,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         [Display(Name = "Formule")]
         public string Formule { get; set; }
 
+        [Display(Name = "datumFilter")]
+        public bool datumFilter { get; set; }
+        
         public AanwezigenViewModel(List<Aanwezigheid> aanwezigheden)
         {
             Aanwezigheden = aanwezigheden;
-
             Datum = DateTime.Today;
             Naam = "";
+            datumFilter = true;
         }
     }
 }

@@ -8,7 +8,7 @@
 
     <form>
         <div class="form-inline">
-            <label>Filtering</label>
+            <label>Formule:</label>
 
             <div class="form-group">
                 <label for="formuleId"></label>
@@ -17,24 +17,26 @@
                 </select>
             </div>
 
+            &nbsp;
+            <label>Naam:</label>
             <div class="form-group">
                 <label for="naam"></label>
                 <input asp-for="Naam" id="naam" class="form-control" placeholder="-- Alle namen --" />
             </div>
 
+            &nbsp;
+            <label>Datum:</label>
             <div class="form-group">
                 <label for="datumFilter"></label>
-                <select id="datumFilter" name="datumFilter" asp-items="@(ViewData["DatumFilterOpties"] as SelectList)" class="form-control">
-                    <option value="0">-- Alle datums --</option>
-                    <option value="1">Kies een datum</option>
-                </select>
+                <input asp-for="datumFilter" id="datumFilter" class="form-control" type="checkbox" name="datumFilter">Alle datums tonen<br>
             </div>
 
-            <div class="form-group" id="datumPicker">
+            <div class="form-group" id="datumPicker" style="display: none">
                 <label for="datum"></label>
                 <input asp-for="Datum" class="form-control" />
             </div>
 
+            &nbsp;
             <button type="submit" class="btn btn-default">Submit</button>
         </div>
     </form>
@@ -78,5 +80,14 @@
 </div>
 
 <script>
-    console.log("test");
+    $('document').ready(() => {
+        if (!$('#datumFilter').is(':checked')) {
+            console.log("lel");
+            $('#datumPicker').show();
+        }
+    });
+
+    $('#datumFilter').on('change', function () {
+        $('#datumPicker').toggle();
+    });
 </script>

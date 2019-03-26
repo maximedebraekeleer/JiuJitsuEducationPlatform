@@ -25,8 +25,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain {
         #endregion
 
         #region methodes
-
-
         #endregion
     }
 }

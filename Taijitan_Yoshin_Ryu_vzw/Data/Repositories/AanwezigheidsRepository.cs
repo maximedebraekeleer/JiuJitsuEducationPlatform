@@ -24,7 +24,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public IEnumerable<Aanwezigheid> GetAll()
         {
-            return _aanwezigheden.Include(a => a.Lid).Include(a => a.Sessie).ToList();
+            return _aanwezigheden.Include(a => a.Sessie).Include(a => a.Lid).ThenInclude(l => l.Formule).ToList();
         }
 
         public IEnumerable<Aanwezigheid> GetbyLid(Lid lid)

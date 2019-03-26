@@ -147,7 +147,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
                 return View();
             }
             //try {
-                Lid gast = new Lid(gvm.Username,
+                Lid gast = new Lid(
+                gvm.Username,
                 gvm.Email,
                gvm.Naam,
                gvm.Voornaam,
@@ -175,8 +176,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
             huidigeSessie.VoegAanwezigheidToe(gast, true);
             _sessies.SaveChanges();
-                //_aanwezigheden.Add(new Aanwezigheid(gast, huidigeSessie, true));
-                //_aanwezigheden.SaveChanges();
             //}
             //catch (Exception e)
             ///{

@@ -1,57 +1,55 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.ViewFeatures;
-//using Moq;
-//using System.Collections.Generic;
-//using Taijitan_Yoshin_Ryu_vzw.Controllers;
-//using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
-//using Taijitan_Yoshin_Ryu_vzw.Models.LesmateriaalViewModels;
-//using Taijitan_Yoshin_Ryu_vzw.Tests.Data;
-//using Xunit;
+﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Moq;
+using Taijitan_Yoshin_Ryu_vzw.Controllers;
+using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Taijitan_Yoshin_Ryu_vzw.Tests.Data;
+using Xunit;
 
-//namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
-//    public class LesmateriaalControllerTest {
-//        private readonly LesmateriaalController _lesmateriaalController;
-//        private readonly DummyApplicationDbContext _dummyContext;
-//        private readonly Mock<IGraadRepository> _graadRepo;
-//        private readonly Mock<IGebruikerRepository> _gebruikerRepo;
-//        private readonly Gebruiker _gebruiker;
-//        private readonly Graad _graad;
+namespace taijitan_yoshin_ryu_vzw.tests.controllers
+{
+    public class lesmateriaalcontrollertest
+    {
+        private readonly LesmateriaalController _lesmateriaalController;
+        private readonly DummyApplicationDbContext _dummyContext;
+        private readonly Mock<IGraadRepository> _graadRepo;
+        private readonly Mock<ICommentaarRepository> _commentaarRepo;
 
-//        public LesmateriaalControllerTest() {
-//            _dummyContext = new DummyApplicationDbContext();
-//            _gebruiker = _dummyContext.gebruiker1;
-//            _graadRepo = new Mock<IGraadRepository>();
-//            _gebruikerRepo = new Mock<IGebruikerRepository>();
-//            _lesmateriaalController = new LesmateriaalController(_graadRepo.Object) {
-//                TempData = new Mock<ITempDataDictionary>().Object
-//            };
+        public lesmateriaalcontrollertest()
+        {
+            _dummyContext = new DummyApplicationDbContext();
+            _graadRepo = new Mock<IGraadRepository>();
+            _commentaarRepo = new Mock<ICommentaarRepository>();
+            _lesmateriaalController = new LesmateriaalController(_graadRepo.Object, _commentaarRepo.Object)
+            {
+                TempData = new Mock<ITempDataDictionary>().Object
+            };
+        }
 
-//        }
+        #region index
+        [Fact]
+        public void index_geefviewmodelterug()
+        {
+        }
 
-//        #region Index
-//        [Fact]
-//        public void Index_GeefViewModelTerug() {
+        //[fact]
+        //public void index_trowsnotfound() {
+        //    _graadrepo.setup(g => g.getall()).returns((graad)null);
+        //    iactionresult action = _lesmateriaalcontroller.index(_gebruiker);
+        //    assert.istype<notfoundresult>(action);
+        //}
+        #endregion
+        #region ThemaView
 
-//            _graadRepo.Setup(g => g.GetAll()).Returns(_dummyContext.Graden);
-//            _gebruikerRepo.Setup(gr => gr.GetByUserName("Lid0003")).Returns(_dummyContext.lid3);
+        #endregion
+        #region LesmateriaalView
 
-//            //IEnumerable<Graad> graden = _graadRepo.GetAll().ToList();
+        #endregion
+        #region LesmateriaalViewHead
 
-//            IActionResult actionResult = _lesmateriaalController.Index(_gebruiker);
-//            var lesmateriaalVvm = (actionResult as ViewResult)?.Model as LesmateriaalViewModel;
+        #endregion
+        #region NieuweCommentaren
 
-//            // Assert.Equal("Lid0003", lesmateriaalVvm?.HuidigLid.Username);
-
-//        }
-
-//        //[Fact]
-//        //public void Index_TrowsNotFound() {
-//        //    _graadRepo.Setup(g => g.GetAll()).Returns((Graad)null);
-//        //    IActionResult action = _lesmateriaalController.Index(_gebruiker);
-//        //    Assert.IsType<NotFoundResult>(action);
-//        //}
-//        #endregion
-
-//    }
-//}
+        #endregion
+    }
+}
 

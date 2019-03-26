@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
+using Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels;
 
 namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 {
@@ -16,8 +17,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         }
         public IActionResult Index()
         {
-            List<Aanwezigheid> aanwezigheden = _aanwezigheden.GetAll().ToList();
-            return View(aanwezigheden);
+            List<Aanwezigheid> aanwezigHeden = _aanwezigheden.GetAll().ToList();
+            return View(new AanwezigenViewModel(aanwezigHeden));
         }
     }
 }

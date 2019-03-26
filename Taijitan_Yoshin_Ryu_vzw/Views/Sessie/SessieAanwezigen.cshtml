@@ -11,10 +11,10 @@
         <div class="sessie-content">
             <h3>Aanwezige leden</h3>
             <ul class="ledenlijst">
-                @foreach (var item in Model.AanwezigeLeden)
+                @foreach (var item in Model.Aanwezigheden)
                 {
                     <li class="ledenlijstLid">
-                        <a asp-controller="Lesmateriaal" asp-action="Index" asp-route-username="@item.Username">@item.Voornaam @item.Naam - @item.Username</a>
+                        <a asp-controller="Lesmateriaal" asp-action="Index" asp-route-username="@item.Lid.Username">@item.Lid.Voornaam @item.Lid.Naam - @item.Lid.Username</a>
                     </li>
                 }
             </ul>

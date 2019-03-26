@@ -60,7 +60,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Postcode")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
-            [DataType(DataType.PostalCode)]
             public string Postcode { get; set; }
 
             [Display(Name = "Naam")]
@@ -204,7 +203,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
                 gebruiker.Straat = Input.Straat;
                 gebruiker.HuisNummer = Input.HuisNummer;
                 gebruiker.Gemeente = Input.Gemeente;
-                gebruiker.Postcode = gebruiker.Postcode;
+                gebruiker.Postcode = Input.Postcode;
                 gebruiker.TelefoonNummer = Input.TelefoonNummer;
                 gebruiker.GsmNummer = Input.GsmNummer;
                 //gebruiker.RijksregisterNummer = Input.RijksregisterNummer;

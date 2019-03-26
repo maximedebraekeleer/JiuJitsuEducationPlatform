@@ -37,17 +37,27 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             return PartialView("~/Views/Lesmateriaal/LesmateriaalHead.cshtml");
         }
 
-        public IActionResult LesmateriaalView(string ThemaNaam, int GraadId, int LesmateriaalId)
+        //Werkt niet door javascript
+        public IActionResult LesmateriaalView(/*LesmateriaalViewModel lvm, */string ThemaNaam, int GraadId, int LesmateriaalId)
         {
             ViewBag.Lesmateriaal = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
-            _loggings.AddLogging(new Logging(new Lid(), new Lesmateriaal()));
+            //_loggings.AddLogging(new Logging(lvm.HuidigLid, ViewBag.Lesmateriaal));
+            //_loggings.SaveChanges();
             return PartialView("~/Views/Lesmateriaal/Lesmateriaal.cshtml");
         }
 
         [ServiceFilter(typeof(GebruikerFilter))]
         public IActionResult Index(Gebruiker gebruiker, string username)
         {
-            return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
+            if(gebruiker is Lesgever)
+            {
+                Gebruiker huidigLid = _gebruikers.GetByUserName(username);
+                return View(new LesmateriaalViewModel(huidigLid, _graden.GetAll().ToList()));
+            }
+            else
+            {
+                return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
+            }
         }
 
         public IActionResult NieuweCommentaren()

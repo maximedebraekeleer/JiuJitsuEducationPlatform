@@ -14,7 +14,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         private readonly Mock<IGraadRepository> _graadRepo;
         private readonly Mock<IGebruikerRepository> _gebruikerRepo;
         private readonly Mock<ICommentaarRepository> _commentaarRepo;
-        private readonly Gebruiker _gebruiker;
+        private Gebruiker _gebruiker;
         private readonly Graad _graad;
 
         public LesmateriaalControllerTest() {
@@ -34,22 +34,18 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         public void Index_GeefViewModelTerug() {
 
             _graadRepo.Setup(g => g.GetAll()).Returns(_dummyContext.Graden);
-            _gebruikerRepo.Setup(gr => gr.GetByUserName("Lid0003")).Returns(_dummyContext.lid3);
+            _gebruikerRepo.Setup(gr => gr.GetByUserName("LidMaxime")).Returns(_dummyContext.lid1);
 
-            //IEnumerable<Graad> graden = _graadRepo.GetAll().ToList();
+            _gebruiker = _dummyContext.lid1;
 
-            IActionResult actionResult = _lesmateriaalController.Index(_gebruiker, "Lid0003");
+            IActionResult actionResult = _lesmateriaalController.Index(_gebruiker, "LidMaxime");
             var lesmateriaalVvm = (actionResult as ViewResult)?.Model as LesmateriaalViewModel;
 
-            Assert.Equal("Lid0003", lesmateriaalVvm?.HuidigLid.Username);
+            Assert.Equal("LidMaxime", lesmateriaalVvm?.HuidigLid.Username);
 
         }
 
-        #region index
-        [Fact]
-        public void index_geefviewmodelterug()
-        {
-        }
+
         //[Fact]
         //public void Index_TrowsNotFound() {
         //    _graadRepo.Setup(g => g.GetAll()).Returns((Graad)null);
@@ -58,23 +54,28 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         //}
         #endregion
 
-        #region NieweCommentaren
+        #region LesmateriaalView
+
+        #endregion
+
+
+        #region LesmateriaalViewHead
+
+        #endregion
+
+
+        #region NieuweCommentaren
         [Fact]
         public void NieweCommentaren_NaarViewModel() {
             _commentaarRepo.Setup(c => c.GetNew()).Returns(_dummyContext.Commentaren);
 
             IActionResult actionResult = _lesmateriaalController.NieuweCommentaren();
             CommentaarViewModel cvm = (actionResult as ViewResult)?.Model as CommentaarViewModel;
-        #endregion
-        #region LesmateriaalView
 
+            Assert.Equal("Commentaar 1", cvm?.Commentaren[0].Inhoud);
+        }
         #endregion
-        #region LesmateriaalViewHead
 
-        #endregion
-        #region NieuweCommentaren
-
-        #endregion
     }
 }
 

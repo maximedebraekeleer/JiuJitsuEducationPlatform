@@ -27,10 +27,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         #region Index
         [Fact]
         public void Index_ToonLid() {
-            _gebruikersRepo.Setup(gr => gr.GetByUserName("Lid0003")).Returns(_dummyContext.lid3);
-            _gebruiker = _dummyContext.gebruiker1;
+            _gebruikersRepo.Setup(gr => gr.GetByUserName("LidMaxime")).Returns(_dummyContext.lid1);
+            _gebruiker = _dummyContext.lid1;
             IActionResult actionResult = _gebruikerController.Index(_gebruiker);
-
+            Assert.Equal("LidMaxime", _gebruiker.Username);
 
         }
         [Fact]

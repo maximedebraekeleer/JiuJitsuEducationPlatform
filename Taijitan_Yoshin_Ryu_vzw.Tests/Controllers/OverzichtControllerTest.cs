@@ -27,39 +27,37 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers
             _overzichtController = new OverzichtController(_aanwezigheidRepo.Object, _formuleRepo.Object)
             {
                 TempData = new Mock<ITempDataDictionary>().Object
-            };
-        }
+                };
+            }
 
         #region Index
-        //[Fact]
-        //public void Index_GeeftLijstAanwezighedenInViewmodel()
-        //{
-        //    _aanwezigheidRepo.Setup(a => a.GetAll()).Returns(_dummyContext.Aanwezigheden);
-        //    var actionResult = _overzichtController.Index() as ViewResult;
-        //    var aanwezighedenInModel = actionResult?.Model as IList<Aanwezigheid>;
+        [Fact]
+        public void Index_GeeftLijstAanwezighedenInViewmodel() {
+            _aanwezigheidRepo.Setup(a => a.GetAll()).Returns(_dummyContext.Aanwezigheden);
+            IActionResult actionResult = _overzichtController.Index();
+            var aanwezighedenInModel = (actionResult as ViewResult)?.Model as IList<Aanwezigheid>;
 
-        //    Assert.Equal(2, aanwezigheden.Count);
-        //    Assert.Equal("Lid0003", aanwezigheden?[0].Lid.Username);
-        //    Assert.Equal("Lid0004", aanwezigheden?[1].Lid.Username);
-        //}
-        //[Fact]
-        //public void Index_GefilterdeAanwezighedenOpDatum()
-        //{
+            Assert.Equal(2, aanwezighedenInModel?.Count);
+            Assert.Equal("LidMaxime", aanwezighedenInModel?[0].Lid.Username);
+            Assert.Equal("Lid0004", aanwezighedenInModel?[1].Lid.Username);
+        }
+        [Fact]
+        public void Index_GefilterdeAanwezighedenOpDatum() {
+            
+        }
+        [Fact]
+        public void Index_GefilterdeAanwezighedenOpFormule() {
 
-        //}
-        //[Fact]
-        //public void Index_GefilterdeAanwezighedenOpFormule()
-        //{
+        }
+        [Fact]
+        public void Index_GefilterdeAanwezighedenOpLid() {
 
-        //}
-        //[Fact]
-        //public void Index_GefilterdeAanwezighedenOpLid()
-        //{
+        }
+        [Fact]
+        public void Index_GefilterdeAanwezighedenOpFouteDatum() {
+        }
+        
 
-        //}
-        //[Fact]
-        //public void Index_GefilterdeAanwezighedenOpFouteDatum()
-        //{
 
         //[Fact]
         //public void Index_TrowsNotFound() {

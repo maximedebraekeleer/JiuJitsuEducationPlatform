@@ -13,6 +13,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
         public Sessie HuidigeSessie { get; }
         public IEnumerable<Trainingsmoment> Trainingsmomenten { get; set; }
         public IEnumerable<Graad> Graden { get; set; }
+        public IEnumerable<Commentaar> Commentaren { get; set; }
 
         public Trainingsmoment Dinsdag;
         public Trainingsmoment Woensdag;
@@ -125,7 +126,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
 
 
             //toevoegen aan lijst
-            Gebruikers = new[] { lid3, lid4, /* lid5, lid6, lid7, lid8, lesgever1, lesgever2,*/ gebruiker1 };
+            Gebruikers = new[] { lid3, lid4,  lid5, lid6, lid7, lid8, lesgever1, lesgever2, gebruiker1 };
             #endregion
 
 
@@ -144,8 +145,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
             #region Aanwezigheden
             Aanwezigheid aanwezigheid3 = new Aanwezigheid((Lid)lid3, sessie14_2);
             Aanwezigheid aanwezigheid4 = new Aanwezigheid((Lid)lid4, sessie14_2);
-            //Aanwezigheid aanwezigheid1 = new Aanwezigheid((Lid)lid7, sessie10_3);
-            //Aanwezigheid aanwezigheid2 = new Aanwezigheid((Lid)lid8, sessie10_3);
+            Aanwezigheid aanwezigheid1 = new Aanwezigheid((Lid)lid7, sessie10_3);
+            Aanwezigheid aanwezigheid2 = new Aanwezigheid((Lid)lid8, sessie10_3);
             //toevoegen aan lijst
             Aanwezigheden = new[] { aanwezigheid3, aanwezigheid4 };
             #endregion

@@ -44,8 +44,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
             Assert.Equal("Lid0003", lesmateriaalVvm?.HuidigLid.Username);
 
         }
-
-        #region index
+        
         [Fact]
         public void index_geefviewmodelterug()
         {
@@ -64,7 +63,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
             _commentaarRepo.Setup(c => c.GetNew()).Returns(_dummyContext.Commentaren);
 
             IActionResult actionResult = _lesmateriaalController.NieuweCommentaren();
-            CommentaarViewModel cvm = (actionResult as ViewResult)?.Model as CommentaarViewModel;
+            CommentaarViewModel cvm = (actionResult as ViewResult)?.Model as CommentaarViewModel;            
+        }
         #endregion
         #region LesmateriaalView
 

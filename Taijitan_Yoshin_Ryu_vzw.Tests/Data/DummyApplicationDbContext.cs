@@ -55,11 +55,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
             //--Leden zonder login
             lid3 = new Lid("Lid0003", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
                 new DateTime(1997, 11, 05), "België", "Beerle", "Molenstraat", "8", "Verdegem", "1234",
-                "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "pol@ouders.com", true, false, ZA, graad1Kyu1);
+                "091112211", "0470477701", "97011033155", new DateTime(2019, 03, 05), "pol@ouders.com", true, false, ZA, graad1Kyu1);
 
             lid4 = new Lid("Lid0004", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
                 new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
-                "094834583", "0470477701", "123456789", new DateTime(2019, 03, 05), "mark@ouders.com", true, false, DI_DO, graad2Kyu2);
+                "091112211", "0470477701", "96032732925", new DateTime(2019, 03, 05), "mark@ouders.com", true, false, DI_DO, graad2Kyu2);
 
             //Gebruiker lid5 = new Lid("Lid5", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
             //    new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
@@ -80,17 +80,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
             //--Lesgevers
             lesgever1 = new Lesgever("LesgeverHans", "hans@gmail.com", "Van Der Staak", "Hans", 'm',
                 new DateTime(1999, 08, 18), "België", "Gent", "Kerkstraat", "47", "Aalter", "1436",
-                "0978956147", "0478945159", "159487263", new DateTime(2019, 03, 09), null, false, false);
+                "091112211", "0470055701", "97011033155", new DateTime(2019, 03, 09),"hans@ouders.com", null, false, false);
 
             lesgever2 = new Lesgever("LesgeverDaan", "daan@gmail.com", "Van Vooren", "Daan", 'm',
                 new DateTime(1997, 01, 10), "België", "Gent", "Rijschootstraat", "32", "Ertvelde", "9040",
-                "093447501", "0470067701", "321654789", new DateTime(2019, 03, 06), null, true, true);
+                "091112211", "0470055701", "97011033155", new DateTime(2019, 03, 06),"daan@ouders.com", null, true, true);
 
             //Gebruikers
 
             gebruiker1 = new Gebruiker {
                 Username = "Gebruiker1",
-                Email = "gebruiker@gmail.com",
+                Email = "gebruiker1@gmail.com",
                 Naam = "Van Achter",
                 Voornaam = "Jan",
                 Geslacht = 'm',
@@ -101,9 +101,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
                 HuisNummer = "21",
                 Gemeente = "Oostakker",
                 Postcode = "9000",
-                TelefoonNummer = "094834583", //Niet verplicht
-                GsmNummer = "0470477701",
-                RijksregisterNummer = "123456789",
+                TelefoonNummer = "091112211", //Niet verplicht
+                GsmNummer = "0470055701",
+                RijksregisterNummer = "96032732925",
                 InschrijvingsDatum = new DateTime(2019, 03, 05),
                 EmailOuders = "jan@ouders.com", //Niet verplicht
                 InfoClubAangelegenheden = true,

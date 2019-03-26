@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Taijitan_Yoshin_Ryu_vzw.Controllers;
 using Taijitan_Yoshin_Ryu_vzw.Models.Domain;
 using Taijitan_Yoshin_Ryu_vzw.Tests.Data;
@@ -14,13 +11,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         private readonly GebruikerController _gebruikerController;
         private readonly DummyApplicationDbContext _dummyContext;
         private readonly Mock<IGebruikerRepository> _gebruikersRepo;
+        private readonly Mock<ICommentaarRepository> _commentaarRepo;
         private Gebruiker _gebruiker;
 
         public GebruikerControllerTest() {
             _dummyContext = new DummyApplicationDbContext();
             _gebruiker = new Gebruiker();
             _gebruikersRepo = new Mock<IGebruikerRepository>();
-            _gebruikerController = new GebruikerController(_gebruikersRepo.Object) {
+            _commentaarRepo = new Mock<ICommentaarRepository>();
+            _gebruikerController = new GebruikerController(_gebruikersRepo.Object,_commentaarRepo.Object) {
                 TempData = new Mock<ITempDataDictionary>().Object
             };
         }
@@ -31,7 +30,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
             _gebruikersRepo.Setup(gr => gr.GetByUserName("Lid0003")).Returns(_dummyContext.lid3);
             _gebruiker = _dummyContext.gebruiker1;
             IActionResult actionResult = _gebruikerController.Index(_gebruiker);
-            
+
 
         }
         [Fact]

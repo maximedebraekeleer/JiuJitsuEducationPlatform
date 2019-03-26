@@ -14,6 +14,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         private readonly DummyApplicationDbContext _dummyContext;
         private readonly Mock<IGraadRepository> _graadRepo;
         private readonly Mock<IGebruikerRepository> _gebruikerRepo;
+        private readonly Mock<ICommentaarRepository> _commentaarRepo;
         private readonly Gebruiker _gebruiker;
         private readonly Graad _graad;
 
@@ -22,7 +23,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
             _gebruiker = _dummyContext.gebruiker1;
             _graadRepo = new Mock<IGraadRepository>();
             _gebruikerRepo = new Mock<IGebruikerRepository>();
-            _lesmateriaalController = new LesmateriaalController(_graadRepo.Object) {
+            _commentaarRepo = new Mock<ICommentaarRepository>();
+            _lesmateriaalController = new LesmateriaalController(_graadRepo.Object, _commentaarRepo.Object) {
                 TempData = new Mock<ITempDataDictionary>().Object
             };
 
@@ -40,7 +42,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
             IActionResult actionResult = _lesmateriaalController.Index(_gebruiker);
             var lesmateriaalVvm = (actionResult as ViewResult)?.Model as LesmateriaalViewModel;
 
-            // Assert.Equal("Lid0003", lesmateriaalVvm?.HuidigLid.Username);
+            Assert.Equal("Lid0003", lesmateriaalVvm?.HuidigLid.Username);
 
         }
 

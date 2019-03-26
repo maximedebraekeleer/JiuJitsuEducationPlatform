@@ -29,7 +29,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Trainingsmoment Donderdag = new Trainingsmoment(4, "Donderdag", "18:00", "20:00");
                 Trainingsmoment Zaterdag = new Trainingsmoment(6, "Zaterdag", "10:00", "11:30");
 
-                Trainingsmoment Develop_Dinsdag = new Trainingsmoment(2, "Dinsdag", "08:00", "23:59");
+                Trainingsmoment Develop_Dinsdag = new Trainingsmoment(1, "Dinsdag", "08:00", "23:59");
 
 
                 var trainingsmomenten = new List<Trainingsmoment> {

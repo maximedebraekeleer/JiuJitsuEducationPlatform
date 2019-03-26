@@ -33,7 +33,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
         public IActionResult Index(Gebruiker gebruiker, Sessie huidigeSessie)
         {
-            Trainingsmoment trainingsMoment = GeefTrainingsmoment();
+            Trainingsmoment trainingsMoment;
+            try
+            {
+                trainingsMoment = GeefTrainingsmoment();
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
 
             if (trainingsMoment == null)
             {
@@ -73,6 +82,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
         public IActionResult RegistreerAanwezigheid(Sessie huidigeSessie, string username)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             Lid lid = (Lid)_gebruikers.GetByUserName(username);
             Aanwezigheid aanwezigheid = _aanwezigheden.GetbyLid(lid).Where(a => a.Sessie == huidigeSessie).FirstOrDefault();
             if (aanwezigheid != null)
@@ -89,12 +103,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
         public IActionResult RegistreerAanwezigNietInLijst(Sessie huidigeSessie)
         {
-            Trainingsmoment trainingsMoment = GeefTrainingsmoment();
-            if (trainingsMoment == null)
+            if (huidigeSessie == null)
             {
                 TempData["error"] = $"Er zijn vandaag geen sessies";
                 return RedirectToAction(nameof(Lesgever), "Gebruiker");
             }
+            Trainingsmoment trainingsMoment = GeefTrainingsmoment();
 
             //Formules ophalen die deze trainingsmomenten niet bevatten
             IList<Formule> formulesFiltered = _formules.getAll().Where(f => !f.bevatTrainingsmoment(trainingsMoment)).ToList();
@@ -110,14 +124,24 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             return View(new andereLedenViewModel(ledenNietOpDag, extraAanwezigheden));
         }
 
-        public IActionResult RegistreerAanwezigGast()
+        public IActionResult RegistreerAanwezigGast(Sessie huidigeSessie)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             //Gastviewmodel wordt gebruikt
             return View();
         }
         [HttpPost]
         public IActionResult RegistreerAanwezigGast(Sessie huidigeSessie, GastViewModel gvm)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             if (!ModelState.IsValid)
             {
                 return View();
@@ -166,6 +190,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         [HttpPost]
         public IActionResult Cancel(Sessie huidigeSessie)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             _sessies.Remove(huidigeSessie);
             _sessies.SaveChanges();
             TempData["error"] = $"De sessie is geannuleerd.";
@@ -175,6 +204,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         [HttpPost]
         public void AanwezigenToevoegen(Sessie huidigeSessie, string aanwezigen)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
             huidigeSessie.ClearAanwezigheden();
             Lid lid;
@@ -191,6 +225,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
         public IActionResult SessieAanwezigen(Sessie huidigeSessie)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             List<Aanwezigheid> aanwezigheden = huidigeSessie.Aanwezigheden.ToList();
             return View(new AanwezigenViewModel(aanwezigheden));
         }

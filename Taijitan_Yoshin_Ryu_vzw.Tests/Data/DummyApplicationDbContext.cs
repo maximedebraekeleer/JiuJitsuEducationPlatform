@@ -10,6 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
         public IEnumerable<Sessie> Sessies { get; set; }
         public IEnumerable<Trainingsmoment> Trainingsmomenten { get; set; }
         public IEnumerable<Graad> Graden { get; set; }
+        public IEnumerable<Commentaar> Commentaren { get; set; }
 
         public Trainingsmoment Dinsdag;
         public Trainingsmoment Woensdag;
@@ -18,6 +19,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
         public Gebruiker lesgever1;
         public Gebruiker lesgever2;
         public Gebruiker gebruiker1;
+        public Commentaar commentaar1;
+        public Commentaar commentaar2;
 
         public DummyApplicationDbContext() {
             #region Trainingsmomenten
@@ -30,6 +33,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
             //toevoegen aan lijst
             Trainingsmomenten = new[] { Dinsdag, Woensdag, Donderdag, Zaterdag };
             #endregion
+
             #region Formules
             //Formules (van powerpoint gehaald)
             Formule DI_DO = new Formule("DI_DO");
@@ -43,10 +47,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
             #endregion
 
             #region Graden
-            Graad graad1Kyu1 = new Graad(1, "Kyu1");
-            Graad graad2Kyu2 = new Graad(2, "Kyu2");
-            Graad graad3Dan1 = new Graad(3, "Dan1");
-            Graad graad4Dan2 = new Graad(4, "Dan2");
+            Graad graad1Kyu1 = new Graad(1, "Kyu1","Groen");
+            Graad graad2Kyu2 = new Graad(2, "Kyu2","Geel");
+            Graad graad3Dan1 = new Graad(3, "Dan1","Oranje");
+            Graad graad4Dan2 = new Graad(4, "Dan2","Zwart");
 
             Graden = new[] { graad1Kyu1, graad2Kyu2, graad3Dan1, graad4Dan2 };
             #endregion
@@ -80,11 +84,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
             //--Lesgevers
             lesgever1 = new Lesgever("LesgeverHans", "hans@gmail.com", "Van Der Staak", "Hans", 'm',
                 new DateTime(1999, 08, 18), "België", "Gent", "Kerkstraat", "47", "Aalter", "1436",
-                "091112211", "0470055701", "97011033155", new DateTime(2019, 03, 09),"hans@ouders.com", null, false, false);
+                "091112211", "0470055701", "97011033155", new DateTime(2019, 03, 09),"hans@ouders.com", false,false);
 
             lesgever2 = new Lesgever("LesgeverDaan", "daan@gmail.com", "Van Vooren", "Daan", 'm',
                 new DateTime(1997, 01, 10), "België", "Gent", "Rijschootstraat", "32", "Ertvelde", "9040",
-                "091112211", "0470055701", "97011033155", new DateTime(2019, 03, 06),"daan@ouders.com", null, true, true);
+                "091112211", "0470055701", "97011033155", new DateTime(2019, 03, 06),"daan@ouders.com", true, true);
 
             //Gebruikers
 
@@ -135,6 +139,27 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data {
             Aanwezigheden = new[] {aanwezigheid3, aanwezigheid4};
             #endregion
 
+
+
+            #region LesmateriaalThema
+
+            LesmateriaalThema lesmateriaalThema1 = new LesmateriaalThema("Thema 1");
+            LesmateriaalThema lesmateriaalThema2 = new LesmateriaalThema("Thema 2");
+            #endregion
+
+            #region Lesmateriaal
+
+            Lesmateriaal lesmateriaal1 = new Lesmateriaal(graad1Kyu1, lesmateriaalThema1, "Lesmateriaal1", "wat tekst", "afbeelding", "video");
+            Lesmateriaal lesmateriaal2 = new Lesmateriaal(graad3Dan1, lesmateriaalThema2, "Lesmateriaal2", "wat tekst", "afbeelding", "video");
+            #endregion
+
+            #region Commentaar
+            commentaar1 = new Commentaar("Dit is commentaar nummer 1",(Lid) lid3, lesmateriaal1);
+            commentaar2 = new Commentaar("Dit is commentaar nummer 2",(Lid) lid4, lesmateriaal2);
+
+            Commentaren = new[] { commentaar1, commentaar2 };
+
+            #endregion
 
         }
     }

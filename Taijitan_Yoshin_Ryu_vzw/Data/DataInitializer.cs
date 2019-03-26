@@ -28,7 +28,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Trainingsmoment Woensdag = new Trainingsmoment(3, "Woensdag", "14:00", "15:30");
                 Trainingsmoment Donderdag = new Trainingsmoment(4, "Donderdag", "18:00", "20:00");
                 Trainingsmoment Zaterdag = new Trainingsmoment(6, "Zaterdag", "10:00", "11:30");
-
+                Trainingsmoment Zaterdag1 = new Trainingsmoment(6, "Zaterdag", "11:30", "13:00");
+                Trainingsmoment Zondag = new Trainingsmoment(0, "Zondag", "10:00", "12:30");
                 Trainingsmoment Develop_Dinsdag = new Trainingsmoment(2, "Dinsdag", "08:00", "23:59");
 
 
@@ -41,6 +42,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Formule DI_DO = new Formule("DI_DO");
                 Formule DI_ZA = new Formule("DI_ZA");
                 Formule WO_ZA = new Formule("WO_ZA");
+                Formule DI = new Formule("DI");
                 Formule WO = new Formule("WO");
                 Formule ZA = new Formule("ZA");
                 Formule gast = new Formule("gast");
@@ -199,10 +201,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 _dbContext.Gebruikers.AddRange(gebruikers);
 
                 //--Commentaar
-                _dbContext.Commentaren.Add(new Commentaar("nieuwe comment", (Lid)lid1, null));
-                _dbContext.Commentaren.Add(new Commentaar("nog een comment", (Lid)lid1, null));
-                _dbContext.Commentaren.Add(new Commentaar("derde comment", (Lid)lid2, null));
-                _dbContext.Commentaren.Add(new Commentaar("vierde comment", (Lid)lid1, null));
+                _dbContext.Commentaren.Add(new Commentaar("nieuwe comment", (Lid)lid1, lm1));
+                _dbContext.Commentaren.Add(new Commentaar("nog een comment", (Lid)lid1, lm1));
+                _dbContext.Commentaren.Add(new Commentaar("derde comment", (Lid)lid2, lm7));
+                _dbContext.Commentaren.Add(new Commentaar("vierde comment", (Lid)lid1, lm2));
 
                 //Alles opslaan
                 _dbContext.SaveChanges();

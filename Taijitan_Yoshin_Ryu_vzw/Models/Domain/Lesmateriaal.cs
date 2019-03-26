@@ -23,7 +23,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         #endregion
 
         #region Constructor
-        protected Lesmateriaal()
+        public Lesmateriaal()
         {
 
         }

@@ -14,6 +14,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         private readonly Mock<IGraadRepository> _graadRepo;
         private readonly Mock<IGebruikerRepository> _gebruikerRepo;
         private readonly Mock<ICommentaarRepository> _commentaarRepo;
+        private readonly Mock<ILoggingRepository> _loggingRepo;
         private Gebruiker _gebruiker;
         private readonly Graad _graad;
 
@@ -23,7 +24,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
             _graadRepo = new Mock<IGraadRepository>();
             _gebruikerRepo = new Mock<IGebruikerRepository>();
             _commentaarRepo = new Mock<ICommentaarRepository>();
-            _lesmateriaalController = new LesmateriaalController(_graadRepo.Object, _commentaarRepo.Object) {
+            _loggingRepo = new Mock<ILoggingRepository>();
+            _lesmateriaalController = new LesmateriaalController(_graadRepo.Object, _commentaarRepo.Object, _loggingRepo.Object, _gebruikerRepo.Object) {
                 TempData = new Mock<ITempDataDictionary>().Object
             };
 

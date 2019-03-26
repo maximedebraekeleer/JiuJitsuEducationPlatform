@@ -17,6 +17,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
         private readonly Mock<IGebruikerRepository> _gebruikers;
         private readonly Mock<IAanwezigheidRepository> _aanwezigheden;
         private readonly Mock<ISessieRepository> _sessies;
+        private readonly Mock<IGraadRepository> _graden;
         private readonly DummyApplicationDbContext _dummContext;
         private Sessie HuidigeSessie;
 
@@ -28,7 +29,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
             _formules = new Mock<IFormuleRepository>();
             _gebruikers = new Mock<IGebruikerRepository>();
             _trainingsmomenten = new Mock<ITrainingsmomentRepository>();
-            _sessieController = new SessieController(_formules.Object, _trainingsmomenten.Object, _gebruikers.Object, _aanwezigheden.Object, _sessies.Object) {
+            _graden = new Mock<IGraadRepository>();
+            _sessieController = new SessieController(_formules.Object, _trainingsmomenten.Object, _gebruikers.Object, _aanwezigheden.Object, _sessies.Object, _graden.Object) {
                 TempData = new Mock<ITempDataDictionary>().Object
             };
         }

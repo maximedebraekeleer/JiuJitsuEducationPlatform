@@ -13,11 +13,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
     {
         private readonly IGraadRepository _graden;
         private readonly ICommentaarRepository _commentaren;
+        private readonly ILoggingRepository _loggings;
+        private readonly IGebruikerRepository _gebruikers;
 
-        public LesmateriaalController(IGraadRepository graden, ICommentaarRepository commentaren)
+        public LesmateriaalController(IGraadRepository graden, ICommentaarRepository commentaren, ILoggingRepository loggings, IGebruikerRepository gebruikers)
         {
             _graden = graden;
             _commentaren = commentaren;
+            _loggings = loggings;
+            _gebruikers = gebruikers;
         }
 
         public IActionResult ThemaView(int GraadId)
@@ -36,6 +40,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         public IActionResult LesmateriaalView(string ThemaNaam, int GraadId, int LesmateriaalId)
         {
             ViewBag.Lesmateriaal = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
+            _loggings.AddLogging(new Logging(new Lid(), new Lesmateriaal()));
             return PartialView("~/Views/Lesmateriaal/Lesmateriaal.cshtml");
         }
 

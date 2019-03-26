@@ -21,14 +21,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         private readonly IGebruikerRepository _gebruikers;
         private readonly IAanwezigheidRepository _aanwezigheden;
         private readonly ISessieRepository _sessies;
+        private readonly IGraadRepository _graden;
 
-        public SessieController(IFormuleRepository formules, ITrainingsmomentRepository trainingsmomenten, IGebruikerRepository gebruikers, IAanwezigheidRepository aanwezigheden, ISessieRepository sessieRepository)
+        public SessieController(IFormuleRepository formules, ITrainingsmomentRepository trainingsmomenten, IGebruikerRepository gebruikers, IAanwezigheidRepository aanwezigheden, ISessieRepository sessieRepository, IGraadRepository graden)
         {
             _formules = formules;
             _trainingsmomenten = trainingsmomenten;
             _gebruikers = gebruikers;
             _aanwezigheden = aanwezigheden;
             _sessies = sessieRepository;
+            _graden = graden;
         }
 
         public IActionResult Index(Gebruiker gebruiker, Sessie huidigeSessie)
@@ -147,30 +149,29 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
                 return View();
             }
             //try {
-                Lid gast = new Lid(
-                gvm.Username,
-                gvm.Email,
-               gvm.Naam,
-               gvm.Voornaam,
-               gvm.Geslacht,
-               gvm.GeboorteDatum,
-               gvm.GeboorteLand,
-                gvm.GeboorteStad,
-                gvm.Straat,
-                gvm.HuisNummer,
-                gvm.Gemeente,
-                gvm.Postcode,
-                "+3291112211",
-                "0470055701",
-                "96032732925",
-                DateTime.Today,
-                gvm.EmailOuders,
-                false,
-                false,
-                _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),
-                new Graad(0, "gast", "")
+            Lid gast = new Lid(
+            gvm.Username,
+            gvm.Email,
+            gvm.Naam,
+            gvm.Voornaam,
+            gvm.Geslacht,
+            gvm.GeboorteDatum,
+            gvm.GeboorteLand,
+            gvm.GeboorteStad,
+            gvm.Straat,
+            gvm.HuisNummer,
+            gvm.Gemeente,
+            gvm.Postcode,
+            gvm.TelefoonNummer,
+            gvm.GsmNummer,
+            gvm.RijksregisterNummer,
+            DateTime.Today,
+            gvm.EmailOuders,
+            false,
+            false,
+            _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),
+            _graden.GetGraadWithId(1)
                 );
-
                 _gebruikers.Add(gast);
                 _gebruikers.SaveChanges();
 

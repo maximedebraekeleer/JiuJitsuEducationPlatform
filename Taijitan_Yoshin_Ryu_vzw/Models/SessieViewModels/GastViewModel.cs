@@ -48,6 +48,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         [Display(Name = "Gsmnummer")]
         [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
         public string GsmNummer { get; set; }
+        [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
         public string RijksregisterNummer { get; set; }
         [Display(Name = "E-mailadres ouders")]
         [EmailAddress(ErrorMessage = "Ongeldig E-mailadres.")]

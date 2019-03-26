@@ -128,7 +128,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
 
 
             //toevoegen aan lijst
-            Gebruikers = new[] { lid3, lid4,  lid5, lid6, lid7, lid8, lesgever1, lesgever2, gebruiker1 };
+            Gebruikers = new[] { lid1, lid4,  lid5, lid6, lid7, lid8, lesgever1, lesgever2, gebruiker1 };
             #endregion
 
 

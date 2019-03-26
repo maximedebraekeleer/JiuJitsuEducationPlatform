@@ -74,13 +74,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Controllers {
 
             IActionResult actionResult = _lesmateriaalController.NieuweCommentaren();
             CommentaarViewModel cvm = (actionResult as ViewResult)?.Model as CommentaarViewModel;
-            CommentaarViewModel cvm = (actionResult as ViewResult)?.Model as CommentaarViewModel;            
-        }
-        #endregion
-        #region LesmateriaalView
-
-        #endregion
-        #region LesmateriaalViewHead
 
             Assert.Equal("Commentaar 1", cvm?.Commentaren[0].Inhoud);
         }

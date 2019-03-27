@@ -32,22 +32,6 @@
                         },
                         success: (response) => {
                             $('#lesmateriaal').html(response); 
-                            $('#commentaarToevoegen').on('click', () => {
-                                voegCommentaarToe($('#commentaarInputArea').val(), $('#HuidigeGebruikerNaam').get(0).textContent);
-
-                                $.ajax({
-                                    method: "POST",
-                                    url: "Lesmateriaal/VoegCommentaarToe",
-                                    data: {
-                                        Inhoud: $('#commentaarInputArea').val(),
-                                        Username: $('#HuidigeGebruiker').get(0).textContent,
-                                        ThemaNaam: $('.geselecteerdThema').get(0).textContent,
-                                        GraadId: $('.geselecteerdeKyu').get(0).id,
-                                        LesmateriaalId: $('.dropdown-item').get(0).id
-                                    },
-                                    complete: () => { $('#commentaarInputArea').val('');}
-                                });
-                            });
                         }
                     });
                 }
@@ -67,6 +51,7 @@ $('#thema-nav').on('click', (e) => {
             },
             success: (r) => {
                 $('#lesmateriaalHead').html(r);
+                laadLesmateriaal($('.dropdown-item').get(0));
             }
         });
 
@@ -86,10 +71,26 @@ function laadLesmateriaal(e) {
             Username: $('#HuidigeGebruiker').get(0).textContent,
             ThemaNaam: $('.geselecteerdThema').get(0).textContent,
             GraadId: $('.geselecteerdeKyu').get(0).id,
-            LesmateriaalId: e.id
+            LesmateriaalId: (e.id ? e.id : -1)
         },
         success: (response) => {
             $('#lesmateriaal').html(response);
+            $('#commentaarToevoegen').on('click', () => {
+                                voegCommentaarToe($('#commentaarInputArea').val(), $('#HuidigeGebruikerNaam').get(0).textContent);
+
+                                $.ajax({
+                                    method: "POST",
+                                    url: "Lesmateriaal/VoegCommentaarToe",
+                                    data: {
+                                        Inhoud: $('#commentaarInputArea').val(),
+                                        Username: $('#HuidigeGebruiker').get(0).textContent,
+                                        ThemaNaam: $('.geselecteerdThema').get(0).textContent,
+                                        GraadId: $('.geselecteerdeKyu').get(0).id,
+                                        LesmateriaalId: $('.dropdown-item').get(0).id
+                                    },
+                                    complete: () => { $('#commentaarInputArea').val('');}
+                                });
+                            });
         }
     });
 
@@ -97,8 +98,31 @@ function laadLesmateriaal(e) {
 
 
 $('.kyu-nav > ul > li').click((e) => {
-    $.get("/Lesmateriaal/ThemaView", { GraadId: e.target.id }, function (response) {
-        $("#thema-nav").html(response);
+    $.ajax({
+        method: "POST",
+        url: "Lesmateriaal/ThemaView",
+        data: {
+            GraadId: e.target.id
+        },
+        success: (res) => {
+            $('#thema-nav').html(res);
+        },
+        complete: () => {
+            $.ajax({
+                type: "POST",
+                url: "/Lesmateriaal/LesmateriaalViewHead",
+                data: {
+                    GraadId: $('.geselecteerdeKyu').get(0).id,
+                    ThemaNaam: $('.geselecteerdThema').get(0).textContent
+                },
+                success: (r) => {
+                    $('#lesmateriaalHead').html(r);
+                },
+                complete: () => {
+                    laadLesmateriaal($('.dropdown-item').get(0));
+                }
+            });
+        }
     });
     $('.geselecteerdeKyu').removeClass('geselecteerdeKyu');
     e.target.classList.add('geselecteerdeKyu');
@@ -129,5 +153,11 @@ function voegCommentaarToe(Inhoud, Naam) {
     commentaarDiv.append(gebruikerDiv);
     commentaarDiv.append(inhoudDiv);
 
-    $('#commentaren').append(commentaarDiv);
+    if ($('#commentaren > div').get(0).classList.contains('commentaar-geen')) 
+    {
+        $('#commentaren').html(commentaarDiv);
+    } else
+    {
+        $('#commentaren').append(commentaarDiv);
+    }
 }

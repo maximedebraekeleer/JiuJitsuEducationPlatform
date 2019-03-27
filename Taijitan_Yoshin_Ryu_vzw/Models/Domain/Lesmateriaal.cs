@@ -50,12 +50,18 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
 
             Dictionary<int, Lid> result = new Dictionary<int, Lid>();
 
-            foreach (var c in Commentaren)
+            if(Commentaren.Count == 0)
             {
-                result.Add(c.Id, c.Lid);
+                return null;
             }
-
-            return result;
+            else
+            {
+                foreach (var c in Commentaren)
+                {
+                    result.Add(c.Id, c.Lid);
+                }
+                return result;
+            }      
         }
         #endregion
     }

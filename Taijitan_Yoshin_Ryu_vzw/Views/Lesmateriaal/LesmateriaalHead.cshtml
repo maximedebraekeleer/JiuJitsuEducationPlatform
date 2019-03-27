@@ -3,6 +3,11 @@
         @ViewBag.ThemaNaam
     </button>
     <div class="dropdown-menu" aria-labelledby="lesmateriaalDropdown">
+        @if(ViewBag.Lesmaterialen.Count == 0)
+        {
+            <li class="dropdown-item lesmateriaal-leeg-li" href="#">Er is geen lesmateriaal voor deze graad en thema.</li>
+        }
+
         @foreach (var l in ViewBag.Lesmaterialen)
         {
             <li class="dropdown-item" href="#" onclick="laadLesmateriaal(this)" id="@l.Id">@l.Titel</li>

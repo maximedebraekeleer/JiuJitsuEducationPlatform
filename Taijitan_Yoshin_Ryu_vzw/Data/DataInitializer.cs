@@ -116,20 +116,20 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 dan5.AddLesmateriaalThema(thema2, thema3);
 
                 //3-Lesmateriaal toevoegen
-                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "LW9X2fKjqCE");
+                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "placeholder.jpg,placeholder.jpg,placeholder.jpg", "LW9X2fKjqCE");
                 Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "LW9X2fKjqCE");
-                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "n6FpLqLLbxY");
-                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "YvFtXBxtHTU");
+                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "n6FpLqLLbxY");
+                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "placeholder.jpg", "");
                 Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "eQF3wyz0-XA");
-                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "QiC8jL90CFA");
-                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "-uFxLGtMwPc");
+                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "", "QiC8jL90CFA");
+                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "placeholder.jpg", "");
                 Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "j635OEznJVc");
                 Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "Q7SgyO0DNYs");
                 Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "4CNpMlF3pMs");
-                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "DXXE0Rs5EDY");
+                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg", "DXXE0Rs5EDY");
                 Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
-                Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
-                Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
+                Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "UITLEG", "placeholder.jpg", "S99HTXM96go");
+                Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "UITLEG", "", "S99HTXM96go");
                 Lesmateriaal lm15 = new Lesmateriaal(dan5, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
 
                 var lesmaterialen = new List<Lesmateriaal> {

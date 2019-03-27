@@ -24,6 +24,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
         public Gebruiker gebruiker1;
         public Commentaar commentaar1;
         public Commentaar commentaar2;
+        public Graad kyu6;
+        public Aanwezigheid aanwezigheid3;
 
         public DummyApplicationDbContext()
         {
@@ -50,7 +52,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
             #endregion
 
             #region Graden
-            Graad kyu6 = new Graad(1, "6e kyu", "#ffffff");
+            kyu6 = new Graad(1, "6e kyu", "#ffffff");
             Graad kyu5 = new Graad(2, "5e kyu", "#e6d259");
             Graad kyu4 = new Graad(3, "4e kyu", "#dc8e4e");
             Graad kyu3 = new Graad(4, "3e kyu", "#8edb4f");
@@ -145,8 +147,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Data
 
 
             #region Aanwezigheden
-            Aanwezigheid aanwezigheid3 = new Aanwezigheid((Lid)lid1, sessie14_2);
-            Aanwezigheid aanwezigheid4 = new Aanwezigheid((Lid)lid4, sessie14_2);
+            aanwezigheid3 = new Aanwezigheid((Lid)lid1, sessie14_2);
+            Aanwezigheid aanwezigheid4 = new Aanwezigheid((Lid)lid5, sessie14_2);
             Aanwezigheid aanwezigheid1 = new Aanwezigheid((Lid)lid7, sessie10_3);
             Aanwezigheid aanwezigheid2 = new Aanwezigheid((Lid)lid8, sessie10_3);
             //toevoegen aan lijst

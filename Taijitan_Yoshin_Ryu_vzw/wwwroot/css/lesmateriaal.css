@@ -114,6 +114,14 @@ div.dropdown-menu{
     margin-top: 3vh;
 }
 
+#loader{
+    position: absolute;
+    display: block;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 .lesmateriaal-content{
     position: absolute;
     top: 3%;
@@ -121,9 +129,19 @@ div.dropdown-menu{
     transform: translateX(-50%)
 }
 
+
+.dropdown-item{
+    padding: 0 10px 0 10px;
+}
+
+.dropdown-item:hover{
+    cursor: pointer;
+}
+
 .lesmateriaal-afbeeldingen {
     display: flex;
     justify-content: center;
+    margin: 5vh 0 5vh 0;
 }
 
 .lesmateriaal-afbeeldingen > img {
@@ -170,8 +188,8 @@ div.dropdown-menu{
     }
 
 hr {
-    margin-bottom: 5vh;
-    margin-top: 5vh;
+    margin-bottom: 7.5vh;
+    margin-top: 7.5vh;
 }
 
 .commentaar {
@@ -182,10 +200,26 @@ hr {
 
 
 .commentaar-gebruiker{
-    margin-right: 5vw;
-    font-weight: bold;
+    width: 15vw;
 }
+
+    .commentaar-gebruiker > h5 {
+        font-weight: bolder;
+    }
 
 .commentaar-inhoud > p{
     margin: 8px 0 8px 0;
+    width: 25vw;
+}
+
+.commentaar-geen{
+    text-align: center;
+}
+
+.commentaar-geen{
+    margin: 0 auto;
+}
+
+.tekstUitleg{
+    
 }

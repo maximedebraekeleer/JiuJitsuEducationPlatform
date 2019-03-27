@@ -40,9 +40,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         //Werkt niet door javascript
         public IActionResult LesmateriaalView(string Username, string ThemaNaam, int GraadId, int LesmateriaalId)
         {
-            ViewBag.Lesmateriaal = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
-            ViewBag.Commentaren = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First().Commentaren;
-            ViewBag.CommentaarLid = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First().GetCommentaarLid();
+            Lesmateriaal lm = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).FirstOrDefault();
+            ViewBag.Lesmateriaal = (lm == null ? null : lm);
+            ViewBag.CommentaarLid = (lm == null ? null : lm.GetCommentaarLid());
             _loggings.AddLogging(new Logging((Lid)_gebruikers.GetByUserName(Username), ViewBag.Lesmateriaal));
             _loggings.SaveChanges();
             return PartialView("~/Views/Lesmateriaal/Lesmateriaal.cshtml");
@@ -68,6 +68,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             commentaren.ForEach(c => c.markeerGezien());
             _commentaren.SaveChanges();
             return View(new CommentaarViewModel(commentaren));
+        }
+
+        public void VoegCommentaarToe(string Username, string Inhoud, string ThemaNaam, int GraadId, int LesmateriaalId)
+        {
+            _commentaren.VoegCommentaarToe(
+                (Lid)_gebruikers.GetByUserName(Username),
+                Inhoud,
+                _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First()
+                );
+            _commentaren.SaveChanges();
         }
 
     }

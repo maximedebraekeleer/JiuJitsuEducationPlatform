@@ -9,5 +9,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
     {
         IEnumerable<Commentaar> GetNew();
         void SaveChanges();
+        void VoegCommentaarToe(Lid Lid, string Inhoud, Lesmateriaal Lesmateriaal);
     }
 }

@@ -90,6 +90,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
                 return RedirectToAction(nameof(Lesgever), "Gebruiker");
             }
             Lid lid = (Lid)_gebruikers.GetByUserName(username);
+            if(lid == null)
+            {
+                TempData["error"] = $"Kon geen gebruiker vinden met de meegegeven username";
+                return RedirectToAction(nameof(Index));
+            }
             Aanwezigheid aanwezigheid = _aanwezigheden.GetbyLid(lid).Where(a => a.Sessie == huidigeSessie).FirstOrDefault();
             if (aanwezigheid != null)
             {          
@@ -148,43 +153,45 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             {
                 return View();
             }
-            //try {
-            Lid gast = new Lid(
-            gvm.Username,
-            gvm.Email,
-            gvm.Naam,
-            gvm.Voornaam,
-            gvm.Geslacht,
-            gvm.GeboorteDatum,
-            gvm.GeboorteLand,
-            gvm.GeboorteStad,
-            gvm.Straat,
-            gvm.HuisNummer,
-            gvm.Gemeente,
-            gvm.Postcode,
-            gvm.TelefoonNummer,
-            gvm.GsmNummer,
-            gvm.RijksregisterNummer,
-            DateTime.Today,
-            gvm.EmailOuders,
-            false,
-            false,
-            _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),
-            _graden.GetGraadWithId(1)
-                );
+            try
+            {
+                Lid gast = new Lid(
+                gvm.Username,
+                gvm.Email,
+                gvm.Naam,
+                gvm.Voornaam,
+                gvm.Geslacht,
+                gvm.GeboorteDatum,
+                gvm.GeboorteLand,
+                gvm.GeboorteStad,
+                gvm.Straat,
+                gvm.HuisNummer,
+                gvm.Gemeente,
+                gvm.Postcode,
+                gvm.TelefoonNummer,
+                gvm.GsmNummer,
+                gvm.RijksregisterNummer,
+                DateTime.Today,
+                gvm.EmailOuders,
+                false,
+                false,
+                _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),
+                _graden.GetGraadWithId(1)
+                    );
                 _gebruikers.Add(gast);
                 _gebruikers.SaveChanges();
 
-            huidigeSessie.VoegAanwezigheidToe(gast, true);
-            _sessies.SaveChanges();
-            //}
-            //catch (Exception e)
-            ///{
-             //   string[] error = e.Message.Split('/');
-            //    ModelState.AddModelError(error[0], error[1]);
-            //}
+                huidigeSessie.VoegAanwezigheidToe(gast, true);
+                _sessies.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                string[] error = e.Message.Split('/');
+                ModelState.AddModelError(error[0], error[1]);
+                return View(gvm);
+            }
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]

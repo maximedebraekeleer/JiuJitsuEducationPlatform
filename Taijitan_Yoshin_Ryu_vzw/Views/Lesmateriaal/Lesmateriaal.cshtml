@@ -12,53 +12,80 @@
 
     </div>
 </div>
-
 <div class="lesmateriaal-content">
-    <div>
-        <iframe width="800" height="455" src="https://www.youtube.com/embed/@ViewBag.lesmateriaal.InhoudVideo" frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="lesmateriaal-afbeeldingen">
-        @{
-            foreach (var a in ViewBag.Lesmateriaal.geefAlleAfbeeldingen())
-            {
-                <img data-toggle="modal" data-target="#afbeeldingModal" src="~/images/lesmateriaal/@a" onclick="modalLaden(this)" alt="Alternate Text" />
-            }
+    @{
+        if (ViewBag.Lesmateriaal != null && ViewBag.Lesmateriaal.InhoudVideo != "")
+        {
+            <div>
+                <iframe width="800" height="455" src="https://www.youtube.com/embed/@ViewBag.lesmateriaal.InhoudVideo" frameborder="0"
+                        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         }
-    </div>
+    }
+            <div class="lesmateriaal-afbeeldingen">
+                @{
+                    if (ViewBag.Lesmateriaal != null && ViewBag.Lesmateriaal.InhoudAfbeeldingen != "")
+                    {
+                        foreach (var a in ViewBag.Lesmateriaal.geefAlleAfbeeldingen())
+                        {
+                            <img data-toggle="modal" data-target="#afbeeldingModal" src="~/images/lesmateriaal/@a" onclick="modalLaden(this)" alt="Alternate Text" />
+                        }
+                    }
+                }
+            </div>
+            <p class="tekstUitleg">
+                @{
+                    if (ViewBag.Lesmateriaal != null)
+                    {
+                        @ViewBag.Lesmateriaal.InhoudTekst
+                        <hr />
+                    }
+                    else
+                    {
+                        <h5>Er is geen lesmateriaal voor deze graad en thema.</h5>
+                    }
+
+                }
+            </p>
     <div id="commentaar-wrapper">
-        <hr />
+        
         <div id="commentaren">
 
-            @if(ViewBag.Commentaren.Count < 1 || ViewBag.Commentaren == null)
+            @if (ViewBag.Lesmateriaal != null)
             {
-                <div class="commentaar" style="text-align: center;">
-                    <span>Er zijn geen commentaren voor dit lesmateriaal.</span>
-                </div>
-            }
-            else
-            {
-                foreach(var commentaar in ViewBag.Commentaren)
+                if (ViewBag.Lesmateriaal.Commentaren.Count < 1 || ViewBag.Lesmateriaal.Commentaren == null)
                 {
-                    <div class="commentaar">
-                        <div class="commentaar-gebruiker">
-                            <h5>@ViewBag.CommentaarLid[commentaar.Id].Voornaam @ViewBag.CommentaarLid[commentaar.Id].Naam:</h5>
-                        </div>
-                        <div class="commentaar-inhoud">
-                            <p>@commentaar.Inhoud</p>
-                        </div>
+                    <div class="commentaar-geen">
+                        <span>Er zijn geen commentaren voor dit lesmateriaal.</span>
                     </div>
+                }
+                else
+                {
+                    foreach (var commentaar in ViewBag.Lesmateriaal.Commentaren)
+                    {
+                        <div class="commentaar">
+                            <div class="commentaar-gebruiker">
+                                <h5>@ViewBag.CommentaarLid[commentaar.Id].Voornaam @ViewBag.CommentaarLid[commentaar.Id].Naam:</h5>
+                            </div>
+                            <div class="commentaar-inhoud">
+                                <p>@commentaar.Inhoud</p>
+                            </div>
+                        </div>
+                    }
                 }
             }
         </div>
         <div id="commentaarInput">
-            <hr />
-            <div>
+            @if (ViewBag.Lesmateriaal != null)
+            {
+                <hr />
+                <div>
 
-                <textarea rows="4" cols="50" name="commentaar" placeholder=" Geef hier uw commentaar."></textarea>
-                <button type="button">Bevestig</button>
-                <br /><br /><br />
-            </div>
+                    <textarea id="commentaarInputArea" rows="4" cols="50" name="commentaar" placeholder=" Geef hier uw commentaar."></textarea>
+                    <button type="button" id="commentaarToevoegen">Bevestig</button>
+                    <br /><br /><br />
+                </div>
+            }
 
         </div>
     </div>

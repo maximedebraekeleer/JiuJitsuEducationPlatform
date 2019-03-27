@@ -9,30 +9,37 @@
 @section Scripts {
         <script src="~/js/lesmateriaal.js"></script>
 }
-
         <span style="display: none;" id="GraadIdGebruiker">@Model.HuidigLid.Graad.GraadId</span>
         <span style="display: none;" id="HuidigeGebruiker">@Model.HuidigLid.Username</span>
+        <span style="display: none;" id="HuidigeGebruikerNaam">@Model.HuidigLid.Voornaam @Model.HuidigLid.Naam</span>
         <div class="lesmateriaalContent-wrapper">
             <div class="kyu-nav">
                 <ul>
                     @{
-                        foreach (var kyu in Model.Graden)
+                        if (Model.Graden.Count > 0)
                         {
-                            if (kyu.GraadId > Model.HuidigLid.Graad.GraadId)
+                            foreach (var kyu in Model.Graden)
                             {
-                                <li class="kyu-locked" id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span><i class="fas fa-lock"></i></li>
-                            }
-                            else
-                            {
-                                if (kyu.GraadId == Model.HuidigLid.Graad.GraadId)
+                                if (kyu.GraadId > Model.HuidigLid.Graad.GraadId)
                                 {
-                                    <li id="@kyu.GraadId" class="geselecteerdeKyu"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span></li>
+                                    <li class="kyu-locked" id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span><i class="fas fa-lock"></i></li>
                                 }
                                 else
                                 {
-                                    <li id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span></li>
+                                    if (kyu.GraadId == Model.HuidigLid.Graad.GraadId)
+                                    {
+                                        <li id="@kyu.GraadId" class="geselecteerdeKyu"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span></li>
+                                    }
+                                    else
+                                    {
+                                        <li id="@kyu.GraadId"><div class="kyu-kleur" style="background-color:@kyu.Kleur"></div><span>@kyu.GraadNaam</span></li>
+                                    }
                                 }
                             }
+                        }
+                        else
+                        {
+                            <li class="geselecteerdeKyu"><span>Er zijn geen graden.</span></li>
                         }
                     }
                 </ul>
@@ -45,7 +52,7 @@
 
                 </div>
                 <div id="lesmateriaal">
-
+                    <img id="loader" src="~/images/loader.gif" alt="Loading image" />
                 </div>
                 
             </div>

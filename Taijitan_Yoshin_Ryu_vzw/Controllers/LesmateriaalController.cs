@@ -70,5 +70,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             return View(new CommentaarViewModel(commentaren));
         }
 
+        public void VoegCommentaarToe(string Username, string Inhoud, string ThemaNaam, int GraadId, int LesmateriaalId)
+        {
+            _commentaren.VoegCommentaarToe(
+                (Lid)_gebruikers.GetByUserName(Username),
+                Inhoud,
+                _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First()
+                );
+            _commentaren.SaveChanges();
+        }
+
     }
 }

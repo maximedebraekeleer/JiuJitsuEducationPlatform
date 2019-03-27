@@ -22,6 +22,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             return _commentaren.Where(c => c.IsNew).Include(c => c.Lesmateriaal).Include(c => c.Lid).ToList();
         }
 
+        public void VoegCommentaarToe(Lid Lid, string Inhoud, Lesmateriaal Lesmateriaal)
+        {
+            _commentaren.Add(new Commentaar(Inhoud, Lid, Lesmateriaal));
+        }
+
         public void SaveChanges()
         {
             _context.SaveChanges();

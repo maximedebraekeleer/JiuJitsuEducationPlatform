@@ -28,19 +28,13 @@
 
         .ledenlijst > li:hover {
             text-decoration: none;
-        }
-
-        .ledenlijst > li:nth-child(even) {
-            background: #e0e0e0;
+            cursor: pointer;
         }
 
         .ledenlijst > li.aanwezig {
             background: #61d961;
         }
 
-        .ledenlijst > li:nth-child(even).aanwezig {
-            background: #38cf38;
-        }
 
 .buttonPanel {
     display: flex;

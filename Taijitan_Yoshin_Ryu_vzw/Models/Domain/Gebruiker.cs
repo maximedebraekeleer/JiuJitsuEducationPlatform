@@ -25,7 +25,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         private string _rijksregisterNummer;
         private DateTime _inschrijvingsDatum;
         private string _emailOuders; //Niet verplicht
-        private List<String> Errors = new List<string>();
         #endregion
 
 
@@ -106,8 +105,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             get => _geboorteDatum;
             set
             {
-                if (DateTime.Compare(value, DateTime.Today) > 0)
-                    throw new ArgumentException("GeboorteDatum/Geboortedatum kan niet ouder zijn dan vandaag");
+                if (DateTime.Today.Year - value.Year < 6)
+                    throw new ArgumentException("GeboorteDatum/Gebruiker moet minstens 6 jaar oud zijn");
                 if (DateTime.Compare(value, (DateTime.Today).AddYears(-99)) < 0)
                     throw new ArgumentException("GeboorteDatum/Geboortedatum kan niet meer dan 99 jaar geleden zijn");
                 _geboorteDatum = value;
@@ -239,7 +238,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
                 Regex regex = new Regex(@"^\d{10}$|^\+\d{11}$");
                 Match match = regex.Match(value);
                 if (!match.Success)
-                    throw new ArgumentException("GsmNummer/Ongeldig gsmnummer");
+                    throw new ArgumentException("GsmNummer/Ongeldig GSM-nummer");
                 _gsmNummer = value;
             }
         }

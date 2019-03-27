@@ -43,35 +43,42 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "E-mailadres")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
-            [EmailAddress(ErrorMessage = "Ongeldig E-mailadres.")]
+            [EmailAddress(ErrorMessage = "Ongeldig {0}")]
             public string Email { get; set; }
 
             [Display(Name = "Straat")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
+            [RegularExpression(@"^([^0-9]*)$", ErrorMessage = "{0} mag geen cijfers bevatten")]
             public string Straat { get; set; }
 
             [Display(Name = "Gemeente")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
+            [RegularExpression(@"^([^0-9]*)$", ErrorMessage = "{0} mag geen cijfers bevatten")]
             public string Gemeente { get; set; }
 
             [Display(Name = "Huisnummer")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
+            [RegularExpression(@"^[0-9]+[a-zA-Z]*", ErrorMessage = "Ongeldig {0}")]
             public string HuisNummer { get; set; }
 
             [Display(Name = "Postcode")]
-            [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
+            [Required(ErrorMessage = "{0} is verplicht om in te vullen")] 
+            [RegularExpression(@"^\d{4}$", ErrorMessage = "{0} moet uit vier cijfers bestaan")]
             public string Postcode { get; set; }
 
             [Display(Name = "Naam")]
+            [RegularExpression(@"^([^0-9]*)$", ErrorMessage = "{0} mag geen cijfers bevatten")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
             public string Naam { get; set; }
 
             [Display(Name = "Voornaam")]
+            [RegularExpression(@"^([^0-9]*)$", ErrorMessage = "{0} mag geen cijfers bevatten")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
             public string Voornaam { get; set; }
 
             [Display(Name = "GSM-nummer")]
             [Required(ErrorMessage = "{0} is verplicht om in te vullen")]
+            [RegularExpression(@"^\d{10}$|^\+\d{11}$", ErrorMessage = "Ongeldig {0}")]
             public string GsmNummer { get; set; }
 
             [Display(Name = "Ik wens info te ontvangen over club aangelegenheden")]
@@ -83,17 +90,15 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             #region nietVerplichteVelden
             [Display(Name = "Telefoonnummer")]
+            [RegularExpression(@"^\d{9}$|^\+\d{10}$|^$", ErrorMessage = "Ongeldig {0}")]
             public string TelefoonNummer { get; set; } //Niet verplicht
 
             [Display(Name = "E-mailadres van ouders")]
-            [RegularExpression(@"^$|^.*@.*\..*$", ErrorMessage = "Ongeldig E-mailadres")]
+            [RegularExpression(@"^$|^.*@.*\..*$", ErrorMessage = "Ongeldig {0}")]
             public string EmailOuders { get; set; } //Niet verplicht
             #endregion
 
             #region onAanpasbaardeVelden            
-            //[Display(Name = "Geslacht")]
-            //public char Geslacht { get; set; }
-
             [Display(Name = "Geboortedatum")]
             public DateTime GeboorteDatum { get; set; }
 
@@ -103,11 +108,8 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Geboorteland")]
             public string GeboorteLand { get; set; }
 
-            [Display(Name = "Rijksregisternummer")]
+            [Display(Name = "Rijksregisternummer")] //niet
             public string RijksregisterNummer { get; set; }
-
-            //[Display(Name = "Inschrijvingsdatum")]
-            //public DateTime InschrijvingsDatum { get; set; }
             #endregion
         }
 
@@ -193,8 +195,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
 
             }
 
-            try
-            {
                 gebruiker.Naam = Input.Naam;
                 gebruiker.Voornaam = Input.Voornaam;
                 //gebruiker.GeboorteDatum = Input.GeboorteDatum;
@@ -215,14 +215,6 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
                 await _signInManager.RefreshSignInAsync(user);
                 StatusMessage = "Uw profiel is aangepast";
                 return RedirectToPage();
-            }
-            catch (Exception e)
-            {
-                string[] error = e.Message.Split('/');
-                ModelState.AddModelError(error[0], error[1]);
-                //ModelState.AddModelError("", e.Message);
-                return Page();
-            }
         }
     }
 }

@@ -216,18 +216,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
                 TempData["error"] = $"Er zijn vandaag geen sessies";
                 RedirectToAction(nameof(Lesgever), "Gebruiker");
             }
-            String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
-            huidigeSessie.ClearAanwezigheden();
-            Lid lid;
-            bool isExtra;
-            List<Formule> formulesMetLes = _formules.getAll().Where(f => f.bevatTrainingsmoment(GeefTrainingsmoment())).ToList();
-            foreach (var a in aanwezig)
+            else
             {
-                lid = (Lid)_gebruikers.GetByUserName(a);
-                isExtra = lid.IsExtra(formulesMetLes);
-                huidigeSessie.VoegAanwezigheidToe(lid, isExtra);
+                String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
+                huidigeSessie.ClearAanwezigheden();
+                Lid lid;
+                bool isExtra;
+                List<Formule> formulesMetLes = _formules.getAll().Where(f => f.bevatTrainingsmoment(GeefTrainingsmoment())).ToList();
+                foreach (var a in aanwezig)
+                {
+                    lid = (Lid)_gebruikers.GetByUserName(a);
+                    isExtra = lid.IsExtra(formulesMetLes);
+                    huidigeSessie.VoegAanwezigheidToe(lid, isExtra);
+                }
+                _sessies.SaveChanges();
             }
-            _sessies.SaveChanges();
         }
 
         public IActionResult SessieAanwezigen(Sessie huidigeSessie)

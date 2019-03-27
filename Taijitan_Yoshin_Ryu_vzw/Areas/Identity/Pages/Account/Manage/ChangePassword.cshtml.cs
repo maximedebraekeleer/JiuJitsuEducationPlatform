@@ -57,7 +57,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Kan gebruiker met ID '{_userManager.GetUserId(User)}' niet laden.");
             }
 
             var hasPassword = await _userManager.HasPasswordAsync(user);
@@ -79,7 +79,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Kan gebruiker met ID '{_userManager.GetUserId(User)}' niet laden.");
             }
 
             var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
@@ -93,7 +93,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
+            _logger.LogInformation("Gebruiker heeft succesvol zijn wachtwoord veranderd.");
             StatusMessage = "Uw wachtwoord is gewijzigd.";
 
             return RedirectToPage();

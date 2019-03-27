@@ -7,6 +7,16 @@ body {
     width: 100vw;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
+}
+
+.icon-bar{
+    background-color: black !important;
+}
+
+.alert{
+    max-width: 50vw;
+    margin: 20px 0 20px 0;
 }
 
 .navbar{
@@ -67,6 +77,7 @@ button {
 
 .navbar-nav > li > button:active {
     outline: none;
+    padding: 6px 12px;
 }
 
 .navbar-nav > li > a {
@@ -78,9 +89,13 @@ button {
     outline: none;
 }
 
-.navbar-nav > .gebruikerEmail {
-    line-height: 50px;
-}
+    .navbar-nav > li > button > i{
+
+    }
+
+    .navbar-nav > .gebruikerEmail {
+        line-height: 50px;
+    }
 
 footer {
     text-align: center;

@@ -9,8 +9,9 @@
 @section Scripts {
         <script src="~/js/lesmateriaal.js"></script>
 }
-
         <span style="display: none;" id="GraadIdGebruiker">@Model.HuidigLid.Graad.GraadId</span>
+        <span style="display: none;" id="HuidigeGebruiker">@Model.HuidigLid.Username</span>
+        <span style="display: none;" id="HuidigeGebruikerNaam">@Model.HuidigLid.Voornaam @Model.HuidigLid.Naam</span>
         <div class="lesmateriaalContent-wrapper">
             <div class="kyu-nav">
                 <ul>
@@ -44,7 +45,8 @@
 
                 </div>
                 <div id="lesmateriaal">
-
+                    <img id="loader" src="~/images/loader.gif" alt="Loading image" />
                 </div>
+                
             </div>
         </div>

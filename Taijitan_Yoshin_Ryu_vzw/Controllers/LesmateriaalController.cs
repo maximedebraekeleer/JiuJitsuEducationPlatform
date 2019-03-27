@@ -37,17 +37,29 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             return PartialView("~/Views/Lesmateriaal/LesmateriaalHead.cshtml");
         }
 
-        public IActionResult LesmateriaalView(string ThemaNaam, int GraadId, int LesmateriaalId)
+        //Werkt niet door javascript
+        public IActionResult LesmateriaalView(string Username, string ThemaNaam, int GraadId, int LesmateriaalId)
         {
             ViewBag.Lesmateriaal = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First();
-            _loggings.AddLogging(new Logging(new Lid(), new Lesmateriaal()));
+            ViewBag.Commentaren = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First().Commentaren;
+            ViewBag.CommentaarLid = _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First().GetCommentaarLid();
+            _loggings.AddLogging(new Logging((Lid)_gebruikers.GetByUserName(Username), ViewBag.Lesmateriaal));
+            _loggings.SaveChanges();
             return PartialView("~/Views/Lesmateriaal/Lesmateriaal.cshtml");
         }
 
         [ServiceFilter(typeof(GebruikerFilter))]
         public IActionResult Index(Gebruiker gebruiker, string username)
         {
-            return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
+            if(gebruiker is Lesgever)
+            {
+                Gebruiker huidigLid = _gebruikers.GetByUserName(username);
+                return View(new LesmateriaalViewModel(huidigLid, _graden.GetAll().ToList()));
+            }
+            else
+            {
+                return View(new LesmateriaalViewModel(gebruiker, _graden.GetAll().ToList()));
+            }
         }
 
         public IActionResult NieuweCommentaren()
@@ -56,6 +68,16 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             commentaren.ForEach(c => c.markeerGezien());
             _commentaren.SaveChanges();
             return View(new CommentaarViewModel(commentaren));
+        }
+
+        public void VoegCommentaarToe(string Username, string Inhoud, string ThemaNaam, int GraadId, int LesmateriaalId)
+        {
+            _commentaren.VoegCommentaarToe(
+                (Lid)_gebruikers.GetByUserName(Username),
+                Inhoud,
+                _graden.GetGraadWithId(GraadId).GeefLesmateriaalMetThema(ThemaNaam).Where(l => l.Id == LesmateriaalId).First()
+                );
+            _commentaren.SaveChanges();
         }
 
     }

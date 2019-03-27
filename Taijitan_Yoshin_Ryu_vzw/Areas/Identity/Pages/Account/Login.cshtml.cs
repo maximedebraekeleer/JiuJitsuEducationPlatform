@@ -76,12 +76,12 @@ namespace Taijitan_Yoshin_Ryu_vzw.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Gebruiker ingelogd.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Gebruiker buitengesloten.");
                     return RedirectToPage("./Lockout");
                 }
                 else

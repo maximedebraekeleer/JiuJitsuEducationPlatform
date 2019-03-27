@@ -8,8 +8,7 @@
     margin: 0;
 }
 
-.kyu-nav, #thema-nav
-{
+.kyu-nav, #thema-nav {
     position: fixed;
     width: 17vw;
     display: flex;
@@ -93,6 +92,7 @@
     margin-left: 34vw;
     width: 66vw;
     padding-left: 2vw;
+   
 }
 
 .lesmateriaal-wrapper > #lesmateriaalHead > .dropdown > button{
@@ -114,6 +114,14 @@ div.dropdown-menu{
     margin-top: 3vh;
 }
 
+#loader{
+    position: absolute;
+    display: block;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 .lesmateriaal-content{
     position: absolute;
     top: 3%;
@@ -121,16 +129,75 @@ div.dropdown-menu{
     transform: translateX(-50%)
 }
 
-.lesmateriaal-content > div:last-child{
+.lesmateriaal-afbeeldingen {
     display: flex;
     justify-content: center;
 }
 
-    .lesmateriaal-content > div:last-child > img{
-        width: 7.5vw;
-        height: 7.5vw;
-        margin: 2px;
+.lesmateriaal-afbeeldingen > img {
+    width: 7.5vw;
+    height: 7.5vw;
+    margin: 2px;
+}
+.lesmateriaal-afbeeldingen img:hover {
+    cursor: pointer;
+}
+
+.modal-header{
+    border: none;
+}
+
+.modal-header > button.close {
+    color: white;
+    opacity: .9;
+    font-size: 3rem;
+    outline: none;
+    transform: translateX(7.5vw) translateY(2vh)
+}
+
+#commentaarInput {
+    position: relative;
+}
+
+#commentaarInput > hr{
+    max-width: 50vw;
+}
+
+#commentaarInput > div{
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+    #commentaarInput > div > textarea {
+        border-width: 1.1px;
     }
-    .lesmateriaal-content > div:last-child > img:hover{
-        cursor: pointer;
+    #commentaarInput > div > button {
+        margin: 5px 0 0 0;
     }
+
+hr {
+    margin-bottom: 7.5vh;
+    margin-top: 7.5vh;
+}
+
+.commentaar {
+    display: flex !important;
+    padding-left: 5vw;
+}
+
+
+
+.commentaar-gebruiker{
+    width: 15vw;
+}
+
+    .commentaar-gebruiker > h5 {
+        font-weight: bolder;
+    }
+
+.commentaar-inhoud > p{
+    margin: 8px 0 8px 0;
+    width: 25vw;
+}

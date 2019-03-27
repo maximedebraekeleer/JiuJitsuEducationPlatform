@@ -28,7 +28,20 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
         public Graad GetGraadWithId(int Graadid)
         {
             return _graden.Where(g => g.GraadId == Graadid).Include(f => f.GraadLesmateriaalThemas).ThenInclude(op => op.LesmateriaalThema)
-                .ThenInclude(t => t.Lesmaterialen).First();
+                .ThenInclude(t => t.Lesmaterialen).ThenInclude(c => c.Commentaren).First();
+        }
+
+        public SortedList<int, Lid> GetCommentaarLid(Lesmateriaal lesmateriaal)
+        {
+
+            SortedList<int, Lid> result = new HashSet<int, Lid>();
+
+            foreach(var c in lesmateriaal.Commentaren)
+            {
+                result.add(c.Id, c.Lid);
+            }
+
+            return result;
         }
     }
 }

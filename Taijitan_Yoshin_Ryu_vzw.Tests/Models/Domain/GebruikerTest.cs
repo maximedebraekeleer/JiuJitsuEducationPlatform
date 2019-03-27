@@ -129,6 +129,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Tests.Models.Domain
         }
 
         [Fact]
+        public void GebruikerMaken_GeboorteDatumJongerDan6Jaar_ThrowsException()
+        {
+            DateTime geboorteDatum = _huidigeDatum.AddYears(-5);
+            Assert.Throws<ArgumentException>(() => new Gebruiker { GeboorteDatum = geboorteDatum });
+        }
+
+        [Fact]
         public void GebruikerMaken_GeboorteDatumOuderDan99Jaar1_ThrowsException()
         {
             DateTime geboorteDatum = _huidigeDatum.AddYears(-100);

@@ -30,11 +30,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Trainingsmoment Zaterdag = new Trainingsmoment(6, "Zaterdag", "10:00", "11:30");
                 Trainingsmoment Zaterdag1 = new Trainingsmoment(6, "Zaterdag", "11:30", "13:00");
                 Trainingsmoment Zondag = new Trainingsmoment(0, "Zondag", "10:00", "12:30");
-                Trainingsmoment Develop_Woensdag = new Trainingsmoment(3, "Woensdag", "08:00", "23:59");
+                Trainingsmoment Develop = new Trainingsmoment(3, "Woensdag", "07:00", "23:59");
 
 
                 var trainingsmomenten = new List<Trainingsmoment> {
-                    Dinsdag, Woensdag, Donderdag, Zaterdag, Develop_Woensdag
+                    Dinsdag, Woensdag, Donderdag, Zaterdag, Develop
                 };
                 _dbContext.Trainingsmomenten.AddRange(trainingsmomenten);
 
@@ -47,12 +47,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Formule ZA = new Formule("ZA");
                 Formule gast = new Formule("gast");
 
-                Formule Develop_WO1 = new Formule("Develop_WO1");
-                Formule Develop_WO2 = new Formule("Develop_WO2");
-                Formule Develop_WO3 = new Formule("Develop_WO3");
+                Formule Develop1 = new Formule("Develop1");
+                Formule Develop2 = new Formule("Develop2");
 
                 var formules = new List<Formule> {
-                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast, Develop_WO1, Develop_WO2, Develop_WO3
+                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast, Develop1, Develop2
                 };
                 _dbContext.Formules.AddRange(formules);
 
@@ -70,9 +69,10 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
 
                 ZA.AddTrainingsmoment(Zaterdag);
 
-                Develop_WO1.AddTrainingsmoment(Develop_Woensdag);
-                Develop_WO2.AddTrainingsmoment(Develop_Woensdag);
-                Develop_WO3.AddTrainingsmoment(Develop_Woensdag);
+                Develop1.AddTrainingsmoment(Develop);
+                Develop2.AddTrainingsmoment(Develop);
+                Develop2.AddTrainingsmoment(Dinsdag);
+                Develop2.AddTrainingsmoment(Zondag);
 
                 //Lesmateriaal
                 //1-Thema's toevoegen
@@ -142,45 +142,45 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Gebruiker lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',
                     new DateTime(1998, 02, 03), "België", "Gent", "Vossenlaan", "2", "Beerle", "9000",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false,
-                    Develop_WO1, kyu3);
+                    Develop1, kyu3);
                 await CreateUser(lid1.Username, lid1.Email, "P@ssword1", "lid");
 
                 Gebruiker lid2 = new Lid("LidMichael", "michael@gmail.com", "Vermassen", "Michael", 'm',
                     new DateTime(1997, 05, 14), "België", "Gent", "Laanstraat", "72", "Hasselt", "6547",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 09), "michael@ouders.com", true, true,
-                    Develop_WO2, kyu4);
+                    Develop1, kyu4);
                 await CreateUser(lid2.Username, lid2.Email, "P@ssword1", "lid");
 
                 //--Leden zonder login
-                Gebruiker lid3 = new Lid("Lid0003", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
+                Gebruiker lid3 = new Lid("Lid0003", "Lid3@gmail.com", "Pervool", "Pol", 'm',
                     new DateTime(1997, 11, 05), "België", "Beerle", "Molenstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "pol@ouders.com", true, false,
-                    Develop_WO3, kyu4);
+                    Develop2, kyu4);
 
-                Gebruiker lid4 = new Lid("Lid0004", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
+                Gebruiker lid4 = new Lid("Lid0004", "Lid4@gmail.com", "Van Spaendonck", "Mark", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "mark@ouders.com", true, false,
-                    Develop_WO1, kyu4);
+                    Develop2, kyu4);
 
-                Gebruiker lid5 = new Lid("Lid0005", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
+                Gebruiker lid5 = new Lid("Lid0005", "Lid5@gmail.com", "De Neve", "Louis", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "louis@ouders.com", true, false,
-                    Develop_WO2, kyu4);
+                    Develop1, kyu4);
 
-                Gebruiker lid6 = new Lid("Lid0006", "Lid6@gmail.com", "Van Onderen", "Justine", 'v',
+                Gebruiker lid6 = new Lid("Lid0006", "Lid6@gmail.com", "Van Hoven", "Justine", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "justine@ouders.com", true, false,
-                    Develop_WO3, kyu3);
+                    Develop1, kyu3);
 
-                Gebruiker lid7 = new Lid("Lid0007", "Lid6@gmail.com", "Van Onderen", "Sien", 'v',
+                Gebruiker lid7 = new Lid("Lid0007", "Lid6@gmail.com", "De Krem", "Sien", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "sien@ouders.com", true, false,
-                    Develop_WO2, kyu5);
+                    Develop2, kyu5);
 
-                Gebruiker lid8 = new Lid("Lid0008", "Lid8@gmail.com", "Van Schuinen", "Neeri", 'm',
+                Gebruiker lid8 = new Lid("Lid0008", "Lid8@gmail.com", "Van de Voorde", "Neeri", 'm',
                     new DateTime(1960, 08, 05), "Duitsland", "Passichi", "Jiaefestraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "sien@ouders.com", true, false,
-                    Develop_WO2, kyu5);
+                    Develop2, kyu5);
 
                 //--Lesgevers
                 Gebruiker lesgever1 = new Lesgever("LesgeverHans", "hans@gmail.com", "Van Der Staak", "Hans", 'm',

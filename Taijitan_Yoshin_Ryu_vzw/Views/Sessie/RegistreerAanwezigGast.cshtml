@@ -29,9 +29,10 @@
                     <span asp-validation-for="Naam" class="text-danger"></span>
                 </div>
                 <label asp-for="Geslacht"></label>
-                <div class="form-group">                    
-                    <label><input asp-for="Geslacht" value="m" type="radio" />Man</label>
+                <div class="form-group">
+                    <label><input asp-for="Geslacht" value="m" type="radio" checked="checked"/>Man</label>
                     <label><input asp-for="Geslacht" value="v" type="radio" />Vrouw</label>
+                    <span asp-validation-for="Geslacht" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="GeboorteDatum"></label>
@@ -50,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="RijksregisterNummer"></label>
-                    <input asp-for="RijksregisterNummer" class="form-control"/>
+                    <input asp-for="RijksregisterNummer" class="form-control" />
                     <span asp-validation-for="RijksregisterNummer" class="text-danger"></span>
                 </div>
 

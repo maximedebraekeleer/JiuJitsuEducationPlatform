@@ -21,18 +21,22 @@
                     $('#lesmateriaalHead').html(r);
                 },
                 complete: () => {
-                    $.ajax({
-                        type: "POST",
-                        url: "Lesmateriaal/LesmateriaalView",
-                        data: {
-                            Username: $('#HuidigeGebruiker').get(0).textContent,
-                            ThemaNaam: $('.geselecteerdThema').get(0).textContent,
-                            GraadId: $('.geselecteerdeKyu').get(0).id,
-                            LesmateriaalId: $('.dropdown-item').get(0).id
-                        },
-                        success: (response) => {
-                            $('#lesmateriaal').html(response); 
-                        }
+                    laadLesmateriaal($('.dropdown-item').get(0));
+                    $('#commentaarToevoegen').on('click', () => {
+                        voegCommentaarToe($('#commentaarInputArea').val(), $('#HuidigeGebruikerNaam').get(0).textContent);
+
+                        $.ajax({
+                            method: "POST",
+                            url: "Lesmateriaal/VoegCommentaarToe",
+                            data: {
+                                Inhoud: $('#commentaarInputArea').val(),
+                                Username: $('#HuidigeGebruiker').get(0).textContent,
+                                ThemaNaam: $('.geselecteerdThema').get(0).textContent,
+                                GraadId: $('.geselecteerdeKyu').get(0).id,
+                                LesmateriaalId: $('.dropdown-item').get(0).id
+                            },
+                            complete: () => { $('#commentaarInputArea').val(''); }
+                        });
                     });
                 }
             });

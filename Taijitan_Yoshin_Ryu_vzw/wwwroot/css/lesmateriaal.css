@@ -220,6 +220,6 @@ hr {
     margin: 0 auto;
 }
 
-.tekstUitleg{
-    
+#commentaarInputArea{
+    resize: none;
 }

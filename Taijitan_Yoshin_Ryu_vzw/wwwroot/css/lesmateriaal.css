@@ -173,3 +173,19 @@ hr {
     margin-bottom: 5vh;
     margin-top: 5vh;
 }
+
+.commentaar {
+    display: flex !important;
+    padding-left: 5vw;
+}
+
+
+
+.commentaar-gebruiker{
+    margin-right: 5vw;
+    font-weight: bold;
+}
+
+.commentaar-inhoud > p{
+    margin: 8px 0 8px 0;
+}

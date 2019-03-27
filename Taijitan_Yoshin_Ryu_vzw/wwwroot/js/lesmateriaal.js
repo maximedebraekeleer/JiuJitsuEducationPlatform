@@ -25,6 +25,7 @@
                         type: "POST",
                         url: "Lesmateriaal/LesmateriaalView",
                         data: {
+                            Username: $('#HuidigeGebruiker').get(0).textContent,
                             ThemaNaam: $('.geselecteerdThema').get(0).textContent,
                             GraadId: $('.geselecteerdeKyu').get(0).id,
                             LesmateriaalId: $('.dropdown-item').get(0).id
@@ -66,6 +67,7 @@ function laadLesmateriaal(e) {
         type: "POST",
         url: "Lesmateriaal/LesmateriaalView",
         data: {
+            Username: $('#HuidigeGebruiker').get(0).textContent,
             ThemaNaam: $('.geselecteerdThema').get(0).textContent,
             GraadId: $('.geselecteerdeKyu').get(0).id,
             LesmateriaalId: e.id

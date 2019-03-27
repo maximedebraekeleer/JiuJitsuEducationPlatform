@@ -42,8 +42,7 @@
                 {
                     <div class="commentaar">
                         <div class="commentaar-gebruiker">
-                            <h5>@commentaar.Lid.Naam</h5><br />
-                                                        <span>@commentaar.Lid.Username</span>
+                            <h5>@ViewBag.CommentaarLid[commentaar.Id].Voornaam @ViewBag.CommentaarLid[commentaar.Id].Naam:</h5>
                         </div>
                         <div class="commentaar-inhoud">
                             <p>@commentaar.Inhoud</p>

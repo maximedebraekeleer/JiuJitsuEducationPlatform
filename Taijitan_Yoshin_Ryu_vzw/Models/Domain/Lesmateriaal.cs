@@ -44,6 +44,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
         {
             return InhoudAfbeeldingen.Split(',');
         }
+
+        public Dictionary<int, Lid> GetCommentaarLid()
+        {
+
+            Dictionary<int, Lid> result = new Dictionary<int, Lid>();
+
+            foreach (var c in Commentaren)
+            {
+                result.Add(c.Id, c.Lid);
+            }
+
+            return result;
+        }
         #endregion
     }
 }

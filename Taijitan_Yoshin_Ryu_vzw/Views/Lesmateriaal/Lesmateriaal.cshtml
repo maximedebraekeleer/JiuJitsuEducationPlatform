@@ -1,11 +1,66 @@
-﻿<div class="lesmateriaal-content">
+﻿<div class="modal fade" id="afbeeldingModal" tabindex="-1" role="dialog" aria-labelledby="afbeeldingModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="Alternate Text" />
+            </div>
+
+    </div>
+</div>
+
+<div class="lesmateriaal-content">
     <div>
         <iframe width="800" height="455" src="https://www.youtube.com/embed/@ViewBag.lesmateriaal.InhoudVideo" frameborder="0"
                 allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <div>
-        <img src="~/images/placeholder.jpg" alt="Alternate Text" />
-        <img src="~/images/placeholder.jpg" alt="Alternate Text" />
-        <img src="~/images/placeholder.jpg" alt="Alternate Text" />
+    <div class="lesmateriaal-afbeeldingen">
+        @{
+            foreach (var a in ViewBag.Lesmateriaal.geefAlleAfbeeldingen())
+            {
+                <img data-toggle="modal" data-target="#afbeeldingModal" src="~/images/lesmateriaal/@a" onclick="modalLaden(this)" alt="Alternate Text" />
+            }
+        }
+    </div>
+    <div id="commentaar-wrapper">
+        <hr />
+        <div id="commentaren">
+
+            @if(ViewBag.Commentaren.Count < 1 || ViewBag.Commentaren == null)
+            {
+                <div class="commentaar" style="text-align: center;">
+                    <span>Er zijn geen commentaren voor dit lesmateriaal.</span>
+                </div>
+            }
+            else
+            {
+                foreach(var commentaar in ViewBag.Commentaren)
+                {
+                    <div class="commentaar">
+                        <div class="commentaar-gebruiker">
+                            <h5>@commentaar.Lid.Naam</h5><br />
+                                                        <span>@commentaar.Lid.Username</span>
+                        </div>
+                        <div class="commentaar-inhoud">
+                            <p>@commentaar.Inhoud</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div id="commentaarInput">
+            <hr />
+            <div>
+
+                <textarea rows="4" cols="50" name="commentaar" placeholder=" Geef hier uw commentaar."></textarea>
+                <button type="button">Bevestig</button>
+                <br /><br /><br />
+            </div>
+
+        </div>
     </div>
 </div>

@@ -85,3 +85,8 @@ $('.kyu-nav > ul > li').click((e) => {
     $('.geselecteerdeKyu').removeClass('geselecteerdeKyu');
     e.target.classList.add('geselecteerdeKyu');
 });
+
+function modalLaden(e) {
+    $('#afbeeldingModal .modal-body > img').get(0).src = e.src;
+    console.log(e.src);
+}

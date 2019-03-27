@@ -10,7 +10,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Filters
     public class SessieFilter : ActionFilterAttribute
     {
         private readonly ISessieRepository _sessieRepository;
-        Sessie _sessie;
+        private Sessie _sessie;
 
         public SessieFilter(ISessieRepository sessieRepository)
         {

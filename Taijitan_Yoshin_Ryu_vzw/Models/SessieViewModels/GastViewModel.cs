@@ -11,7 +11,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         #region Properties
         [Display(Name = "Gebruikersnaam")]
         [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
-        [StringLength(25,MinimumLength = 8, ErrorMessage ="Gebruikersnaam moet minstens 8 karakters bevatten")]
+        [StringLength(25,MinimumLength = 7, ErrorMessage ="Gebruikersnaam moet minstens 7 karakters bevatten")]
         public string Username { get; set; } //Unieke waarde
         [Display(Name = "E-mailadres")]
         [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
@@ -48,10 +48,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.SessieViewModels
         [Display(Name = "Gsmnummer")]
         [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
         public string GsmNummer { get; set; }
+        [Required(ErrorMessage = "{0} is verplicht om in te vullen.")]
         public string RijksregisterNummer { get; set; }
         [Display(Name = "E-mailadres ouders")]
         [EmailAddress(ErrorMessage = "Ongeldig E-mailadres.")]
         public string EmailOuders { get; set; } //Niet verplicht
-        #endregion
+        #endregion        
     }
 }

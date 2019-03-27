@@ -24,12 +24,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
 
         public IEnumerable<Aanwezigheid> GetAll()
         {
-            return _aanwezigheden.Include(a => a.Lid).Include(a => a.Sessie).ToList();
-        }
-
-        public IEnumerable<Aanwezigheid> GetbyFormule(Formule formule)
-        {
-            throw new NotImplementedException();
+            return _aanwezigheden.Include(a => a.Sessie).Include(a => a.Lid).ThenInclude(l => l.Formule).ToList();
         }
 
         public IEnumerable<Aanwezigheid> GetbyLid(Lid lid)
@@ -37,19 +32,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data.Repositories
             return _aanwezigheden.Where(a => a.Lid == lid).ToList();
         }
 
-        public IEnumerable<Aanwezigheid> GetbySessie(Sessie sessie)
-        {
-            return _aanwezigheden.Include(a => a.Lid).Where(a => a.Sessie == sessie).ToList();
-        }
-
         public void Remove(Aanwezigheid aanwezigheid)
         {
             _aanwezigheden.Remove(aanwezigheid);
-        }
-
-        public void RemoveBySessie(Sessie sessie)
-        {
-            _aanwezigheden.RemoveRange(_aanwezigheden.Where(a => a.Sessie == sessie));
         }
 
         public void SaveChanges()

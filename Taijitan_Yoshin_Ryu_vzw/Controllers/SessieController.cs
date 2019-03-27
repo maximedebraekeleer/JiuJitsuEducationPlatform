@@ -21,19 +21,30 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         private readonly IGebruikerRepository _gebruikers;
         private readonly IAanwezigheidRepository _aanwezigheden;
         private readonly ISessieRepository _sessies;
+        private readonly IGraadRepository _graden;
 
-        public SessieController(IFormuleRepository formules, ITrainingsmomentRepository trainingsmomenten, IGebruikerRepository gebruikers, IAanwezigheidRepository aanwezigheden, ISessieRepository sessieRepository)
+        public SessieController(IFormuleRepository formules, ITrainingsmomentRepository trainingsmomenten, IGebruikerRepository gebruikers, IAanwezigheidRepository aanwezigheden, ISessieRepository sessieRepository, IGraadRepository graden)
         {
             _formules = formules;
             _trainingsmomenten = trainingsmomenten;
             _gebruikers = gebruikers;
             _aanwezigheden = aanwezigheden;
             _sessies = sessieRepository;
+            _graden = graden;
         }
 
         public IActionResult Index(Gebruiker gebruiker, Sessie huidigeSessie)
         {
-            Trainingsmoment trainingsMoment = GeefTrainingsmoment();
+            Trainingsmoment trainingsMoment;
+            try
+            {
+                trainingsMoment = GeefTrainingsmoment();
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
 
             if (trainingsMoment == null)
             {
@@ -43,24 +54,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
 
             DateTime datumBeginUur = trainingsMoment.geefDatumBeginUur();
             DateTime datumEindUur = trainingsMoment.geefDatumEindUur();
-            Lesgever huidigeLesgever = (Lesgever)_gebruikers.GetByUserName(gebruiker.Username);
-
-            Sessie sessieHuidig;
-
+            Lesgever huidigeLesgever = (Lesgever)gebruiker;
+            
             if (huidigeSessie == null)
             {
-                Sessie sessie = new Sessie(datumBeginUur, datumEindUur, huidigeLesgever);
-                _sessies.Add(sessie);
+                huidigeSessie = new Sessie(datumBeginUur, datumEindUur, huidigeLesgever);
+                _sessies.Add(huidigeSessie);
                 _sessies.SaveChanges();
-                sessieHuidig = sessie;
             }
-            else
-            {
-                sessieHuidig = huidigeSessie;
-            }
-
+            
             //Formules ophalen die deze trainingsmomenten bevatten
-            IList<Formule> formulesFiltered = _formules.getAll().Where(f => f.bevatTrainingsmoment(trainingsMoment)).ToList();
+            List<Formule> formulesFiltered = _formules.getAll().Where(f => f.bevatTrainingsmoment(trainingsMoment)).ToList();
 
             //Leden uit deze modules halen
             List<Lid> ledenOpdag = new List<Lid>();
@@ -71,38 +75,42 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             }
             ledenOpdag.ToList();
 
-            List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(sessieHuidig).Select(l => l.Lid).ToList();
-            List<Lid> andereLeden = _aanwezigheden.GetbySessie(sessieHuidig).Where(a => a.IsExtra).Select(l => l.Lid).ToList();
+            List<Lid> aanwezigeLeden = huidigeSessie.GeefAanwezigeLeden();
+            List<Lid> andereLeden = huidigeSessie.GeefExtraAanwezigeLeden();
 
             //Gefilterde leden teruggeven
-            return View(new SessieViewModel(ledenOpdag, sessieHuidig, aanwezigeLeden, andereLeden));
+            return View(new SessieViewModel(ledenOpdag, huidigeSessie, aanwezigeLeden, andereLeden));
         }
 
         public IActionResult RegistreerAanwezigheid(Sessie huidigeSessie, string username)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             Lid lid = (Lid)_gebruikers.GetByUserName(username);
             Aanwezigheid aanwezigheid = _aanwezigheden.GetbyLid(lid).Where(a => a.Sessie == huidigeSessie).FirstOrDefault();
             if (aanwezigheid != null)
-            {
-                //TempData["error"] = $"{lid.Voornaam}{lid.Naam} is reeds geregistreerd als aanwezig.";                
+            {          
                 _aanwezigheden.Remove(aanwezigheid);
                 _aanwezigheden.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            _aanwezigheden.Add(new Aanwezigheid(lid, huidigeSessie, true));
-            _aanwezigheden.SaveChanges();
-            //TempData["message"] = $"{lid.Voornaam}{lid.Naam} is succesvol geregistreerd als aanwezig.";
+            aanwezigheid = new Aanwezigheid(lid, huidigeSessie, true);
+            huidigeSessie.VoegAanwezigheidToe(lid, true);
+            _sessies.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult RegistreerAanwezigNietInLijst(Sessie huidigeSessie)
         {
-            Trainingsmoment trainingsMoment = GeefTrainingsmoment();
-            if (trainingsMoment == null)
+            if (huidigeSessie == null)
             {
                 TempData["error"] = $"Er zijn vandaag geen sessies";
                 return RedirectToAction(nameof(Lesgever), "Gebruiker");
             }
+            Trainingsmoment trainingsMoment = GeefTrainingsmoment();
 
             //Formules ophalen die deze trainingsmomenten niet bevatten
             IList<Formule> formulesFiltered = _formules.getAll().Where(f => !f.bevatTrainingsmoment(trainingsMoment)).ToList();
@@ -113,50 +121,68 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
             }
 
             ledenNietOpDag.ToList();
-            List<Lid> extraAanwezigheden = _aanwezigheden.GetbySessie(huidigeSessie).Where(a => a.IsExtra).Select(l => l.Lid).ToList();
+            List<Lid> extraAanwezigheden = huidigeSessie.GeefExtraAanwezigeLeden();
+
             return View(new andereLedenViewModel(ledenNietOpDag, extraAanwezigheden));
         }
 
-        public IActionResult RegistreerAanwezigGast()
+        public IActionResult RegistreerAanwezigGast(Sessie huidigeSessie)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             //Gastviewmodel wordt gebruikt
             return View();
         }
         [HttpPost]
         public IActionResult RegistreerAanwezigGast(Sessie huidigeSessie, GastViewModel gvm)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            Lid gast = new Lid(gvm.Username,
-                gvm.Email,
-               gvm.Naam,
-               gvm.Voornaam,
-               gvm.Geslacht,
-               gvm.GeboorteDatum,
-               gvm.GeboorteLand,
-                gvm.GeboorteStad,
-                gvm.Straat,
-                gvm.HuisNummer,
-                gvm.Gemeente,
-                gvm.Postcode,
-                "+3291112211",
-                "0470055701",
-                "96032732925",
-                DateTime.Today,
-                gvm.EmailOuders,
-                false,
-                false,
-                _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),
-                new Graad(0, "gast", "")
+            //try {
+            Lid gast = new Lid(
+            gvm.Username,
+            gvm.Email,
+            gvm.Naam,
+            gvm.Voornaam,
+            gvm.Geslacht,
+            gvm.GeboorteDatum,
+            gvm.GeboorteLand,
+            gvm.GeboorteStad,
+            gvm.Straat,
+            gvm.HuisNummer,
+            gvm.Gemeente,
+            gvm.Postcode,
+            gvm.TelefoonNummer,
+            gvm.GsmNummer,
+            gvm.RijksregisterNummer,
+            DateTime.Today,
+            gvm.EmailOuders,
+            false,
+            false,
+            _formules.getAll().Where(f => f.FormuleNaam == "gast").FirstOrDefault(),
+            _graden.GetGraadWithId(1)
                 );
+                _gebruikers.Add(gast);
+                _gebruikers.SaveChanges();
 
-            _gebruikers.Add(gast);
-            _gebruikers.SaveChanges();
-
-            _aanwezigheden.Add(new Aanwezigheid(gast, huidigeSessie, true));
-            _aanwezigheden.SaveChanges();
+            huidigeSessie.VoegAanwezigheidToe(gast, true);
+            _sessies.SaveChanges();
+            //}
+            //catch (Exception e)
+            ///{
+             //   string[] error = e.Message.Split('/');
+            //    ModelState.AddModelError(error[0], error[1]);
+            //}
 
             return RedirectToAction(nameof(Index));
         }
@@ -164,6 +190,11 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         [HttpPost]
         public IActionResult Cancel(Sessie huidigeSessie)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             _sessies.Remove(huidigeSessie);
             _sessies.SaveChanges();
             TempData["error"] = $"De sessie is geannuleerd.";
@@ -173,34 +204,38 @@ namespace Taijitan_Yoshin_Ryu_vzw.Controllers
         [HttpPost]
         public void AanwezigenToevoegen(Sessie huidigeSessie, string aanwezigen)
         {
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
             String[] aanwezig = JsonConvert.DeserializeObject<string[]>(aanwezigen);
-            _aanwezigheden.RemoveBySessie(huidigeSessie);
+            huidigeSessie.ClearAanwezigheden();
+            Lid lid;
+            bool isExtra;
+            List<Formule> formulesMetLes = _formules.getAll().Where(f => f.bevatTrainingsmoment(GeefTrainingsmoment())).ToList();
             foreach (var a in aanwezig)
             {
-                huidigeSessie.voegAanwezigheidToe((Lid)_gebruikers.GetByUserName(a));
+                lid = (Lid)_gebruikers.GetByUserName(a);
+                isExtra = lid.IsExtra(formulesMetLes);
+                huidigeSessie.VoegAanwezigheidToe(lid, isExtra);
             }
             _sessies.SaveChanges();
         }
 
         public IActionResult SessieAanwezigen(Sessie huidigeSessie)
         {
-            List<Lid> aanwezigeLeden = _aanwezigheden.GetbySessie(huidigeSessie).Select(l => l.Lid).ToList();
-            return View(new AanwezigenViewModel(aanwezigeLeden));
+            if (huidigeSessie == null)
+            {
+                TempData["error"] = $"Er zijn vandaag geen sessies";
+                return RedirectToAction(nameof(Lesgever), "Gebruiker");
+            }
+            List<Aanwezigheid> aanwezigheden = huidigeSessie.Aanwezigheden.ToList();
+            return View(new AanwezigenViewModel(aanwezigheden));
         }
 
         private Trainingsmoment GeefTrainingsmoment()
         {
-            //IEnumerable<Trainingsmoment> trainingsmomenten;
-            ////Donderdag wordt gekozen op localhost, anders de huidige dag
-            //if (HttpContext.Request.Host.Host.ToLower().Equals("localhost"))
-            //{
-            //    return _trainingsmomenten.getByDagNummer(4/*Donderdag*/).First();
-            //}
-            //else
-            //{
-            //    return _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek).First();
-            //}
-
             return _trainingsmomenten.getByDagNummer((int)DateTime.Now.DayOfWeek).First();
         }
     }

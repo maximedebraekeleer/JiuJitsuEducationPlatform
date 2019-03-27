@@ -28,12 +28,13 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Trainingsmoment Woensdag = new Trainingsmoment(3, "Woensdag", "14:00", "15:30");
                 Trainingsmoment Donderdag = new Trainingsmoment(4, "Donderdag", "18:00", "20:00");
                 Trainingsmoment Zaterdag = new Trainingsmoment(6, "Zaterdag", "10:00", "11:30");
-
-                Trainingsmoment Develop_Maandag = new Trainingsmoment(1, "Maandag", "08:00", "16:00");
+                Trainingsmoment Zaterdag1 = new Trainingsmoment(6, "Zaterdag", "11:30", "13:00");
+                Trainingsmoment Zondag = new Trainingsmoment(0, "Zondag", "10:00", "12:30");
+                Trainingsmoment Develop_Dinsdag = new Trainingsmoment(2, "Dinsdag", "08:00", "23:59");
 
 
                 var trainingsmomenten = new List<Trainingsmoment> {
-                    Dinsdag, Woensdag, Donderdag, Zaterdag, Develop_Maandag
+                    Dinsdag, Woensdag, Donderdag, Zaterdag, Develop_Dinsdag
                 };
                 _dbContext.Trainingsmomenten.AddRange(trainingsmomenten);
 
@@ -41,14 +42,17 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Formule DI_DO = new Formule("DI_DO");
                 Formule DI_ZA = new Formule("DI_ZA");
                 Formule WO_ZA = new Formule("WO_ZA");
+                Formule DI = new Formule("DI");
                 Formule WO = new Formule("WO");
                 Formule ZA = new Formule("ZA");
                 Formule gast = new Formule("gast");
 
-                Formule Develop_MA = new Formule("Develop_MA");
+                Formule Develop_DI = new Formule("Develop_DI");
+                Formule Develop_DI2 = new Formule("Develop_DI2");
+                Formule Develop_DI3 = new Formule("Develop_DI3");
 
                 var formules = new List<Formule> {
-                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast, Develop_MA
+                    DI_DO, DI_ZA, WO_ZA, WO, ZA, gast, Develop_DI, Develop_DI2, Develop_DI3
                 };
                 _dbContext.Formules.AddRange(formules);
 
@@ -66,7 +70,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
 
                 ZA.AddTrainingsmoment(Zaterdag);
 
-                Develop_MA.AddTrainingsmoment(Develop_Maandag);
+                Develop_DI.AddTrainingsmoment(Develop_Dinsdag);
+                Develop_DI2.AddTrainingsmoment(Develop_Dinsdag);
+                Develop_DI3.AddTrainingsmoment(Develop_Dinsdag);
 
                 //Lesmateriaal
                 //1-Thema's toevoegen
@@ -110,21 +116,21 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 dan5.AddLesmateriaalThema(thema2, thema3);
 
                 //3-Lesmateriaal toevoegen
-                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "LW9X2fKjqCE");
-                Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "LW9X2fKjqCE");
-                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "n6FpLqLLbxY");
-                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "YvFtXBxtHTU");
-                Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "eQF3wyz0-XA");
-                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "QiC8jL90CFA");
-                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "-uFxLGtMwPc");
-                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "j635OEznJVc");
-                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "Q7SgyO0DNYs");
-                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "4CNpMlF3pMs");
-                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "DXXE0Rs5EDY");
-                Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
-                Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
-                Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
-                Lesmateriaal lm15 = new Lesmateriaal(dan5, thema3, "Lesmateriaal 10", "UITLEG", "placeholder.jpg,placeholder.jpg,placeholder.jpg,placeholder.jpg", "S99HTXM96go");
+                Lesmateriaal lm1 = new Lesmateriaal(kyu3, thema1, "Lesmateriaal 1", "UITLEG", "FOTO", "LW9X2fKjqCE");
+                Lesmateriaal lm2 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 2", "UITLEG", "FOTO", "LW9X2fKjqCE");
+                Lesmateriaal lm3 = new Lesmateriaal(kyu1, thema3, "Lesmateriaal 3", "UITLEG", "FOTO", "n6FpLqLLbxY");
+                Lesmateriaal lm4 = new Lesmateriaal(kyu2, thema3, "Lesmateriaal 4", "UITLEG", "FOTO", "YvFtXBxtHTU");
+                Lesmateriaal lm5 = new Lesmateriaal(kyu2, thema1, "Lesmateriaal 5", "UITLEG", "FOTO", "eQF3wyz0-XA");
+                Lesmateriaal lm6 = new Lesmateriaal(kyu3, thema2, "Lesmateriaal 6", "UITLEG", "FOTO", "QiC8jL90CFA");
+                Lesmateriaal lm7 = new Lesmateriaal(kyu4, thema3, "Lesmateriaal 7", "UITLEG", "FOTO", "-uFxLGtMwPc");
+                Lesmateriaal lm8 = new Lesmateriaal(kyu5, thema1, "Lesmateriaal 8", "UITLEG", "FOTO", "j635OEznJVc");
+                Lesmateriaal lm9 = new Lesmateriaal(kyu6, thema2, "Lesmateriaal 9", "UITLEG", "FOTO", "Q7SgyO0DNYs");
+                Lesmateriaal lm10 = new Lesmateriaal(kyu6, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "4CNpMlF3pMs");
+                Lesmateriaal lm11 = new Lesmateriaal(dan1, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "DXXE0Rs5EDY");
+                Lesmateriaal lm12 = new Lesmateriaal(dan2, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
+                Lesmateriaal lm13 = new Lesmateriaal(dan3, thema2, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
+                Lesmateriaal lm14 = new Lesmateriaal(dan4, thema1, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
+                Lesmateriaal lm15 = new Lesmateriaal(dan5, thema3, "Lesmateriaal 10", "UITLEG", "FOTO", "S99HTXM96go");
 
                 var lesmaterialen = new List<Lesmateriaal> {
                     lm1, lm2, lm3, lm4, lm5, lm6, lm7, lm8, lm9, lm10, lm11, lm12, lm13, lm14, lm15
@@ -136,45 +142,45 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 Gebruiker lid1 = new Lid("LidMaxime", "maxime@gmail.com", "De Braekeleer", "Maxime", 'm',
                     new DateTime(1998, 02, 03), "België", "Gent", "Vossenlaan", "2", "Beerle", "9000",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "maxime@ouders.com", true, false,
-                    Develop_MA, kyu3);
+                    Develop_DI, kyu3);
                 await CreateUser(lid1.Username, lid1.Email, "P@ssword1", "lid");
 
                 Gebruiker lid2 = new Lid("LidMichael", "michael@gmail.com", "Vermassen", "Michael", 'm',
                     new DateTime(1997, 05, 14), "België", "Gent", "Laanstraat", "72", "Hasselt", "6547",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 09), "michael@ouders.com", true, true,
-                    Develop_MA, kyu4);
+                    Develop_DI2, kyu4);
                 await CreateUser(lid2.Username, lid2.Email, "P@ssword1", "lid");
 
                 //--Leden zonder login
                 Gebruiker lid3 = new Lid("Lid0003", "Lid3@gmail.com", "Van Achteren", "Pol", 'm',
                     new DateTime(1997, 11, 05), "België", "Beerle", "Molenstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "pol@ouders.com", true, false,
-                    Develop_MA, kyu4);
+                    Develop_DI3, kyu4);
 
                 Gebruiker lid4 = new Lid("Lid0004", "Lid4@gmail.com", "Van Rechtsen", "Mark", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "mark@ouders.com", true, false,
-                    Develop_MA, kyu4);
+                    Develop_DI, kyu4);
 
                 Gebruiker lid5 = new Lid("Lid0005", "Lid5@gmail.com", "Van Linksen", "Louis", 'm',
                     new DateTime(1997, 08, 05), "Japan", "Tokyo", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "louis@ouders.com", true, false,
-                    Develop_MA, kyu4);
+                    Develop_DI2, kyu4);
 
                 Gebruiker lid6 = new Lid("Lid0006", "Lid6@gmail.com", "Van Onderen", "Justine", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "justine@ouders.com", true, false,
-                    Develop_MA, kyu3);
+                    Develop_DI3, kyu3);
 
                 Gebruiker lid7 = new Lid("Lid0007", "Lid6@gmail.com", "Van Onderen", "Sien", 'v',
                     new DateTime(1997, 08, 05), "China", "Passichi", "Jiaefstraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "sien@ouders.com", true, false,
-                    Develop_MA, kyu5);
+                    Develop_DI2, kyu5);
 
                 Gebruiker lid8 = new Lid("Lid0008", "Lid8@gmail.com", "Van Schuinen", "Neeri", 'm',
                     new DateTime(1960, 08, 05), "Duitsland", "Passichi", "Jiaefestraat", "8", "Verdegem", "1234",
                     "", "0470011701", "97011033155", new DateTime(2019, 03, 05), "sien@ouders.com", true, false,
-                    Develop_MA, kyu5);
+                    Develop_DI3, kyu5);
 
                 //--Lesgevers
                 Gebruiker lesgever1 = new Lesgever("LesgeverHans", "hans@gmail.com", "Van Der Staak", "Hans", 'm',
@@ -195,9 +201,9 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data
                 _dbContext.Gebruikers.AddRange(gebruikers);
 
                 //--Commentaar
-                _dbContext.Commentaren.Add(new Commentaar("nieuwe comment", (Lid)lid1, lm2));
-                _dbContext.Commentaren.Add(new Commentaar("nog een comment", (Lid)lid1, lm2));
-                _dbContext.Commentaren.Add(new Commentaar("derde comment", (Lid)lid2, lm2));
+                _dbContext.Commentaren.Add(new Commentaar("nieuwe comment", (Lid)lid1, lm1));
+                _dbContext.Commentaren.Add(new Commentaar("nog een comment", (Lid)lid1, lm1));
+                _dbContext.Commentaren.Add(new Commentaar("derde comment", (Lid)lid2, lm7));
                 _dbContext.Commentaren.Add(new Commentaar("vierde comment", (Lid)lid1, lm2));
 
                 //Alles opslaan

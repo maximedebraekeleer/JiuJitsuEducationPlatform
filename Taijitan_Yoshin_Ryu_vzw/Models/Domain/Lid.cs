@@ -49,6 +49,19 @@ namespace Taijitan_Yoshin_Ryu_vzw.Models.Domain
             Formule = formule;
             Graad = graad;
         }
+
+        
+        public bool IsExtra(List<Formule> formulesMetLes)
+        {
+            return !formulesMetLes.Contains(Formule);
+        }
+        #endregion
+
+        #region Methods
+        public bool bevatFormule(int formuleId)
+        {
+            return Formule.Id == formuleId;
+        }
         #endregion
     }
 }

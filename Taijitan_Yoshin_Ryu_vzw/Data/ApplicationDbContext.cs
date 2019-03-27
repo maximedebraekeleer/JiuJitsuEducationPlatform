@@ -15,6 +15,7 @@ namespace Taijitan_Yoshin_Ryu_vzw.Data {
         public DbSet<LesmateriaalThema> LesmateriaalThemas { get; set; }
         public DbSet<Lesmateriaal> Lesmaterialen { get; set; }        
         public DbSet<Commentaar> Commentaren { get; set; }
+        public DbSet<Logging> Loggings { get; set; }
         #endregion
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

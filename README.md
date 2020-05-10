@@ -10,8 +10,7 @@ Logins and CRUD for educational material would be provided later through a JAVA 
 
 One teacher and one member login is provided. 
 
-Username: TeacherAccount
-Username: MemberAccount
+Usernames: "TeacherAccount" and "MemberAccount"
 
 Password is "P@ssword1" for both accounts. 
 
